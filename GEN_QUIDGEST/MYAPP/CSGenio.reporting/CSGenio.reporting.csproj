@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net48</TargetFrameworks>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <!-- Core specific libraries-->
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net8'))">
+    <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.19" />
+    <!--
+      These must be called by serve side reports by reflection. The code does not have a direct dependency
+
+      It is very important that the version is set to 4.10.3, this is because CSGenio.core also depends on this package,
+      but since its in Net Standard it will only work with up to 4.10.3.
+      If this dependency is set to a higher version here, it will have version collisions and WCF clients will not work!!
+    -->
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.10.3" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.10.3" />
+    
+    <PackageReference Include="System.Threading.ThreadPool" Version="4.3.0" />
+    <PackageReference Include="System.Net.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
+  </ItemGroup>
+
+  <!-- Framework specific libraries -->
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <AssemblySearchPaths>$(AssemblySearchPaths);{GAC}</AssemblySearchPaths>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <PackageReference Include="Microsoft.Report.Viewer" Version="11.0.0" />
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>Libs\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- It has to be this version. The lastest version of Types only works with the new Microsoft.Data.SqlClient provider -->
+    <PackageReference Include="Microsoft.SqlServer.Types" Version="14.0.1016.290">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSGenio.core\CSGenio.core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+services:
+  webadmin:
+    build: .
+    container_name: webadmin
+    ports:
+      - "3031:8080"
+    volumes:
+      - ./Administration/Configuracoes.xml:/app/Configuracoes.xml
+    dns: # Add Quidgest DNS resolution
+      - "172.16.0.28"
+      - "1.1.1.1"

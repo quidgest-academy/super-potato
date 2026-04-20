@@ -1,0 +1,86 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "detail": "build the solution for development",
+            "type": "shell",
+            "command": "./build.ps1",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$msCompile", "$vite"
+            ]
+        },
+        {
+            "label": "run",
+            "detail": "runs the solution in place",
+            "type": "shell",
+            "command": "./run.ps1",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$msCompile", "$vite"
+            ],
+            "dependsOn": [
+                "build"
+            ]
+        },
+        {
+            "label": "publish",
+            "detail": "create a publish directory ready to be deployed in iis",
+            "type": "shell",
+            "command": "./publish.ps1",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$msCompile", "$node-sass"
+            ]
+        },
+        {
+            "label": "publish",
+            "detail": "create a publish directory for linux x64 ready to be deployed with docker",
+            "type": "shell",
+            "command": "./publish-linux.ps1",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$msCompile", "$node-sass"
+            ]
+        },
+        {
+            "label": "vite",
+            "type": "npm",
+            "script": "dev",
+            "isBackground": true,
+            "path": "./ClientApp",
+            "problemMatcher": ["$vite"]
+        }
+    ]
+}

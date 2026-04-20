@@ -1,0 +1,96 @@
+{
+  "name": "@quidgest/clientapp",
+  "description": "Quidgest's Vue Client App framework",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "author": "Quidgest",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "jsdelivr": "dist/clientapp.js",
+  "unpkg": "dist/clientapp.js",
+  "types": "dist/index.d.ts",
+  "sass": "dist/styles/index.scss",
+  "style": "dist/index.css",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "sass": "./dist/styles/index.scss",
+      "style": "./dist/index.css",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./components": "./dist/components/index.js",
+    "./components/*": "./dist/components/*/index.js",
+    "./composables": "./dist/composables/index.js",
+    "./composables/*": "./dist/composables/*/index.js",
+    "./constants": "./dist/constants/index.js",
+    "./constants/*": "./dist/constants/*/index.js",
+    "./models": "./dist/models/index.js",
+    "./models/*": "./dist/models/*/index.js",
+    "./network": "./dist/network/index.js",
+    "./network/*": "./dist/network/*/index.js",
+    "./plugins": "./dist/plugins/index.js",
+    "./plugins/*": "./dist/plugins/*/index.js",
+    "./stores": "./dist/stores/index.js",
+    "./stores/*": "./dist/stores/*/index.js",
+    "./styles": {
+      "sass": "./dist/styles/index.scss",
+      "default": "./dist/index.css"
+    },
+    "./telemetry": "./dist/telemetry/index.js",
+    "./telemetry/*": "./dist/telemetry/*/index.js",
+    "./utils": "./dist/utils/index.js",
+    "./utils/*": "./dist/utils/*/index.js",
+    "./*": "./*"
+  },
+  "scripts": {
+    "clean": "rimraf dist coverage storybook-static",
+    "build": "pnpm clean && pnpm run build:dist && pnpm run build:css",
+    "build:dist": "vite build",
+    "build:css": "node build/css.js",
+    "type-check": "vue-tsc --noEmit --composite false",
+    "format": "prettier --check --cache .",
+    "format:fix": "prettier --write --cache .",
+    "lint": "eslint --cache .",
+    "lint:fix": "pnpm lint --fix",
+    "lint:style": "stylelint \"**/*.scss\"",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "storybook": "storybook dev -p 6006",
+    "build:storybook": "storybook build"
+  },
+  "dependencies": {
+    "date-fns": "4.1.0",
+    "eventemitter3": "5.0.1",
+    "lodash-es": "4.17.21",
+    "tinycolor2": "1.6.0",
+    "uuid": "11.0.5"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@pinia/testing": "0.1.7",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@storybook/vue3": "^8.6.3",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/test-utils": "catalog:",
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "fast-glob": "^3.3.3",
+    "postcss": "^8.5.1",
+    "vite": "catalog:",
+    "vite-plugin-dts": "^4.5.0",
+    "vue-tsc": "^2.2.0"
+  },
+  "peerDependencies": {
+    "@quidgest/ui": "catalog:",
+    "axios": "catalog:",
+    "pinia": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  }
+}

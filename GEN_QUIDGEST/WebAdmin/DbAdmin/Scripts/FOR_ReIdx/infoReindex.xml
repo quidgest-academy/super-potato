@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Projecto>
+	<Definicoes>
+		<Sistema>FOR</Sistema>
+		<Cliente>QUIDGEST</Cliente>
+		<Versao>2522</Versao>
+	</Definicoes>
+	<Modulos>
+		<Modulo ID="Reindex">
+			<PROG>Templates Reindexação</PROG>
+			<PLATAFOR>REINDEX</PLATAFOR>
+		</Modulo>
+	</Modulos>
+</Projecto>

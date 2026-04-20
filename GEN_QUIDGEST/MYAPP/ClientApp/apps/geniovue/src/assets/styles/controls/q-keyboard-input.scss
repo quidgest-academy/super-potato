@@ -1,0 +1,405 @@
+.q-keyboard {
+    .q-keyboard__input-wrapper {
+        width: 230px;
+        margin: 25px;
+        border-width: 3px;
+    }
+    .q-keyboard__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    .q-keyboard__popup {
+        position: absolute; /* Make it pop up without affecting other elements */
+        z-index: 1000; /* Any high value to ensure it's above other content */
+    }
+    .q-keyboard__digit {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+        margin-right: 0.12rem;
+        margin-left: 0.12rem;
+    }
+    
+    .q-keyboard__input-popup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 19.5px;
+        position: relative;
+        border-radius: 4px;
+        border-bottom: 3px solid $gray;
+    }
+    .q-keyboard__input-popup > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+    .q-keyboard__line1, .q-keyboard__final-line {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0.25rem;
+        margin-left: 0.25rem;
+        
+    }
+    .q-keyboard__line1 {
+        margin-top: 0.3rem;
+       
+    }
+
+    .q-keyboard__final-line {
+        margin-top: 0.3rem;
+        margin-bottom: 0.25rem;
+    }
+
+
+    .q-keyboard__icons {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+        border-radius: 3px;
+        user-select: none;
+    }
+
+    .q-icon__svg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 22px;
+        width: 22px;
+    }
+    
+    .q-keyboard__icons:hover {
+        cursor: pointer;
+        border:none;
+    }
+    .q-keyboard__icons:active {
+       
+        .q-icon__svg {
+            height: 23px;
+            width: 23px;
+        }
+    }
+    .q-keyboard--backspace {
+        margin-left: 0.1rem;
+    }
+
+    .q-keyboard--cancel {
+        margin-right: 0.125rem;
+    }
+    .q-keyboard__enter {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        height: 40px;
+        width: 100%;
+        margin-right: 0.3rem;
+        margin-left: 0.3rem;
+        z-index: 3;
+        position: relative;
+        user-select: none;
+        .q-icon__svg {
+            fill: $white
+        }
+    }
+    div.q-keyboard__enter:hover {
+        position: relative;
+        cursor: pointer;
+    }
+    
+    div.q-keyboard__enter:active {
+        transition: border-width 0.1s;
+        position: relative;
+        font-size: 19.2px;
+        .q-keyboard--check-circle {
+            transition: border-width 0.1s;
+            border-left: none;
+            border-right: none;
+        }
+        .q-keyboard__icons {
+            transition: border-width 0.1s;
+            .q-icon__svg {
+                height: 21.6px;
+                width: 21.6px;
+                
+            }
+        }
+    }
+    .q-keyboard--check-circle {
+        border: none;
+        border-radius: 0;
+        
+        }
+
+    p {
+        margin: 0;
+    }
+    
+
+    /*////////////////////Introducing the pointer to the q-numeric-input component inside of the the q-keyboard-q-keyboard__input-popup///////////////////////*/
+
+    .q-keyboard__decoration:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            }
+
+    /*//////////////////// Changing the position of the q-numeric-input component based on user input///////////////////////*/
+
+    //Default layout - when no inputPlacement is chosen
+    .q-keyboard:not(&--inputPlacement-top):not(&--inputPlacement-bottom):not(&--inputPlacement-left):not(&--inputPlacement-right) {
+        
+        /*////////////////////Changing the position of the pointer ///////////////////////*/
+        .q-keyboard__container .q-keyboard__decoration:before {
+            left: 46%;
+            top: 0%;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            transform: translateX(-50%);
+            transform: translateY(-100%);
+            border-bottom: 10px solid $gray; 
+        }
+        
+        .q-keyboard__popup {
+            top: 100% !important;
+        }
+    }
+    
+    &--inputPlacement-top {
+        /*////////////////////Changing the position of the pointer ///////////////////////*/
+
+        .q-keyboard__decoration:before {
+            left: 46%;
+            top: 0%;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            transform: translateX(-50%);
+            transform: translateY(-100%);
+            border-bottom: 10px solid $gray
+        }
+
+        .q-keyboard__popup {
+            top: 100%;
+        }
+    }
+    &--inputPlacement-bottom{
+      
+        .q-keyboard__decoration:before {
+            left: 46%;
+            bottom: -1%;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            transform: translateX(-50%);
+            transform: translateY(100%);
+            border-top: 10px solid $gray
+        }
+        .q-keyboard__popup {
+            bottom: 100%;
+        }
+    }
+    &--inputPlacement-left{
+      
+        .q-keyboard__decoration:before {
+            left: 0%;
+            top: 45%;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            transform: translateX(-100%);
+            border-right: 10px solid $gray
+        }
+        .q-keyboard__popup {
+            left: 100%;
+        }
+    }
+    &--inputPlacement-right{
+       
+        .q-keyboard__decoration:before {
+            right: 0%;
+            top: 45%;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            transform: translateX(100%);
+            border-left: 10px solid $gray
+        }
+        .q-keyboard__popup {
+            right: 100%;
+        }
+    }
+
+    &--primary, :not([class*="q-keyboard--"]) { //case for primary and also default kbStyle
+        .q-keyboard__digit-edit {
+            span {
+                color: $primary;
+                font-size: 25.6px;
+            }
+        }
+        .q-keyboard__input-wrapper {
+            border-color: $primary-light;
+        }
+
+        .q-keyboard__digit {
+            border: 1.5px solid $primary;
+            background-color: $white;
+            color: $primary;
+        }
+
+        .q-keyboard__digit:active  {
+        border: 3px solid $primary;
+        }
+
+        .q-keyboard__input-popup {
+        background-color: $gray;
+        }
+
+
+        .q-keyboard__line1, .q-keyboard__final-line {
+        color: $primary;
+        }
+
+        .q-keyboard__icons {
+        border: 1.5px solid $primary;
+        background-color: $white;
+        color: $primary;
+        }
+        .q-keyboard__icons:hover {
+            background-color: $light;
+        }
+
+        .q-keyboard__icons:active {
+        border: 3px solid  $primary;
+        }
+
+        .q-keyboard__enter {
+        background-color: $primary;
+        color: $white;
+            .q-icon__svg {
+                fill: $white;
+            }
+        }
+
+        div.q-keyboard__enter:hover {
+            background-color: $primary;
+            border-color: $primary;
+            .q-keyboard--check-circle {
+                background-color: $primary;
+                border-color : $primary;
+        }
+        }
+
+        div.q-keyboard__enter:active {
+        background-color: $primary;
+        border: 3px solid $primary;
+        .q-keyboard--check-circle {
+                border-top: 3px solid $primary;
+                border-bottom: 3px solid $primary;
+                background-color: $primary;
+                
+        }
+        }
+
+        .q-keyboard--check-circle {
+        background-color: $primary;
+        fill: $white;
+        }
+
+        .q-icon__svg {
+            fill: $primary;
+        }
+
+    }
+
+
+    &--secondary:not(&--primary) {
+        .q-keyboard__digit-edit {
+            span {
+                color: $secondary;
+                font-size: 25.6px;
+            }
+        }
+        .q-keyboard__input-wrapper {
+            border-color: $primary-dark;
+        }
+    
+        .q-keyboard__digit {
+            border: 1.5px solid $secondary;
+            background-color: $white;
+            color: $secondary;
+        }
+    
+        .q-keyboard__digit:active  {
+            border: 3px solid $secondary;
+        }
+    
+        .q-keyboard__input-popup {
+            background-color: $gray;
+        }
+    
+        .q-keyboard__line1, .q-keyboard__final-line {
+            color: $secondary;
+        }
+    
+        .q-keyboard__icons {
+            border: 1.5px solid $secondary;
+            background-color: $white;
+            color: $secondary;
+        }
+        .q-keyboard__icons:hover {
+            background-color: $light;
+        }
+    
+        .q-keyboard__icons:active {
+            border: 3px solid  $secondary;
+        }
+    
+        .q-keyboard__enter {
+            background-color: $secondary;
+            color: $white;
+            .q-icon__svg {
+                fill: $white;
+            }
+        }
+    
+        div.q-keyboard__enter:hover {
+            background-color: $primary-dark;
+            border-color: $primary-dark;
+            .q-keyboard--check-circle {
+                background-color: $primary-dark;
+                border-color: $primary-dark;
+            }
+        }
+    
+        div.q-keyboard__enter:active {
+            background-color: $primary-dark;
+            border: 3px solid $secondary;
+            .q-keyboard--check-circle {
+                border-top: 3px solid $secondary;
+                border-bottom: 3px solid $secondary;
+                background-color: $primary-dark;
+            }
+        }
+    
+        .q-keyboard--check-circle {
+            background-color: $secondary;
+            color: $white;
+        }
+
+        .q-icon__svg {
+            fill: $secondary;
+        }
+    
+    } 
+    
+}

@@ -1,0 +1,33 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>annotations</Nullable>
+
+    <!-- When publishing the solution for Linux there are a couple of files that are duplicated for some reason
+    This option seems to be the only way to avoid those errors, and they can safly be ignored since the
+    duplicated files don't cause significant issues. -->
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <!-- This shouldn't be necessary, but there's currently no way of disabling warnings coming from specific project references -->
+    <!-- https://github.com/NuGet/Home/issues/5740 -->
+    <PackageReference Include="Microsoft.SqlServer.Types" Version="14.0.1016.290">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DbAdmin\DbAdmin.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\\Administration\\Configuracoes.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,11 @@
+.vs
+*GeneratedFiles.txt*
+GenerationReport.xml
+packages
+Release
+publish
+[Bb]in
+[Oo]bj
+[Tt]emp
+[Cc]onfiguracoes.xml
+[Cc]onfiguracoes.redirect.xml

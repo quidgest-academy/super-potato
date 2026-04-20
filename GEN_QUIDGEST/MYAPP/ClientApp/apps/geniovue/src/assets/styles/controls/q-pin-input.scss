@@ -1,0 +1,164 @@
+﻿.q-pin-input--borderless-border[type=text],
+.q-pin-input--borderless-border[type=password],
+.q-pin-input--semi-borderless-border[type=text],
+.q-pin-input--semi-borderless-border[type=password] {
+	border: transparent;
+	background-color: transparent;
+}
+/*
+*PRIMARY
+*/
+.q-pin-input {
+	width: 1.9rem;
+	height: 1.9rem;
+	text-align: center;
+	margin: 0.1rem;
+	border-radius: 5px;
+	outline: none;
+	caret-color: $primary;
+	color: $primary;
+	font-size: $font-size-base;
+	font-weight: bold;
+
+	&::placeholder {
+		color: $light;
+	}
+
+	&.filled {
+		background-color: $light;
+		color: $primary;
+		font-weight: bold;
+		border: 2px solid $gray-light;
+		caret-color: transparent;
+	}
+	&.filled:focus {
+		border: 3px solid $primary;
+	}
+
+	&:focus {
+		border: 3px solid $primary;
+	}
+
+	&.error {
+		background-color: $light;
+		caret-color: $danger;
+		border: 2px solid $danger;
+	}
+	&.error:focus {
+		color: $danger;
+	}
+}
+
+/*
+*SECONDARY
+*/
+.q-pin-input--secondary {
+	caret-color: $secondary;
+	color: $secondary;
+
+	&.filled {
+		color: $secondary;
+	}
+	&.filled:focus {
+		border: 3px solid $secondary;
+	}
+	
+	&:focus {
+		border: 3px solid $secondary;
+	}
+
+	&.error {
+		background-color: $light;
+		caret-color: $danger;
+		border: 2px solid $danger;
+	}
+	&.error:focus {
+		color: $danger;
+	}
+}
+
+/*
+*BLUE
+*/
+.q-pin-input--blue {
+	caret-color: $primary;
+	color: $primary;
+
+	&.filled {
+		color: $primary;
+	}
+	&.filled:focus {
+		border: 3px solid $primary;
+	}
+
+	&:focus {
+		border: 3px solid $primary;
+	}
+
+	&.error {
+		background-color: $light;
+		caret-color: $danger;
+		border: 2px solid $danger;
+	}
+	&.error:focus {
+		color: $danger;
+	}
+}
+
+/*---------------------------------------------*/
+/*
+*Filled Input Borders
+*/
+.q-pin-input--gray-border {
+	&.filled {
+		border: thin solid $gray;
+	}
+}
+
+.q-pin-input--light-border {
+	&.filled {
+		border: 2px solid $light;
+	}
+}
+
+
+.q-pin-input--borderless-border {
+	&.filled {
+		border: thin solid transparent;
+		background-color: transparent;
+	}
+
+	&.error {
+		background-color: transparent;
+	}
+}
+
+.q-pin-input--semi-borderless-border {
+	&.filled {
+		border: thin solid $light;
+		background-color: transparent;
+	}
+	&.error {
+		background-color: transparent;
+	}
+}
+
+.q-pin-input--primary-border {
+	&.filled {
+		border: thin solid rgb($primary-rgb /0.3);
+	}
+}
+
+.q-pin-input--secondary-border {
+	&.filled {
+		border: thin solid rgb($secondary-rgb /0.3);
+	}
+}
+
+.q-pin-input--blue-border {
+	&.filled {
+		border: thin solid rgb($primary-rgb /0.3);
+	}
+}
+
+

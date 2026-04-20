@@ -1,0 +1,8 @@
+trailingComma: 'none'
+semi: false
+singleQuote: true
+bracketSameLine: true
+singleAttributePerLine: true
+
+# Vue
+vueIndentScriptAndStyle: true

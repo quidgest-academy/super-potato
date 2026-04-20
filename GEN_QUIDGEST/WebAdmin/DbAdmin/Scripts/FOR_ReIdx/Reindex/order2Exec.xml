@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReindexOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<ReIndexItems>
+		<Function Id="CREATEDB" Name="Create Database" Help="" Connection="Admin" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>CreateDatabase.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CREATESP" Name="Create Base StoredProcedures" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>FuncoesAuxCheckTable.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="DROPFK" Name="Drop foreign keys" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>DropFK.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CREATEHRDSCHEMA" Name="Create HardcodedTables Schema" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Dependencies>
+				<Dependencie>UPDATECFG</Dependencie>
+			</Dependencies>
+			<Scripts>
+				<Script>tblHardcode.sql</Script>
+			</Scripts>
+		</Function>
+		<!-- Used to select both the before and after schema upgrade scripts -->
+		<Function Id="UPGRADECLIENTS" Name="Upgrade Version Routines" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+			</Scripts>
+		</Function>
+		<Function Id="UPGRADECLIENT1" Name="Upgrade Client" Help="" Connection="Normal" Selected="true" TimeoutMult="10" Selectable="false">
+			<Scripts>
+			</Scripts>
+		</Function>
+
+		<Function Id="UPDATEFUNCTIONS" Name="Update Functions" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>UpdateFunctions.sql</Script>
+			</Scripts>
+		</Function>
+
+		<Function Id="CREATESCHEMA" Name="Create Schema" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Dependencies>
+				<Dependencie>CREATESP</Dependencie>
+				<Dependencie>UPDATECFG</Dependencie>
+			</Dependencies>
+			<Scripts>
+				<Script>CheckTable.sql</Script>
+				<Script>InsertCodInt.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="TBLREBUILD" Name="Rebuild tables" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Dependencies>
+				<Dependencie>CREATESP</Dependencie>
+			</Dependencies>
+			<Scripts>
+				<Script>TblRebuild.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="FRAMEWORKUPGRADE" Name="Framework change routines" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Dependencies>
+				<Dependencie>TBLREBUILD</Dependencie>
+			</Dependencies>
+			<Scripts>
+				<Script>FrameworkChangeRoutines.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="DROPCOLUMNS" Name="Delete unknown columns" Help="" Connection="Normal" Selected="false" Selectable="true">
+			<Scripts>
+				<Script>RemoverColunas.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="UPDATECFG" Name="Schema Maintenance" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Dependencies>
+				<Dependencie>CREATESP</Dependencie>
+			</Dependencies>
+			<Scripts>
+				<Script>UpdateCfg.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="UPDATESP" Name="Update StoredProcedures" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>ActStoredProcINI.sql</Script>
+				<Script>ActStoredProcMAN.sql</Script>
+				<Script>ActStoredProcFIM.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="DELETETMPDB" Name="Delete Temporary Databases" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>EliminacaoBDTemp.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="ADDINDEX" Name="Rebuild Table Indexes" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>AddIndex.sql</Script>
+			</Scripts>
+		</Function>
+
+		<Function Id="INVALIDZZSTATE" Name="Invalid Records" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>ActualizacaoEstados.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CREATEFORMULASPROCS" Name="Create formula stored procedures" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>RecalcTabelas.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CREATEFORMULAGROUPS" Name="Create formula groups stored procedures" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>CalcFormulaGroup.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="UPDATEREPLICAS" Name="Update Replicas" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>Replicas.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="RESETCALCFIELDS" Name="Reset CalculatedFields" Help="" Connection="Normal" Selected="false" Selectable="true">
+			<Scripts>
+				<Script>LimparVlCalculados.sql</Script>
+			</Scripts>
+		</Function>
+
+		<Function Id="UPGRADECLIENT2" Name="Upgrade Client" Type="SQL" Help="" Connection="Normal" Selected="true" TimeoutMult="10" Selectable="false">
+			<Scripts>
+				<!-- User defined ReIndexItems -->
+			</Scripts>
+		</Function>
+
+		<Function Id="UPDATEFORMULAFIELDS" Name="Update FormulaFields" Help="" Connection="Normal" Selected="true" TimeoutMult="10" Selectable="true">
+			<Scripts>
+				<Script>GerarFormulas.sql</Script>
+			</Scripts>
+			<Dependencies>
+				<Dependencie>FRAMEWORKUPGRADE</Dependencie>
+			</Dependencies>
+		</Function>
+		<Function Id="FORMULASDAILYUPDATE" Name="Update daily formulas" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>FormDailyUpdate.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="UPDATEINTCOD" Name="Update Sequencial Numbers" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Scripts>
+				<Script>ReconstrucaoCodInt.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CREATEDBLOG" Name="Create Audit Database" Help="" Connection="Admin" Selected="false" Selectable="true">
+			<Scripts>
+				<Script>CreateLogDatabase.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CREATESCHEMALOG" Name="Create Audit Database Schema" Help="" Connection="Log" Selected="false" Selectable="true">
+			<Scripts>
+				<Script>FuncoesAuxCheckTable.sql</Script>
+				<Script>ChecktableLog.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CREATEDEFAULTUSER" Name="Create default user" Help="" Connection="Normal" Selected="false" Selectable="true">
+			<Scripts>
+				<Script>DatabaseSeed.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="GRANTACCESSSP" Name="Grant Access StoredProcedures" Help="" Connection="Normal" Selected="false" Selectable="true">
+			<Scripts>
+				<Script>GrantAccessStoredProcedures.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CREATEFK" Name="Create foreign keys" Help="" Connection="Normal" Selected="false" Selectable="true">
+			<Dependencies>
+				<Dependencie>DROPFK</Dependencie>
+			</Dependencies>
+			<Scripts>
+				<Script>CreateFK.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="SHRINKDB" Name="Shrink Database" Help="" Connection="Normal" Selected="false" Selectable="true">
+			<Scripts>
+				<Script>CompactacaoTransLog.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="DELROWS" Name="Delete Invalid Rows" Help="" Connection="Normal" Selected="false" Selectable="true">
+			<Dependencies>
+				<Dependencie>DROPFK</Dependencie>
+			</Dependencies>
+			<Scripts>
+				<Script Type="CS">DeleteInvalidRows</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CLEANUPNOTES" Name="Clean Up Notes" Help="" Connection="Normal" Selected="false" Selectable="true">
+			<Scripts>
+				<Script>CleanUpNotes.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="CTRLRECORDS" Name="Create controlled records" Help="" Connection="Normal" Selected="true" Selectable="true">
+			<Dependencies>
+			</Dependencies>
+			<Scripts>
+				<Script>ControlledRecords.sql</Script>
+			</Scripts>
+		</Function>
+		<Function Id="FK2NULL" Name="Invalid foreign key to NULL value" Help="" Connection="Normal" Selected="false" Selectable="true">
+			<Scripts>
+				<Script>SetInvalidFK2Null.sql</Script>
+			</Scripts>
+		</Function>
+	</ReIndexItems>
+	<ReIndexGroups>
+		<ReIndexGroup Name="Schema">
+			<GroupItems>
+				<ReIndexItem>CREATEDB</ReIndexItem>
+				<ReIndexItem>CREATESP</ReIndexItem>
+				<ReIndexItem>UPDATEFUNCTIONS</ReIndexItem>
+				<ReIndexItem>CREATESCHEMA</ReIndexItem>
+				<ReIndexItem>CREATEHRDSCHEMA</ReIndexItem>
+				<ReIndexItem>UPGRADECLIENTS</ReIndexItem>
+				<ReIndexItem>UPGRADECLIENT1</ReIndexItem>
+				<ReIndexItem>TBLREBUILD</ReIndexItem>
+				<ReIndexItem>FRAMEWORKUPGRADE</ReIndexItem>
+				<ReIndexItem>UPDATECFG</ReIndexItem>
+				<ReIndexItem>UPDATESP</ReIndexItem>
+				<ReIndexItem>DELETETMPDB</ReIndexItem>
+				<ReIndexItem>DROPFK</ReIndexItem>
+				<ReIndexItem>DROPCOLUMNS</ReIndexItem>
+				<ReIndexItem>CREATEFK</ReIndexItem>
+				<ReIndexItem>SHRINKDB</ReIndexItem>
+				<ReIndexItem>FULLTEXTSEARCH</ReIndexItem>
+			</GroupItems>
+		</ReIndexGroup>
+		<ReIndexGroup Name="Data">
+			<GroupItems>
+				<ReIndexItem>ADDINDEX</ReIndexItem>
+				<ReIndexItem>UPDATEINTCOD</ReIndexItem>
+				<ReIndexItem>CREATEFORMULASPROCS</ReIndexItem>
+				<ReIndexItem>CREATEFORMULAGROUPS</ReIndexItem>
+				<ReIndexItem>INVALIDZZSTATE</ReIndexItem>
+				<ReIndexItem>UPDATEREPLICAS</ReIndexItem>
+				<ReIndexItem>RESETCALCFIELDS</ReIndexItem>
+				<ReIndexItem>UPGRADECLIENT2</ReIndexItem>
+				<ReIndexItem>UPDATEFORMULAFIELDS</ReIndexItem>
+				<ReIndexItem>FORMULASDAILYUPDATE</ReIndexItem>
+				<ReIndexItem>CHECKACCESSLEVEL</ReIndexItem>
+				<ReIndexItem>CTRLRECORDS</ReIndexItem>
+			</GroupItems>
+		</ReIndexGroup>
+		<ReIndexGroup Name="Logging">
+			<GroupItems>
+				<ReIndexItem>CREATEDBLOG</ReIndexItem>
+				<ReIndexItem>CREATESCHEMALOG</ReIndexItem>
+				<ReIndexItem>CREATELOGVIEWSLOG</ReIndexItem>
+				<ReIndexItem>DELETELOGTRIGGERS</ReIndexItem>
+				<ReIndexItem>CREATELOGTRIGGERS</ReIndexItem>
+				<ReIndexItem>CREATELOGVIEWS</ReIndexItem>
+				<ReIndexItem>DISABLECT</ReIndexItem>
+				<ReIndexItem>ENABLECT</ReIndexItem>
+				<ReIndexItem>ENABLECC</ReIndexItem>
+				<ReIndexItem>DISABLECC</ReIndexItem>
+			</GroupItems>
+		</ReIndexGroup>
+		<ReIndexGroup Name="Extra Options">
+			<GroupItems>
+				<ReIndexItem>CREATEDEFAULTUSER</ReIndexItem>
+				<ReIndexItem>GRANTACCESSSP</ReIndexItem>
+				<ReIndexItem>ADDGROUP_CONCAT</ReIndexItem>
+				<ReIndexItem>DELROWS</ReIndexItem>
+				<ReIndexItem>CLEANUPNOTES</ReIndexItem>
+				<ReIndexItem>FK2NULL</ReIndexItem>
+				<ReIndexItem>ASPSTATE</ReIndexItem>
+			</GroupItems>
+		</ReIndexGroup>
+	</ReIndexGroups>
+</ReindexOrder>

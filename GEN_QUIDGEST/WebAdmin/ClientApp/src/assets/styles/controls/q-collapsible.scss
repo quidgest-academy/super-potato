@@ -1,0 +1,25 @@
+// QCollapsible web-admin specific styling
+.q-collapsible {
+  // Removes the bootstrap styling and leaves the QuidgestUI defaults.
+  // Should be deleted once bootstrap is removed
+  &__title-text {
+    font-size: unset;
+    line-height: unset;
+  }
+  // Variants
+  &--admin-default {
+    &:not(.q-collapsible--border-bottom) {
+      border-bottom: 2px solid var(--q-theme-neutral-light);
+    }
+  }
+
+  &--admin-plain {
+    .q-collapsible__btn .q-button__content {
+      h4 {
+        text-transform: none;
+      }
+
+      color: var(--q-theme-neutral-dark);
+    }
+  }
+}

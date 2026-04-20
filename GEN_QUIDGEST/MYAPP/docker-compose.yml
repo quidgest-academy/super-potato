@@ -1,0 +1,46 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      MSSQL_SA_PASSWORD: QuidSpark!
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "2433:1433"
+    volumes:
+      #Named volumes are better for executing in different OS
+      - db_data:/var/opt/mssql
+      - ./sqlbackup:/app/dbs/backup
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" -C -b -o /dev/null
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  webadmin:
+    build: ../WebAdmin
+    ports:
+      - "3031:8080"
+    environment:
+      CONFIG_PATH: /app/config
+    volumes:
+      - ../config:/app/config
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      
+  genioapp:
+    build: .
+    ports:
+      - "3030:8080"
+    environment:
+      CONFIG_PATH: /app/config
+    volumes:
+      - ../config:/app/config
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+       
+volumes:
+  db_data:

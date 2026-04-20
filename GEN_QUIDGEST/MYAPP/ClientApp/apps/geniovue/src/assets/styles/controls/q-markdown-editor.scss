@@ -1,0 +1,156 @@
+﻿/*
+  SCSS for the QMarkdownEditor component.
+*/
+.q-markdown-editor {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	gap: 0.2rem;
+	margin: 0 auto;
+
+	background-color: rgb(var(--q-theme-neutral-light-rgb)/.15);
+	border: 2px solid rgb(var(--q-theme-neutral-light-rgb)/.15);
+	box-sizing: border-box;
+
+	resize: vertical;
+  	overflow: hidden;
+
+	height: 400px;
+	width: 100%;
+	min-height: 300px;
+
+	// Size Variants - control max-width
+	&--small {
+		max-width: 600px;
+	}
+	&--medium {
+		max-width: 800px;
+	}
+	&--large {
+		max-width: 1000px;
+	}
+	&--xlarge {
+		max-width: 1200px;
+	}
+	&--xxlarge {
+		max-width: 1400px;
+	}
+
+	&__header {
+		height: 35px;
+		display: flex;
+		align-items: center;
+
+		&--logo {
+			margin-left: 0.5rem;
+			margin-right: 0.5rem;
+			fill: var(--q-theme-on-background);
+		}
+
+		.q-button-group {
+			margin: 0.25rem;
+			.q-button {
+				padding-top: 0.25rem;
+				padding-bottom: 0.25rem;
+			}
+		}
+	}
+
+	// Toolbar
+	&__toolbar {
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: 0.5rem;
+		height: 35px;
+		min-width: fit-content;
+		background-color: $white;
+
+		&-btn {
+			&--options {
+				&::after {
+					display: inline-block;
+					margin-left: 0.255em;
+					vertical-align: 0.255em;
+					content: "";
+					border-top: 0.3em solid;
+					border-right: 0.3em solid transparent;
+					border-bottom: 0px;
+					border-left: 0.3em solid transparent;
+				}
+			}
+		}
+	}
+
+	// Editor body container
+	&__body {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		height: calc(100% - 35px); /* Subtract header height */
+		width: 100%;
+	}
+
+	// Text edit container
+	&__edit {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		min-width: fit-content;
+	}
+
+	// Editor text area
+	&__textarea {
+		display: flex;
+		flex-direction: column;
+
+		width: 100%;
+		height: calc(100% - 35px); /* Subtract toolbar height */
+
+		padding: 1rem;
+		border: 1px solid rgb(var(--q-theme-neutral-light-rgb)/.4);
+		font-family: $font-family-monospace;
+		font-size: inherit;
+		resize: none;
+		box-sizing: border-box;
+		overflow-y: auto;
+
+		background-color: rgb(var(--q-theme-neutral-light-rgb)/.4);
+
+		&--full-width {
+			width: 100%;
+		}
+	}
+
+	// Editor preview area
+	&__preview {
+		position: relative;
+		padding: 1rem;
+		box-sizing: border-box;
+		background-color: $white;
+		overflow: auto;
+
+		&--full-width {
+			width: 100%;
+		}
+
+		/* Fullscreen preview: occupies the full space of the target container */
+		&--full-screen {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 9999;
+			background-color: $white;
+			overflow: auto;
+		}
+	}
+
+	&__divider {
+		width: 20px;
+		cursor: col-resize;
+		background-color: rgb(var(--q-theme-neutral-light-rgb)/.15);
+		align-content: center;
+	}
+}

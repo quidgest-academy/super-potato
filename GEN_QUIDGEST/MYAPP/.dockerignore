@@ -1,0 +1,97 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Node.js
+**/node_modules
+**/dist
+**/.npm
+**/.pnpm-store
+**/.pnpm-debug.log
+**/coverage
+**/.nyc_output
+
+
+# .NET
+**/bin/
+**/obj/
+**/*.user
+**/*.userosscache
+**/*.suo
+**/*.userprefs
+**/*.dbmdl
+**/*.jfm
+**/TestResults/
+**/artifacts/
+**/*.nupkg
+
+# IDE and editor files
+**/.vs/
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo
+**/.DS_Store
+**/Thumbs.db
+
+# Build results
+**/[Dd]ebug/
+**/[Dd]ebugPublic/
+**/[Rr]elease/
+**/[Rr]eleases/
+**/x64/
+**/x86/
+**/build/
+**/bld/
+**/[Bb]in/
+**/[Oo]bj/
+**/[Ll]og/
+**/[Ll]ogs/
+
+# Test Results
+**/[Tt]est[Rr]esult*/
+**/[Bb]uild[Ll]og.*
+
+# NuGet
+**/packages/
+!ClientApp/packages/
+**/*.nupkg
+**/nuget.exe
+
+# Temporary files
+**/tmp/
+**/temp/
+**/*.tmp
+**/*.temp
+
+# Logs
+**/logs/
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# Environment files
+**/.env
+**/.env.*
+**/appsettings.*.json
+!**/appsettings.json
+
+# Documentation
+**/docs/
+**/documentation/
+**/README.md
+**/CHANGELOG.md
+**/LICENSE
+
+# Build tools
+**/.eslintrc
+**/.prettierrc
+**/.stylelintrc
+**/.editorconfig
+**/tsconfig.tsbuildinfo
+
+# Genio Specific
+**GeneratedFiles.txt*
+**/Configuracoes.*.xml

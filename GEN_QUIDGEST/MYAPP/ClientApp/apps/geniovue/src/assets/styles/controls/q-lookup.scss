@@ -1,0 +1,11 @@
+﻿.q-lookup__results {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+	padding: 0 0.75rem;
+	opacity: 0.5;
+}
+
+.q-list-item__description .q-icon {
+	fill: $neutral;
+}

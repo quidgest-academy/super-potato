@@ -1,0 +1,15 @@
+/***********************************
+ *        Dynamic variables        *
+ ***********************************/
+:root {
+	--visible-header-height: 0; // In pixels (px)
+	--right-sidebar-width: 0; // In root element's font-size (rem)
+	--cav-width-percentage: 0; // In percentage (%)
+	--navbar-height: 0; // In pixels (px)
+}
+
+// Bootstrap overrides
+// TODO: remove when possible
+$input-height: 31.89px;
+
+@import 'custom-layout-variables.scss';

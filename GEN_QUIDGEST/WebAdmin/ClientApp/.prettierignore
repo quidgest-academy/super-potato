@@ -1,0 +1,27 @@
+# Build artifacts
+dist/
+
+# Ignore files for PNPM and NPM
+.pnpm-store/
+node_modules/
+
+# Ignore external files - bootbox, jquery, ...
+src/plugins/jquery/
+src/plugins/adminlte.js
+src/plugins/bootbox.js
+src/assets/styles/plugins/*.min.css
+
+# Ignore template files, for now
+# TODO: Gradually include these, as they are passed from template files to regular .vue files
+src/views/**/*.vue
+src/App.vue
+src/global.js
+src/router.js
+src/utils/PathFinder.js
+src/plugins/i18n.js
+src/mixins/mainMixin.js
+src/utils/mainUtils.js
+
+*.json
+*.yml
+*.yaml

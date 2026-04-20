@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Frontend",
+            "type": "chrome",
+            "url": "https://localhost:5173",
+            "request": "launch",
+            "webRoot": "${workspaceFolder}/ClientApp",
+            "preLaunchTask": "vite"
+        },
+        {
+            "name": "Launch Backend",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/GenioMVC/bin/Debug/net8.0/GenioMVC.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/GenioMVC",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "logging": {
+                "moduleLoad": false
+            },
+            "justMyCode": true
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug Ui+Portal",
+            "configurations": ["Launch Backend", "Launch Frontend"],
+            "stopAll": true
+        }
+    ]
+}

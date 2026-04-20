@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Frontend",
+            "type": "chrome",
+            "url": "http://localhost:8202/",
+            "request": "launch",
+            "webRoot": "${workspaceFolder}/ClientApp",
+            "preLaunchTask": "vite"
+        },
+        {
+            // Use IntelliSense to find out which attributes exist for C# debugging
+            // Use hover for the description of the existing attributes
+            // For further information visit https://github.com/dotnet/vscode-csharp/blob/main/debugger-launchjson.md.
+            "name": "Launch Backend",
+            "type": "coreclr",
+            "request": "launch",
+            //"preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Administration/bin/Debug/net8.0/Administration.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Administration",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "logging": {
+                "moduleLoad": false
+            },
+            "justMyCode": true
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug Ui+Webamin",
+            "configurations": ["Launch Backend", "Launch Frontend"],
+            "stopAll": true
+        }
+    ]
+}

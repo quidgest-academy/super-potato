@@ -1,0 +1,118 @@
+html,
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-size: $font-size-base;
+  font-family: 'Lato', serif;
+  line-height: $line-height-base;
+  background-color: #f0f0f1;
+}
+
+.wrapper {
+  min-height: inherit;
+}
+
+.content-wrapper {
+  background-color: transparent;
+  z-index: auto;
+
+  &#content-wrapper {
+    margin-left: 270px; // sidebar-width
+    margin-top: -2.5rem;
+  }
+}
+
+hr {
+  margin: 0.75rem 0 1rem 0;
+}
+
+// Removes the block and margin bottom from bootstrap labels
+// Needed to correct q-checkbox and q-label
+label {
+  display: flex;
+  margin-bottom: unset;
+}
+
+.control-row-group {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.75rem;
+
+  @if $compactstyle {
+    margin-bottom: 0.25rem;
+  } @else {
+    margin-bottom: 0.75rem;
+  }
+
+  & + .control-row-group {
+    margin-top: 0.25rem;
+  }
+}
+
+.col-12 {
+  flex: 0 0 auto;
+}
+
+.textRight {
+  text-align: right;
+}
+
+// jQuery-highlight
+.highlight {
+  background-color: yellow;
+}
+
+.title-container {
+  &--with-badge {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+}
+
+.footer-btn .control-row-group {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+
+// MEDIA QUERIES
+@media (max-width: 767px) {
+  #header-container {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  /*--- Mobile portrait ---*/
+  #header-container {
+    #header {
+      .container {
+        height: 200px;
+        background-position: center top 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .c-groupbox {
+    padding: 0.2rem !important;
+    margin-bottom: 0.6rem !important;
+  }
+
+  .c-modal__body {
+    padding: 0rem !important;
+  }
+
+  select,
+  .i-text__field {
+    padding: 0.13rem 0.13rem !important;
+  }
+}

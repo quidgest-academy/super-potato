@@ -1,0 +1,78 @@
+.graph {
+  width: 100%;
+
+  text {
+    user-select: none;
+    font-family: sans-serif;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+
+  .edgePath {
+    &.hidden {
+      path {
+        opacity: 0.2;
+        transition: opacity 0.5s;
+      }
+    }
+
+    path {
+      stroke: #666;
+      fill: #666;
+      stroke-width: 1.5px;
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+  }
+
+  .node {
+    rect,
+    circle,
+    ellipse {
+      stroke: #333;
+      fill: #fff;
+      stroke-width: 1px;
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+
+    &.hidden {
+      rect,
+      text {
+        opacity: 0.2;
+        transition: opacity 0.5s;
+      }
+    }
+
+    &.dests {
+      rect {
+        fill: #e1f5fd;
+        stroke: #b5eaff;
+      }
+
+      text {
+        fill: #308fb5;
+      }
+    }
+
+    &.sources {
+      rect {
+        fill: #e7fde2;
+        stroke: #b2f1a4;
+      }
+
+      text {
+        fill: #29a20e;
+      }
+    }
+
+    &:hover {
+      rect {
+        stroke-width: 2px;
+        stroke: #333;
+        opacity: 0.8;
+        transition: opacity 0.1s;
+      }
+    }
+  }
+}

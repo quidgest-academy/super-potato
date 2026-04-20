@@ -1,0 +1,14 @@
+# Misc
+.DS_Store
+
+# Build artifacts
+coverage/
+dist/
+
+# Ignore files for PNPM and NPM
+.pnpm-store/
+node_modules/
+
+*.json
+*.yml
+*.yaml

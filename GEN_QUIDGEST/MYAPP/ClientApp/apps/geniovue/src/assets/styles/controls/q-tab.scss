@@ -1,0 +1,202 @@
+﻿.c-tab {
+	@extend .nav;
+
+	&__list {
+		button {
+			padding: 0;
+			// Leave some space so the outline on focus-visible is not covered by other elements
+			// This outline can go beyond the space the element uses
+			margin-top: 0.25rem;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+
+			@if $tab-style == "line" {
+				// Remove small gap that somehow comes from the buttons using display: flex;
+				position: relative;
+				bottom: -1px;
+
+				&:not(.active) {
+					.nav-link {
+						color: rgb($on-background-rgb / 0.7);
+					}
+				}
+			}
+
+			&:hover:not([disabled]) {
+				background-color: transparent;
+				border-color: transparent;
+
+				&:not(.active) {
+					.nav-link {
+						@if $tab-style == "line" {
+							color: $on-background;
+							background-color: transparent;
+							box-shadow: inset 0 -0.4rem 0 $primary-dark;
+						}
+						@else if $tab-style == "box" {
+							color: $primary-dark;
+							border-color: $light $light $container;
+						}
+					}
+				}
+			}
+
+			&:focus-visible,
+			&:focus-visible:not([disabled]) {
+				outline: $action-focus-width $action-focus-style $action-focus-color;
+			}
+		}
+
+		.nav-link {
+			@extend a;
+			display: block;
+			padding: 0.645rem 1rem;
+			text-decoration: none !important;
+
+			&:hover {
+				color: $on-background;
+				border-color: transparent;
+			}
+		}
+
+		.active {
+			@if $tab-style == "box"
+			{
+				// Make selected tab look like it does not have a bottom border
+				border-bottom: $container;
+			}
+		}
+	}
+
+	&__divider {
+		@extend .nav-tabs;
+		border: none !important;
+
+		.c-tab__item {
+			margin-bottom: -1px;
+			line-height: 1;
+		}
+	}
+
+	&__item {
+		@extend .nav-item;
+
+		&-header {
+			@extend .nav-link;
+
+			&:hover {
+				background-color: #f3f5f6;
+			}
+
+			&.disable {
+				color: $gray-light;
+				cursor: not-allowed;
+			}
+		}
+
+		&-container {
+			@extend .tab-content;
+			border: 1px solid $gray-light;
+			background-color: $container;
+		}
+
+		&-content {
+			@extend .tab-pane;
+
+			@if $compactstyle {
+				padding: 0.55rem;
+			} @else {
+				padding: 1rem;
+			}
+		}
+
+		.nav-link:hover {
+			cursor: pointer;
+		}
+	}
+
+	&__divider &__item {
+		margin-bottom: -1px;
+	}
+
+	&__divider &__item-header {
+		border: 1px solid transparent;
+		border-top-left-radius: $border-radius;
+		border-top-right-radius: $border-radius;
+	}
+
+	&__divider &__item-header.active,
+	&__divider &__item.show &__item-header {
+		color: $gray;
+		background-color: $white;
+		border-color: $input-border-color $input-border-color $white;
+	}
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .active.c-tab__item-header,
+.c-tab__divider .nav-link.active,
+.c-tab__divider .active.c-tab__item-header,
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-item.show .c-tab__item-header,
+.nav-tabs .show.c-tab__item .nav-link,
+.nav-tabs .show.c-tab__item .c-tab__item-header,
+.c-tab__divider .nav-item.show .nav-link,
+.c-tab__divider .nav-item.show .c-tab__item-header,
+.c-tab__divider .show.c-tab__item .nav-link,
+.c-tab__divider .show.c-tab__item .c-tab__item-header {
+	color: $on-background;
+	@if $tab-style == "line" {
+		// add these lines to remove style from selected
+		border: none;
+		background-color: transparent;
+		font-weight: 700;
+		box-shadow: inset 0 -0.4rem 0 $primary;
+	}
+	@else if $tab-style == "box" {
+		background-color: $container;
+		border-color: $gray-light $gray-light $container;
+		border-top: 2px solid $gray-light;
+	}
+}
+
+.c-tab__divider .nav-item.disabled {
+	pointer-events: none !important;
+}
+
+.nav-tabs {
+	background: $white;
+	background-color: transparent;
+	border-bottom: 1px solid #e9ecef;
+
+	.nav-link {
+		border: 1px solid transparent;
+		border-top-left-radius: $border-radius;
+		border-top-right-radius: $border-radius;
+
+		@if $tab-style == "line" {
+			color: $black;
+			outline: none;
+
+			&.active {
+				color: $primary;
+			}
+
+			&:hover {
+				border-color: transparent;
+				color: $primary;
+			}
+		}
+	}
+
+	& &.active {
+		color: $secondary;
+		background-color: $white;
+		border-color: #dee2e6 #dee2e6 #fff;
+	}
+}
+
+.tab-group-container {
+	max-width: 100%;
+	flex: 1;
+}

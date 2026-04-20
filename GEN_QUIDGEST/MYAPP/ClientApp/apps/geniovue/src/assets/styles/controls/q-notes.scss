@@ -1,0 +1,55 @@
+﻿.q-note {
+  $this: &;
+
+  position: relative;
+  padding: .5rem;
+  border-radius: .2rem;
+  border: 1px solid transparent;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  white-space: normal;
+  border-radius: $border-radius;
+  color: $on-background;
+  background-color: #F7ED96;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__header {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 1rem;
+
+    .q-button {
+      padding: 0;
+      margin-left: auto;
+    }
+  }
+
+  &__title {
+    font-weight: 600;
+    text-transform: $headings-text-transform;
+    font-size: 0.9rem;
+    line-height: 1rem;
+    font-size: smaller;
+
+    &-from {
+      font-weight: 900
+    }
+  }
+
+  &__text {
+    text-align: left;
+    font-weight: 400;
+    color: $on-background;
+  }
+
+
+  &__container {
+    position: relative;
+    width: 100%;
+  }
+}

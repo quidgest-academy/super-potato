@@ -1,0 +1,25 @@
+// All WebAdmin styles - do NOT change order due to conflicts between theme variables, bootstrap and QuidgestUI
+// Variables and fonts
+@import './theme-variables.scss';
+@import './typography.scss';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+@import '../../../node_modules/bootstrap/scss/_variables.scss';
+@import '../../../node_modules/bootstrap/scss/mixins';
+@import '../../../node_modules/bootstrap/scss/utilities';
+
+// QuidgestUI
+@import './quidgest-ui.scss';
+
+// Page layout
+@import './layout/index.scss';
+
+// Plugins
+@import './plugins/index.scss';
+
+// Controls
+@import './controls/index.scss';
+
+// Views
+@import './views/index.scss';

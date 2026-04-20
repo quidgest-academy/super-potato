@@ -1,0 +1,51 @@
+dl:not(.wa-environment) dd:not(:last-child)::after {
+  content: '|';
+  margin: 0 0.5rem;
+}
+
+dl.row {
+  margin-bottom: 0;
+  gap: 0.25rem;
+}
+
+dt {
+  font-weight: 900;
+
+  &.version {
+    display: flex;
+    align-items: center;
+  }
+}
+
+dl.wa-environment {
+  display: grid;
+  gap: 4px 16px;
+  grid-template-columns: max-content;
+
+  dd {
+    margin: 0;
+    grid-column-start: 2;
+
+    &.version {
+      display: flex;
+      align-items: center;
+
+      .q-icon {
+        color: red;
+        display: flex;
+        font-size: 1.3em;
+      }
+    }
+  }
+}
+
+span.app-brand {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+
+  img {
+    height: 50px;
+    width: auto;
+  }
+}

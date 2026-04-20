@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.1184077">
+  <PropertyGroup>
+    <!-- We turn off the SDK hardcoded npm install task, and replace it with our own Pnpm restore task -->
+    <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
+
+    <JavaScriptTestRoot>.\</JavaScriptTestRoot>
+    <JavaScriptTestFramework>Vitest</JavaScriptTestFramework>
+    <!-- Allows the build (or compile) script located on package.json to run on Build -->
+    <ShouldRunBuildScript>false</ShouldRunBuildScript>
+
+    <StartupCommand>pnpm run dev</StartupCommand>
+    <BuildCommand>pnpm run build:no-color</BuildCommand>
+    <TestCommand>pnpm run test</TestCommand>
+    <!--<CleanCommand>pnpm run clean</CleanCommand>-->
+    <PublishCommand>pnpm run build:no-color</PublishCommand>
+
+    <!-- Folder where production build objects will be placed -->
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\apps/geniovue\dist</BuildOutputFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AllPackageJsons Include="$(PackageJsonDirectory)**\package.json" />
+    <LockFiles Include="$(PackageJsonDirectory)pnpm-lock.yaml" />
+  </ItemGroup>
+
+  <!-- This target has been copied from the SDK targets and modified to use pnpm instead -->
+  <Target Name="RunPnpmInstall" DependsOnTargets="PreNpmInstallCheck" Inputs="@(AllPackageJsons);@(LockFiles)" Outputs="$(NpmInstallCheck)" BeforeTargets="RunNpmInstall">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCodeNpmVersion" />
+    </Exec>
+    <Error Condition="'$(ErrorCodeNpmVersion)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'pnpm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(PackageJsonDirectory)" Command="pnpm install --no-frozen-lockfile">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCodeNpmInstall" />
+    </Exec>
+    <Touch Files="$(NpmInstallCheck)" Condition="'$(ErrorCodeNpmInstall)' == '0'" AlwaysCreate="true" />
+  </Target>
+  <ItemGroup>
+    <None Remove="**\dist\**" />
+    <None Remove="**\coverage\**" />
+    <TypeScriptConfiguration Remove="**\dist\**" />
+    <TypeScriptConfiguration Remove="**\coverage\**" />
+  </ItemGroup>
+</Project>

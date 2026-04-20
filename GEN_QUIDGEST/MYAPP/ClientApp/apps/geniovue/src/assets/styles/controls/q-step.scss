@@ -1,0 +1,93 @@
+﻿.q-step {
+	.q-step__numeric-input {
+		font-size: 1.25rem !important;
+		color: $gray;
+		border: 0.0625rem solid $gray;
+		background-color: $light;
+		border-width: 0.0625rem 0 0.0625rem 0;
+		border-color: $gray;
+		border-radius: 0;
+		width: 8.125rem;
+		height: 2.8125rem;
+
+		&--readonly {
+			pointer-events: none;
+		}
+	}
+
+	.q-step__container {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.q-step__digit {
+		width: 2.8125rem;
+		height: 2.8125rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 0.0625rem solid $primary;
+		border-radius: 0 0.32rem 0.32rem 0;
+		background-color: $white;
+		.q-icon__svg {
+			width: 1.1rem;
+			height: 1.1rem;
+			fill: $primary;
+		}
+		&:hover {
+			border: 0.0625rem solid $primary;
+		}
+	}
+
+	.q-step__digit:active {
+		border: 0.1875rem solid $primary;
+		.q-icon__svg {
+			width: 1.12rem;
+			height: 1.12rem;
+		}
+		&.q-step--margin-left {
+			.q-icon__svg {
+				width: 1.16rem;
+				height: 1.16rem;
+			}
+		}
+	}
+
+	.q-step--margin-left {
+		border-radius: 0.32rem 0 0 0.32rem;
+	}
+
+	&--secondary {
+		.q-step__digit {
+			border: 0.0625rem solid $secondary;
+
+			.q-icon__svg {
+				fill: $secondary;
+			}
+			&:hover {
+				border: 0.0625rem solid $secondary;
+			}
+		}
+		.q-step__digit:active {
+			border: 0.1875rem solid $secondary;
+		}
+	}
+
+	&--danger {
+		.q-step__digit {
+			border: 0.0625rem solid $danger;
+
+			.q-icon__svg {
+				fill: $danger;
+			}
+			&:hover {
+				border: 0.0625rem solid $danger;
+			}
+		}
+		.q-step__digit:active {
+			border: 0.1875rem solid $danger;
+		}
+	}
+}

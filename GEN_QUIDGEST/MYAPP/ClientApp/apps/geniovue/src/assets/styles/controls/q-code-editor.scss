@@ -1,0 +1,73 @@
+// The ace editor requires custom styles for the differ
+@import 'ace-diff/dist/ace-diff.min.css';
+
+.q-code-editor__wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.q-code-editor__options {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.3rem;
+}
+
+.q-code-editor__theme-picker {
+	display: flex;
+	align-items: center;
+
+	>span {
+		margin-right: 0.5rem;
+	}
+}
+
+.q-code-editor__container {
+	display: flex;
+	width: 100%;
+	border: 1px solid var(--q-theme-neutral-light);
+}
+
+.q-code-editor__editor {
+	flex: 1;
+	height: 100%;
+}
+
+.q-code-editor__differ {
+	flex: 1;
+	position: relative;
+
+	&.light-mode {
+		.acediff__gutter {
+			border-left: 1px solid var(--q-theme-neutral-light);
+			border-right: 1px solid var(--q-theme-neutral-light);
+
+			svg {
+				background-color: rgb(var(--q-theme-neutral-light-rgb) / 0.05);
+			}
+		}
+
+		.acediff__diffLine {
+			background-color: rgba(var(--q-theme-info-light-rgb)/0.4);
+			border-top: 1px solid var(--q-theme-info-light);
+			border-bottom: 1px solid var(--q-theme-info-light);
+		}
+	}
+
+	&.dark-mode {
+		.acediff__gutter {
+			border-left: 1px solid var(--q-theme-on-background);
+			border-right: 1px solid var(--q-theme-on-background);
+
+			svg {
+				background-color: var(--q-theme-on-background);
+			}
+		}
+
+		.acediff__diffLine {
+			background-color: rgba(var(--q-theme-info-dark-rgb)/0.3);
+			border-top: 1px solid var(--q-theme-info-dark);
+			border-bottom: 1px solid var(--q-theme-info-dark);
+		}
+	}
+}

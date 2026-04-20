@@ -1,0 +1,31 @@
+﻿.q-cookies {
+	color: $white;
+	background-color: $primary;
+	bottom: 0;
+	z-index: 9999;
+	position: fixed;
+	text-align: center;
+	width: 100%;
+	white-space: pre-line;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+	&__field {
+		color: $white;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	
+	&__button {
+		background-color: $white;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		display: inline-block;
+		overflow: visible;
+		align-items: flex-end;
+		margin-left: 10px;
+	}
+}

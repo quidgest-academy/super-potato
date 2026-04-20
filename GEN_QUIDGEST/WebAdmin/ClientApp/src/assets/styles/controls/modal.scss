@@ -1,0 +1,117 @@
+//c-modal
+.c-modal {
+  @extend .modal;
+
+  &__fade {
+    @extend .fade;
+  }
+
+  &__dialog {
+    @extend .modal-dialog;
+    margin: 5rem auto;
+  }
+
+  &--lg {
+    @extend .modal-lg;
+  }
+
+  &__content {
+    @extend .modal-content;
+    border: 1px solid $input-border-color;
+    background-color: $body-bg;
+
+    @if $enable-rounded {
+      border-radius: $border-radius;
+    } @else {
+      border-radius: 0;
+    }
+  }
+
+  &__header {
+    @extend .modal-header;
+    border-color: $light;
+    margin-bottom: 1rem;
+    display: block;
+
+    @if $compactstyle {
+      padding: 0.5rem;
+      margin-bottom: 0;
+    }
+
+    &-title {
+      color: $gray;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.02rem;
+    }
+  }
+
+  &--center {
+    top: 40% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  &__body {
+    @extend .modal-body;
+    color: $gray;
+
+    @if $compactstyle {
+      padding: 0.5rem;
+    }
+
+    .normal-view {
+      overflow-x: auto;
+    }
+  }
+
+  &__footer {
+    @extend .modal-footer;
+    border-color: $light;
+
+    @if $compactstyle {
+      margin-top: 0;
+      padding-top: 0.55rem;
+    } @else {
+      margin-top: 10px;
+      padding-top: 1.25rem;
+    }
+  }
+}
+
+//modal
+.modal-content {
+  max-width: 500px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: $white;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+
+  .modal-content {
+    box-shadow: 0 0.5rem 1rem #00000080;
+
+    .modal-content {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 1rem;
+      border-bottom: 1px solid #e9ecef;
+      border-top-left-radius: 0.3rem;
+      border-top-right-radius: 0.3rem;
+
+      .modal-title {
+        margin-bottom: 0;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.modal.show {
+  z-index: 4000;
+}

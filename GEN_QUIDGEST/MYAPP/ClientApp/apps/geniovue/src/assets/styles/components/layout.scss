@@ -1,0 +1,300 @@
+﻿$spacing-base: 0.25rem;
+
+// Bootstrap layout classes are removing these paddings
+// on smaller screens. We don't want that at the form container level.
+// Maybe should use $spacing-base ?
+#form-container {
+	padding-right: 15px;
+	padding-left: 15px;
+
+	> .q-container {
+		padding: 0;
+	}
+}
+
+.form-flow {
+	& > .form-actions {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.control-row-group {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		position: relative;
+	}
+}
+
+.control-row-group {
+	display: flex;
+	gap: $spacing-base;
+	width: 100%;
+
+	& + & {
+		margin-top: $spacing-base;
+	}
+
+	&.row-large-control {
+		display: block;
+	}
+
+	.control-join-group .c-groupbox {
+		white-space: initial !important;
+	}
+
+	.label-container {
+		display: flex;
+		gap: $spacing-base;
+
+		&--inline {
+			display: inline-flex;
+			gap: $spacing-base;
+		}
+	}
+}
+
+.control-join-group {
+	display: inline-flex;
+	align-items: stretch;
+	white-space: nowrap;
+	max-width: 100%;
+	gap: $spacing-base;
+
+	&:not(.control-dynamic-group):not(:has(.c-groupbox)) {
+		align-self: flex-start;
+
+		&:has(.i-button) {
+			align-self: flex-end;
+		}
+
+		&:has(.i-dbedit) {
+			align-self: flex-end;
+		}
+	}
+
+	// Needs to be full width for the text editor (TinyMCE) to expand to the full width
+	&:has([data-size='block']), & > .i-text:has([data-size='block']) {
+		width: 100%;
+	}
+
+	& > .i-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-self: flex-end;
+
+		&:has(span.q-help__subtext) {
+			max-width: min-content;
+		}
+	}
+
+	.label-container {
+		display: flex;
+
+		&--inline {
+			display: inline-flex;
+		}
+	}
+
+	.i-button {
+		display: flex;
+		flex-direction: column-reverse;
+		align-self: flex-end;
+
+		// Positions the popover button next to the button
+		&:has(.btn-popover) {
+			flex-direction: row-reverse;
+			align-items: center;
+		}
+
+		// Positions the popover button on the top side of the button
+		.label-container:has(> .btn-popover) {
+			align-self: flex-start;
+			margin-left: 0.25rem;
+		}
+	}
+
+	.table-responsive-wrapper {
+		white-space: initial;
+	}
+}
+
+.control-dynamic-group {
+	flex: 1;
+
+	/* TODO: remove when QField wrapper is properly used */
+	> * {
+		width: 100%;
+	}
+}
+
+.control-row-group:has(.control-join-group .i-text .q-help__subtext) {
+	.control-join-group:not(.control-dynamic-group):not(:has(.c-groupbox)):has(.i-button) {
+		align-self: flex-start;
+		margin-top: calc(1.5 * 0.9rem);
+	}
+}
+
+.heading-button-group {
+	float: left;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.form-horizontal {
+	position: relative;
+}
+
+.row-line-group {
+	& > .i-text {
+		width: 100%;
+	}
+}
+
+#footer-action-btns {
+	display: flex;
+	gap: 0.5rem;
+
+	@if $btn-align-right {
+		justify-content: flex-end;
+	} @else {
+		justify-content: flex-start;
+	}
+}
+
+.form-actions {
+	padding: 1.5rem 1rem;
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+	background-color: transparent;
+	border-top: 1px solid $input-border-color;
+	display: flex;
+
+	@if $btn-align-right {
+		justify-content: flex-end;
+	} @else {
+		justify-content: flex-start;
+	}
+}
+
+.nested-form .form-actions {
+	margin-bottom: 0;
+	margin-top: 0;
+	padding-bottom: 6px;
+	background: inherit;
+	border-top: none;
+}
+
+.q-dialog {
+	&__header-title {
+		color: $on-background;
+		font-size: 1.25rem;
+		font-weight: 600;
+		letter-spacing: 0.02rem;
+	}
+
+	&__body {
+		padding: 1rem;
+
+		&-icon {
+			padding: 0.25rem 1rem 0.45rem 1rem;
+		}
+	}
+
+	&:not(.q-dialog-message) {
+		.q-dialog__header {
+			border-bottom: 1px solid $light;
+			padding-bottom: 1rem;
+		}
+
+		.q-dialog__footer {
+			border-top: 1px solid $light;
+			padding-top: 1rem;
+
+			&-buttons {
+				@if $btn-align-right {
+					justify-content: flex-end;
+				} @else {
+					justify-content: flex-start;
+				}
+			}
+
+			.actions {
+				display: flex;
+				gap: 0.5rem;
+			}
+		}
+	}
+}
+
+@media (max-width: 575.98px) {
+	.control-join-group {
+		white-space: normal;
+	}
+
+	.row {
+		margin-left: -5px;
+		margin-right: -5px;
+	}
+}
+
+.q-row {
+	--q-row-gutter: var(--q-spacing);
+}
+
+.q-col {
+	display: flex;
+	gap: var(--q-spacing);
+	align-items: end;
+
+	&-auto {
+		flex: 0 0 auto;
+		width: auto;
+		max-width: 100%;
+	}
+
+	// Make label content in the same line
+	.label-container {
+		display: flex;
+		align-items: center;
+		gap: var(--q-spacing);
+	}
+
+	// Make containers inside q-cols have the height of the col
+	.container-fluid,
+	.q-table-list {
+		height: 100%;
+	}
+
+	// Make groups ocupy the whole container (if whole line the q-col container has 100% width as well)
+	.c-groupbox {
+		width: 100%;
+		height: 100%;
+
+		> .q-container {
+			height: 100%;
+		}
+	}
+}
+
+// Remove the margins from containers inside groupboxes since they already add spacing
+.q-col > * .q-container {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+// Add padding to groups that have the title background style - these groups remove paddings by default
+.q-col:not(.q-col-auto),
+.q-col {
+	> .c-groupbox--title-background > .q-container {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+}

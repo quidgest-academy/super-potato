@@ -1,0 +1,35 @@
+.q-stack--column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
+
+  .f-header__title {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #202428; //$on-background
+    letter-spacing: 0.02rem;
+    text-transform: none;
+  }
+}
+
+.main-header {
+  min-height: 3rem;
+}
+
+#system-years,
+#languages {
+  .q-field__control {
+    border: none;
+    outline: none;
+  }
+}
+
+.navbar__data-systems {
+  padding-left: 0.25rem;
+}

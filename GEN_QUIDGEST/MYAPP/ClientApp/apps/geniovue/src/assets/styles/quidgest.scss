@@ -1,0 +1,195 @@
+﻿/**********************************************************************************
+ *                                                                                *
+ *                                   ATTENTION!                                   *
+ *         This is the entry point for all the styles of the application          *
+ *   Only styles common to the entire application should be placed in this file   *
+ *                                                                                *
+ **********************************************************************************/
+
+@import "typography.scss";
+@import "bootstrap/scss/bootstrap";
+@import "theme-variables.scss";
+@import "quidgest-ui.scss";
+@import "@quidgest/chatbot/style.css";
+
+@import "glyphicons.scss";
+@import "fonticons.scss";
+
+@import "layout-variables.scss";
+@import "layout.scss";
+@import "customstyles.scss";
+
+// App components
+@import "components/badge.scss";
+@import "components/breadcrumb.scss";
+@import "components/cav.scss";
+@import "components/footer.scss";
+@import "components/home-page.scss";
+@import "components/layout.scss";
+@import "components/login.scss";
+@import "components/miscellaneous.scss";
+@import "components/right-sidebar.scss";
+
+// Controls
+@import "controls/q-anchors.scss";
+@import "controls/q-captcha.scss";
+@import "controls/q-checklist.scss";
+@import "controls/q-code-editor.scss";
+@import "controls/q-cookies.scss";
+@import "controls/q-dashboard.scss";
+@import "controls/q-datetime.scss";
+@import "controls/q-dropdown.scss";
+@import "controls/q-grid-table-list.scss";
+@import "controls/q-group-collapsible.scss";
+@import "controls/q-group.scss";
+@import "controls/q-help.scss";
+@import "controls/q-image.scss";
+@import "controls/q-image-preview.scss";
+@import "controls/q-info-message.scss";
+@import "controls/q-kanban.scss";
+@import "controls/q-lookup.scss";
+@import "controls/q-markdown-editor.scss";
+@import "controls/q-markdown-viewer.scss";
+@import "controls/q-multiform.scss";
+@import "controls/q-notes.scss";
+@import "controls/q-numeric-input.scss";
+@import "controls/q-password-meter.scss";
+@import "controls/q-popover.scss";
+@import "controls/q-progress.scss";
+@import "controls/q-rating.scss";
+@import "controls/q-tab.scss";
+@import "controls/q-table.scss";
+@import "controls/q-text.scss";
+@import "controls/q-timeline.scss";
+@import "controls/q-wizard.scss";
+
+// TODO: Change to custom controls
+@import "controls/q-pin-input.scss";
+@import "controls/q-slider.scss";
+@import "controls/q-step.scss";
+@import "controls/q-slider-ui.scss";
+@import "controls/q-keyboard-input.scss";
+@import "controls/q-duallist.scss";
+
+// The custom controls
+@import "custom-control-styles.scss";
+
+// @quidgest/clientapp styling
+@import "@quidgest/clientapp/styles";
+
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: $background;
+	font-family: $font-family-sans-serif;
+	line-height: $line-height-base;
+}
+
+html,
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+label {
+	margin-bottom: unset !important;
+	font-weight: inherit !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 500;
+}
+
+#app {
+	width: 100%;
+	height: 100%;
+}
+
+#main {
+	margin-bottom: 0.8rem;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+
+	&:first-child {
+		margin-top: 0.5rem;
+	}
+}
+
+.layout-container {
+	height: auto;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.layout-dashboard {
+	background-color: $dashboard-bg;
+	margin: 0;
+
+	#form-container {
+		height: 100%;
+	}
+}
+
+.content-wrapper {
+	transition:
+		margin-left $transition-speed $transition-fn,
+		margin-right $transition-speed $transition-fn,
+		width $transition-speed $transition-fn;
+	display: flex;
+	flex-direction: column;
+	background-color: transparent;
+	z-index: auto;
+	margin-right: calc(var(--right-sidebar-width) * 1rem);
+}
+
+// Make the layout use the full screen height but not more.
+// Used to make menu list tables use the maximum available height without making the whole page scroll.
+.layout-container:has(.page-full-height) {
+	height: 100vh;
+	min-height: unset;
+
+	.content-wrapper {
+		min-height: 0;
+	}
+
+	#main {
+		min-height: 0;
+	}
+
+	#form-container {
+		min-height: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.form-horizontal {
+		display: flex;
+		min-height: 0;
+	}
+
+	@media (min-width: 768px) {
+		#main-header-navbar {
+			min-height: unset;
+		}
+	}
+}
+
+//
+// Global style for containters
+//
+:root {
+	--q-spacing: .25rem;
+}

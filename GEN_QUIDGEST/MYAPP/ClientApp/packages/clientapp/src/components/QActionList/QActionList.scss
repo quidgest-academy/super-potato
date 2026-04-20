@@ -1,0 +1,39 @@
+.q-action-list {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+
+	&__expand {
+		margin-left: 0.15rem;
+		width: 0.5rem;
+		height: 0.5rem;
+	}
+}
+
+.q-button-group > .q-action-list,
+.q-input-group > .q-field__control > .q-action-list {
+	.q-button,
+	.q-button-group {
+		height: 100%;
+	}
+
+	.q-button {
+		border-radius: 0;
+	}
+
+	&:first-child {
+		& > .q-button-group > .q-button,
+		& > .q-button {
+			border-top-left-radius: var(--border-radius);
+			border-bottom-left-radius: var(--border-radius);
+		}
+	}
+
+	&:last-child {
+		& > .q-button-group > .q-button,
+		& > .q-button {
+			border-top-right-radius: var(--border-radius);
+			border-bottom-right-radius: var(--border-radius);
+		}
+	}
+}

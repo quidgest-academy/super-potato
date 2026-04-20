@@ -1,0 +1,161 @@
+﻿@use 'sass:map';
+
+$c-alert-theme-colors: ();
+$c-alert-theme-colors: map.merge( ( "success": $success, "info": $info, "warning": $warning, "danger": $danger ), $c-alert-theme-colors );
+
+.c-alert {
+	$this: &;
+
+	position: relative;
+	padding: 1rem;
+	border-radius: .2rem;
+	border: 1px solid transparent;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	white-space: normal;
+	border-radius: $border-radius;
+
+	&:not(#{$this}--banner):hover {
+		cursor: pointer;
+	}
+
+	&--banner {
+		margin-top: 1rem;
+	}
+
+	.q-icon__svg {
+		fill: $white;
+		width: 20px;
+		height: 20px;
+	}
+
+	&__header {
+		display: flex;
+		width: 100%;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	&__row {
+		&-icon {
+			padding: 0.3rem 0.5rem;
+			font-size: 1rem;
+			color: $secondary;
+			vertical-align: middle;
+		}
+
+		&-text {
+			font-size: .85rem;
+			font-weight: 400;
+			line-height: 1.5rem;
+			color: $secondary;
+			padding-right: 1rem;
+			padding-left: 0.5rem;
+		}
+	}
+
+	&__title {
+		font-weight: 600;
+		text-transform: $headings-text-transform;
+		font-size: 0.9rem;
+		line-height: 1rem;
+	}
+
+	&__text {
+		text-align: left;
+		font-weight: 400;
+		color: $white;
+	}
+
+	&__icon {
+		float: left;
+		font-size: 1.5rem;
+		line-height: 1rem;
+		color: $white;
+
+		&.q-icon__svg {
+			fill: $white;
+			width: 48px;
+			height: 48px;
+			margin-top: -1rem;
+		}
+	}
+
+	&__dismissible.q-button {
+		padding: 0;
+		margin-left: auto;
+
+		.q-icon__svg {
+			fill: $white;
+			opacity: 0.5;
+		}
+
+		&:hover:not([disabled]) {
+			.q-icon__svg {
+				fill: $white;
+				opacity: 1;
+			}
+		}
+	}
+
+	&__container {
+		position: relative;
+		width: 100%;
+	}
+
+	&--fixed__container {
+		position: fixed;
+		top: 0;
+		right: 0;
+		margin: 1rem 2rem 0;
+		width: 35%;
+		z-index: 9999;
+
+		#{$this} {
+			box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.45);
+		}
+	}
+
+	&-E {
+		@extend #{$this}--danger;
+	}
+
+	&-OK {
+		@extend #{$this}--success;
+	}
+
+	&-W {
+		@extend #{$this}--warning;
+	}
+
+	&.OK_MAIS_W {
+		@extend #{$this}--info;
+	}
+}
+
+@media (max-width: 768px) {
+	.c-alert--fixed__container {
+		margin: 1rem 1rem 0;
+		width: calc(100% - 2rem);
+	}
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+	.c-alert--fixed__container {
+		width: 65%;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+	.c-alert--fixed__container {
+		width: 50%;
+	}
+}
+
+@each $color, $value in $c-alert-theme-colors {
+	.c-alert--#{$color} {
+		color: $white;
+		background-color: $value;
+	}
+}

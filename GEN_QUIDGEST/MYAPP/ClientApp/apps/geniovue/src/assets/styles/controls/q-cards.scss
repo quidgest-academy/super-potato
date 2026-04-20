@@ -1,0 +1,66 @@
+@import './q-card.scss';
+
+.q-cards-grid {
+  &--columns {
+    .q-card-view {
+      --q-card-view-width: 100%;
+    }
+  }
+}
+
+.q-cards-carousel {
+  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min-content;
+  margin: -1rem;
+  padding: 1rem; /**  this trick prevents the cards shadow from being clipped under the overflow: hidden zone */
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: none;
+  scroll-behavior: smooth;
+  -webkit-scroll-snap-type: x mandatory;
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__container {
+    position: relative;
+  }
+
+  &__btn-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+
+    &-prev {
+      left: 0;
+    }
+
+    &-next {
+      right: 0;
+    }
+  }
+
+  &__btn {
+    padding: 1rem;
+    background-color: var(--q-theme-background);
+    z-index: 2;
+  }
+}
+
+.q-cards-empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 18rem;
+  }
+}

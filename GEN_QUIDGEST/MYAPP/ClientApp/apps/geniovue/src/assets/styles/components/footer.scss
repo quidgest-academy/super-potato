@@ -1,0 +1,78 @@
+﻿#q-footer {
+	z-index: 0;
+	display: flex;
+	margin-top: auto;
+}
+
+.c-footer {
+	display: flex;
+	flex-direction: column;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: $footer-bg;
+	border-top: 1px solid $primary;
+	color: $primary;
+	padding: 0.4rem 2rem 0.6rem 2rem;
+	margin-top: auto;
+	margin-right: calc(var(--right-sidebar-width) * 1rem);
+	transition: margin $transition-speed $transition-fn, width $transition-speed $transition-fn;
+	z-index: 10;
+
+	&__certifications {
+		float: left;
+		display: inline;
+
+		img {
+			max-width: 100%;
+			height: auto;
+			vertical-align: middle;
+		}
+	}
+
+	&__genio-version {
+		color: $primary;
+		font-size: 0.75rem;
+		vertical-align: bottom;
+		white-space: nowrap;
+
+		/* FIX FOR TABBING */
+		a:focus {
+			outline: $action-focus-width $action-focus-style $action-focus-color;
+		}
+	}
+
+	&__quidgest {
+		width: 70px;
+		margin-bottom: -1px;
+	}
+
+	&__text {
+		padding-left: 0.25rem;
+		padding-right: 0.25rem;
+		color: $primary;
+		font-size: 0.75rem;
+		vertical-align: bottom;
+	}
+
+	#language-items {
+		margin-left: 1rem;
+
+		& + .version-container {
+			margin-left: auto;
+			margin-right: 1rem;
+		}
+	}
+
+	.n-language {
+		margin-bottom: -4px;
+
+		.language-icon {
+			margin-right: 0.3rem;
+		}
+	}
+}
+
+.login-page .c-footer #language-items + .version-container {
+	margin-right: 1rem;
+}

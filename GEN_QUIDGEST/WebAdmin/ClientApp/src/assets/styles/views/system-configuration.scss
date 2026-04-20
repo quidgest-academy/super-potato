@@ -1,0 +1,26 @@
+// Data systems tab
+.data-systems {
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    &--with-errors {
+      .q-field__control {
+        border: 1px solid var(--q-theme-danger);
+        box-shadow: 0 0 2px var(--q-theme-danger-dark);
+      }
+
+      .q-field__extras {
+        color: var(--q-theme-danger);
+      }
+    }
+  }
+
+  &__dialog--container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 1rem;
+  }
+}

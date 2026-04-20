@@ -1,0 +1,67 @@
+﻿/* ===================================================
+* All Theme variables will be placed here.
+* ======================================================== */
+
+$primary: #008ad2 !default;
+$primary-dark: #006398 !default;
+$primary-light: #cde5ff !default;
+$secondary: #001d31 !default;
+$success: #28a745 !default;
+$info: #17a2b8 !default;
+$warning: #ffa900 !default;
+$danger: #b71c1c !default;
+$light: #eaebec !default;
+$dark: #202428 !default;
+
+// ------------------------------------
+// TODO: REMOVE
+
+$white: #fff !default;
+$gray: #7c858d !default;
+$gray-dark: #40474f !default;
+$gray-light: #c4c5ca !default;
+
+// ------------------------------------
+
+$body-bg: $white !default;
+$body-color: $dark !default;
+$container-bg-color: $white !default;
+$border-dark-color: rgba(rgb(0, 0, 0), 0.1) !default;
+$border-light-color: rgba(rgb(255, 255, 255), 0.2) !default;
+$disabled-bg: $gray !default;
+
+//inputs
+$input-label: $gray !default;
+$input-border-color: $gray-light !default;
+$input-bg: $white !default;
+$input-color: $gray-dark !default;
+$input-disabled-bg: $light !default;
+
+$input-btn-padding-y: 0.26rem !default;
+$input-btn-padding-x: 0.25rem !default;
+
+//icons
+$icon-color: $primary !default;
+$icon-light: $body-bg !default;
+$icon-dark: $secondary !default;
+
+$font-size-base: 0.9rem !default;
+$line-height-base: 1.5 !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+  monospace !default;
+
+$compactstyle: true !default;
+$enable-rounded: true !default;
+$table-striped: false !default;
+$table-head-inverse: false !default;
+$table-vertical-border: true !default;
+
+/* IR other theme variables */
+$table-border-color: $gray-light !default;
+
+$hover-primary: darken($primary, 15%) !default;
+$hover-secondary: darken($secondary, 15%) !default;
+$hover-dropdown: #f4f5f9 !default;
+
+$header-height: 6rem !default;
+$header-bg: $white !default;

@@ -1,0 +1,14 @@
+{
+  "uid" : "quidgest-prom-v2-12843",
+  "name": "prometheus",
+  "type": "prometheus",
+  "url": "http://prometheus:9090",
+  "access": "proxy",
+  "basicAuth": false,
+  "jsonData": {
+     "httpMethod": "GET",
+     "tlsSkipVerify": true
+  },
+  "isDefault": false,
+  "editable": true
+}

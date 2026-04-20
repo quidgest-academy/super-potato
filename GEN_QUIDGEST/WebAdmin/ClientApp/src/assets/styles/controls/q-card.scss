@@ -1,0 +1,53 @@
+// QCard web-admin specific styling
+.q-card {
+  // Variants
+  &--admin-default {
+    border-bottom: 3px solid var(--q-theme-neutral-light);
+
+    .q-card__title {
+      text-transform: uppercase;
+      color: var(--q-theme-primary);
+    }
+  }
+
+  &--admin-border-top {
+    border-radius: 0;
+    border-color: transparent;
+    border-top: 1px solid var(--q-theme-neutral-light);
+
+    .q-card__title {
+      text-transform: none;
+      color: var(--q-theme-primary-dark);
+    }
+  }
+
+  &--admin-border-less {
+    border-radius: 0;
+    border-color: transparent;
+  }
+
+  &--admin-compact {
+    .q-card__header-content,
+    .q-card__content {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  // Fill empty card space with the card content, not the header
+  // For setting cards side by side with the same height, but different contents (use class on both cards, within a div with flex: 1)
+  &--admin-fill {
+    > .q-card__header {
+      flex: unset;
+    }
+  }
+}
+
+// TODO: Old loading card specific styling, should be replaced with QCard with loading prop
+.card-body:has(#tab-loader) {
+  align-items: center;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  padding: 1rem;
+}

@@ -1,0 +1,117 @@
+// Maintenance tab
+.database-options {
+  display: flex;
+  align-items: center;
+
+  // Due to the +Info button, the maintenance checkboxes need to be aligned
+  > .q-checkbox > .q-checkbox__input {
+    align-self: center;
+  }
+
+  &__last-rdx {
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+#database-script-details.modal-content {
+  min-width: 25rem;
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+}
+
+.script-details {
+  &__block {
+    max-height: 15rem;
+    overflow-y: auto;
+
+    // increases max-height - for log details page
+    &--extended {
+      max-height: 45vh;
+      overflow-y: auto;
+    }
+  }
+
+  &__line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    color: rgb(var(--q-theme-neutral-dark-rgb) / 0.75);
+
+    &-error {
+      color: var(--q-theme-danger);
+    }
+  }
+}
+
+// Schedule Maintenance tab
+#tab_link_schedule_maintenance-tab {
+  color: $white;
+  background-color: rgb(var(--q-theme-primary-rgb) / 0.95);
+  font-weight: 500;
+  padding: 0.15rem 0.75rem 0.25rem 0.5rem;
+  border-radius: 1rem;
+  margin-top: 0.25rem;
+
+  &.active {
+    box-shadow: none;
+  }
+}
+
+// Maintenance log details page
+.log-details {
+  &__overview {
+    .q-card__content {
+      gap: 1rem;
+    }
+  }
+
+  &__wrapper {
+    .q-card__content {
+      flex-direction: column;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    gap: 1rem;
+  }
+
+  &__task-list,
+  &__task-details {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    .q-button--admin-start {
+      margin-top: 0.5rem;
+    }
+  }
+
+  &__no-task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    justify-content: flex-start;
+    padding-top: 5em;
+
+    > .q-icon {
+      font-size: 3em;
+      padding: 0.25rem;
+      // TODO: Remove after q-icon colors accept non-semantic colors
+      color: var(--q-theme-neutral-dark);
+    }
+
+    // placeholder color
+    color: var(--q-theme-neutral-dark);
+  }
+}

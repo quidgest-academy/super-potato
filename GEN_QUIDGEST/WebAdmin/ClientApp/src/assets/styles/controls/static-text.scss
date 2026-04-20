@@ -1,0 +1,23 @@
+.q-static {
+  display: flex;
+
+  &--horizontal {
+    gap: 0.25rem;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &--bold {
+    .q-static__value {
+      font-weight: bold;
+    }
+  }
+
+  &--bold-label {
+    .q-static__label {
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>annotations</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DefineConstants>$(DefineConstants);;MYAPP_MODULE;</DefineConstants>
+    
+    <!-- When publishing the solution for Linux there are a couple of files that are duplicated for some reason
+    This option seems to be the only way to avoid those errors, and they can safly be ignored since the
+    duplicated files don't cause significant issues. -->
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+    <!-- This avoids creating duplicate dlls for other languages and reduces the final solution size-->
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
+    <RazorCompileOnPublish>false</RazorCompileOnPublish>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Process" Version="0.5.0-beta.5" />
+    
+    <PackageReference Include="AspNetCore.LegacyAuthCookieCompat" Version="2.0.5" />
+    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00016" />
+    <PackageReference Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00016" />
+    <!-- Its has to be this version. The lastest version of Types only works with the new Microsoft.Data.SqlClient provider -->
+    <PackageReference Include="Microsoft.SqlServer.Types" Version="14.0.1016.290">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="HtmlSanitizer" Version="9.0.892" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GenioServer\GenioServer.csproj" />
+    <ProjectReference Include="..\CSGenio.reporting\CSGenio.reporting.csproj" />
+    <ProjectReference Include="..\ClientApp\ClientApp.esproj" Condition="'$(SkipClientApp)'!='true'">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <IncludeQCodeAnalysis Condition="'$(IncludeQCodeAnalysis)' == ''">true</IncludeQCodeAnalysis>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(IncludeQCodeAnalysis)'=='true'">
+    <ProjectReference Include="..\QCodeAnalysis\QCodeAnalysis.csproj"
+      PrivateAssets="all"
+      ReferenceOutputAssembly="false"
+      OutputItemType="Analyzer" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="menus.xml" CopyToOutputDirectory="PreserveNewest"/>
+    <None Update="_app_offline.htm" CopyToOutputDirectory="PreserveNewest"/>
+    <None Include="Content/**" CopyToOutputDirectory="PreserveNewest"/>
+  </ItemGroup>
+
+  <!-- Without this, Visual studio needs to create a new .csproj.user file, and will hang indefinitly in some instances.
+  While it wasn't possible to figure out exactly why this happened, if you want to remove this, make sure you can open a
+   project generated for the first time without hanging. -->
+  <PropertyGroup>
+    <ActiveDebugProfile>https</ActiveDebugProfile>
+  </PropertyGroup>
+</Project>

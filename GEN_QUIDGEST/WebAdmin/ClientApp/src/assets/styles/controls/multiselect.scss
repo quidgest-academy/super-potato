@@ -1,0 +1,99 @@
+// TODO: should be removed when QMultiSelect is implemented
+.multiselect {
+  position: relative;
+
+  &--disabled {
+    background: #ededed;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  &--active {
+    z-index: 9999;
+
+    .multiselect__select .q-icon {
+      transform: rotateZ(180deg);
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex: 1;
+    gap: 0.25rem;
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem;
+      background-color: #fff;
+      border-radius: 5px;
+      border: 1px solid var(--q-theme-neutral-light);
+      flex-wrap: wrap;
+      cursor: pointer;
+    }
+  }
+
+  &__placeholder {
+    color: var(--q-theme-neutral);
+    display: inline-block;
+  }
+
+  &__content {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    min-width: 100%;
+
+    &-wrapper {
+      position: absolute;
+      background: rgba(255, 255, 255, 1);
+      width: 100%;
+      max-height: 240px;
+      overflow-y: auto;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border: 1px solid var(--q-theme-neutral-light);
+    }
+  }
+
+  &__option {
+    display: flex;
+    padding: 0.4rem;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    cursor: pointer;
+
+    &--highlight {
+      background: var(--q-theme-primary-light);
+    }
+
+    &--selected {
+      background: #f3f3f3;
+      font-weight: bold;
+
+      &:after {
+        content: attr(data-selected);
+        color: var(--q-theme-neutral);
+      }
+
+      &.multiselect__option--highlight {
+        background: var(--q-theme-primary);
+        color: #fff;
+
+        &:after {
+          background: var(--q-theme-primary);
+          content: attr(data-deselect);
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &--above {
+    .multiselect__content-wrapper {
+      bottom: 100%;
+    }
+  }
+}

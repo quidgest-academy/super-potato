@@ -1,0 +1,12 @@
+// QCheckbox web-admin specific styling
+.q-checkbox {
+  gap: 0.25rem;
+
+  // Variants
+  // table checkboxes
+  &--table:not(.q-checkbox--checked) {
+    .q-checkbox__input {
+      background-color: $white;
+    }
+  }
+}

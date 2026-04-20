@@ -1,0 +1,234 @@
+// Contains all styling related to textual inputs (text, numeric, password, ...)
+
+// TODO: once the roles tab refactor is done, rethink and remove
+// General classes for quick sizes
+.input {
+  &-mini {
+    width: calc(1 * 5em + 0 * 0.25rem);
+  }
+
+  &-small {
+    width: calc(2 * 5em + 1 * 0.25rem);
+  }
+
+  &-medium {
+    width: calc(3 * 5em + 2 * 0.25rem);
+  }
+
+  &-large {
+    width: calc(4 * 5em + 3 * 0.25rem);
+  }
+
+  &-xlarge {
+    width: calc(6 * 5em + 5 * 0.25rem);
+  }
+
+  &-xxlarge {
+    width: calc(8 * 5em + 7 * 0.25rem);
+  }
+}
+
+.i-text,
+.i-image,
+.i-date-picker {
+  margin-right: 0.25rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.i-text {
+  &__field {
+    @extend .form-control;
+    @extend %input-Field;
+    padding: $input-btn-padding-y $input-btn-padding-x !important;
+    height: inherit;
+    background-clip: padding-box;
+    transition:
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+    border: 1px solid #c4c5ca;
+
+    :focus {
+      color: $body-color;
+      background-color: $white;
+      border-color: $info;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem $info;
+    }
+
+    ::-webkit-input-placeholder {
+      color: $body-color;
+      opacity: 1;
+    }
+
+    ::-moz-placeholder {
+      color: $body-color;
+      opacity: 1;
+    }
+
+    :disabled,
+    [readonly] {
+      background-color: #e9ecef;
+      opacity: 1;
+    }
+
+    :-ms-input-placeholder {
+      color: $body-color;
+      opacity: 1;
+    }
+
+    ::placeholder {
+      color: $body-color;
+      opacity: 1;
+    }
+  }
+
+  &--disabled {
+    input:disabled {
+      color: $body-color;
+      cursor: not-allowed;
+      background-color: $light;
+    }
+
+    label {
+      cursor: not-allowed;
+    }
+  }
+
+  &__error {
+    color: $danger;
+    font-size: 0.875rem;
+    padding: 0.76rem;
+    border-left: 10px solid $danger;
+    background-color: rgba(183, 28, 28, 0.15);
+
+    input {
+      background-color: #fceaea;
+    }
+
+    li {
+      list-style-type: none;
+      margin-left: -2.1rem;
+    }
+
+    ul {
+      margin-bottom: 0;
+    }
+  }
+
+  &--readonly input:read-only {
+    color: $body-color;
+    background-color: $light;
+    cursor: not-allowed;
+  }
+
+  &--inline {
+    display: inline-block;
+  }
+}
+
+%input-Field {
+  font-size: $font-size-base !important;
+  color: $body-color;
+  background-color: $white;
+
+  @if $enable-rounded {
+    border-radius: $border-radius;
+  } @else {
+    border-radius: 0;
+  }
+
+  @if $enable-shadows {
+    box-shadow: $box-shadow;
+  } @else {
+    box-shadow: none;
+  }
+}
+
+// Variants
+//Error inputs
+.input-error {
+  .q-field {
+    &__control {
+      border: 1px solid $danger;
+      box-shadow: 0 0 2px var(--q-theme-danger-dark);
+    }
+
+    &__extras {
+      color: $danger;
+    }
+  }
+}
+
+.i-text__field {
+  @if $enable-rounded {
+    border-radius: $border-radius;
+  } @else {
+    border-radius: 0 !important;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.15rem rgba(0, 169, 206, 0.35) !important;
+  }
+}
+
+.form-control:focus,
+.i-date-picker__field:focus,
+.i-time-picker__field:focus,
+.i-text__field:focus {
+  color: $input-color;
+  background-color: $input-bg;
+  outline: 0;
+  box-shadow: 0 0 0 0.15rem rgba(0, 169, 206, 0.35) !important;
+}
+
+//disabled inputs
+input,
+.form-control:disabled,
+.i-date-picker__field:disabled,
+.i-time-picker__field:disabled,
+.i-text__field:disabled,
+.form-control[readonly],
+[readonly].i-date-picker__field,
+[readonly].i-time-picker__field,
+[readonly].i-text__field {
+  background-color: $input-disabled-bg;
+  color: $input-label;
+  opacity: 1;
+  outline: none;
+}
+
+// Whole line inputs
+.row-line-group > .i-text {
+  width: 100%;
+}
+
+// Subtexts
+.q-field__extras {
+  font-size: 0.75rem;
+}
+
+.q-help__subtext {
+  color: var(--q-theme-neutral);
+  font-size: 0.75rem;
+  display: block;
+  line-height: 1;
+  margin-top: 0.25rem;
+
+  .q-icon__svg {
+    fill: var(--q-theme-neutral);
+    font-size: 0.65rem;
+    vertical-align: initial;
+  }
+}
+
+// Tooltips
+.field-help {
+  margin-left: 0.2rem;
+  color: #ccc;
+}
+
+.field-help:hover {
+  color: $input-label;
+}

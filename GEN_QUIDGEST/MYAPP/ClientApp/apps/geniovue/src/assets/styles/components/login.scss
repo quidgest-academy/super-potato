@@ -1,0 +1,551 @@
+﻿.f-login {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	align-content: center;
+	background: url('#{$images-path}/f-login__background.png') no-repeat center center fixed;
+	background-size: cover;
+
+	&--header {
+		transform: scale(0.85, 0.85);
+		background-color: #fff;
+	}
+
+	&__container {
+		display: flex;
+		justify-content: center;
+		height: 100%;
+	}
+
+	// Removes the container padding in the login pop up
+	.q-container {
+		padding: 0;
+	}
+
+	&__background {
+		margin-top: auto;
+		margin-bottom: auto;
+		width: min(400px, 90vw);
+		background-color: rgb($primary-rgb / 0.8);
+		color: $on-primary;
+		padding: 40px 20px 10px 20px;
+		border-radius: $border-radius;
+
+		&--dark {
+			margin-top: auto;
+			margin-bottom: auto;
+			width: 400px;
+		}
+	}
+
+	&__brand {
+		display: block;
+		margin: 0 auto;
+		text-align: center !important;
+		font-size: 1.35rem;
+		color: $white;
+		font-weight: 500;
+
+		h1 {
+			padding-top: 1rem;
+			margin-bottom: 1rem;
+			font-size: 1.35rem;
+			font-weight: 500;
+			line-height: 1.5;
+		}
+
+		img {
+			width: auto;
+			max-height: 130px;
+		}
+	}
+
+	.form-flow {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+
+		.q-button {
+			text-transform: uppercase;
+		}
+	}
+
+	&__input-tag {
+		color: $primary;
+		background-color: $white;
+		border: 1px solid $white;
+		border-radius: $border-radius;
+
+		.q-icon__svg {
+			width: 21px;
+			height: 21px;
+		}
+	}
+
+	&__input-icon {
+		font-size: 1.3rem;
+		color: $primary;
+	}
+
+	&__input-field {
+		background-color: rgba(0, 145, 234, 0.1);
+		border: 1px solid $white;
+		border-right: 1px solid #fff !important;
+		height: inherit;
+		border-radius: $border-radius;
+
+		input:disabled {
+			color: rgba(255, 255, 255, 0.6);
+			background-color: $light;
+		}
+
+		&:focus {
+			color: $white;
+			background-color: rgb($primary-rgb / 0.1);
+			border-color: $white;
+			outline: 0;
+			box-shadow: 0 0 0 0.2rem $info;
+		}
+
+		&:disabled,
+		&[readonly] {
+			background-color: rgba(233, 236, 239, 0.5);
+			opacity: 1;
+		}
+	}
+
+	&__link {
+		color: $on-primary;
+		background-color: transparent;
+		font-weight: 400;
+		margin-bottom: 0.25rem;
+		text-decoration: underline;
+
+		&:hover {
+			color: $on-primary;
+			text-decoration: underline;
+			background-color: transparent;
+			border-color: transparent;
+
+		}
+
+		&:focus,
+		&.focus {
+			text-decoration: underline;
+			border-color: transparent;
+			box-shadow: none;
+
+		}
+	}
+
+	&__c-cidadao {
+		width: 135px;
+		height: 35px;
+	}
+
+	.error {
+		border-radius: $border-radius;
+		border: 2px solid $danger;
+	}
+
+	.i-text__error {
+		border-radius: $border-radius;
+		color: $danger;
+		background-color: rgba($light, 0.7);
+		border-left: 0;
+
+		svg {
+			fill: $danger;
+			margin-left: 0.5rem;
+		}
+	}
+}
+
+select.f-login__input-field:focus::-ms-value {
+	color: $white;
+	background-color: rgb($primary-rgb / 0.1);
+}
+
+.q-button--login {
+	font-weight: 500;
+}
+
+.q-logon-btns-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin: 0.5rem 0;
+}
+
+.c-user__dropdown {
+	min-width: 17rem;
+	padding: 0;
+
+	.q-card-view__content {
+		margin: 0;
+		background-color: $secondary;
+		color: $background;
+		padding: 0.5rem;
+	}
+
+	.q-card-view__title .n-module__title {
+		color: $background;
+	}
+
+	.q-card-view__subtitle {
+		color: $primary;
+	}
+
+	.c-sidebar__list {
+		list-style-type: none;
+		margin-left: 0px;
+		padding: 0;
+
+		&-link {
+			display: flex;
+			align-items: center;
+			padding: 0.3rem 0.7rem;
+
+			&:focus {
+				outline: 0;
+			}
+		}
+
+		&-item {
+			display: flex;
+			min-height: 2.6rem;
+			padding: 0;
+
+			&:focus-within {
+				outline: $action-focus-width $action-focus-style $action-focus-color;
+			}
+		}
+
+		&-item:hover {
+			color: $hover-primary !important;
+			background-color: $hover-item;
+		}
+	}
+
+	&.log-on-container {
+		margin-top: 0.4rem;
+		margin-right: 1rem;
+	}
+
+	ul li a {
+		display: block;
+		width: 100%;
+		text-decoration: none;
+	}
+}
+
+.log-on-container {
+	.f-login {
+		background: none;
+
+		&__brand img {
+			max-height: 75px;
+			width: auto;
+		}
+	}
+
+	.f-login__background {
+		width: 300px;
+		background-color: $secondary;
+		padding: 20px;
+		color: $primary;
+	}
+
+	.f-login__link {
+		text-decoration: underline;
+	}
+
+	.c-card__body {
+		padding: 0;
+		border-color: $primary;
+	}
+
+	&.dropdown-menu,
+	.c-card {
+		border: none;
+	}
+}
+
+#sidebar-collapse {
+	padding: 0.4rem;
+	margin-right: 0.3rem;
+
+	.q-button__content {
+		gap: 0;
+	}
+}
+
+button.n-menu__aside-link,
+.n-menu__aside-link {
+	padding: 0.25rem;
+
+	&:focus {
+		outline: $action-focus-width $action-focus-style $action-focus-color;
+
+		.q-icon__svg {
+			fill: $primary;
+		}
+	}
+
+	.q-icon__svg {
+		margin-right: 0.2rem;
+		width: 20px;
+		height: 20px;
+
+		#main-header-navbar &,
+		.main-header & {
+			fill: rgba(255, 255, 255, 1);
+		}
+	}
+}
+
+li.n-menu__aside-item .q-button--outlined {
+	color: $primary;
+	background-color: transparent;
+	border: none;
+
+	&:hover {
+		color: $hover-primary;
+		background-color: transparent;
+		border: none;
+	}
+
+	.q-icon {
+		font-size: 20px;
+	}
+}
+
+.avatar {
+	vertical-align: middle;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}
+
+#register-btn {
+	margin-top: 0;
+	background: transparent;
+	border-color: $on-primary;
+
+	&:hover{
+		background-color: $on-primary;
+		color: $primary;
+	}
+}
+
+/* Change password form */
+.profile-input-group {
+	display: flex;
+}
+
+.password-change-icon {
+	border-radius: 0.25rem 0 0 0.25rem !important;
+	padding: 0 0.75rem !important;
+
+	.q-icon__svg {
+		fill: $white;
+	}
+}
+
+.user-change-icon {
+	border-radius: 0.25rem 0 0 0.25rem !important;
+	padding: 0 0.75rem !important;
+
+	.q-icon__svg {
+		fill: $gray;
+	}
+}
+
+.password-change-input-fld {
+	border-radius: 0 !important;
+
+	&-user-name {
+		border-radius: 0 0.25rem 0.25rem 0 !important;
+	}
+}
+
+#toggle-password {
+	z-index: 0;
+	border: 1px solid $input-border-color;
+}
+
+#user-register-acc-info {
+	max-width: 520px;
+	width: 100%;
+}
+
+.layout-container.login-page {
+	height: 100%;
+}
+
+// Login input icon
+.f-login__background {
+	color: $on-background;
+
+	.q-button--outlined {
+		background-color: $on-primary;
+	}
+
+	.q-input-group, #captcha-field  {
+		&__prepend {
+			border-width: 0;
+
+			span {
+				background-color: $white;
+				border: none;
+			}
+		}
+
+		.q-field__control {
+			border-width: 0;
+			background-color: $body-bg;
+
+			&:focus-within {
+				outline: none;
+			}
+		}
+
+		.q-button {
+			border-width: 0;
+			border-left-width: 1px;
+			z-index: 3;
+		}
+	}
+}
+
+// Light Class
+.layout-light {
+	.f-login {
+		&__background {
+			background-color: $light;
+		}
+
+		&__brand {
+			color: $primary;
+		}
+
+		&__input-tag {
+			color: $primary;
+			background-color: $white;
+			border: 1px solid $white;
+			border-radius: $border-radius;
+
+			.q-icon__svg {
+				width: 21px;
+				height: 21px;
+			}
+		}
+
+		&__input-icon {
+			font-size: 1.3rem;
+			color: $primary;
+		}
+
+		&__input-field {
+			background-color: rgba(0, 145, 234, 0.1);
+			border: 1px solid $white;
+			border-right: 1px solid #fff !important;
+			height: inherit;
+		}
+	}
+
+	.q-button--login:not(.q-button--loading) {
+ 		&:not(:hover) {
+    		background-color: $primary;
+  		}
+
+		.q-button__content {
+			color: $white;
+		}
+	}
+	
+	.q-logon-text {
+		color: $primary;
+	}
+
+	#toggle-password {
+		border: 1px solid $primary;
+	}
+}
+
+//Secondary class
+.layout-secondary {
+	.f-login {
+		&__background {
+			background-color: $secondary;
+		}
+
+		&__brand {
+			color: $primary;
+		}
+
+		&__input-tag {
+			color: $primary;
+			background-color: $white;
+			border: 1px solid $white;
+			border-radius: $border-radius;
+
+			.q-icon__svg {
+				width: 21px;
+				height: 21px;
+				fill: $white;
+			}
+		}
+
+		&__input-icon {
+			font-size: 1.3rem;
+			color: $primary;
+		}
+
+		&__input-field {
+			background-color: $light;
+			border: 1px solid $white;
+			border-right: 1px solid #fff !important;
+			height: inherit;
+			border-radius: $border-radius;
+		}
+	}
+
+	.q-button--login:not(.q-button--loading) {
+  		&:not(:hover) {
+   			background-color: $primary;
+  		}
+
+		.q-button__content {
+			color: $white;
+		}
+	}
+
+	#toggle-password {
+		border: 1px solid $primary;
+	}
+}
+
+.q-logon-text {
+	color: $on-primary;
+	margin: 0;
+}
+
+.q-logon-links-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+#link-register {
+	cursor: pointer;
+}
+
+.q-successful-registration {
+	font-size: 0.88rem;
+	color: $on-primary;
+	margin: 0.25rem 0 0.5rem 0;
+}
+
+.i-captcha__img_recovery{
+	width:100%
+}

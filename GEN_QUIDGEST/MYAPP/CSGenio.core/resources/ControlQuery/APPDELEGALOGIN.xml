@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ControlQueryDefinitionSurrogate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Distinct>false</Distinct>
+  <SelectFields>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>delega</TableAlias><ColumnName>coddelega</ColumnName></Column>
+      <Alias>delega.coddelega</Alias>
+    </SelectFieldSurrogate>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>delega</TableAlias><ColumnName>auditusr</ColumnName></Column>
+      <Alias>delega.auditusr</Alias>
+    </SelectFieldSurrogate>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>pswup</TableAlias><ColumnName>name</ColumnName></Column>
+      <Alias>pswup.name</Alias>
+    </SelectFieldSurrogate>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>delega</TableAlias><ColumnName>dateini</ColumnName></Column>
+      <Alias>delega.dateini</Alias>
+    </SelectFieldSurrogate>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>delega</TableAlias><ColumnName>dateend</ColumnName></Column>
+      <Alias>delega.dateend</Alias>
+    </SelectFieldSurrogate>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>delega</TableAlias><ColumnName>message</ColumnName></Column>
+      <Alias>delega.message</Alias>
+    </SelectFieldSurrogate>
+  </SelectFields>
+  <FromTable>
+	<TableName>FORdelega</TableName>
+    <TableAlias>delega</TableAlias>
+  </FromTable>
+  <Joins>
+    <TableJoinSurrogate>
+      <Table>
+        <TableName>UserLogin</TableName>
+        <TableAlias>pswup</TableAlias>
+      </Table>
+      <JoinType>Left</JoinType>
+      <OnCondition><Operation>And</Operation><Criterias><CriteriaSurrogate><Operation>Equal</Operation><LeftColumn><TableAlias>delega</TableAlias><ColumnName>codpswup</ColumnName></LeftColumn><RightColumn><TableAlias>pswup</TableAlias><ColumnName>codpsw</ColumnName></RightColumn></CriteriaSurrogate></Criterias><SubSets /></OnCondition>
+    </TableJoinSurrogate>
+    <TableJoinSurrogate>
+      <Table>
+        <TableName>UserLogin</TableName>
+        <TableAlias>psw</TableAlias>
+      </Table>
+      <JoinType>Left</JoinType>
+      <OnCondition><Operation>And</Operation><Criterias><CriteriaSurrogate><Operation>Equal</Operation><LeftColumn><TableAlias>delega</TableAlias><ColumnName>codpswdw</ColumnName></LeftColumn><RightColumn><TableAlias>psw</TableAlias><ColumnName>codpsw</ColumnName></RightColumn></CriteriaSurrogate></Criterias><SubSets /></OnCondition>
+    </TableJoinSurrogate>
+  </Joins>
+  <WhereConditions><Operation>And</Operation><Criterias><CriteriaSurrogate><Operation>Equal</Operation><LeftColumn><TableAlias>delega</TableAlias><ColumnName>zzState</ColumnName></LeftColumn><RightValue xsi:type="xsd:int">0</RightValue></CriteriaSurrogate></Criterias><SubSets /></WhereConditions>
+</ControlQueryDefinitionSurrogate>

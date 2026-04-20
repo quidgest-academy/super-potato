@@ -1,0 +1,6 @@
+dist
+node_modules
+*-stamp
+public/Content/svgbundle.svg
+# VS generates an empty package-lock.json
+package-lock.json

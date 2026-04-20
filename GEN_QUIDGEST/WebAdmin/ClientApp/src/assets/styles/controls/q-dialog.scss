@@ -1,0 +1,19 @@
+.q-dialog {
+  &-container {
+    padding: 0.5rem 0.75rem;
+  }
+
+  &__body-actions:has(.q-button) {
+    align-self: flex-start;
+  }
+}
+
+.alert-dialog {
+  .q-dialog__body-text {
+    text-align: center;
+  }
+
+  .q-dialog__body-actions {
+    align-self: center;
+  }
+}

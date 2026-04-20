@@ -1,0 +1,174 @@
+﻿/* ========================================================
+ * All Theme variables will be placed here.
+ * ======================================================== */
+
+// Brand colors
+$primary: var(--q-theme-primary);
+$primary-rgb: var(--q-theme-primary-rgb);
+$primary-light: var(--q-theme-primary-light);
+$primary-light-rgb: var(--q-theme-primary-light-rgb);
+$primary-dark: var(--q-theme-primary-dark);
+$primary-dark-rgb: var(--q-theme-primary-dark-rgb);
+$on-primary: var(--q-theme-on-primary);
+$on-primary-rgb: var(--q-theme-on-primary-rgb);
+
+$secondary: var(--q-theme-secondary);
+$secondary-rgb: var(--q-theme-secondary-rgb);
+$on-secondary: var(--q-theme-on-secondary);
+$on-secondary-rgb: var(--q-theme-on-secondary-rgb);
+
+$highlight: var(--q-theme-highlight);
+$highlight-rgb: var(--q-theme-highlight-rgb);
+$on-highlight: var(--q-theme-on-highlight);
+$on-highlight-rgb: var(--q-theme-on-highlight-rgb);
+
+// Surface colors
+$background: var(--q-theme-background);
+$background-rgb: var(--q-theme-background-rgb);
+$on-background: var(--q-theme-on-background);
+$on-background-rgb: var(--q-theme-on-background-rgb);
+
+$container: var(--q-theme-container);
+$container-rgb: var(--q-theme-container-rgb);
+
+// Semantic colors
+$info: var(--q-theme-info);
+$info-rgb: var(--q-theme-info-rgb);
+$info-light: var(--q-theme-info-light);
+$info-light-rgb: var(--q-theme-info-light-rgb);
+$info-dark: var(--q-theme-info-dark);
+$info-dark-rgb: var(--q-theme-info-dark-rgb);
+$on-info: var(--q-theme-on-info);
+$on-info-rgb: var(--q-theme-on-info-rgb);
+
+$success: var(--q-theme-success);
+$success-rgb: var(--q-theme-success-rgb);
+$success-light: var(--q-theme-success-light);
+$success-light-rgb: var(--q-theme-success-light-rgb);
+$success-dark: var(--q-theme-success-dark);
+$success-dark-rgb: var(--q-theme-success-dark-rgb);
+$on-success: var(--q-theme-on-success);
+$on-success-rgb: var(--q-theme-on-success-rgb);
+
+$warning: var(--q-theme-warning);
+$warning-rgb: var(--q-theme-warning-rgb);
+$warning-light: var(--q-theme-warning-light);
+$warning-light-rgb: var(--q-theme-warning-light-rgb);
+$warning-dark: var(--q-theme-warning-dark);
+$warning-dark-rgb: var(--q-theme-warning-dark-rgb);
+$on-warning: var(--q-theme-on-warning);
+$on-warning-rgb: var(--q-theme-on-warning-rgb);
+
+$danger: var(--q-theme-danger);
+$danger-rgb: var(--q-theme-danger-rgb);
+$danger-light: var(--q-theme-danger-light);
+$danger-light-rgb: var(--q-theme-danger-light-rgb);
+$danger-dark: var(--q-theme-danger-dark);
+$danger-dark-rgb: var(--q-theme-danger-dark-rgb);
+$on-danger: var(--q-theme-on-danger);
+$on-danger-rgb: var(--q-theme-on-danger-rgb);
+
+$neutral: var(--q-theme-neutral);
+$neutral-rgb: var(--q-theme-neutral-rgb);
+$neutral-light: var(--q-theme-neutral-light);
+$neutral-light-rgb: var(--q-theme-neutral-light-rgb);
+$neutral-dark: var(--q-theme-neutral-dark);
+$neutral-dark-rgb: var(--q-theme-neutral-dark-rgb);
+
+// TODO: move somewhere else
+$images-path: "/Content/img";
+$svgs-path: "/Content/svg";
+
+// ------------------------------------
+// TODO: REMOVE
+
+$white: #fff;
+$black: #000;
+$light: #eaebec;
+$gray: #7C858D;
+$gray-dark: #40474F;
+$gray-light: #C4C5CA;
+
+// Variables to add background color to inputs
+$input-bg: transparent;
+$input-bg-readonly: rgb($neutral-light-rgb / 0.25);
+
+$input-label: $neutral-dark;
+$input-color: $on-background;
+$border-dark-color: rgb(0 0 0 / 0.1);
+
+// Hover
+$hover-primary: $primary-dark;
+$hover-item: rgb($primary-light-rgb / 0.5);
+
+// Action focus
+$action-focus-width: 2px;
+$action-focus-style: solid;
+$action-focus-color: $primary-dark;
+
+$input-btn-padding-y: 0.26rem;
+$input-btn-padding-x: 0.25rem;
+
+// Input focus
+$input-focus-color: rgb($info-rgb / 0.5);
+
+$compactheader-height: 4rem;
+$header-height: 6rem;
+
+// Layout options
+$btn-align-right: false;
+$menu-multi-level: true;
+$menu-multi-level-border: false;
+$border-radius: var(--border-radius);
+$compactstyle: true;
+$compactheader: false;
+$table-striped: false;
+$table-head-inverse: false;
+$table-vertical-border: true;
+$enable-table-wrap: true;
+$menu-behaviour: "partial_collapse";
+$menu-sidebar-width: 16rem;
+$footer-bg: transparent;
+$enable-switch-single-label: false;
+
+// Wizards
+$wizard-steps: "circle";
+$wizard-content: "standard";
+
+// Transition global options
+$transition-speed: 0.4s;
+$transition-fn: ease-in-out;
+
+// Navbar link fonts
+$navbar-font-size: 0.9rem;
+$navbar-font-weight: 400;
+
+// Custom tab navigator
+$tab-style: "line";
+
+$table-border-color: $gray-light;
+$input-border-color: $neutral-light;
+
+@import "customtheme-variables.scss";
+
+/* Theme variables that depend from others need to be after the import of the custom variables, all the others should be before. */
+
+$input-disabled-bg: rgb($neutral-light-rgb / 0.25);
+$header-bg: $background !default;
+$header-bg-rgb: $background-rgb !default;
+$header-on-bg: $on-background !default;
+$header-on-bg-rgb: $on-background-rgb !default;
+$navbar-bg: $primary !default;
+$navbar-bg-rgb: $primary-rgb !default;
+$navbar-on-bg: $on-primary !default;
+$navbar-on-bg-rgb: $on-primary-rgb !default;
+$dashboard-bg: $light !default;
+
+// Group borders
+$group-border-top: 1px solid $input-border-color !default;
+$group-border-bottom: 1px solid $input-border-color !default;
+
+// FIXME: this needs to be here
+// since $font-family-sans-serif is a customizable "theme" variable, for now
+$font-headings: $font-family-sans-serif !default;
+$headings-text-transform: uppercase !default;

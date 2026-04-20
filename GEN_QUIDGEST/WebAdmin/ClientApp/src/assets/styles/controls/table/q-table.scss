@@ -1,0 +1,334 @@
+//Table
+.c-table {
+  @extend table;
+  font-size: 0.9rem;
+  text-align: left;
+  word-wrap: break-word;
+  width: 100%;
+  border: 1px solid $border-dark-color;
+  background-color: $container-bg-color;
+
+  @if $compactstyle {
+    margin: 0.5rem 0;
+  } @else {
+    margin: 1rem 0;
+  }
+
+  & th,
+  & td {
+    vertical-align: top;
+    border-bottom: 1px solid $border-dark-color;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    @if $compactstyle {
+      padding-top: 0.1rem;
+      padding-bottom: 0.1rem;
+    } @else {
+      padding: 0.5rem;
+    }
+  }
+
+  thead th {
+    border-bottom: none;
+    vertical-align: top;
+
+    @if $compactstyle {
+      padding: 0.5rem;
+    } @else {
+      padding: 0.75rem;
+    }
+  }
+
+  thead a {
+    @if $table-head-inverse {
+      color: $primary;
+    } @else {
+      color: $white;
+    }
+  }
+
+  .thead-actions {
+    width: 5rem;
+  }
+
+  &--bordered {
+    border: 1px solid $table-border-color;
+
+    & th,
+    & td {
+      border: 1px solid $table-border-color;
+    }
+  }
+
+  &-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  &__title-row {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+  }
+
+  &__tools {
+    display: inline-flex;
+    gap: 0.25rem;
+  }
+
+  &__head {
+    @if $table-head-inverse {
+      color: $primary;
+      background-color: $container-bg-color;
+    } @else {
+      color: $white;
+      background-color: $primary;
+    }
+
+    th {
+      font-size: 0.75rem;
+      letter-spacing: 0.02rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1rem;
+
+      @if $table-head-inverse {
+        border: none;
+        border-bottom: 1px solid $primary !important;
+      } @else {
+        border: 1px solid $primary;
+      }
+    }
+
+    thead th {
+      vertical-align: top;
+    }
+
+    &-numeric {
+      @extend .text-right;
+    }
+  }
+
+  &__caption {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: $secondary;
+    text-align: left;
+    caption-side: bottom;
+  }
+
+  &__body {
+    th {
+      vertical-align: middle;
+      font-weight: 500;
+    }
+
+    tr {
+      vertical-align: middle;
+    }
+
+    td {
+      vertical-align: middle;
+      font-weight: 400;
+
+      @if $table-vertical-border {
+        border-left: 1px solid $border-dark-color;
+      } @else {
+        border-left: none;
+      }
+
+      a:not(.dropdown-item) {
+        font-weight: 600;
+
+        &:hover {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    padding: 0.5rem;
+    border-top: 2px solid $border-dark-color;
+    border-bottom: none;
+
+    th {
+      font-weight: 600;
+      border-bottom: none;
+      padding-left: 1rem;
+    }
+
+    td {
+      font-weight: 600;
+      border-bottom: none;
+      vertical-align: middle;
+
+      @if $compactstyle {
+        padding-top: 0.2rem;
+      } @else {
+        padding-top: 1rem;
+      }
+    }
+  }
+
+  &__title {
+    color: $gray;
+    padding-top: 0.5rem;
+    display: block;
+    letter-spacing: 0.02rem;
+    font-size: 1.05rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
+.q-table--borderless {
+  .search:has(+ .export-btn) {
+    padding: 0;
+  }
+
+  .export-btn {
+    padding-right: 15px;
+    padding-left: 0.25rem;
+  }
+
+  .form-group {
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
+  .c-table {
+    border: none;
+
+    tr,
+    td {
+      border: none;
+    }
+
+    &__head {
+      color: rgb(var(--q-theme-on-background-rgb) / 0.9);
+      background-color: rgb(var(--q-theme-primary-light-rgb) / 0.5);
+      border-bottom: 3px solid var(--q-theme-container);
+
+      th {
+        border: none;
+      }
+    }
+
+    &__body {
+      tr {
+        color: rgb(var(--q-theme-on-background-rgb) / 0.75);
+        background-color: rgb(var(--q-theme-neutral-light-rgb) / 0.25);
+        border-bottom: 3px solid var(--q-theme-container);
+      }
+    }
+
+    &__footer {
+      td {
+        padding: 0.25rem 0 0 0;
+      }
+    }
+  }
+}
+
+// Row classes
+.q-table--borderless .c-table__body {
+  tr {
+    cursor: default;
+
+    &.q-table__row {
+      &-warning {
+        background-color: var(--q-theme-warning-light);
+        box-shadow: inset 4px 0 0 var(--q-theme-warning);
+      }
+
+      &-error {
+        background-color: var(--q-theme-danger-light);
+        box-shadow: inset 4px 0 0 var(--q-theme-danger);
+      }
+    }
+  }
+
+  .q-table__actions-btns {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+// Table alert
+.q-table__alert {
+  margin-top: 2rem;
+}
+
+// Used in User Management -> Edit User table. Fixes multi-select size.
+#PrivilegeTable {
+  .c-table {
+    table-layout: fixed;
+  }
+  th:nth-child(1) {
+    width: 10%;
+  }
+  th:nth-child(2) {
+    width: 30%;
+  }
+}
+
+// Used in User Management -> Roles -> Role Assign form table.
+.assigned > td {
+  font-weight: bold;
+}
+
+// Table header
+.form-header {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: $dark;
+  text-transform: uppercase;
+  align-self: flex-end;
+  margin-bottom: 0;
+}
+
+.vbt-column-header div {
+  display: inline;
+}
+
+.vbt-global-search-clear {
+  cursor: pointer;
+}
+
+// Table footer
+#pagination .q-button-group {
+  background-color: $white;
+
+  // Page buttons need extra styling because the content is a string, not an icon
+  .btn-page {
+    padding: 0.25rem 0.4rem;
+  }
+}
+
+// Variants
+// Highlighted rows
+.table tbody > tr.highlighted > td,
+.highlighted {
+  cursor: pointer;
+  color: $hover-primary;
+}
+
+// Image cells
+.dbeditimage {
+  height: 32px;
+  width: 32px;
+}
+
+// Multiple elements within cells
+.q-table__cell--multiple {
+  margin: 0 0.15rem;
+}

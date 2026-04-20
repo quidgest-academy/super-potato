@@ -1,0 +1,17 @@
+﻿.i-captcha {
+	padding-top: 0.3rem;
+
+	> *:not(:last-child) {
+		padding-bottom: 0.25rem;
+	}
+
+	img {
+		&.BDC_ReloadIcon, &.BDC_SoundIcon {
+			width: 100%;
+		}
+	}
+
+	&__reset {
+		border-style: none;
+	}
+}

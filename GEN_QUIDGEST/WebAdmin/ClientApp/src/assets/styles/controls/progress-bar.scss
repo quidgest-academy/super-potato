@@ -1,0 +1,23 @@
+.progress-bar {
+  &__container {
+    min-width: 30rem;
+  }
+
+  &__header {
+    padding-bottom: 0;
+  }
+
+  &__subtitle {
+    display: flex;
+    align-items: center;
+    color: var(--q-theme-neutral);
+    font-size: $font-size-base;
+  }
+
+  &__footer {
+    display: flex;
+    padding: 0.5rem;
+    padding-top: 0;
+    justify-content: flex-end;
+  }
+}

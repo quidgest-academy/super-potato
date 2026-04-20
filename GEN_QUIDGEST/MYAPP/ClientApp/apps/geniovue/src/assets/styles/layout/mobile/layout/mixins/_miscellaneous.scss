@@ -1,0 +1,80 @@
+﻿//
+// Mixins: Miscellaneous
+//
+
+// ETC
+@mixin translate($x, $y) {
+	transform: translate($x, $y);
+}
+
+// Different radius each side
+@mixin border-radius-sides($top-left, $top-right, $bottom-left, $bottom-right) {
+	border-radius: $top-left $top-right $bottom-left $bottom-right;
+}
+
+@mixin calc($property, $expression) {
+	#{$property}: calc(#{$expression});
+}
+
+@mixin rotate($value) {
+	transform: rotate($value);
+}
+
+@mixin animation($animation) {
+	animation: $animation;
+}
+
+// Gradient background
+@mixin gradient($color: #f5f5f5, $start: #eee, $stop: $white) {
+	background-color: $color;
+	background-image: gradient(linear, left bottom, left top, color-stop(0, $start), color-stop(1, $stop));
+}
+
+@mixin scrollbar-width-thin() {
+	scrollbar-width: thin;
+	scrollbar-color: #a9a9a9 transparent;
+}
+
+@mixin scrollbar-width-none() {
+	scrollbar-width: none;
+}
+
+@mixin menu-multi-level($padding-left, $opacity) {
+	@if $menu-multi-level {
+		li {
+			a, button {
+				padding-left: $padding-left;
+				transition: padding-left ease-in-out $transition-speed;
+				font-weight: 400;
+				letter-spacing: 0.02rem;
+
+				& p {
+					opacity: $opacity;
+				}
+			}
+
+			.q-button__content .e-icon__svg.right {
+				opacity: $opacity;
+			}
+		}
+	}
+}
+
+@mixin menu-multi-level-border($level, $margin-left, $opacity) {
+	@if $menu-multi-level-border {
+		.level-#{$level} {
+			background-color: rgba(0, 0, 0, 0.2);
+
+			a:not(.n-sidebar__nav-link-selected)::before {
+				content: "";
+				position: absolute;
+				left: 20px;
+				border-left: 1px solid $white;
+				width: 1px;
+				opacity: $opacity;
+				height: 95%;
+				margin-left: $margin-left;
+			}
+		}
+	}
+}

@@ -1,0 +1,30 @@
+.q-collapsible {
+	.q-collapsible__header .q-button .q-button__content {
+		h4 {
+			font-size: .9rem;
+			font-weight: 700;
+			margin-left: .1rem;
+		}
+	}
+
+	&--audit {
+		.q-collapsible__header .q-button .q-button__content {
+			text-transform: unset;
+
+			.q-icon__svg {
+				width: 0.7em;
+				height: 0.7em;
+			}
+
+			h4 {
+				font-weight: 500;
+				font-size: 0.8rem;
+				line-height: 0.7;
+			}
+		}
+
+		.q-collapsible__content {
+			padding: .2rem .9rem .5rem .9rem;
+		}
+	}
+}

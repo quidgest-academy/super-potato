@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ControlQueryDefinitionSurrogate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Distinct>false</Distinct>
+  <SelectFields>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>userauthorization</TableAlias><ColumnName>codua</ColumnName></Column>
+      <Alias>userauthorization.codua</Alias>
+    </SelectFieldSurrogate>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>userauthorization</TableAlias><ColumnName>modulo</ColumnName></Column>
+      <Alias>userauthorization.modulo</Alias>
+    </SelectFieldSurrogate>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>userauthorization</TableAlias><ColumnName>nivel</ColumnName></Column>
+      <Alias>userauthorization.nivel</Alias>
+    </SelectFieldSurrogate>
+    <SelectFieldSurrogate>
+      <Column><TableAlias>userauthorization</TableAlias><ColumnName>codpsw</ColumnName></Column>
+      <Alias>userauthorization.codpsw</Alias>
+    </SelectFieldSurrogate>
+  </SelectFields>
+  <FromTable>
+	<TableName>userauthorization</TableName>
+    <TableAlias>userauthorization</TableAlias>
+  </FromTable>
+  <WhereConditions><Operation>And</Operation><Criterias>
+    <CriteriaSurrogate><Operation>Equal</Operation><LeftColumn><TableAlias>userauthorization</TableAlias><ColumnName>zzState</ColumnName></LeftColumn><RightValue xsi:type="xsd:int">0</RightValue></CriteriaSurrogate>
+    <CriteriaSurrogate><Operation>Equal</Operation><LeftColumn><TableAlias>userauthorization</TableAlias><ColumnName>sistema</ColumnName></LeftColumn><RightValue xsi:type="xsd:string">FOR</RightValue></CriteriaSurrogate>
+    
+  </Criterias><SubSets /></WhereConditions>
+</ControlQueryDefinitionSurrogate>

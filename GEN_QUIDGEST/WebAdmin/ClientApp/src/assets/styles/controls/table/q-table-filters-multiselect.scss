@@ -1,0 +1,15 @@
+.vbt-table-wrapper:not(:has(.multiselect)) {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.custom-control-label {
+  vertical-align: top;
+}
+
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}

@@ -1,0 +1,113 @@
+﻿@import 'cropperjs/dist/cropper.css';
+
+.q-image {
+	&__field {
+		text-align: center;
+		box-shadow: none;
+		height: auto;
+
+		&-input {
+			display: none;
+		}
+
+		/* Image control buttons */
+		&-actions {
+			position: relative;
+			margin-top: 0.5rem;
+			width: 100%;
+		}
+
+		&-drop-area {
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 2;
+			text-align: center;
+			display: none;
+			justify-content: center;
+			align-items: center;
+			line-height: 1.2;
+			font-size: 12px;
+			margin-top: 0.1rem;
+			white-space: normal;
+
+			&-active {
+				display: flex;
+			}
+		}
+
+		&-empty {
+			cursor: default;
+		}
+
+		&-thumbnail {
+			border: 1px solid var(--q-theme-neutral-light);
+			max-height: 100%;
+			max-width: 100%;
+			padding: 0;
+			outline: 0;
+
+			&:focus,
+			&:focus-within {
+				border-color: $info;
+				box-shadow: 0 0 0 0.15rem $input-focus-color;
+			}
+		}
+	}
+
+	&__container {
+		a {
+			cursor: pointer;
+		}
+	}
+
+	&-crop__container {
+		margin-top: 0.6rem;
+
+		.q-image-edit-btn {
+			padding: 6px;
+
+			.q-icon__svg {
+				width: 18px;
+				height: 18px;
+			}
+		}
+
+		.q-button-group {
+			margin-right: 6px;
+		}
+	}
+}
+
+.cropper {
+	&-hidden {
+		display: none !important;
+	}
+
+	&-bg {
+		background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
+	}
+
+	&-modal {
+		background-color: #000;
+		opacity: 0.5;
+	}
+}
+
+@keyframes q-image__modal-animation {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes q-image__modal-button {
+	from {
+		top: -2rem;
+	}
+	to {
+		top: 0;
+	}
+}

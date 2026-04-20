@@ -1,0 +1,75 @@
+﻿@import '@vuepic/vue-datepicker/dist/main.css';
+
+/* Hammer VueDateTimePicker dependency styles to look like Quidgest's */
+
+.dp__main {
+	font-family: inherit;
+}
+
+.dp__input_wrap {
+	display: flex;
+}
+
+.dp__input {
+	background-color: inherit;
+	border-radius: inherit;
+	font-family: inherit;
+	border: none;
+	outline: none;
+	width: 100%;
+	font-size: inherit;
+	line-height: inherit;
+	padding: 0;
+	color: inherit;
+
+	&::placeholder {
+		font-style: italic;
+	}
+}
+
+.dp__active_date {
+	background-color: $primary;
+	border-color: $primary;
+}
+
+.dp__today {
+	border-color: $primary;
+}
+
+.dp__menu {
+	font-size: $font-size-base;
+	border-radius: $border-radius;
+
+	& .dp__cell_inner {
+		font-family: $font-family-sans-serif;
+	}
+}
+
+.q-field__control[type='Date'] .q-icon__svg {
+	fill: $primary;
+}
+
+/* ------------------------------------------------------------------ */
+
+.q-date-time-picker {
+	&__icon-wrapper {
+		cursor: pointer;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	&__clear {
+		padding: 0.1rem;
+		opacity: 0.5;
+
+		span.q-button__content svg.q-icon.q-icon__svg {
+			padding: 3px;
+			fill: currentColor;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}

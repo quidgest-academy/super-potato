@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["dom"],
+    "types": ["node"],
+    "rootDir": "src"
+  },
+  "exclude": [".storybook/*", "src/**/__tests__/*", "test"]
+}

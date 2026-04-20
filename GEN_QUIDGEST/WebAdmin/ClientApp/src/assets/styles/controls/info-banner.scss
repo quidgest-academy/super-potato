@@ -1,0 +1,22 @@
+.q-help__info-banner {
+  color: var(--q-theme-neutral-dark);
+  font-size: 0.9rem;
+  background-color: rgb(var(--q-theme-info-light-rgb) / 0.75);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.25rem;
+  white-space: normal;
+  width: 100%;
+
+  &-header {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .q-icon {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,161 @@
+﻿.q-markdown-viewer {
+	// Headings
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: bold;
+	}
+
+	h1 {
+		font-size: $h1-font-size;
+		border-bottom: 1px solid rgba($black, 0.1); // Underline for h1 heading
+	}
+
+	h2 {
+		font-size: $h2-font-size;
+		border-bottom: 1px solid rgba($black, 0.1); // Underline for h2 heading
+	}
+
+	h3 {
+		font-size: $h3-font-size;
+	}
+
+	h4 {
+		font-size: $h4-font-size;
+	}
+
+	h5 {
+		font-size: $h5-font-size;
+	}
+
+	h6 {
+		font-size: $h6-font-size;
+		color: $text-muted; // Lighter text colour for h6 headings
+	}
+
+	// Paragraphs
+	p {
+		margin: 0; // Adequate spacing for paragraphs
+	}
+
+	// Links
+	a {
+		color: $link-color;
+		text-decoration: $link-decoration;
+
+		&:hover {
+			color: $link-hover-color;
+			text-decoration: $link-hover-decoration;
+		}
+	}
+
+	// Unordered and ordered lists
+	ul,
+	ol {
+		padding-left: 1em; // Indentation for list items
+		white-space: normal;
+	}
+
+	// Blockquotes
+	blockquote {
+		margin: 1em 0;
+		padding: 0 1em;
+		color: $gray-600;
+		border-left: 4px solid $gray-300; // Left border for blockquotes
+		font-style: italic;
+	}
+
+	// Inline code
+	code {
+		font-family: $font-family-monospace;
+		background-color: $gray-200;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+	}
+
+	// Preformatted code blocks
+	pre {
+		background-color: $gray-200;
+		padding: 1em;
+		overflow: auto;
+		border-radius: 3px;
+		margin: 1em 0;
+
+		// Remove extra background for code within pre
+		code {
+			background-color: transparent;
+			padding: 0;
+		}
+	}
+
+	// Tables
+	table {
+		border-collapse: collapse;
+		margin: 1em 0;
+		width: 100%;
+
+		th,
+		td {
+			border: 1px solid $table-border-color;
+			padding: 0.6em 1em;
+			text-align: left;
+		}
+
+		th {
+			background-color: $table-head-bg;
+		}
+	}
+
+	// Horizontal rules
+	hr {
+		border: none;
+		border-top: 1px solid $hr-border-color;
+		border-width: $hr-border-width;
+	}
+
+	// Images
+	img {
+		max-width: 1080px;
+		display: block;
+		margin: 1em auto; // Centre images
+	}
+}
+
+// Normalization of text size within table rows
+.c-table__row {
+	.q-markdown-viewer {
+		// Headings
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-size: $font-size-base;
+		}
+
+		// Images
+		img {
+			max-width: 540px;
+		}
+	}
+}
+
+// Styles within popovers
+.q-popover__content {
+	.q-markdown-viewer {
+		// Headings
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-size: calc($font-size-base * 1.1);
+		}
+	}
+}

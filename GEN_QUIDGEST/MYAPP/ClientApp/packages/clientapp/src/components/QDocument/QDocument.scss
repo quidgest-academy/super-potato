@@ -1,0 +1,9 @@
+.q-document {
+	&__attach {
+		display: none;
+	}
+
+	&:not(.q-document--readonly) .q-text-field {
+		cursor: pointer;
+	}
+}

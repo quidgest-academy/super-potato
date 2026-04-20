@@ -1,0 +1,17 @@
+// All users tab
+.all-users-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+  gap: 0.5rem;
+
+  // Needs to be aligned due to line height differences between WebAdmin and Storybook
+  .q-checkbox > .q-checkbox__input {
+    align-self: center;
+  }
+
+  &__divider {
+    border: 1px solid var(--q-theme-neutral);
+    margin: 0 0.25rem;
+  }
+}

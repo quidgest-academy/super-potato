@@ -1,0 +1,69 @@
+﻿.q-slider {
+	-webkit-appearance: none;
+	appearance: none;
+	position: relative;
+	cursor: pointer;
+	top: 10%;
+	height: 10px;
+	width: 150px;
+	outline: none;
+	border-radius: 2px;
+	box-shadow: 0px 0.5px 0.5px 0.5px $on-background;
+	background: linear-gradient(90deg, $primary 50%, $gray 50%);
+	-webkit-transition: $transition-speed;
+	transition: $transition-speed;
+}
+
+/* slider circle */
+.q-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 23px;
+	height: 23px;
+	border: 1px solid $secondary;
+	border-radius: 50%;
+	background: #fff;
+	cursor: pointer;
+}
+
+.slider-container {
+	position: relative;
+}
+
+div .slider-container > p.min {
+	position: absolute;
+	margin-left: 2px;
+	margin-top: 5px;
+	color: $on-background;
+}
+
+div .slider-container > p.max {
+	position: absolute;
+	width: 97%;
+	text-align: right;
+	margin-top: 5px;
+	color: $on-background;
+}
+
+input:checked + .q-slider {
+	background-color: $primary;
+}
+
+input:focus + .q-slider {
+	box-shadow: 0 0 1px $primary;
+}
+
+input:checked + .q-slider:before {
+	-webkit-transform: translateX(13px);
+	-ms-transform: translateX(13px);
+	transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.q-slider.round {
+	border-radius: 17px;
+}
+
+.q-slider.round:before {
+	border-radius: 50%;
+}
