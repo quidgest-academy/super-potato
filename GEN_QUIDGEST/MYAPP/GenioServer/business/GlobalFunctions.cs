@@ -198,6 +198,13 @@ namespace CSGenio.business
                         {
                             return GetUserProfile();
                         }
+                    case 8:
+                        {
+                            checkFunctionArgs(obj, 1);
+
+                            DateTime arg0 = Conversion.dateString2DateTime(obj[0]);
+                            return Age(arg0);
+                        }
                     default:
                         throw new BusinessException(null, "GlobalFunctions.executaFuncao", "Unknown function name: " + name);
                 }
