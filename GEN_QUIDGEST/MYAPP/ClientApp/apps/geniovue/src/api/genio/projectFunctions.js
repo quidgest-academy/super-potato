@@ -26,7 +26,23 @@ function Age(birthdate)
 	/// <param name="birthdate">Date of birth to calculate the age</param>
 /* eslint-disable indent */
 //BEGIN_FUNCTION:b234e155-064a-482d-b629-f51ffe924c38
-//agora e java
+    const today = new Date();
+    let age = 0;
+
+    if (birthdate) {
+        const birth = new Date(birthdate);
+
+        age = today.getFullYear() - birth.getFullYear();
+
+        if (
+            birth.getMonth() > today.getMonth() ||(birth.getMonth() === today.getMonth() && birth.getDate() > today.getDate())
+        ) {
+            age--;
+        }
+    }
+
+    return age;
+
 //END_FUNCTION
 // eslint-disable-next-line
 /* eslint-enable indent */
