@@ -18,6 +18,20 @@ import genericFunctions from '@quidgest/clientapp/utils/genericFunctions'
  */
 
 //*************** User functions ***************
+function Age(birthdate)
+{
+	/// <summary>
+	/// Calculate age
+	/// </summary>
+	/// <param name="birthdate">Date of birth to calculate the age</param>
+/* eslint-disable indent */
+//BEGIN_FUNCTION:b234e155-064a-482d-b629-f51ffe924c38
+//agora e java
+//END_FUNCTION
+// eslint-disable-next-line
+/* eslint-enable indent */
+}
 
 export default {
+	Age,
 }

@@ -161,30 +161,6 @@ namespace GenioMVC.Controllers
 
 
 
-		// POST: /Agent/AGENT_AGENT_AGE_Formula
-		[HttpPost]
-		public JsonResult AGENT_AGENT_AGE_Formula([FromBody] ViewModels.Agent.Agent_ViewModel formData)
-		{
-			try
-			{
-				// Create a model from form data to avoid extra database queries.
-				var p = new Models.Agent(UserContext.Current);
-
-				// At this moment, in the case of runtime calculation of server-side formulas, to improve performance and reduce database load,
-				// the values coming from the client-side will be accepted as valid, since they won't be saved and are only being used for calculation.
-				formData.DisableUserValuesSecurity();
-				// Map client-side form data into the model
-				formData.MapToModel(p);
-
-				// Formula: Age([AGENT->BIRTHDAT])
-				var result = new CSGenio.business.GlobalFunctions(m_userContext.User, m_userContext.User.CurrentModule, m_userContext.PersistentSupport).Age(((DateTime)p.ValBirthdat));
-				return JsonOK(result);
-			}
-			catch (Exception ex)
-			{
-				return JsonERROR(ex.Message);
-			}
-		}
 
 
 		/// <summary>

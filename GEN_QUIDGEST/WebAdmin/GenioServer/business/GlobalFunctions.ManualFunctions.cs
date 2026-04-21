@@ -70,7 +70,7 @@ namespace CSGenio.business
 
                 age = today.Year - birthdate.Value.Year;
 			}
-            if (birthdate.Value.Month < today.Month || ((birthdate.Value.Month == today.Month) && (birthdate.Value.Day > today.Day)))
+            if (birthdate.Value.Month > today.Month || ((birthdate.Value.Month == today.Month) && (birthdate.Value.Day > today.Day)))
             {
                 age--;
 

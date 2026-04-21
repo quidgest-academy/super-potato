@@ -108,7 +108,7 @@ export default class ViewModel extends FormViewModelBase
 				fnFormula(params)
 				{
 					// Formula: Age([AGENT->BIRTHDAT])
-					return 
+					return qFunctions.Age(this.ValBirthdat.value)
 				},
 				dependencyEvents: ['fieldChange:agent.birthdat'],
 				isServerRecalc: false,
