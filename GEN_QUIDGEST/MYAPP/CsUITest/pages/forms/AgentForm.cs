@@ -13,11 +13,6 @@ public class AgentForm : Form
 	public CollapsibleZoneControl PseudNewgrp01 => new CollapsibleZoneControl(driver, ContainerLocator, "#AGENT___PSEUDNEWGRP01" + IdSuffix + "-container");
 
 	/// <summary>
-	/// Photography
-	/// </summary>
-	public BaseInputControl AgentPhotogra => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTPHOTOGRA" + IdSuffix, "#AGENT___AGENTPHOTOGRA" + IdSuffix);
-
-	/// <summary>
 	/// Agent's name
 	/// </summary>
 	public BaseInputControl AgentName => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTNAME____" + IdSuffix, "#AGENT___AGENTNAME____" + IdSuffix);
@@ -26,6 +21,11 @@ public class AgentForm : Form
 	/// Birthdate
 	/// </summary>
 	public DateInputControl AgentBirthdat => new DateInputControl(driver, ContainerLocator, "#AGENT___AGENTBIRTHDAT" + IdSuffix);
+
+	/// <summary>
+	/// Age
+	/// </summary>
+	public BaseInputControl AgentAge => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTAGE_____" + IdSuffix, "#AGENT___AGENTAGE_____" + IdSuffix);
 
 	/// <summary>
 	/// E-mail
@@ -63,6 +63,11 @@ public class AgentForm : Form
 	/// Last property sold (price)
 	/// </summary>
 	public BaseInputControl AgentLastprop => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTLASTPROP" + IdSuffix, "#AGENT___AGENTLASTPROP" + IdSuffix);
+
+	/// <summary>
+	/// Photography
+	/// </summary>
+	public BaseInputControl AgentPhotogra => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTPHOTOGRA" + IdSuffix, "#AGENT___AGENTPHOTOGRA" + IdSuffix);
 
 	public AgentForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "AGENT", containerLocator: containerLocator, usePkInId: usePkInId) { }

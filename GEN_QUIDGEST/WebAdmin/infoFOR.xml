@@ -3,7 +3,7 @@
 	<Definicoes>
 		<Sistema>FOR</Sistema>
 		<Cliente>QUIDGEST</Cliente>
-		<Versao>2522</Versao>
+		<Versao>2523</Versao>
 	</Definicoes>
 	<Modulos>
 		<Modulo ID="FOR">

@@ -169,6 +169,22 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
+			Qfield = new Field(info.Alias, "age", FieldType.NUMERIC);
+			Qfield.FieldDescription = "Age";
+			Qfield.FieldSize =  3;
+			Qfield.MQueue = false;
+			Qfield.IntegerDigits = 3;
+			Qfield.CavDesignation = "AGE28663";
+
+			Qfield.Dupmsg = "";
+			argumentsListByArea = new List<ByAreaArguments>();
+			argumentsListByArea.Add(new ByAreaArguments(new string[] {"birthdat"}, new int[] {0}, "agent", "codagent"));
+			Qfield.Formula = new InternalOperationFormula(argumentsListByArea, 1, delegate(object[] args, User user, string module, PersistentSupport sp) {
+				return new GlobalFunctions(user,module,sp).Age(((DateTime)args[0]));
+			});
+			info.RegisterFieldDB(Qfield);
+
+			//- - - - - - - - - - - - - - - - - - -
 			Qfield = new Field(info.Alias, "zzstate", FieldType.INTEGER);
 			Qfield.FieldDescription = "Estado da ficha";
 			info.RegisterFieldDB(Qfield);
@@ -213,6 +229,10 @@ namespace CSGenio.business
 			//------------------------------
 
 
+
+			info.InternalOperationFields = new string[] {
+			 "age"
+			};
 
 			info.DefaultValues = new string[] {
 			 "email"
@@ -453,6 +473,17 @@ namespace CSGenio.business
 			set { insertNameValueField(FldLastprop, value); }
 		}
 
+		/// <summary>Field : "Age" Tipo: "N" Formula: + "Age([AGENT->BIRTHDAT])"</summary>
+		public static FieldRef FldAge { get { return m_fldAge; } }
+		private static FieldRef m_fldAge = new FieldRef("agent", "age");
+
+		/// <summary>Field : "Age" Tipo: "N" Formula: + "Age([AGENT->BIRTHDAT])"</summary>
+		public decimal ValAge
+		{
+			get { return (decimal)returnValueField(FldAge); }
+			set { insertNameValueField(FldAge, value); }
+		}
+
 		/// <summary>Field : "ZZSTATE" Type: "INT" Formula:  ""</summary>
 		public static FieldRef FldZzstate { get { return m_fldZzstate; } }
 		private static FieldRef m_fldZzstate = new FieldRef("agent", "zzstate");
@@ -550,7 +581,7 @@ namespace CSGenio.business
 		// USE /[MANUAL FOR TABAUX AGENT]/
 
  
-            
+             
 
 	}
 }

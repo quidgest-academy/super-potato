@@ -115,6 +115,12 @@ namespace GenioMVC.Models
 		[CurrencyAttribute("EUR", 2)]
 		public decimal? ValLastprop { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValLastprop, 2)); } set { klass.ValLastprop = Convert.ToDecimal(value); } }
 
+		[DisplayName("Age")]
+		/// <summary>Field : "Age" Tipo: "N" Formula: + "Age([AGENT->BIRTHDAT])"</summary>
+		[ShouldSerialize("Agent.ValAge")]
+		[NumericAttribute(0)]
+		public decimal? ValAge { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValAge, 0)); } set { klass.ValAge = Convert.ToDecimal(value); } }
+
 		[DisplayName("ZZSTATE")]
 		[ShouldSerialize("Agent.ValZzstate")]
 		/// <summary>Field: "ZZSTATE", Type: "INT", Formula: ""</summary>

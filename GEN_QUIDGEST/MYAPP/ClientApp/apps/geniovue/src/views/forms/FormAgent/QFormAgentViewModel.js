@@ -75,15 +75,6 @@ export default class ViewModel extends FormViewModelBase
 		this.stopWatchers.push(watch(() => this.ValCodcaddr.value, (newValue, oldValue) => this.onUpdate('agent.codcaddr', this.ValCodcaddr, newValue, oldValue)))
 
 		/** The remaining form fields. */
-		this.ValPhotography = reactive(new modelFieldType.Image({
-			id: 'ValPhotography',
-			originId: 'ValPhotography',
-			area: 'AGENT',
-			field: 'PHOTOGRA',
-			description: computed(() => this.Resources.PHOTOGRAPHY38058),
-		}).cloneFrom(values?.ValPhotography))
-		this.stopWatchers.push(watch(() => this.ValPhotography.value, (newValue, oldValue) => this.onUpdate('agent.photography', this.ValPhotography, newValue, oldValue)))
-
 		this.ValName = reactive(new modelFieldType.String({
 			id: 'ValName',
 			originId: 'ValName',
@@ -102,6 +93,30 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.BIRTHDATE22743),
 		}).cloneFrom(values?.ValBirthdat))
 		this.stopWatchers.push(watch(() => this.ValBirthdat.value, (newValue, oldValue) => this.onUpdate('agent.birthdat', this.ValBirthdat, newValue, oldValue)))
+
+		this.ValAge = reactive(new modelFieldType.Number({
+			id: 'ValAge',
+			originId: 'ValAge',
+			area: 'AGENT',
+			field: 'AGE',
+			maxDigits: 3,
+			decimalDigits: 0,
+			isFixed: true,
+			valueFormula: {
+				stopRecalcCondition() { return false },
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				fnFormula(params)
+				{
+					// Formula: Age([AGENT->BIRTHDAT])
+					return 
+				},
+				dependencyEvents: ['fieldChange:agent.birthdat'],
+				isServerRecalc: false,
+				isEmpty: qApi.emptyN,
+			},
+			description: computed(() => this.Resources.AGE28663),
+		}).cloneFrom(values?.ValAge))
+		this.stopWatchers.push(watch(() => this.ValAge.value, (newValue, oldValue) => this.onUpdate('agent.age', this.ValAge, newValue, oldValue)))
 
 		this.ValEmail = reactive(new modelFieldType.String({
 			id: 'ValEmail',
@@ -185,6 +200,15 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.LAST_PROPERTY_SOLD__49162),
 		}).cloneFrom(values?.ValLastprop))
 		this.stopWatchers.push(watch(() => this.ValLastprop.value, (newValue, oldValue) => this.onUpdate('agent.lastprop', this.ValLastprop, newValue, oldValue)))
+
+		this.ValPhotography = reactive(new modelFieldType.Image({
+			id: 'ValPhotography',
+			originId: 'ValPhotography',
+			area: 'AGENT',
+			field: 'PHOTOGRA',
+			description: computed(() => this.Resources.PHOTOGRAPHY38058),
+		}).cloneFrom(values?.ValPhotography))
+		this.stopWatchers.push(watch(() => this.ValPhotography.value, (newValue, oldValue) => this.onUpdate('agent.photography', this.ValPhotography, newValue, oldValue)))
 	}
 
 	/**

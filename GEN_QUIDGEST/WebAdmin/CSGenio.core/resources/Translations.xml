@@ -189,6 +189,9 @@
   <msg id="A cancelar" code="A_CANCELAR43988">
     <ENUS>A cancelar</ENUS>
   </msg>
+  <msg id="Age" code="AGE28663">
+    <ENUS>Age</ENUS>
+  </msg>
   <msg id="Password date" code="PASSWORD_DATE16593">
     <ENUS>Password date</ENUS>
   </msg>

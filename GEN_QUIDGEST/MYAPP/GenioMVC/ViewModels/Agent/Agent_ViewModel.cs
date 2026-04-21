@@ -42,11 +42,6 @@ namespace GenioMVC.ViewModels.Agent
 		#endregion
 
 		/// <summary>
-		/// Title: "Photography" | Type: "IJ"
-		/// </summary>
-		[ImageThumbnailJsonConverter(30, 50)]
-		public GenioMVC.Models.ImageModel ValPhotography { get; set; }
-		/// <summary>
 		/// Title: "Agent's name" | Type: "C"
 		/// </summary>
 		public string ValName { get; set; }
@@ -54,6 +49,11 @@ namespace GenioMVC.ViewModels.Agent
 		/// Title: "Birthdate" | Type: "D"
 		/// </summary>
 		public DateTime? ValBirthdat { get; set; }
+		/// <summary>
+		/// Title: "Age" | Type: "N"
+		/// </summary>
+		[ValidateSetAccess]
+		public decimal? ValAge { get; set; }
 		/// <summary>
 		/// Title: "E-mail" | Type: "C"
 		/// </summary>
@@ -87,6 +87,11 @@ namespace GenioMVC.ViewModels.Agent
 		/// </summary>
 		[ValidateSetAccess]
 		public decimal? ValLastprop { get; set; }
+		/// <summary>
+		/// Title: "Photography" | Type: "IJ"
+		/// </summary>
+		[ImageThumbnailJsonConverter(30, 50)]
+		public GenioMVC.Models.ImageModel ValPhotography { get; set; }
 
 		#region Navigations
 		#endregion
@@ -220,14 +225,15 @@ namespace GenioMVC.ViewModels.Agent
 			{
 				ValCodcaddr = ViewModelConversion.ToString(m.ValCodcaddr);
 				ValCborn = ViewModelConversion.ToString(m.ValCborn);
-				ValPhotography = ViewModelConversion.ToImage(m.ValPhotography);
 				ValName = ViewModelConversion.ToString(m.ValName);
 				ValBirthdat = ViewModelConversion.ToDateTime(m.ValBirthdat);
+				ValAge = ViewModelConversion.ToNumeric(m.ValAge);
 				ValEmail = ViewModelConversion.ToString(m.ValEmail);
 				ValTelephon = ViewModelConversion.ToString(m.ValTelephon);
 				ValNrprops = ViewModelConversion.ToNumeric(m.ValNrprops);
 				ValProfit = ViewModelConversion.ToNumeric(m.ValProfit);
 				ValLastprop = ViewModelConversion.ToNumeric(m.ValLastprop);
+				ValPhotography = ViewModelConversion.ToImage(m.ValPhotography);
 				ValCodagent = ViewModelConversion.ToString(m.ValCodagent);
 			}
 			catch (Exception)
@@ -256,12 +262,12 @@ namespace GenioMVC.ViewModels.Agent
 			{
 				m.ValCodcaddr = ViewModelConversion.ToString(ValCodcaddr);
 				m.ValCborn = ViewModelConversion.ToString(ValCborn);
-				if (ValPhotography == null || !ValPhotography.IsThumbnail)
-					m.ValPhotography = ViewModelConversion.ToImage(ValPhotography);
 				m.ValName = ViewModelConversion.ToString(ValName);
 				m.ValBirthdat = ViewModelConversion.ToDateTime(ValBirthdat);
 				m.ValEmail = ViewModelConversion.ToString(ValEmail);
 				m.ValTelephon = ViewModelConversion.ToString(ValTelephon);
+				if (ValPhotography == null || !ValPhotography.IsThumbnail)
+					m.ValPhotography = ViewModelConversion.ToImage(ValPhotography);
 				m.ValCodagent = ViewModelConversion.ToString(ValCodagent);
 
 				/*
@@ -271,6 +277,7 @@ namespace GenioMVC.ViewModels.Agent
 				if (!HasDisabledUserValuesSecurity)
 					return;
 
+				m.ValAge = ViewModelConversion.ToNumeric(ValAge);
 				m.ValNrprops = ViewModelConversion.ToNumeric(ValNrprops);
 				m.ValProfit = ViewModelConversion.ToNumeric(ValProfit);
 				m.ValLastprop = ViewModelConversion.ToNumeric(ValLastprop);
@@ -299,9 +306,6 @@ namespace GenioMVC.ViewModels.Agent
 					case "agent.cborn":
 						this.ValCborn = ViewModelConversion.ToString(_value);
 						break;
-					case "agent.photography":
-						this.ValPhotography = ViewModelConversion.ToImage(_value);
-						break;
 					case "agent.name":
 						this.ValName = ViewModelConversion.ToString(_value);
 						break;
@@ -313,6 +317,9 @@ namespace GenioMVC.ViewModels.Agent
 						break;
 					case "agent.telephon":
 						this.ValTelephon = ViewModelConversion.ToString(_value);
+						break;
+					case "agent.photography":
+						this.ValPhotography = ViewModelConversion.ToImage(_value);
 						break;
 					case "agent.codagent":
 						this.ValCodagent = ViewModelConversion.ToString(_value);
@@ -863,14 +870,15 @@ namespace GenioMVC.ViewModels.Agent
 			{
 				"agent.codcaddr" => ViewModelConversion.ToString(modelValue),
 				"agent.cborn" => ViewModelConversion.ToString(modelValue),
-				"agent.photography" => ViewModelConversion.ToImage(modelValue),
 				"agent.name" => ViewModelConversion.ToString(modelValue),
 				"agent.birthdat" => ViewModelConversion.ToDateTime(modelValue),
+				"agent.age" => ViewModelConversion.ToNumeric(modelValue),
 				"agent.email" => ViewModelConversion.ToString(modelValue),
 				"agent.telephon" => ViewModelConversion.ToString(modelValue),
 				"agent.nrprops" => ViewModelConversion.ToNumeric(modelValue),
 				"agent.profit" => ViewModelConversion.ToNumeric(modelValue),
 				"agent.lastprop" => ViewModelConversion.ToNumeric(modelValue),
+				"agent.photography" => ViewModelConversion.ToImage(modelValue),
 				"agent.codagent" => ViewModelConversion.ToString(modelValue),
 				"cborn.codcount" => ViewModelConversion.ToString(modelValue),
 				"cborn.country" => ViewModelConversion.ToString(modelValue),

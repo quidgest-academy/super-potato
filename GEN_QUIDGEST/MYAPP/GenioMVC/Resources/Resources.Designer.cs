@@ -630,6 +630,15 @@ namespace GenioMVC.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to "Age"
+		/// </summary>
+		public static string AGE28663 {
+			get {
+				return ResourceManager.GetString("AGE28663", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to "Password date"
 		/// </summary>
 		public static string PASSWORD_DATE16593 {

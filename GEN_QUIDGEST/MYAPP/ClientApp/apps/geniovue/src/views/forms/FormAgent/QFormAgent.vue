@@ -106,28 +106,7 @@
 							:id="getControlId(controls.AGENT___PSEUDNEWGRP01)"
 							:no-border="controls.AGENT___PSEUDNEWGRP01.borderless">
 							<!-- Start AGENT___PSEUDNEWGRP01 -->
-							<q-row v-if="controls.AGENT___AGENTPHOTOGRA.isVisible">
-								<q-col
-									v-if="controls.AGENT___AGENTPHOTOGRA.isVisible"
-									cols="auto">
-									<base-input-structure
-										v-if="controls.AGENT___AGENTPHOTOGRA.isVisible"
-										class="q-image"
-										v-bind="controls.AGENT___AGENTPHOTOGRA.wrapperProps"
-										:id="getControlId(controls.AGENT___AGENTPHOTOGRA)"
-										v-on="controls.AGENT___AGENTPHOTOGRA.handlers"
-										:loading="controls.AGENT___AGENTPHOTOGRA.props.loading"
-										:reporting-mode-on="reportingModeCAV"
-										:suggestion-mode-on="suggestionModeOn">
-										<q-image
-											v-if="controls.AGENT___AGENTPHOTOGRA.isVisible"
-											v-bind="controls.AGENT___AGENTPHOTOGRA.props"
-											:id="getControlId(controls.AGENT___AGENTPHOTOGRA)"
-											v-on="controls.AGENT___AGENTPHOTOGRA.handlers" />
-									</base-input-structure>
-								</q-col>
-							</q-row>
-							<q-row v-if="controls.AGENT___AGENTNAME____.isVisible || controls.AGENT___AGENTBIRTHDAT.isVisible || controls.AGENT___AGENTEMAIL___.isVisible || controls.AGENT___AGENTTELEPHON.isVisible">
+							<q-row v-if="controls.AGENT___AGENTNAME____.isVisible || controls.AGENT___AGENTBIRTHDAT.isVisible || controls.AGENT___AGENTAGE_____.isVisible || controls.AGENT___AGENTEMAIL___.isVisible || controls.AGENT___AGENTTELEPHON.isVisible">
 								<q-col
 									v-if="controls.AGENT___AGENTNAME____.isVisible"
 									cols="auto">
@@ -166,6 +145,25 @@
 											:model-value="model.ValBirthdat.value"
 											@reset-icon-click="model.ValBirthdat.fnUpdateValue(model.ValBirthdat.originalValue ?? new Date())"
 											@update:model-value="model.ValBirthdat.fnUpdateValue($event ?? '')" />
+									</base-input-structure>
+								</q-col>
+								<q-col
+									v-if="controls.AGENT___AGENTAGE_____.isVisible"
+									cols="auto">
+									<base-input-structure
+										v-if="controls.AGENT___AGENTAGE_____.isVisible"
+										class="i-text"
+										v-bind="controls.AGENT___AGENTAGE_____.wrapperProps"
+										:id="getControlId(controls.AGENT___AGENTAGE_____)"
+										v-on="controls.AGENT___AGENTAGE_____.handlers"
+										:loading="controls.AGENT___AGENTAGE_____.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-numeric-input
+											v-if="controls.AGENT___AGENTAGE_____.isVisible"
+											v-bind="controls.AGENT___AGENTAGE_____.props"
+											:id="getControlId(controls.AGENT___AGENTAGE_____)"
+											@update:model-value="model.ValAge.fnUpdateValue" />
 									</base-input-structure>
 								</q-col>
 								<q-col
@@ -296,7 +294,7 @@
 									</base-input-structure>
 								</q-col>
 							</q-row>
-							<q-row v-if="controls.AGENT___AGENTLASTPROP.isVisible">
+							<q-row v-if="controls.AGENT___AGENTLASTPROP.isVisible || controls.AGENT___AGENTPHOTOGRA.isVisible">
 								<q-col
 									v-if="controls.AGENT___AGENTLASTPROP.isVisible"
 									cols="auto">
@@ -314,6 +312,25 @@
 											v-bind="controls.AGENT___AGENTLASTPROP.props"
 											:id="getControlId(controls.AGENT___AGENTLASTPROP)"
 											@update:model-value="model.ValLastprop.fnUpdateValue" />
+									</base-input-structure>
+								</q-col>
+								<q-col
+									v-if="controls.AGENT___AGENTPHOTOGRA.isVisible"
+									cols="auto">
+									<base-input-structure
+										v-if="controls.AGENT___AGENTPHOTOGRA.isVisible"
+										class="q-image"
+										v-bind="controls.AGENT___AGENTPHOTOGRA.wrapperProps"
+										:id="getControlId(controls.AGENT___AGENTPHOTOGRA)"
+										v-on="controls.AGENT___AGENTPHOTOGRA.handlers"
+										:loading="controls.AGENT___AGENTPHOTOGRA.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-image
+											v-if="controls.AGENT___AGENTPHOTOGRA.isVisible"
+											v-bind="controls.AGENT___AGENTPHOTOGRA.props"
+											:id="getControlId(controls.AGENT___AGENTPHOTOGRA)"
+											v-on="controls.AGENT___AGENTPHOTOGRA.handlers" />
 									</base-input-structure>
 								</q-col>
 							</q-row>
@@ -679,26 +696,8 @@
 						borderless: false,
 						isCollapsible: false,
 						anchored: false,
-						directChildren: ['AGENT___AGENTPHOTOGRA', 'AGENT___AGENTNAME____', 'AGENT___AGENTBIRTHDAT', 'AGENT___AGENTEMAIL___', 'AGENT___AGENTTELEPHON', 'AGENT___CBORNCOUNTRY_', 'AGENT___CADDRCOUNTRY_', 'AGENT___AGENTNRPROPS_', 'AGENT___AGENTPROFIT__', 'AGENT___AGENTLASTPROP'],
+						directChildren: ['AGENT___AGENTNAME____', 'AGENT___AGENTBIRTHDAT', 'AGENT___AGENTAGE_____', 'AGENT___AGENTEMAIL___', 'AGENT___AGENTTELEPHON', 'AGENT___CBORNCOUNTRY_', 'AGENT___CADDRCOUNTRY_', 'AGENT___AGENTNRPROPS_', 'AGENT___AGENTPROFIT__', 'AGENT___AGENTLASTPROP', 'AGENT___AGENTPHOTOGRA'],
 						mustBeFilled: true,
-						controlLimits: [
-						],
-					}, this),
-					AGENT___AGENTPHOTOGRA: new fieldControlClass.ImageControl({
-						modelField: 'ValPhotography',
-						valueChangeEvent: 'fieldChange:agent.photography',
-						id: 'AGENT___AGENTPHOTOGRA',
-						name: 'PHOTOGRA',
-						size: 'mini',
-						label: computed(() => this.Resources.PHOTOGRAPHY38058),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'AGENT___PSEUDNEWGRP01',
-						height: 50,
-						width: 30,
-						dataTitle: computed(() => genericFunctions.formatString(vm.Resources.IMAGEM_UTILIZADA_PAR17299, vm.Resources.PHOTOGRAPHY38058)),
-						maxFileSize: 10485760, // In bytes.
-						maxFileSizeLabel: '10 MB',
 						controlLimits: [
 						],
 					}, this),
@@ -734,6 +733,22 @@
 						labelPosition: computed(() => this.labelAlignment.topleft),
 						container: 'AGENT___PSEUDNEWGRP01',
 						dateTimeType: 'date',
+						controlLimits: [
+						],
+					}, this),
+					AGENT___AGENTAGE_____: new fieldControlClass.NumberControl({
+						modelField: 'ValAge',
+						valueChangeEvent: 'fieldChange:agent.age',
+						id: 'AGENT___AGENTAGE_____',
+						name: 'AGE',
+						size: 'mini',
+						label: computed(() => this.Resources.AGE28663),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'AGENT___PSEUDNEWGRP01',
+						isFormulaBlocked: true,
+						maxIntegers: 3,
+						maxDecimals: 0,
 						controlLimits: [
 						],
 					}, this),
@@ -872,6 +887,24 @@
 						controlLimits: [
 						],
 					}, this),
+					AGENT___AGENTPHOTOGRA: new fieldControlClass.ImageControl({
+						modelField: 'ValPhotography',
+						valueChangeEvent: 'fieldChange:agent.photography',
+						id: 'AGENT___AGENTPHOTOGRA',
+						name: 'PHOTOGRA',
+						size: 'mini',
+						label: computed(() => this.Resources.PHOTOGRAPHY38058),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'AGENT___PSEUDNEWGRP01',
+						height: 50,
+						width: 30,
+						dataTitle: computed(() => genericFunctions.formatString(vm.Resources.IMAGEM_UTILIZADA_PAR17299, vm.Resources.PHOTOGRAPHY38058)),
+						maxFileSize: 10485760, // In bytes.
+						maxFileSizeLabel: '10 MB',
+						controlLimits: [
+						],
+					}, this),
 				},
 
 				model: new FormViewModel(this, {
@@ -896,6 +929,8 @@
 				 */
 				dataApi: {
 					Agent: {
+						get ValAge() { return vm.model.ValAge.value },
+						set ValAge(value) { vm.model.ValAge.updateValue(value) },
 						get ValBirthdat() { return vm.model.ValBirthdat.value },
 						set ValBirthdat(value) { vm.model.ValBirthdat.updateValue(value) },
 						get ValCborn() { return vm.model.ValCborn.value },
