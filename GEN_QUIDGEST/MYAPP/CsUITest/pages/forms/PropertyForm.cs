@@ -60,7 +60,7 @@ public class PropertyForm : Form
 	/// <summary>
 	/// Country
 	/// </summary>
-	public IWebElement CountCountry => throw new NotImplementedException();
+	public BaseInputControl CountCountry => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYCOUNTCOUNTRY_" + IdSuffix, "#PROPERTYCOUNTCOUNTRY_" + IdSuffix);
 
 	/// <summary>
 	/// Price

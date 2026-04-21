@@ -100,7 +100,7 @@ namespace GenioMVC.ViewModels.Prope
 			conditions.SubSets.Add(GetCustomizedStaticLimits(StaticLimits));
 
 			// Checks for foreign tables in fields and conditions
-			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldPrice, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldDtconst, CSGenioAprope.FldDescript, CSGenioAprope.FldBathnr, CSGenioAprope.FldTitle, CSGenioAprope.FldPhoto, CSGenioAprope.FldSize };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldPrice, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldDtconst, CSGenioAprope.FldDescript, CSGenioAprope.FldBathnr, CSGenioAprope.FldTitle, CSGenioAprope.FldPhoto, CSGenioAprope.FldSize, CSGenioAprope.FldTax };
 
 			ListingMVC<CSGenioAprope> listing = new(fields, null, 1, 1, false, user, true, string.Empty, true);
 			SelectQuery qs = sp.getSelectQueryFromListingMVC(conditions, listing);
@@ -153,6 +153,7 @@ namespace GenioMVC.ViewModels.Prope
 				new Exports.QColumn(CSGenioAprope.FldBathnr, FieldType.NUMERIC, Resources.Resources.BATHROOMS_NUMBER52698, 2, 0, true),
 				new Exports.QColumn(CSGenioAprope.FldTitle, FieldType.TEXT, Resources.Resources.TITLE21885, 30, 0, true),
 				new Exports.QColumn(CSGenioAprope.FldSize, FieldType.NUMERIC, Resources.Resources.SIZE__M2_57059, 8, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldTax, FieldType.NUMERIC, Resources.Resources.TAX37977, 5, 2, true),
 			];
 		}
 
@@ -410,7 +411,7 @@ namespace GenioMVC.ViewModels.Prope
 
 			}
 
-			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldPrice, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldDtconst, CSGenioAprope.FldDescript, CSGenioAprope.FldBathnr, CSGenioAprope.FldTitle, CSGenioAprope.FldPhoto, CSGenioAprope.FldSize };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldPrice, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldDtconst, CSGenioAprope.FldDescript, CSGenioAprope.FldBathnr, CSGenioAprope.FldTitle, CSGenioAprope.FldPhoto, CSGenioAprope.FldSize, CSGenioAprope.FldTax };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
@@ -611,7 +612,7 @@ namespace GenioMVC.ViewModels.Prope
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Agent", "Agent.ValName", "Prope.ValPrice", "City", "City.ValCity", "Prope.ValDtconst", "Prope.ValDescript", "Prope.ValBathnr", "Prope.ValTitle", "Prope.ValPhoto", "Prope.ValSize", "Prope.ValCodagent", "Prope.ValCodcity"
+			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Agent", "Agent.ValName", "Prope.ValPrice", "City", "City.ValCity", "Prope.ValDtconst", "Prope.ValDescript", "Prope.ValBathnr", "Prope.ValTitle", "Prope.ValPhoto", "Prope.ValSize", "Prope.ValTax", "Prope.ValCodagent", "Prope.ValCodcity"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
@@ -624,6 +625,7 @@ namespace GenioMVC.ViewModels.Prope
 			new TableSearchColumn("ValBathnr", CSGenioAprope.FldBathnr, typeof(decimal?)),
 			new TableSearchColumn("ValTitle", CSGenioAprope.FldTitle, typeof(string), defaultSearch : true),
 			new TableSearchColumn("ValSize", CSGenioAprope.FldSize, typeof(decimal?)),
+			new TableSearchColumn("ValTax", CSGenioAprope.FldTax, typeof(decimal?)),
 		];
 		protected void SetTicketToImageFields(Models.Prope row)
 		{

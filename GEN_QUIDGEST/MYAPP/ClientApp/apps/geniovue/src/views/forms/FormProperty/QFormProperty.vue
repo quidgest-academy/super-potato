@@ -1487,11 +1487,9 @@
 					PROPERTYCOUNTCOUNTRY_: new fieldControlClass.StringControl({
 						modelField: 'CityCountValCountry',
 						valueChangeEvent: 'fieldChange:count.country',
-						dependentModelField: 'ValCodcount',
-						dependentChangeEvent: 'fieldChange:city.codcount',
 						id: 'PROPERTYCOUNTCOUNTRY_',
 						name: 'COUNTRY',
-						size: 'xxlarge',
+						size: 'xlarge',
 						label: computed(() => this.Resources.COUNTRY64133),
 						placeholder: '',
 						labelPosition: computed(() => this.labelAlignment.topleft),

@@ -87,6 +87,12 @@ public class FOR_Menu_21_RowViewModel : Models.Prope
 				Area = "PROPE",
 				Field = "SIZE",
 			},
+			new ListColumn()
+			{
+				Order = 10,
+				Area = "PROPE",
+				Field = "TAX",
+			},
 		];
 	}
 

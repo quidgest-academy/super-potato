@@ -165,7 +165,6 @@ export default class ViewModel extends FormViewModelBase
 			area: 'COUNT',
 			field: 'COUNTRY',
 			maxLength: 50,
-			isFixed: true,
 			description: computed(() => this.Resources.COUNTRY64133),
 		}).cloneFrom(values?.CityCountValCountry))
 		this.stopWatchers.push(watch(() => this.CityCountValCountry.value, (newValue, oldValue) => this.onUpdate('count.country', this.CityCountValCountry, newValue, oldValue)))

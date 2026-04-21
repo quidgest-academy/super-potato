@@ -243,6 +243,17 @@
 								decimalPlaces: 0,
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.NumericColumn({
+								order: 10,
+								name: 'ValTax',
+								area: 'PROPE',
+								field: 'TAX',
+								label: computed(() => this.Resources.TAX37977),
+								scrollData: 5,
+								maxDigits: 2,
+								decimalPlaces: 2,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
 						config: {
 							name: 'FOR_Menu_21',
