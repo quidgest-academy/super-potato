@@ -31,7 +31,7 @@ namespace GenioMVC.ViewModels.Agent
 
 		/// <inheritdoc/>
 		[JsonPropertyName("uuid")]
-		public override string Uuid => "351ce7f5-09b9-45b7-9663-f8e18fdef7a2";
+		public override string Uuid => "5de40750-e12b-4e68-807b-fd93d7c1a364";
 
 		/// <inheritdoc/>
 		protected override string[] FieldsToSerialize => _fieldsToSerialize;
@@ -100,7 +100,7 @@ namespace GenioMVC.ViewModels.Agent
 			conditions.SubSets.Add(GetCustomizedStaticLimits(StaticLimits));
 
 			// Checks for foreign tables in fields and conditions
-			FieldRef[] fields = new FieldRef[] { CSGenioAagent.FldCodagent, CSGenioAagent.FldZzstate, CSGenioAagent.FldPhotography, CSGenioAagent.FldName, CSGenioAagent.FldBirthdat, CSGenioAagent.FldEmail };
+			FieldRef[] fields = new FieldRef[] { CSGenioAagent.FldCodagent, CSGenioAagent.FldZzstate, CSGenioAagent.FldCodcaddr, CSGenioAcaddr.FldCodcount, CSGenioAcaddr.FldCountry, CSGenioAagent.FldLastprop, CSGenioAagent.FldNrprops, CSGenioAagent.FldProfit, CSGenioAagent.FldAge, CSGenioAagent.FldBirthdat, CSGenioAagent.FldPhotography, CSGenioAagent.FldEmail, CSGenioAagent.FldTelephon, CSGenioAagent.FldName, CSGenioAagent.FldCborn, CSGenioAcborn.FldCodcount, CSGenioAcborn.FldCountry };
 
 			ListingMVC<CSGenioAagent> listing = new(fields, null, 1, 1, false, user, true, string.Empty, false);
 			SelectQuery qs = sp.getSelectQueryFromListingMVC(conditions, listing);
@@ -127,7 +127,7 @@ namespace GenioMVC.ViewModels.Agent
 		/// <param name="userContext">The current user request context</param>
 		public FOR_Menu_11_ViewModel(UserContext userContext) : base(userContext)
 		{
-			this.RoleToShow = CSGenio.framework.Role.ADMINISTRATION;
+			this.RoleToShow = CSGenio.framework.Role.ROLE_1;
 		}
 
 		/// <summary>
@@ -145,9 +145,16 @@ namespace GenioMVC.ViewModels.Agent
 		{
 			return
 			[
-				new Exports.QColumn(CSGenioAagent.FldName, FieldType.TEXT, Resources.Resources.AGENT_S_NAME42642, 30, 0, true),
+				new Exports.QColumn(CSGenioAcaddr.FldCountry, FieldType.TEXT, Resources.Resources.COUNTRY64133, 30, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldLastprop, FieldType.CURRENCY, Resources.Resources.LAST_PROPERTY_SOLD__49162, 12, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldNrprops, FieldType.NUMERIC, Resources.Resources.NUMBER_OF_PROPERTIES01169, 5, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldProfit, FieldType.CURRENCY, Resources.Resources.PROFIT55910, 14, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldAge, FieldType.NUMERIC, Resources.Resources.AGE28663, 3, 0, true),
 				new Exports.QColumn(CSGenioAagent.FldBirthdat, FieldType.DATE, Resources.Resources.BIRTHDATE22743, 8, 0, true),
 				new Exports.QColumn(CSGenioAagent.FldEmail, FieldType.TEXT, Resources.Resources.E_MAIL42251, 30, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldTelephon, FieldType.TEXT, Resources.Resources.TELEPHONE28697, 14, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldName, FieldType.TEXT, Resources.Resources.AGENT_S_NAME42642, 30, 0, true),
+				new Exports.QColumn(CSGenioAcborn.FldCountry, FieldType.TEXT, Resources.Resources.COUNTRY64133, 30, 0, true),
 			];
 		}
 
@@ -331,7 +338,7 @@ namespace GenioMVC.ViewModels.Agent
 
 			}
 
-			FieldRef[] fields = new FieldRef[] { CSGenioAagent.FldCodagent, CSGenioAagent.FldZzstate, CSGenioAagent.FldPhotography, CSGenioAagent.FldName, CSGenioAagent.FldBirthdat, CSGenioAagent.FldEmail };
+			FieldRef[] fields = new FieldRef[] { CSGenioAagent.FldCodagent, CSGenioAagent.FldZzstate, CSGenioAagent.FldCodcaddr, CSGenioAcaddr.FldCodcount, CSGenioAcaddr.FldCountry, CSGenioAagent.FldLastprop, CSGenioAagent.FldNrprops, CSGenioAagent.FldProfit, CSGenioAagent.FldAge, CSGenioAagent.FldBirthdat, CSGenioAagent.FldPhotography, CSGenioAagent.FldEmail, CSGenioAagent.FldTelephon, CSGenioAagent.FldName, CSGenioAagent.FldCborn, CSGenioAcborn.FldCodcount, CSGenioAcborn.FldCountry };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
@@ -342,7 +349,7 @@ namespace GenioMVC.ViewModels.Agent
 			{
 				firstVisibleColumn = tableConfig?.GetFirstVisibleColumn(TableAlias);
 
-				firstVisibleColumn ??= new FieldRef("agent", "photography");
+				firstVisibleColumn ??= new FieldRef("caddr", "country");
 			}
 			// Limitations
 			this.TableLimits ??= [];
@@ -476,6 +483,10 @@ namespace GenioMVC.ViewModels.Agent
 				{
 					case "agent":
 						model.klass.insertNameValueField(Qfield.FullName, Qfield.Value); break;
+					case "caddr":
+						model.Caddr.klass.insertNameValueField(Qfield.FullName, Qfield.Value); break;
+					case "cborn":
+						model.Cborn.klass.insertNameValueField(Qfield.FullName, Qfield.Value); break;
 					default:
 						break;
 				}
@@ -528,14 +539,21 @@ namespace GenioMVC.ViewModels.Agent
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Agent", "Agent.ValCodagent", "Agent.ValZzstate", "Agent.ValPhotography", "Agent.ValName", "Agent.ValBirthdat", "Agent.ValEmail", "Agent.ValCodcaddr", "Agent.ValCborn"
+			"Agent", "Agent.ValCodagent", "Agent.ValZzstate", "Caddr", "Caddr.ValCountry", "Agent.ValLastprop", "Agent.ValNrprops", "Agent.ValProfit", "Agent.ValAge", "Agent.ValBirthdat", "Agent.ValPhotography", "Agent.ValEmail", "Agent.ValTelephon", "Agent.ValName", "Cborn", "Cborn.ValCountry", "Agent.ValCodcaddr", "Agent.ValCborn"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
 		[
-			new TableSearchColumn("ValName", CSGenioAagent.FldName, typeof(string), defaultSearch : true),
+			new TableSearchColumn("Caddr_ValCountry", CSGenioAcaddr.FldCountry, typeof(string)),
+			new TableSearchColumn("ValLastprop", CSGenioAagent.FldLastprop, typeof(decimal?)),
+			new TableSearchColumn("ValNrprops", CSGenioAagent.FldNrprops, typeof(decimal?)),
+			new TableSearchColumn("ValProfit", CSGenioAagent.FldProfit, typeof(decimal?)),
+			new TableSearchColumn("ValAge", CSGenioAagent.FldAge, typeof(decimal?)),
 			new TableSearchColumn("ValBirthdat", CSGenioAagent.FldBirthdat, typeof(DateTime?)),
 			new TableSearchColumn("ValEmail", CSGenioAagent.FldEmail, typeof(string)),
+			new TableSearchColumn("ValTelephon", CSGenioAagent.FldTelephon, typeof(string)),
+			new TableSearchColumn("ValName", CSGenioAagent.FldName, typeof(string), defaultSearch : true),
+			new TableSearchColumn("Cborn_ValCountry", CSGenioAcborn.FldCountry, typeof(string)),
 		];
 		protected void SetTicketToImageFields(Models.Agent row)
 		{

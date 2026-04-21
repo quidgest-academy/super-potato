@@ -36,26 +36,68 @@ public class FOR_Menu_11_RowViewModel : Models.Agent
 			new ListColumn()
 			{
 				Order = 1,
-				Area = "AGENT",
-				Field = "PHOTOGRAPHY",
+				Area = "CADDR",
+				Field = "COUNTRY",
 			},
 			new ListColumn()
 			{
 				Order = 2,
 				Area = "AGENT",
-				Field = "NAME",
+				Field = "LASTPROP",
 			},
 			new ListColumn()
 			{
 				Order = 3,
 				Area = "AGENT",
-				Field = "BIRTHDAT",
+				Field = "NRPROPS",
 			},
 			new ListColumn()
 			{
 				Order = 4,
 				Area = "AGENT",
+				Field = "PROFIT",
+			},
+			new ListColumn()
+			{
+				Order = 5,
+				Area = "AGENT",
+				Field = "AGE",
+			},
+			new ListColumn()
+			{
+				Order = 6,
+				Area = "AGENT",
+				Field = "BIRTHDAT",
+			},
+			new ListColumn()
+			{
+				Order = 7,
+				Area = "AGENT",
+				Field = "PHOTOGRAPHY",
+			},
+			new ListColumn()
+			{
+				Order = 8,
+				Area = "AGENT",
 				Field = "EMAIL",
+			},
+			new ListColumn()
+			{
+				Order = 9,
+				Area = "AGENT",
+				Field = "TELEPHON",
+			},
+			new ListColumn()
+			{
+				Order = 10,
+				Area = "AGENT",
+				Field = "NAME",
+			},
+			new ListColumn()
+			{
+				Order = 11,
+				Area = "CBORN",
+				Field = "COUNTRY",
 			},
 		];
 	}

@@ -135,7 +135,7 @@
 				model: new MenuViewModel(this),
 
 				controls: {
-					menu: new controlClass.TableSpecialRenderingControl({
+					menu: new controlClass.TableListControl({
 						fnHydrateViewModel: (data) => vm.model.hydrate(data),
 						id: 'FOR_Menu_11',
 						controller: 'AGENT',
@@ -147,8 +147,73 @@
 							'page-full-height'
 						],
 						columnsOriginal: [
-							new listColumnTypes.ImageColumn({
+							new listColumnTypes.TextColumn({
 								order: 1,
+								name: 'Caddr.ValCountry',
+								area: 'CADDR',
+								field: 'COUNTRY',
+								label: computed(() => this.Resources.COUNTRY64133),
+								dataLength: 50,
+								scrollData: 30,
+								export: 1,
+								pkColumn: 'ValCodcount',
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.CurrencyColumn({
+								order: 2,
+								name: 'ValLastprop',
+								area: 'AGENT',
+								field: 'LASTPROP',
+								label: computed(() => this.Resources.LAST_PROPERTY_SOLD__49162),
+								scrollData: 12,
+								maxDigits: 9,
+								decimalPlaces: 2,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.NumericColumn({
+								order: 3,
+								name: 'ValNrprops',
+								area: 'AGENT',
+								field: 'NRPROPS',
+								label: computed(() => this.Resources.NUMBER_OF_PROPERTIES01169),
+								scrollData: 5,
+								maxDigits: 5,
+								decimalPlaces: 0,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.CurrencyColumn({
+								order: 4,
+								name: 'ValProfit',
+								area: 'AGENT',
+								field: 'PROFIT',
+								label: computed(() => this.Resources.PROFIT55910),
+								scrollData: 14,
+								maxDigits: 11,
+								decimalPlaces: 2,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.NumericColumn({
+								order: 5,
+								name: 'ValAge',
+								area: 'AGENT',
+								field: 'AGE',
+								label: computed(() => this.Resources.AGE28663),
+								scrollData: 3,
+								maxDigits: 3,
+								decimalPlaces: 0,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.DateColumn({
+								order: 6,
+								name: 'ValBirthdat',
+								area: 'AGENT',
+								field: 'BIRTHDAT',
+								label: computed(() => this.Resources.BIRTHDATE22743),
+								scrollData: 8,
+								dateTimeType: 'date',
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.ImageColumn({
+								order: 7,
 								name: 'ValPhotography',
 								area: 'AGENT',
 								field: 'PHOTOGRAPHY',
@@ -160,7 +225,27 @@
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 							new listColumnTypes.TextColumn({
-								order: 2,
+								order: 8,
+								name: 'ValEmail',
+								area: 'AGENT',
+								field: 'EMAIL',
+								label: computed(() => this.Resources.E_MAIL42251),
+								dataLength: 80,
+								scrollData: 30,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.TextColumn({
+								order: 9,
+								name: 'ValTelephon',
+								area: 'AGENT',
+								field: 'TELEPHON',
+								label: computed(() => this.Resources.TELEPHONE28697),
+								dataLength: 14,
+								scrollData: 14,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.TextColumn({
+								order: 10,
 								name: 'ValName',
 								area: 'AGENT',
 								field: 'NAME',
@@ -169,25 +254,16 @@
 								scrollData: 30,
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
-							new listColumnTypes.DateColumn({
-								order: 3,
-								name: 'ValBirthdat',
-								area: 'AGENT',
-								field: 'BIRTHDAT',
-								label: computed(() => this.Resources.BIRTHDATE22743),
-								scrollData: 8,
-								dateTimeType: 'date',
-								export: 1,
-							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 							new listColumnTypes.TextColumn({
-								order: 4,
-								name: 'ValEmail',
-								area: 'AGENT',
-								field: 'EMAIL',
-								label: computed(() => this.Resources.E_MAIL42251),
-								dataLength: 80,
+								order: 11,
+								name: 'Cborn.ValCountry',
+								area: 'CBORN',
+								field: 'COUNTRY',
+								label: computed(() => this.Resources.COUNTRY64133),
+								dataLength: 50,
 								scrollData: 30,
 								export: 1,
+								pkColumn: 'ValCodcount',
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
 						config: {
@@ -328,99 +404,8 @@
 							}
 						},
 						globalEvents: ['changed-CADDR', 'changed-AGENT', 'changed-CBORN'],
-						uuid: '351ce7f5-09b9-45b7-9663-f8e18fdef7a2',
+						uuid: '5de40750-e12b-4e68-807b-fd93d7c1a364',
 						allSelectedRows: 'false',
-						viewModes: [
-							{
-								id: 'CARDS',
-								type: 'cards',
-								subtype: 'card',
-								label: computed(() => this.Resources.CARTOES27587),
-								order: 1,
-								mappingVariables: readonly({
-									title: {
-										allowsMultiple: false,
-										sources: [
-											'AGENT.NAME',
-										]
-									},
-									image: {
-										allowsMultiple: false,
-										sources: [
-											'AGENT.PHOTOGRA',
-										]
-									},
-								}),
-								styleVariables: {
-									actionsAlignment: {
-										rawValue: 'left',
-										isMapped: false
-									},
-									actionsPlacement: {
-										rawValue: 'footer',
-										isMapped: false
-									},
-									actionsStyle: {
-										rawValue: 'dropdown',
-										isMapped: false
-									},
-									backgroundColor: {
-										rawValue: 'auto',
-										isMapped: false
-									},
-									contentAlignment: {
-										rawValue: 'left',
-										isMapped: false
-									},
-									customFollowupDefaultTarget: {
-										rawValue: 'blank',
-										isMapped: false
-									},
-									customInsertCard: {
-										rawValue: false,
-										isMapped: false
-									},
-									customInsertCardStyle: {
-										rawValue: 'secondary',
-										isMapped: false
-									},
-									displayMode: {
-										rawValue: 'grid',
-										isMapped: false
-									},
-									gridMode: {
-										rawValue: 'fixed',
-										isMapped: false
-									},
-									containerAlignment: {
-										rawValue: 'left',
-										isMapped: false
-									},
-									hoverScaleAmount: {
-										rawValue: '1.00',
-										isMapped: false
-									},
-									imageShape: {
-										rawValue: 'rectangular',
-										isMapped: false
-									},
-									showColumnTitles: {
-										rawValue: false,
-										isMapped: false
-									},
-									showEmptyColumnTitles: {
-										rawValue: true,
-										isMapped: false
-									},
-									size: {
-										rawValue: 'regular',
-										isMapped: false
-									},
-								},
-								groups: {
-								}
-							},
-						],
 						headerLevel: 1,
 						isActiveControl: computed(() => this.isActiveMenu)
 					}, this),
