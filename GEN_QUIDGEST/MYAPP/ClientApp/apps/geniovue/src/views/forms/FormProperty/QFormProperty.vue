@@ -98,163 +98,36 @@
 			:data-identifier="primaryKeyValue"
 			:data-loading="!formInitialDataLoaded || !isActiveForm">
 			<template v-if="formControl.initialized && showFormBody">
-				<q-row v-if="controls.PROPERTYPROPEID______.isVisible">
-					<q-col
-						v-if="controls.PROPERTYPROPEID______.isVisible"
-						cols="auto">
-						<base-input-structure
-							v-if="controls.PROPERTYPROPEID______.isVisible"
-							class="i-text"
-							v-bind="controls.PROPERTYPROPEID______.wrapperProps"
-							:id="getControlId(controls.PROPERTYPROPEID______)"
-							v-on="controls.PROPERTYPROPEID______.handlers"
-							:loading="controls.PROPERTYPROPEID______.props.loading"
-							:reporting-mode-on="reportingModeCAV"
-							:suggestion-mode-on="suggestionModeOn">
-							<q-numeric-input
-								v-if="controls.PROPERTYPROPEID______.isVisible"
-								v-bind="controls.PROPERTYPROPEID______.props"
-								:id="getControlId(controls.PROPERTYPROPEID______)"
-								@update:model-value="model.ValId.fnUpdateValue" />
-						</base-input-structure>
-					</q-col>
-				</q-row>
-				<q-row v-if="controls.PROPERTYPROPESOLD____.isVisible || controls.PROPERTYPROPEDTSOLD__.isVisible">
-					<q-col
-						v-if="controls.PROPERTYPROPESOLD____.isVisible"
-						cols="auto">
-						<base-input-structure
-							v-if="controls.PROPERTYPROPESOLD____.isVisible"
-							class="i-text"
-							v-bind="controls.PROPERTYPROPESOLD____.wrapperProps"
-							:id="getControlId(controls.PROPERTYPROPESOLD____)"
-							v-on="controls.PROPERTYPROPESOLD____.handlers"
-							:loading="controls.PROPERTYPROPESOLD____.props.loading"
-							:reporting-mode-on="reportingModeCAV"
-							:suggestion-mode-on="suggestionModeOn">
-							<template #label>
-								<q-checkbox
-									v-if="controls.PROPERTYPROPESOLD____.isVisible"
-									v-bind="controls.PROPERTYPROPESOLD____.props"
-									:id="getControlId(controls.PROPERTYPROPESOLD____)"
-									v-on="controls.PROPERTYPROPESOLD____.handlers" />
+				<q-row v-if="controls.PROPERTYPSEUDFIELD001.isVisible">
+					<q-col v-if="controls.PROPERTYPSEUDFIELD001.isVisible">
+						<q-table
+							v-if="controls.PROPERTYPSEUDFIELD001.isVisible"
+							v-bind="controls.PROPERTYPSEUDFIELD001"
+							:id="getControlId(controls.PROPERTYPSEUDFIELD001)"
+							v-on="controls.PROPERTYPSEUDFIELD001.handlers">
+							<template #header>
+								<q-table-config
+									:table-ctrl="controls.PROPERTYPSEUDFIELD001"
+									v-on="controls.PROPERTYPSEUDFIELD001.handlers" />
 							</template>
-						</base-input-structure>
-					</q-col>
-					<q-col
-						v-if="controls.PROPERTYPROPEDTSOLD__.isVisible"
-						cols="auto">
-						<base-input-structure
-							v-if="controls.PROPERTYPROPEDTSOLD__.isVisible"
-							class="i-text"
-							v-bind="controls.PROPERTYPROPEDTSOLD__.wrapperProps"
-							:id="getControlId(controls.PROPERTYPROPEDTSOLD__)"
-							v-on="controls.PROPERTYPROPEDTSOLD__.handlers"
-							:loading="controls.PROPERTYPROPEDTSOLD__.props.loading"
-							:reporting-mode-on="reportingModeCAV"
-							:suggestion-mode-on="suggestionModeOn">
-							<q-date-time-picker
-								v-if="controls.PROPERTYPROPEDTSOLD__.isVisible"
-								v-bind="controls.PROPERTYPROPEDTSOLD__.props"
-								:id="getControlId(controls.PROPERTYPROPEDTSOLD__)"
-								:model-value="model.ValDtsold.value"
-								@reset-icon-click="model.ValDtsold.fnUpdateValue(model.ValDtsold.originalValue ?? new Date())"
-								@update:model-value="model.ValDtsold.fnUpdateValue($event ?? '')" />
-						</base-input-structure>
+							<!-- USE /[MANUAL FOR CUSTOM_TABLE PROPERTYPSEUDFIELD001]/ -->
+						</q-table>
 					</q-col>
 				</q-row>
-				<q-row v-if="controls.PROPERTYPSEUDNEWGRP01.isVisible">
-					<q-col v-if="controls.PROPERTYPSEUDNEWGRP01.isVisible">
-						<q-group-box-container
-							v-if="controls.PROPERTYPSEUDNEWGRP01.isVisible"
-							v-bind="controls.PROPERTYPSEUDNEWGRP01"
-							:id="getControlId(controls.PROPERTYPSEUDNEWGRP01)"
-							:no-border="controls.PROPERTYPSEUDNEWGRP01.borderless">
-							<!-- Start PROPERTYPSEUDNEWGRP01 -->
-							<q-row v-if="controls.PROPERTYPROPEPHOTO___.isVisible">
-								<q-col
-									v-if="controls.PROPERTYPROPEPHOTO___.isVisible"
-									cols="auto">
-									<base-input-structure
-										v-if="controls.PROPERTYPROPEPHOTO___.isVisible"
-										class="q-image"
-										v-bind="controls.PROPERTYPROPEPHOTO___.wrapperProps"
-										:id="getControlId(controls.PROPERTYPROPEPHOTO___)"
-										v-on="controls.PROPERTYPROPEPHOTO___.handlers"
-										:loading="controls.PROPERTYPROPEPHOTO___.props.loading"
-										:reporting-mode-on="reportingModeCAV"
-										:suggestion-mode-on="suggestionModeOn">
-										<q-image
-											v-if="controls.PROPERTYPROPEPHOTO___.isVisible"
-											v-bind="controls.PROPERTYPROPEPHOTO___.props"
-											:id="getControlId(controls.PROPERTYPROPEPHOTO___)"
-											v-on="controls.PROPERTYPROPEPHOTO___.handlers" />
-									</base-input-structure>
-								</q-col>
-							</q-row>
-							<q-row v-if="controls.PROPERTYPROPETITLE___.isVisible || controls.PROPERTYPROPEPRICE___.isVisible">
-								<q-col
-									v-if="controls.PROPERTYPROPETITLE___.isVisible"
-									cols="auto">
-									<base-input-structure
-										v-if="controls.PROPERTYPROPETITLE___.isVisible"
-										class="i-text"
-										v-bind="controls.PROPERTYPROPETITLE___.wrapperProps"
-										:id="getControlId(controls.PROPERTYPROPETITLE___)"
-										v-on="controls.PROPERTYPROPETITLE___.handlers"
-										:loading="controls.PROPERTYPROPETITLE___.props.loading"
-										:reporting-mode-on="reportingModeCAV"
-										:suggestion-mode-on="suggestionModeOn">
-										<q-text-field
-											v-bind="controls.PROPERTYPROPETITLE___.props"
-											:id="getControlId(controls.PROPERTYPROPETITLE___)"
-											@blur="onBlur(controls.PROPERTYPROPETITLE___, model.ValTitle.value)"
-											@change="model.ValTitle.fnUpdateValueOnChange" />
-									</base-input-structure>
-								</q-col>
-								<q-col
-									v-if="controls.PROPERTYPROPEPRICE___.isVisible"
-									cols="auto">
-									<base-input-structure
-										v-if="controls.PROPERTYPROPEPRICE___.isVisible"
-										class="i-text"
-										v-bind="controls.PROPERTYPROPEPRICE___.wrapperProps"
-										:id="getControlId(controls.PROPERTYPROPEPRICE___)"
-										v-on="controls.PROPERTYPROPEPRICE___.handlers"
-										:loading="controls.PROPERTYPROPEPRICE___.props.loading"
-										:reporting-mode-on="reportingModeCAV"
-										:suggestion-mode-on="suggestionModeOn">
-										<q-numeric-input
-											v-if="controls.PROPERTYPROPEPRICE___.isVisible"
-											v-bind="controls.PROPERTYPROPEPRICE___.props"
-											:id="getControlId(controls.PROPERTYPROPEPRICE___)"
-											@update:model-value="model.ValPrice.fnUpdateValue" />
-									</base-input-structure>
-								</q-col>
-							</q-row>
-							<q-row v-if="controls.PROPERTYPROPEDESCRIPT.isVisible">
-								<q-col
-									v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
-									cols="auto">
-									<base-input-structure
-										v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
-										class="i-textarea"
-										v-bind="controls.PROPERTYPROPEDESCRIPT.wrapperProps"
-										:id="getControlId(controls.PROPERTYPROPEDESCRIPT)"
-										v-on="controls.PROPERTYPROPEDESCRIPT.handlers"
-										:loading="controls.PROPERTYPROPEDESCRIPT.props.loading"
-										:reporting-mode-on="reportingModeCAV"
-										:suggestion-mode-on="suggestionModeOn">
-										<q-text-area
-											v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
-											v-bind="controls.PROPERTYPROPEDESCRIPT.props"
-											:id="getControlId(controls.PROPERTYPROPEDESCRIPT)"
-											v-on="controls.PROPERTYPROPEDESCRIPT.handlers" />
-									</base-input-structure>
-								</q-col>
-							</q-row>
-							<!-- End PROPERTYPSEUDNEWGRP01 -->
-						</q-group-box-container>
+				<q-row v-if="controls.PROPERTYPSEUDFIELD002.isVisible">
+					<q-col v-if="controls.PROPERTYPSEUDFIELD002.isVisible">
+						<q-table
+							v-if="controls.PROPERTYPSEUDFIELD002.isVisible"
+							v-bind="controls.PROPERTYPSEUDFIELD002"
+							:id="getControlId(controls.PROPERTYPSEUDFIELD002)"
+							v-on="controls.PROPERTYPSEUDFIELD002.handlers">
+							<template #header>
+								<q-table-config
+									:table-ctrl="controls.PROPERTYPSEUDFIELD002"
+									v-on="controls.PROPERTYPSEUDFIELD002.handlers" />
+							</template>
+							<!-- USE /[MANUAL FOR CUSTOM_TABLE PROPERTYPSEUDFIELD002]/ -->
+						</q-table>
 					</q-col>
 				</q-row>
 				<q-row v-if="controls.PROPERTYPSEUDNEWGRP05.isVisible">
@@ -568,36 +441,178 @@
 						</q-accordion>
 					</q-col>
 				</q-row>
-				<q-row v-if="controls.PROPERTYPSEUDFIELD001.isVisible">
-					<q-col v-if="controls.PROPERTYPSEUDFIELD001.isVisible">
-						<q-table
-							v-if="controls.PROPERTYPSEUDFIELD001.isVisible"
-							v-bind="controls.PROPERTYPSEUDFIELD001"
-							:id="getControlId(controls.PROPERTYPSEUDFIELD001)"
-							v-on="controls.PROPERTYPSEUDFIELD001.handlers">
-							<template #header>
-								<q-table-config
-									:table-ctrl="controls.PROPERTYPSEUDFIELD001"
-									v-on="controls.PROPERTYPSEUDFIELD001.handlers" />
-							</template>
-							<!-- USE /[MANUAL FOR CUSTOM_TABLE PROPERTYPSEUDFIELD001]/ -->
-						</q-table>
+				<q-row v-if="controls.PROPERTYPSEUDNEWGRP01.isVisible">
+					<q-col v-if="controls.PROPERTYPSEUDNEWGRP01.isVisible">
+						<q-group-box-container
+							v-if="controls.PROPERTYPSEUDNEWGRP01.isVisible"
+							v-bind="controls.PROPERTYPSEUDNEWGRP01"
+							:id="getControlId(controls.PROPERTYPSEUDNEWGRP01)"
+							:no-border="controls.PROPERTYPSEUDNEWGRP01.borderless">
+							<!-- Start PROPERTYPSEUDNEWGRP01 -->
+							<q-row v-if="controls.PROPERTYPROPEPHOTO___.isVisible">
+								<q-col
+									v-if="controls.PROPERTYPROPEPHOTO___.isVisible"
+									cols="auto">
+									<base-input-structure
+										v-if="controls.PROPERTYPROPEPHOTO___.isVisible"
+										class="q-image"
+										v-bind="controls.PROPERTYPROPEPHOTO___.wrapperProps"
+										:id="getControlId(controls.PROPERTYPROPEPHOTO___)"
+										v-on="controls.PROPERTYPROPEPHOTO___.handlers"
+										:loading="controls.PROPERTYPROPEPHOTO___.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-image
+											v-if="controls.PROPERTYPROPEPHOTO___.isVisible"
+											v-bind="controls.PROPERTYPROPEPHOTO___.props"
+											:id="getControlId(controls.PROPERTYPROPEPHOTO___)"
+											v-on="controls.PROPERTYPROPEPHOTO___.handlers" />
+									</base-input-structure>
+								</q-col>
+							</q-row>
+							<q-row v-if="controls.PROPERTYPROPETITLE___.isVisible || controls.PROPERTYPROPEPRICE___.isVisible || controls.PROPERTYPROPEAVERAGE_.isVisible">
+								<q-col
+									v-if="controls.PROPERTYPROPETITLE___.isVisible"
+									cols="auto">
+									<base-input-structure
+										v-if="controls.PROPERTYPROPETITLE___.isVisible"
+										class="i-text"
+										v-bind="controls.PROPERTYPROPETITLE___.wrapperProps"
+										:id="getControlId(controls.PROPERTYPROPETITLE___)"
+										v-on="controls.PROPERTYPROPETITLE___.handlers"
+										:loading="controls.PROPERTYPROPETITLE___.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-text-field
+											v-bind="controls.PROPERTYPROPETITLE___.props"
+											:id="getControlId(controls.PROPERTYPROPETITLE___)"
+											@blur="onBlur(controls.PROPERTYPROPETITLE___, model.ValTitle.value)"
+											@change="model.ValTitle.fnUpdateValueOnChange" />
+									</base-input-structure>
+								</q-col>
+								<q-col
+									v-if="controls.PROPERTYPROPEPRICE___.isVisible || controls.PROPERTYPROPEAVERAGE_.isVisible"
+									cols="auto">
+									<base-input-structure
+										v-if="controls.PROPERTYPROPEPRICE___.isVisible"
+										class="i-text"
+										v-bind="controls.PROPERTYPROPEPRICE___.wrapperProps"
+										:id="getControlId(controls.PROPERTYPROPEPRICE___)"
+										v-on="controls.PROPERTYPROPEPRICE___.handlers"
+										:loading="controls.PROPERTYPROPEPRICE___.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-numeric-input
+											v-if="controls.PROPERTYPROPEPRICE___.isVisible"
+											v-bind="controls.PROPERTYPROPEPRICE___.props"
+											:id="getControlId(controls.PROPERTYPROPEPRICE___)"
+											@update:model-value="model.ValPrice.fnUpdateValue" />
+									</base-input-structure>
+									<base-input-structure
+										v-if="controls.PROPERTYPROPEAVERAGE_.isVisible"
+										class="i-text"
+										v-bind="controls.PROPERTYPROPEAVERAGE_.wrapperProps"
+										:id="getControlId(controls.PROPERTYPROPEAVERAGE_)"
+										v-on="controls.PROPERTYPROPEAVERAGE_.handlers"
+										:loading="controls.PROPERTYPROPEAVERAGE_.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-numeric-input
+											v-if="controls.PROPERTYPROPEAVERAGE_.isVisible"
+											v-bind="controls.PROPERTYPROPEAVERAGE_.props"
+											:id="getControlId(controls.PROPERTYPROPEAVERAGE_)"
+											@update:model-value="model.ValAverage.fnUpdateValue" />
+									</base-input-structure>
+								</q-col>
+							</q-row>
+							<q-row v-if="controls.PROPERTYPROPEDESCRIPT.isVisible">
+								<q-col
+									v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
+									cols="auto">
+									<base-input-structure
+										v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
+										class="i-textarea"
+										v-bind="controls.PROPERTYPROPEDESCRIPT.wrapperProps"
+										:id="getControlId(controls.PROPERTYPROPEDESCRIPT)"
+										v-on="controls.PROPERTYPROPEDESCRIPT.handlers"
+										:loading="controls.PROPERTYPROPEDESCRIPT.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-text-area
+											v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
+											v-bind="controls.PROPERTYPROPEDESCRIPT.props"
+											:id="getControlId(controls.PROPERTYPROPEDESCRIPT)"
+											v-on="controls.PROPERTYPROPEDESCRIPT.handlers" />
+									</base-input-structure>
+								</q-col>
+							</q-row>
+							<!-- End PROPERTYPSEUDNEWGRP01 -->
+						</q-group-box-container>
 					</q-col>
 				</q-row>
-				<q-row v-if="controls.PROPERTYPSEUDFIELD002.isVisible">
-					<q-col v-if="controls.PROPERTYPSEUDFIELD002.isVisible">
-						<q-table
-							v-if="controls.PROPERTYPSEUDFIELD002.isVisible"
-							v-bind="controls.PROPERTYPSEUDFIELD002"
-							:id="getControlId(controls.PROPERTYPSEUDFIELD002)"
-							v-on="controls.PROPERTYPSEUDFIELD002.handlers">
-							<template #header>
-								<q-table-config
-									:table-ctrl="controls.PROPERTYPSEUDFIELD002"
-									v-on="controls.PROPERTYPSEUDFIELD002.handlers" />
+				<q-row v-if="controls.PROPERTYPROPEDTSOLD__.isVisible">
+					<q-col
+						v-if="controls.PROPERTYPROPEDTSOLD__.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.PROPERTYPROPEDTSOLD__.isVisible"
+							class="i-text"
+							v-bind="controls.PROPERTYPROPEDTSOLD__.wrapperProps"
+							:id="getControlId(controls.PROPERTYPROPEDTSOLD__)"
+							v-on="controls.PROPERTYPROPEDTSOLD__.handlers"
+							:loading="controls.PROPERTYPROPEDTSOLD__.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
+							<q-date-time-picker
+								v-if="controls.PROPERTYPROPEDTSOLD__.isVisible"
+								v-bind="controls.PROPERTYPROPEDTSOLD__.props"
+								:id="getControlId(controls.PROPERTYPROPEDTSOLD__)"
+								:model-value="model.ValDtsold.value"
+								@reset-icon-click="model.ValDtsold.fnUpdateValue(model.ValDtsold.originalValue ?? new Date())"
+								@update:model-value="model.ValDtsold.fnUpdateValue($event ?? '')" />
+						</base-input-structure>
+					</q-col>
+				</q-row>
+				<q-row v-if="controls.PROPERTYPROPESOLD____.isVisible || controls.PROPERTYPROPEID______.isVisible">
+					<q-col
+						v-if="controls.PROPERTYPROPESOLD____.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.PROPERTYPROPESOLD____.isVisible"
+							class="i-text"
+							v-bind="controls.PROPERTYPROPESOLD____.wrapperProps"
+							:id="getControlId(controls.PROPERTYPROPESOLD____)"
+							v-on="controls.PROPERTYPROPESOLD____.handlers"
+							:loading="controls.PROPERTYPROPESOLD____.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
+							<template #label>
+								<q-checkbox
+									v-if="controls.PROPERTYPROPESOLD____.isVisible"
+									v-bind="controls.PROPERTYPROPESOLD____.props"
+									:id="getControlId(controls.PROPERTYPROPESOLD____)"
+									v-on="controls.PROPERTYPROPESOLD____.handlers" />
 							</template>
-							<!-- USE /[MANUAL FOR CUSTOM_TABLE PROPERTYPSEUDFIELD002]/ -->
-						</q-table>
+						</base-input-structure>
+					</q-col>
+					<q-col
+						v-if="controls.PROPERTYPROPEID______.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.PROPERTYPROPEID______.isVisible"
+							class="i-text"
+							v-bind="controls.PROPERTYPROPEID______.wrapperProps"
+							:id="getControlId(controls.PROPERTYPROPEID______)"
+							v-on="controls.PROPERTYPROPEID______.handlers"
+							:loading="controls.PROPERTYPROPEID______.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
+							<q-numeric-input
+								v-if="controls.PROPERTYPROPEID______.isVisible"
+								v-bind="controls.PROPERTYPROPEID______.props"
+								:id="getControlId(controls.PROPERTYPROPEID______)"
+								@update:model-value="model.ValId.fnUpdateValue" />
+						</base-input-structure>
 					</q-col>
 				</q-row>
 			</template>
@@ -948,61 +963,6 @@
 				},
 
 				controls: {
-					PROPERTYPROPEID______: new fieldControlClass.NumberControl({
-						modelField: 'ValId',
-						valueChangeEvent: 'fieldChange:prope.id',
-						id: 'PROPERTYPROPEID______',
-						name: 'ID',
-						size: 'mini',
-						label: computed(() => this.Resources.ORDER39632),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						maxIntegers: 5,
-						maxDecimals: 0,
-						isSequencial: true,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPESOLD____: new fieldControlClass.BooleanControl({
-						modelField: 'ValSold',
-						valueChangeEvent: 'fieldChange:prope.sold',
-						id: 'PROPERTYPROPESOLD____',
-						name: 'SOLD',
-						size: 'mini',
-						label: computed(() => this.Resources.SOLD59824),
-						placeholder: '',
-						labelPosition: computed(() => this.$app.layout.CheckboxLabelAlignment),
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPEDTSOLD__: new fieldControlClass.DateControl({
-						modelField: 'ValDtsold',
-						valueChangeEvent: 'fieldChange:prope.dtsold',
-						id: 'PROPERTYPROPEDTSOLD__',
-						name: 'DTSOLD',
-						size: 'small',
-						label: computed(() => this.Resources.SOLD_DATE37976),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						dateTimeType: 'date',
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPSEUDNEWGRP01: new fieldControlClass.GroupControl({
-						id: 'PROPERTYPSEUDNEWGRP01',
-						name: 'NEWGRP01',
-						size: 'block',
-						label: computed(() => this.Resources.MAIN_INFO53406),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						borderless: false,
-						isCollapsible: false,
-						anchored: false,
-						directChildren: ['PROPERTYPROPEPHOTO___', 'PROPERTYPROPETITLE___', 'PROPERTYPROPEPRICE___', 'PROPERTYPROPEDESCRIPT'],
-						mustBeFilled: true,
-						controlLimits: [
-						],
-					}, this),
 					PROPERTYPROPEPHOTO___: new fieldControlClass.ImageControl({
 						modelField: 'ValPhoto',
 						valueChangeEvent: 'fieldChange:prope.photo',
@@ -1052,6 +1012,22 @@
 						controlLimits: [
 						],
 					}, this),
+					PROPERTYPROPEAVERAGE_: new fieldControlClass.NumberControl({
+						modelField: 'ValAverage',
+						valueChangeEvent: 'fieldChange:prope.average',
+						id: 'PROPERTYPROPEAVERAGE_',
+						name: 'AVERAGE',
+						size: 'medium',
+						label: computed(() => this.Resources.AVERAGEPRICE13700),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP01',
+						isFormulaBlocked: true,
+						maxIntegers: 12,
+						maxDecimals: 0,
+						controlLimits: [
+						],
+					}, this),
 					PROPERTYPROPEDESCRIPT: new fieldControlClass.MultilineStringControl({
 						modelField: 'ValDescript',
 						valueChangeEvent: 'fieldChange:prope.descript',
@@ -1064,309 +1040,6 @@
 						container: 'PROPERTYPSEUDNEWGRP01',
 						rows: 5,
 						cols: 80,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPSEUDNEWGRP05: new fieldControlClass.AccordionControl({
-						id: 'PROPERTYPSEUDNEWGRP05',
-						name: 'NEWGRP05',
-						size: 'block',
-						label: computed(() => this.Resources.NEW_GROUP63448),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						isCollapsible: false,
-						anchored: false,
-						directChildren: ['PROPERTYPSEUDNEWGRP02', 'PROPERTYPSEUDNEWGRP03', 'PROPERTYPSEUDNEWGRP04'],
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPSEUDNEWGRP02: new fieldControlClass.GroupControl({
-						id: 'PROPERTYPSEUDNEWGRP02',
-						name: 'NEWGRP02',
-						size: 'block',
-						label: computed(() => this.Resources.LOCALIZATION34148),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP05',
-						isInAccordion: true,
-						borderless: false,
-						isCollapsible: true,
-						anchored: false,
-						directChildren: ['PROPERTYCITY_CITY____', 'PROPERTYCOUNTCOUNTRY_'],
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYCITY_CITY____: new fieldControlClass.LookupControl({
-						modelField: 'TableCityCity',
-						valueChangeEvent: 'fieldChange:city.city',
-						id: 'PROPERTYCITY_CITY____',
-						name: 'CITY',
-						size: 'xxlarge',
-						label: computed(() => this.Resources.CITY42505),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP02',
-						externalCallbacks: {
-							getModelField: vm.getModelField,
-							getModelFieldValue: vm.getModelFieldValue,
-							setModelFieldValue: vm.setModelFieldValue
-						},
-						externalProperties: {
-							modelKeys: computed(() => vm.modelKeys)
-						},
-						lookupKeyModelField: {
-							name: 'ValCodcity',
-							dependencyEvent: 'fieldChange:prope.codcity'
-						},
-						dependentFields: () => ({
-							set 'city.codcity'(value) { vm.model.ValCodcity.updateValue(value) },
-							set 'city.city'(value) { vm.model.TableCityCity.updateValue(value) },
-							set 'count.country'(value) { vm.model.CityCountValCountry.updateValue(value) },
-						}),
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYCOUNTCOUNTRY_: new fieldControlClass.StringControl({
-						modelField: 'CityCountValCountry',
-						valueChangeEvent: 'fieldChange:count.country',
-						dependentModelField: 'ValCodcount',
-						dependentChangeEvent: 'fieldChange:city.codcount',
-						id: 'PROPERTYCOUNTCOUNTRY_',
-						name: 'COUNTRY',
-						size: 'xxlarge',
-						label: computed(() => this.Resources.COUNTRY64133),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP02',
-						maxLength: 50,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPSEUDNEWGRP03: new fieldControlClass.GroupControl({
-						id: 'PROPERTYPSEUDNEWGRP03',
-						name: 'NEWGRP03',
-						size: 'block',
-						label: computed(() => this.Resources.DETAILS19591),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP05',
-						isInAccordion: true,
-						borderless: false,
-						isCollapsible: true,
-						anchored: false,
-						directChildren: ['PROPERTYPROPETYPOLOGY', 'PROPERTYPROPEBUILDTYP', 'PROPERTYPROPEGRDSIZE_', 'PROPERTYPROPEFLOORNR_', 'PROPERTYPROPESIZE____', 'PROPERTYPROPEBATHNR__', 'PROPERTYPROPEDTCONST_', 'PROPERTYPROPEBUILDAGE'],
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPETYPOLOGY: new fieldControlClass.RadioGroupControl({
-						modelField: 'ValTypology',
-						valueChangeEvent: 'fieldChange:prope.typology',
-						id: 'PROPERTYPROPETYPOLOGY',
-						name: 'TYPOLOGY',
-						label: computed(() => this.Resources.BUILDING_TYPOLOGY54011),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP03',
-						maxIntegers: 1,
-						maxDecimals: 0,
-						arrayName: 'typology',
-						columns: 5,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPEBUILDTYP: new fieldControlClass.ArrayStringControl({
-						modelField: 'ValBuildtyp',
-						valueChangeEvent: 'fieldChange:prope.buildtyp',
-						id: 'PROPERTYPROPEBUILDTYP',
-						name: 'BUILDTYP',
-						size: 'small',
-						label: computed(() => this.Resources.BUILDING_TYPE57152),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP03',
-						maxLength: 1,
-						arrayName: 'buildtyp',
-						helpShortItem: 'None',
-						helpDetailedItem: 'None',
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPEGRDSIZE_: new fieldControlClass.NumberControl({
-						modelField: 'ValGrdsize',
-						valueChangeEvent: 'fieldChange:prope.grdsize',
-						id: 'PROPERTYPROPEGRDSIZE_',
-						name: 'GRDSIZE',
-						size: 'small',
-						label: computed(() => this.Resources.GROUND_SIZE01563),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP03',
-						maxIntegers: 9,
-						maxDecimals: 0,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPEFLOORNR_: new fieldControlClass.NumberControl({
-						modelField: 'ValFloornr',
-						valueChangeEvent: 'fieldChange:prope.floornr',
-						id: 'PROPERTYPROPEFLOORNR_',
-						name: 'FLOORNR',
-						size: 'small',
-						label: computed(() => this.Resources.FLOOR19993),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP03',
-						maxIntegers: 2,
-						maxDecimals: 0,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPESIZE____: new fieldControlClass.NumberControl({
-						modelField: 'ValSize',
-						valueChangeEvent: 'fieldChange:prope.size',
-						id: 'PROPERTYPROPESIZE____',
-						name: 'SIZE',
-						size: 'small',
-						label: computed(() => this.Resources.SIZE__M2_57059),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP03',
-						maxIntegers: 8,
-						maxDecimals: 0,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPEBATHNR__: new fieldControlClass.NumberControl({
-						modelField: 'ValBathnr',
-						valueChangeEvent: 'fieldChange:prope.bathnr',
-						id: 'PROPERTYPROPEBATHNR__',
-						name: 'BATHNR',
-						size: 'small',
-						label: computed(() => this.Resources.BATHROOMS_NUMBER52698),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP03',
-						maxIntegers: 2,
-						maxDecimals: 0,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPEDTCONST_: new fieldControlClass.DateControl({
-						modelField: 'ValDtconst',
-						valueChangeEvent: 'fieldChange:prope.dtconst',
-						id: 'PROPERTYPROPEDTCONST_',
-						name: 'DTCONST',
-						size: 'small',
-						label: computed(() => this.Resources.CONSTRUCTION_DATE18132),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP03',
-						dateTimeType: 'date',
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPROPEBUILDAGE: new fieldControlClass.NumberControl({
-						modelField: 'ValBuildage',
-						valueChangeEvent: 'fieldChange:prope.buildage',
-						id: 'PROPERTYPROPEBUILDAGE',
-						name: 'BUILDAGE',
-						size: 'small',
-						label: computed(() => this.Resources.BUILDING_AGE27311),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP03',
-						isFormulaBlocked: true,
-						maxIntegers: 4,
-						maxDecimals: 0,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYPSEUDNEWGRP04: new fieldControlClass.GroupControl({
-						id: 'PROPERTYPSEUDNEWGRP04',
-						name: 'NEWGRP04',
-						size: 'block',
-						label: computed(() => this.Resources.AGENT_INFORMATION06141),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP05',
-						isInAccordion: true,
-						borderless: false,
-						isCollapsible: true,
-						anchored: false,
-						directChildren: ['PROPERTYAGENTNAME____', 'PROPERTYAGENTPHOTOGRA', 'PROPERTYAGENTEMAIL___'],
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYAGENTNAME____: new fieldControlClass.LookupControl({
-						modelField: 'TableAgentName',
-						valueChangeEvent: 'fieldChange:agent.name',
-						id: 'PROPERTYAGENTNAME____',
-						name: 'NAME',
-						size: 'xxlarge',
-						helpControl: {
-							shortHelp: {
-								type: '',
-								text: '',
-							},
-						},
-						label: computed(() => this.Resources.AGENT_S_NAME42642),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP04',
-						externalCallbacks: {
-							getModelField: vm.getModelField,
-							getModelFieldValue: vm.getModelFieldValue,
-							setModelFieldValue: vm.setModelFieldValue
-						},
-						externalProperties: {
-							modelKeys: computed(() => vm.modelKeys)
-						},
-						lookupKeyModelField: {
-							name: 'ValCodagent',
-							dependencyEvent: 'fieldChange:prope.codagent'
-						},
-						dependentFields: () => ({
-							set 'agent.codagent'(value) { vm.model.ValCodagent.updateValue(value) },
-							set 'agent.name'(value) { vm.model.TableAgentName.updateValue(value) },
-							set 'agent.photography'(value) { vm.model.AgentValPhotography.updateValue(value) },
-							set 'agent.email'(value) { vm.model.AgentValEmail.updateValue(value) },
-						}),
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYAGENTPHOTOGRA: new fieldControlClass.ImageControl({
-						modelField: 'AgentValPhotography',
-						valueChangeEvent: 'fieldChange:agent.photography',
-						dependentModelField: 'ValCodagent',
-						dependentChangeEvent: 'fieldChange:prope.codagent',
-						id: 'PROPERTYAGENTPHOTOGRA',
-						name: 'PHOTOGRA',
-						size: 'mini',
-						label: computed(() => this.Resources.PHOTOGRAPHY38058),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP04',
-						height: 50,
-						width: 30,
-						dataTitle: computed(() => genericFunctions.formatString(vm.Resources.IMAGEM_UTILIZADA_PAR17299, vm.Resources.PHOTOGRAPHY38058)),
-						maxFileSize: 10485760, // In bytes.
-						maxFileSizeLabel: '10 MB',
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYAGENTEMAIL___: new fieldControlClass.StringControl({
-						modelField: 'AgentValEmail',
-						valueChangeEvent: 'fieldChange:agent.email',
-						dependentModelField: 'ValCodagent',
-						dependentChangeEvent: 'fieldChange:prope.codagent',
-						id: 'PROPERTYAGENTEMAIL___',
-						name: 'EMAIL',
-						size: 'xxlarge',
-						label: computed(() => this.Resources.E_MAIL42251),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP04',
-						maxLength: 80,
 						controlLimits: [
 						],
 					}, this),
@@ -1757,6 +1430,364 @@
 							},
 						],
 					}, this),
+					PROPERTYPSEUDNEWGRP05: new fieldControlClass.AccordionControl({
+						id: 'PROPERTYPSEUDNEWGRP05',
+						name: 'NEWGRP05',
+						size: 'block',
+						label: computed(() => this.Resources.NEW_GROUP63448),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						isCollapsible: false,
+						anchored: false,
+						directChildren: ['PROPERTYPSEUDNEWGRP02', 'PROPERTYPSEUDNEWGRP03', 'PROPERTYPSEUDNEWGRP04'],
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPSEUDNEWGRP01: new fieldControlClass.GroupControl({
+						id: 'PROPERTYPSEUDNEWGRP01',
+						name: 'NEWGRP01',
+						size: 'block',
+						label: computed(() => this.Resources.MAIN_INFO53406),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						borderless: false,
+						isCollapsible: false,
+						anchored: false,
+						directChildren: ['PROPERTYPROPEPHOTO___', 'PROPERTYPROPETITLE___', 'PROPERTYPROPEPRICE___', 'PROPERTYPROPEAVERAGE_', 'PROPERTYPROPEDESCRIPT'],
+						mustBeFilled: true,
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPSEUDNEWGRP02: new fieldControlClass.GroupControl({
+						id: 'PROPERTYPSEUDNEWGRP02',
+						name: 'NEWGRP02',
+						size: 'block',
+						label: computed(() => this.Resources.LOCALIZATION34148),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP05',
+						isInAccordion: true,
+						borderless: false,
+						isCollapsible: true,
+						anchored: false,
+						directChildren: ['PROPERTYCITY_CITY____', 'PROPERTYCOUNTCOUNTRY_'],
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYCITY_CITY____: new fieldControlClass.LookupControl({
+						modelField: 'TableCityCity',
+						valueChangeEvent: 'fieldChange:city.city',
+						id: 'PROPERTYCITY_CITY____',
+						name: 'CITY',
+						size: 'xxlarge',
+						label: computed(() => this.Resources.CITY42505),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP02',
+						externalCallbacks: {
+							getModelField: vm.getModelField,
+							getModelFieldValue: vm.getModelFieldValue,
+							setModelFieldValue: vm.setModelFieldValue
+						},
+						externalProperties: {
+							modelKeys: computed(() => vm.modelKeys)
+						},
+						lookupKeyModelField: {
+							name: 'ValCodcity',
+							dependencyEvent: 'fieldChange:prope.codcity'
+						},
+						dependentFields: () => ({
+							set 'city.codcity'(value) { vm.model.ValCodcity.updateValue(value) },
+							set 'city.city'(value) { vm.model.TableCityCity.updateValue(value) },
+							set 'count.country'(value) { vm.model.CityCountValCountry.updateValue(value) },
+						}),
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYCOUNTCOUNTRY_: new fieldControlClass.StringControl({
+						modelField: 'CityCountValCountry',
+						valueChangeEvent: 'fieldChange:count.country',
+						dependentModelField: 'ValCodcount',
+						dependentChangeEvent: 'fieldChange:city.codcount',
+						id: 'PROPERTYCOUNTCOUNTRY_',
+						name: 'COUNTRY',
+						size: 'xxlarge',
+						label: computed(() => this.Resources.COUNTRY64133),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP02',
+						maxLength: 50,
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPSEUDNEWGRP03: new fieldControlClass.GroupControl({
+						id: 'PROPERTYPSEUDNEWGRP03',
+						name: 'NEWGRP03',
+						size: 'block',
+						label: computed(() => this.Resources.DETAILS19591),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP05',
+						isInAccordion: true,
+						borderless: false,
+						isCollapsible: true,
+						anchored: false,
+						directChildren: ['PROPERTYPROPETYPOLOGY', 'PROPERTYPROPEBUILDTYP', 'PROPERTYPROPEGRDSIZE_', 'PROPERTYPROPEFLOORNR_', 'PROPERTYPROPESIZE____', 'PROPERTYPROPEBATHNR__', 'PROPERTYPROPEDTCONST_', 'PROPERTYPROPEBUILDAGE'],
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPETYPOLOGY: new fieldControlClass.RadioGroupControl({
+						modelField: 'ValTypology',
+						valueChangeEvent: 'fieldChange:prope.typology',
+						id: 'PROPERTYPROPETYPOLOGY',
+						name: 'TYPOLOGY',
+						label: computed(() => this.Resources.BUILDING_TYPOLOGY54011),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP03',
+						maxIntegers: 1,
+						maxDecimals: 0,
+						arrayName: 'typology',
+						columns: 5,
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPEBUILDTYP: new fieldControlClass.ArrayStringControl({
+						modelField: 'ValBuildtyp',
+						valueChangeEvent: 'fieldChange:prope.buildtyp',
+						id: 'PROPERTYPROPEBUILDTYP',
+						name: 'BUILDTYP',
+						size: 'small',
+						label: computed(() => this.Resources.BUILDING_TYPE57152),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP03',
+						maxLength: 1,
+						arrayName: 'buildtyp',
+						helpShortItem: 'None',
+						helpDetailedItem: 'None',
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPEGRDSIZE_: new fieldControlClass.NumberControl({
+						modelField: 'ValGrdsize',
+						valueChangeEvent: 'fieldChange:prope.grdsize',
+						id: 'PROPERTYPROPEGRDSIZE_',
+						name: 'GRDSIZE',
+						size: 'small',
+						label: computed(() => this.Resources.GROUND_SIZE01563),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP03',
+						maxIntegers: 9,
+						maxDecimals: 0,
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPEFLOORNR_: new fieldControlClass.NumberControl({
+						modelField: 'ValFloornr',
+						valueChangeEvent: 'fieldChange:prope.floornr',
+						id: 'PROPERTYPROPEFLOORNR_',
+						name: 'FLOORNR',
+						size: 'small',
+						label: computed(() => this.Resources.FLOOR19993),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP03',
+						maxIntegers: 2,
+						maxDecimals: 0,
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPESIZE____: new fieldControlClass.NumberControl({
+						modelField: 'ValSize',
+						valueChangeEvent: 'fieldChange:prope.size',
+						id: 'PROPERTYPROPESIZE____',
+						name: 'SIZE',
+						size: 'small',
+						label: computed(() => this.Resources.SIZE__M2_57059),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP03',
+						maxIntegers: 8,
+						maxDecimals: 0,
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPEBATHNR__: new fieldControlClass.NumberControl({
+						modelField: 'ValBathnr',
+						valueChangeEvent: 'fieldChange:prope.bathnr',
+						id: 'PROPERTYPROPEBATHNR__',
+						name: 'BATHNR',
+						size: 'small',
+						label: computed(() => this.Resources.BATHROOMS_NUMBER52698),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP03',
+						maxIntegers: 2,
+						maxDecimals: 0,
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPEDTCONST_: new fieldControlClass.DateControl({
+						modelField: 'ValDtconst',
+						valueChangeEvent: 'fieldChange:prope.dtconst',
+						id: 'PROPERTYPROPEDTCONST_',
+						name: 'DTCONST',
+						size: 'small',
+						label: computed(() => this.Resources.CONSTRUCTION_DATE18132),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP03',
+						dateTimeType: 'date',
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPEBUILDAGE: new fieldControlClass.NumberControl({
+						modelField: 'ValBuildage',
+						valueChangeEvent: 'fieldChange:prope.buildage',
+						id: 'PROPERTYPROPEBUILDAGE',
+						name: 'BUILDAGE',
+						size: 'small',
+						label: computed(() => this.Resources.BUILDING_AGE27311),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP03',
+						isFormulaBlocked: true,
+						maxIntegers: 4,
+						maxDecimals: 0,
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPSEUDNEWGRP04: new fieldControlClass.GroupControl({
+						id: 'PROPERTYPSEUDNEWGRP04',
+						name: 'NEWGRP04',
+						size: 'block',
+						label: computed(() => this.Resources.AGENT_INFORMATION06141),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP05',
+						isInAccordion: true,
+						borderless: false,
+						isCollapsible: true,
+						anchored: false,
+						directChildren: ['PROPERTYAGENTNAME____', 'PROPERTYAGENTPHOTOGRA', 'PROPERTYAGENTEMAIL___'],
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYAGENTNAME____: new fieldControlClass.LookupControl({
+						modelField: 'TableAgentName',
+						valueChangeEvent: 'fieldChange:agent.name',
+						id: 'PROPERTYAGENTNAME____',
+						name: 'NAME',
+						size: 'xxlarge',
+						helpControl: {
+							shortHelp: {
+								type: '',
+								text: '',
+							},
+						},
+						label: computed(() => this.Resources.AGENT_S_NAME42642),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP04',
+						externalCallbacks: {
+							getModelField: vm.getModelField,
+							getModelFieldValue: vm.getModelFieldValue,
+							setModelFieldValue: vm.setModelFieldValue
+						},
+						externalProperties: {
+							modelKeys: computed(() => vm.modelKeys)
+						},
+						lookupKeyModelField: {
+							name: 'ValCodagent',
+							dependencyEvent: 'fieldChange:prope.codagent'
+						},
+						dependentFields: () => ({
+							set 'agent.codagent'(value) { vm.model.ValCodagent.updateValue(value) },
+							set 'agent.name'(value) { vm.model.TableAgentName.updateValue(value) },
+							set 'agent.photography'(value) { vm.model.AgentValPhotography.updateValue(value) },
+							set 'agent.email'(value) { vm.model.AgentValEmail.updateValue(value) },
+						}),
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYAGENTPHOTOGRA: new fieldControlClass.ImageControl({
+						modelField: 'AgentValPhotography',
+						valueChangeEvent: 'fieldChange:agent.photography',
+						dependentModelField: 'ValCodagent',
+						dependentChangeEvent: 'fieldChange:prope.codagent',
+						id: 'PROPERTYAGENTPHOTOGRA',
+						name: 'PHOTOGRA',
+						size: 'mini',
+						label: computed(() => this.Resources.PHOTOGRAPHY38058),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP04',
+						height: 50,
+						width: 30,
+						dataTitle: computed(() => genericFunctions.formatString(vm.Resources.IMAGEM_UTILIZADA_PAR17299, vm.Resources.PHOTOGRAPHY38058)),
+						maxFileSize: 10485760, // In bytes.
+						maxFileSizeLabel: '10 MB',
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYAGENTEMAIL___: new fieldControlClass.StringControl({
+						modelField: 'AgentValEmail',
+						valueChangeEvent: 'fieldChange:agent.email',
+						dependentModelField: 'ValCodagent',
+						dependentChangeEvent: 'fieldChange:prope.codagent',
+						id: 'PROPERTYAGENTEMAIL___',
+						name: 'EMAIL',
+						size: 'xxlarge',
+						label: computed(() => this.Resources.E_MAIL42251),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP04',
+						maxLength: 80,
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPEDTSOLD__: new fieldControlClass.DateControl({
+						modelField: 'ValDtsold',
+						valueChangeEvent: 'fieldChange:prope.dtsold',
+						id: 'PROPERTYPROPEDTSOLD__',
+						name: 'DTSOLD',
+						size: 'small',
+						label: computed(() => this.Resources.SOLD_DATE37976),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						dateTimeType: 'date',
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPESOLD____: new fieldControlClass.BooleanControl({
+						modelField: 'ValSold',
+						valueChangeEvent: 'fieldChange:prope.sold',
+						id: 'PROPERTYPROPESOLD____',
+						name: 'SOLD',
+						size: 'mini',
+						label: computed(() => this.Resources.SOLD59824),
+						placeholder: '',
+						labelPosition: computed(() => this.$app.layout.CheckboxLabelAlignment),
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYPROPEID______: new fieldControlClass.NumberControl({
+						modelField: 'ValId',
+						valueChangeEvent: 'fieldChange:prope.id',
+						id: 'PROPERTYPROPEID______',
+						name: 'ID',
+						size: 'mini',
+						label: computed(() => this.Resources.ORDER39632),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						maxIntegers: 5,
+						maxDecimals: 0,
+						isSequencial: true,
+						controlLimits: [
+						],
+					}, this),
 				},
 
 				model: new FormViewModel(this, {
@@ -1767,11 +1798,11 @@
 				}),
 
 				groupFields: readonly([
-					'PROPERTYPSEUDNEWGRP01',
 					'PROPERTYPSEUDNEWGRP05',
 					'PROPERTYPSEUDNEWGRP02',
 					'PROPERTYPSEUDNEWGRP03',
 					'PROPERTYPSEUDNEWGRP04',
+					'PROPERTYPSEUDNEWGRP01',
 				]),
 
 				tableFields: readonly([
@@ -1803,6 +1834,8 @@
 						set ValCountry(value) { vm.model.CityCountValCountry.updateValue(value) },
 					},
 					Prope: {
+						get ValAverage() { return vm.model.ValAverage.value },
+						set ValAverage(value) { vm.model.ValAverage.updateValue(value) },
 						get ValBathnr() { return vm.model.ValBathnr.value },
 						set ValBathnr(value) { vm.model.ValBathnr.updateValue(value) },
 						get ValBuildage() { return vm.model.ValBuildage.value },

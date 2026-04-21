@@ -392,96 +392,6 @@ namespace GenioMVC.Controllers
 		#endregion
 
 
-		public class Property_CityValCityModel : RequestLookupModel
-		{
-			public Property_ViewModel Model { get; set; }
-		}
-
-		//
-		// GET: /Prope/Property_CityValCity
-		// POST: /Prope/Property_CityValCity
-		[ActionName("Property_CityValCity")]
-		public ActionResult Property_CityValCity([FromBody] Property_CityValCityModel requestModel)
-		{
-			var queryParams = requestModel.QueryParams;
-
-			// If there was a recent operation on this table then force the primary persistence server to be called and ignore the read only feature
-			if (string.IsNullOrEmpty(Navigation.GetStrValue("ForcePrimaryRead_city")))
-				UserContext.Current.SetPersistenceReadOnly(true);
-			else
-			{
-				Navigation.DestroyEntry("ForcePrimaryRead_city");
-				UserContext.Current.SetPersistenceReadOnly(false);
-			}
-
-			NameValueCollection requestValues = [];
-			if (queryParams != null)
-			{
-				// Add to request values
-				foreach (var kv in queryParams)
-					requestValues.Add(kv.Key, kv.Value);
-			}
-
-			IsStateReadonly = true;
-
-			Models.Prope parentCtx = requestModel.Model == null ? null : new(m_userContext);
-			requestModel.Model?.Init(m_userContext);
-			requestModel.Model?.MapToModel(parentCtx);
-			Property_CityValCity_ViewModel model = new(m_userContext, parentCtx);
-
-			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(requestModel.TableConfiguration);
-
-			model.setModes(Request.Query["m"].ToString());
-			model.Load(tableConfig, requestValues, Request.IsAjaxRequest());
-
-			return JsonOK(model);
-		}
-
-		public class Property_AgentValNameModel : RequestLookupModel
-		{
-			public Property_ViewModel Model { get; set; }
-		}
-
-		//
-		// GET: /Prope/Property_AgentValName
-		// POST: /Prope/Property_AgentValName
-		[ActionName("Property_AgentValName")]
-		public ActionResult Property_AgentValName([FromBody] Property_AgentValNameModel requestModel)
-		{
-			var queryParams = requestModel.QueryParams;
-
-			// If there was a recent operation on this table then force the primary persistence server to be called and ignore the read only feature
-			if (string.IsNullOrEmpty(Navigation.GetStrValue("ForcePrimaryRead_agent")))
-				UserContext.Current.SetPersistenceReadOnly(true);
-			else
-			{
-				Navigation.DestroyEntry("ForcePrimaryRead_agent");
-				UserContext.Current.SetPersistenceReadOnly(false);
-			}
-
-			NameValueCollection requestValues = [];
-			if (queryParams != null)
-			{
-				// Add to request values
-				foreach (var kv in queryParams)
-					requestValues.Add(kv.Key, kv.Value);
-			}
-
-			IsStateReadonly = true;
-
-			Models.Prope parentCtx = requestModel.Model == null ? null : new(m_userContext);
-			requestModel.Model?.Init(m_userContext);
-			requestModel.Model?.MapToModel(parentCtx);
-			Property_AgentValName_ViewModel model = new(m_userContext, parentCtx);
-
-			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(requestModel.TableConfiguration);
-
-			model.setModes(Request.Query["m"].ToString());
-			model.Load(tableConfig, requestValues, Request.IsAjaxRequest());
-
-			return JsonOK(model);
-		}
-
 		public class Property_ValField001Model : RequestLookupModel
 		{
 			public Property_ViewModel Model { get; set; }
@@ -573,6 +483,96 @@ namespace GenioMVC.Controllers
 
 			// Determine rows per page
 			tableConfig.RowsPerPage = tableConfig.DetermineRowsPerPage(4, "");
+
+			model.setModes(Request.Query["m"].ToString());
+			model.Load(tableConfig, requestValues, Request.IsAjaxRequest());
+
+			return JsonOK(model);
+		}
+
+		public class Property_CityValCityModel : RequestLookupModel
+		{
+			public Property_ViewModel Model { get; set; }
+		}
+
+		//
+		// GET: /Prope/Property_CityValCity
+		// POST: /Prope/Property_CityValCity
+		[ActionName("Property_CityValCity")]
+		public ActionResult Property_CityValCity([FromBody] Property_CityValCityModel requestModel)
+		{
+			var queryParams = requestModel.QueryParams;
+
+			// If there was a recent operation on this table then force the primary persistence server to be called and ignore the read only feature
+			if (string.IsNullOrEmpty(Navigation.GetStrValue("ForcePrimaryRead_city")))
+				UserContext.Current.SetPersistenceReadOnly(true);
+			else
+			{
+				Navigation.DestroyEntry("ForcePrimaryRead_city");
+				UserContext.Current.SetPersistenceReadOnly(false);
+			}
+
+			NameValueCollection requestValues = [];
+			if (queryParams != null)
+			{
+				// Add to request values
+				foreach (var kv in queryParams)
+					requestValues.Add(kv.Key, kv.Value);
+			}
+
+			IsStateReadonly = true;
+
+			Models.Prope parentCtx = requestModel.Model == null ? null : new(m_userContext);
+			requestModel.Model?.Init(m_userContext);
+			requestModel.Model?.MapToModel(parentCtx);
+			Property_CityValCity_ViewModel model = new(m_userContext, parentCtx);
+
+			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(requestModel.TableConfiguration);
+
+			model.setModes(Request.Query["m"].ToString());
+			model.Load(tableConfig, requestValues, Request.IsAjaxRequest());
+
+			return JsonOK(model);
+		}
+
+		public class Property_AgentValNameModel : RequestLookupModel
+		{
+			public Property_ViewModel Model { get; set; }
+		}
+
+		//
+		// GET: /Prope/Property_AgentValName
+		// POST: /Prope/Property_AgentValName
+		[ActionName("Property_AgentValName")]
+		public ActionResult Property_AgentValName([FromBody] Property_AgentValNameModel requestModel)
+		{
+			var queryParams = requestModel.QueryParams;
+
+			// If there was a recent operation on this table then force the primary persistence server to be called and ignore the read only feature
+			if (string.IsNullOrEmpty(Navigation.GetStrValue("ForcePrimaryRead_agent")))
+				UserContext.Current.SetPersistenceReadOnly(true);
+			else
+			{
+				Navigation.DestroyEntry("ForcePrimaryRead_agent");
+				UserContext.Current.SetPersistenceReadOnly(false);
+			}
+
+			NameValueCollection requestValues = [];
+			if (queryParams != null)
+			{
+				// Add to request values
+				foreach (var kv in queryParams)
+					requestValues.Add(kv.Key, kv.Value);
+			}
+
+			IsStateReadonly = true;
+
+			Models.Prope parentCtx = requestModel.Model == null ? null : new(m_userContext);
+			requestModel.Model?.Init(m_userContext);
+			requestModel.Model?.MapToModel(parentCtx);
+			Property_AgentValName_ViewModel model = new(m_userContext, parentCtx);
+
+			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(requestModel.TableConfiguration);
 
 			model.setModes(Request.Query["m"].ToString());
 			model.Load(tableConfig, requestValues, Request.IsAjaxRequest());

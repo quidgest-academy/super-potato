@@ -8,26 +8,6 @@ namespace quidgest.uitests.pages.forms;
 public class PropertyForm : Form
 {
 	/// <summary>
-	/// Order
-	/// </summary>
-	public BaseInputControl PropeId => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEID______" + IdSuffix, "#PROPERTYPROPEID______" + IdSuffix);
-
-	/// <summary>
-	/// Sold
-	/// </summary>
-	public CheckboxInputControl PropeSold => new CheckboxInputControl(driver, ContainerLocator, "#container-PROPERTYPROPESOLD____" + IdSuffix);
-
-	/// <summary>
-	/// Sold date
-	/// </summary>
-	public DateInputControl PropeDtsold => new DateInputControl(driver, ContainerLocator, "#PROPERTYPROPEDTSOLD__" + IdSuffix);
-
-	/// <summary>
-	/// Main info
-	/// </summary>
-	public CollapsibleZoneControl PseudNewgrp01 => new CollapsibleZoneControl(driver, ContainerLocator, "#PROPERTYPSEUDNEWGRP01" + IdSuffix + "-container");
-
-	/// <summary>
 	/// Main photo
 	/// </summary>
 	public BaseInputControl PropePhoto => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPHOTO___" + IdSuffix, "#PROPERTYPROPEPHOTO___" + IdSuffix);
@@ -43,14 +23,34 @@ public class PropertyForm : Form
 	public BaseInputControl PropePrice => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPRICE___" + IdSuffix, "#PROPERTYPROPEPRICE___" + IdSuffix);
 
 	/// <summary>
+	/// AveragePrice
+	/// </summary>
+	public BaseInputControl PropeAverage => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEAVERAGE_" + IdSuffix, "#PROPERTYPROPEAVERAGE_" + IdSuffix);
+
+	/// <summary>
 	/// Description
 	/// </summary>
 	public BaseInputControl PropeDescript => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEDESCRIPT" + IdSuffix, "#PROPERTYPROPEDESCRIPT" + IdSuffix);
 
 	/// <summary>
+	/// Album
+	/// </summary>
+	public ListControl PseudField001 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD001" + IdSuffix);
+
+	/// <summary>
+	/// Contacts
+	/// </summary>
+	public ListControl PseudField002 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD002" + IdSuffix);
+
+	/// <summary>
 	/// New Group
 	/// </summary>
 	public IWebElement PseudNewgrp05 => throw new NotImplementedException();
+
+	/// <summary>
+	/// Main info
+	/// </summary>
+	public CollapsibleZoneControl PseudNewgrp01 => new CollapsibleZoneControl(driver, ContainerLocator, "#PROPERTYPSEUDNEWGRP01" + IdSuffix + "-container");
 
 	/// <summary>
 	/// Localization
@@ -140,14 +140,19 @@ public class PropertyForm : Form
 	public BaseInputControl PropeProfit => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPROFIT__" + IdSuffix, "#PROPERTYPROPEPROFIT__" + IdSuffix);
 
 	/// <summary>
-	/// Album
+	/// Sold date
 	/// </summary>
-	public ListControl PseudField001 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD001" + IdSuffix);
+	public DateInputControl PropeDtsold => new DateInputControl(driver, ContainerLocator, "#PROPERTYPROPEDTSOLD__" + IdSuffix);
 
 	/// <summary>
-	/// Contacts
+	/// Sold
 	/// </summary>
-	public ListControl PseudField002 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD002" + IdSuffix);
+	public CheckboxInputControl PropeSold => new CheckboxInputControl(driver, ContainerLocator, "#container-PROPERTYPROPESOLD____" + IdSuffix);
+
+	/// <summary>
+	/// Order
+	/// </summary>
+	public BaseInputControl PropeId => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEID______" + IdSuffix, "#PROPERTYPROPEID______" + IdSuffix);
 
 	public PropertyForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "PROPERTY", containerLocator: containerLocator, usePkInId: usePkInId) { }

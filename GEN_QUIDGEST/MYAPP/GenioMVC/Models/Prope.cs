@@ -169,6 +169,12 @@ namespace GenioMVC.Models
 		[DateAttribute("D")]
 		public DateTime? ValDtsold { get { return klass.ValDtsold; } set { klass.ValDtsold = value ?? DateTime.MinValue; } }
 
+		[DisplayName("AveragePrice")]
+		/// <summary>Field : "AveragePrice" Tipo: "N" Formula: + "Average()"</summary>
+		[ShouldSerialize("Prope.ValAverage")]
+		[NumericAttribute(0)]
+		public decimal? ValAverage { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValAverage, 0)); } set { klass.ValAverage = Convert.ToDecimal(value); } }
+
 		[DisplayName("ZZSTATE")]
 		[ShouldSerialize("Prope.ValZzstate")]
 		/// <summary>Field: "ZZSTATE", Type: "INT", Formula: ""</summary>

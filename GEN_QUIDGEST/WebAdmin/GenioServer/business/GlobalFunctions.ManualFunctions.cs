@@ -39,7 +39,7 @@ namespace CSGenio.business
 		/// </summary>
 		private static void initTodasFuncoes()
 		{
-			todasFuncoes = new Hashtable(9, (float)0.5);
+			todasFuncoes = new Hashtable(10, (float)0.5);
 			todasFuncoes.Add("password_alterar", 0);
 			todasFuncoes.Add("password_verificaAntiga", 1);
 			todasFuncoes.Add("validarAssinatura", 2);
@@ -50,6 +50,7 @@ namespace CSGenio.business
 			todasFuncoes.Add("GetUserProfile", 7);
 			//funcoes Csharp
 			todasFuncoes.Add("Age", 8);
+			todasFuncoes.Add("Average", 9);
 			// Cargas
 		}
 
@@ -80,6 +81,16 @@ namespace CSGenio.business
 //END_FUNCTION
 		}
 
+		/// <summary>
+		/// Calculate the average price of properties
+		/// </summary>
+		public decimal Average()
+		{
+//BEGIN_FUNCTION:4c7b4f61-37bc-48d5-a2df-bc378752f723
+//andre aqui
+//END_FUNCTION
+		}
+
 		#endregion
 
 		#region MANCS
@@ -89,7 +100,8 @@ namespace CSGenio.business
 
 		private static readonly List<string> m_allManualFuntionsNames = new List<string>()
 		{
-			"Age"
+			"Age",
+			"Average"
 		};
 
 		public static List<string> AllManualFuntionsNames

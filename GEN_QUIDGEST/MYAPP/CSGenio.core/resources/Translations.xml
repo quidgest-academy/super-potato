@@ -57,6 +57,9 @@
   <msg id="Resultados" code="RESULTADOS20000">
     <ENUS>Resultados</ENUS>
   </msg>
+  <msg id="AveragePrice" code="AVERAGEPRICE13700">
+    <ENUS>AveragePrice</ENUS>
+  </msg>
   <msg id="Unidade orgânica" code="UNIDADE_ORGANICA38383">
     <ENUS>Unidade orgânica</ENUS>
   </msg>

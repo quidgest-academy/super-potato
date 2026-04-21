@@ -75,57 +75,6 @@ export default class ViewModel extends FormViewModelBase
 		this.stopWatchers.push(watch(() => this.ValCodagent.value, (newValue, oldValue) => this.onUpdate('prope.codagent', this.ValCodagent, newValue, oldValue)))
 
 		/** The remaining form fields. */
-		this.ValId = reactive(new modelFieldType.Number({
-			id: 'ValId',
-			originId: 'ValId',
-			area: 'PROPE',
-			field: 'ID',
-			maxDigits: 5,
-			decimalDigits: 0,
-			description: '',
-		}).cloneFrom(values?.ValId))
-		this.stopWatchers.push(watch(() => this.ValId.value, (newValue, oldValue) => this.onUpdate('prope.id', this.ValId, newValue, oldValue)))
-
-		this.ValSold = reactive(new modelFieldType.Boolean({
-			id: 'ValSold',
-			originId: 'ValSold',
-			area: 'PROPE',
-			field: 'SOLD',
-			description: computed(() => this.Resources.SOLD59824),
-		}).cloneFrom(values?.ValSold))
-		this.stopWatchers.push(watch(() => this.ValSold.value, (newValue, oldValue) => this.onUpdate('prope.sold', this.ValSold, newValue, oldValue)))
-
-		this.ValDtsold = reactive(new modelFieldType.Date({
-			id: 'ValDtsold',
-			originId: 'ValDtsold',
-			area: 'PROPE',
-			field: 'DTSOLD',
-			fillWhen: {
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				fnFormula(params)
-				{
-					// Formula: [PROPE->SOLD]==1
-					return (this.ValSold.value ? 1 : 0)===1
-				},
-				dependencyEvents: ['fieldChange:prope.sold'],
-				isServerRecalc: false,
-				isEmpty: qApi.emptyD,
-			},
-			showWhen: {
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				fnFormula(params)
-				{
-					// Formula: [PROPE->SOLD]==1
-					return (this.ValSold.value ? 1 : 0)===1
-				},
-				dependencyEvents: ['fieldChange:prope.sold'],
-				isServerRecalc: false,
-				isEmpty: qApi.emptyD,
-			},
-			description: computed(() => this.Resources.SOLD_DATE37976),
-		}).cloneFrom(values?.ValDtsold))
-		this.stopWatchers.push(watch(() => this.ValDtsold.value, (newValue, oldValue) => this.onUpdate('prope.dtsold', this.ValDtsold, newValue, oldValue)))
-
 		this.ValPhoto = reactive(new modelFieldType.Image({
 			id: 'ValPhoto',
 			originId: 'ValPhoto',
@@ -155,6 +104,30 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.PRICE06900),
 		}).cloneFrom(values?.ValPrice))
 		this.stopWatchers.push(watch(() => this.ValPrice.value, (newValue, oldValue) => this.onUpdate('prope.price', this.ValPrice, newValue, oldValue)))
+
+		this.ValAverage = reactive(new modelFieldType.Number({
+			id: 'ValAverage',
+			originId: 'ValAverage',
+			area: 'PROPE',
+			field: 'AVERAGE',
+			maxDigits: 12,
+			decimalDigits: 0,
+			isFixed: true,
+			valueFormula: {
+				stopRecalcCondition() { return false },
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				fnFormula(params)
+				{
+					// Formula: Average()
+					return qFunctions.Average()
+				},
+				dependencyEvents: [],
+				isServerRecalc: false,
+				isEmpty: qApi.emptyN,
+			},
+			description: computed(() => this.Resources.AVERAGEPRICE13700),
+		}).cloneFrom(values?.ValAverage))
+		this.stopWatchers.push(watch(() => this.ValAverage.value, (newValue, oldValue) => this.onUpdate('prope.average', this.ValAverage, newValue, oldValue)))
 
 		this.ValDescript = reactive(new modelFieldType.MultiLineString({
 			id: 'ValDescript',
@@ -366,6 +339,57 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.PROFIT55910),
 		}).cloneFrom(values?.ValProfit))
 		this.stopWatchers.push(watch(() => this.ValProfit.value, (newValue, oldValue) => this.onUpdate('prope.profit', this.ValProfit, newValue, oldValue)))
+
+		this.ValDtsold = reactive(new modelFieldType.Date({
+			id: 'ValDtsold',
+			originId: 'ValDtsold',
+			area: 'PROPE',
+			field: 'DTSOLD',
+			fillWhen: {
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				fnFormula(params)
+				{
+					// Formula: [PROPE->SOLD]==1
+					return (this.ValSold.value ? 1 : 0)===1
+				},
+				dependencyEvents: ['fieldChange:prope.sold'],
+				isServerRecalc: false,
+				isEmpty: qApi.emptyD,
+			},
+			showWhen: {
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				fnFormula(params)
+				{
+					// Formula: [PROPE->SOLD]==1
+					return (this.ValSold.value ? 1 : 0)===1
+				},
+				dependencyEvents: ['fieldChange:prope.sold'],
+				isServerRecalc: false,
+				isEmpty: qApi.emptyD,
+			},
+			description: computed(() => this.Resources.SOLD_DATE37976),
+		}).cloneFrom(values?.ValDtsold))
+		this.stopWatchers.push(watch(() => this.ValDtsold.value, (newValue, oldValue) => this.onUpdate('prope.dtsold', this.ValDtsold, newValue, oldValue)))
+
+		this.ValSold = reactive(new modelFieldType.Boolean({
+			id: 'ValSold',
+			originId: 'ValSold',
+			area: 'PROPE',
+			field: 'SOLD',
+			description: computed(() => this.Resources.SOLD59824),
+		}).cloneFrom(values?.ValSold))
+		this.stopWatchers.push(watch(() => this.ValSold.value, (newValue, oldValue) => this.onUpdate('prope.sold', this.ValSold, newValue, oldValue)))
+
+		this.ValId = reactive(new modelFieldType.Number({
+			id: 'ValId',
+			originId: 'ValId',
+			area: 'PROPE',
+			field: 'ID',
+			maxDigits: 5,
+			decimalDigits: 0,
+			description: '',
+		}).cloneFrom(values?.ValId))
+		this.stopWatchers.push(watch(() => this.ValId.value, (newValue, oldValue) => this.onUpdate('prope.id', this.ValId, newValue, oldValue)))
 	}
 
 	/**

@@ -286,6 +286,21 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
+			Qfield = new Field(info.Alias, "average", FieldType.NUMERIC);
+			Qfield.FieldDescription = "AveragePrice";
+			Qfield.FieldSize =  12;
+			Qfield.MQueue = false;
+			Qfield.IntegerDigits = 12;
+			Qfield.CavDesignation = "AVERAGEPRICE13700";
+
+			Qfield.Dupmsg = "";
+			argumentsListByArea = new List<ByAreaArguments>();
+			Qfield.Formula = new InternalOperationFormula(argumentsListByArea, 0, delegate(object[] args, User user, string module, PersistentSupport sp) {
+				return new GlobalFunctions(user,module,sp).Average();
+			});
+			info.RegisterFieldDB(Qfield);
+
+			//- - - - - - - - - - - - - - - - - - -
 			Qfield = new Field(info.Alias, "zzstate", FieldType.INTEGER);
 			Qfield.FieldDescription = "Estado da ficha";
 			info.RegisterFieldDB(Qfield);
@@ -352,7 +367,7 @@ namespace CSGenio.business
 
 
 			info.InternalOperationFields = new string[] {
-			 "buildage","profit"
+			 "buildage","profit","average"
 			};
 
 			info.DefaultValues = new string[] {
@@ -695,6 +710,17 @@ namespace CSGenio.business
 			set { insertNameValueField(FldDtsold, value); }
 		}
 
+		/// <summary>Field : "AveragePrice" Tipo: "N" Formula: + "Average()"</summary>
+		public static FieldRef FldAverage { get { return m_fldAverage; } }
+		private static FieldRef m_fldAverage = new FieldRef("prope", "average");
+
+		/// <summary>Field : "AveragePrice" Tipo: "N" Formula: + "Average()"</summary>
+		public decimal ValAverage
+		{
+			get { return (decimal)returnValueField(FldAverage); }
+			set { insertNameValueField(FldAverage, value); }
+		}
+
 		/// <summary>Field : "ZZSTATE" Type: "INT" Formula:  ""</summary>
 		public static FieldRef FldZzstate { get { return m_fldZzstate; } }
 		private static FieldRef m_fldZzstate = new FieldRef("prope", "zzstate");
@@ -792,7 +818,7 @@ namespace CSGenio.business
 		// USE /[MANUAL FOR TABAUX PROPE]/
 
  
-                    
+                     
 
 	}
 }

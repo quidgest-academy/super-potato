@@ -232,6 +232,15 @@ namespace Administration.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "AveragePrice"
+        /// </summary>
+        public static string AVERAGEPRICE13700 {
+            get {
+                return ResourceManager.GetString("AVERAGEPRICE13700", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Unidade orgânica"
         /// </summary>
         public static string UNIDADE_ORGANICA38383 {

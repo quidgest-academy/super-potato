@@ -205,6 +205,11 @@ namespace CSGenio.business
                             DateTime arg0 = Conversion.dateString2DateTime(obj[0]);
                             return Age(arg0);
                         }
+                    case 9:
+                        {
+
+                            return Average();
+                        }
                     default:
                         throw new BusinessException(null, "GlobalFunctions.executaFuncao", "Unknown function name: " + name);
                 }

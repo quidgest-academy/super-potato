@@ -42,18 +42,6 @@ namespace GenioMVC.ViewModels.Prope
 		#endregion
 
 		/// <summary>
-		/// Title: "Order" | Type: "N"
-		/// </summary>
-		public decimal? ValId { get; set; }
-		/// <summary>
-		/// Title: "Sold" | Type: "L"
-		/// </summary>
-		public bool ValSold { get; set; }
-		/// <summary>
-		/// Title: "Sold date" | Type: "D"
-		/// </summary>
-		public DateTime? ValDtsold { get; set; }
-		/// <summary>
 		/// Title: "Main photo" | Type: "IJ"
 		/// </summary>
 		[ImageThumbnailJsonConverter(30, 50)]
@@ -66,6 +54,11 @@ namespace GenioMVC.ViewModels.Prope
 		/// Title: "Price" | Type: "$"
 		/// </summary>
 		public decimal? ValPrice { get; set; }
+		/// <summary>
+		/// Title: "AveragePrice" | Type: "N"
+		/// </summary>
+		[ValidateSetAccess]
+		public decimal? ValAverage { get; set; }
 		/// <summary>
 		/// Title: "Description" | Type: "MO"
 		/// </summary>
@@ -170,6 +163,18 @@ namespace GenioMVC.ViewModels.Prope
 		/// </summary>
 		[ValidateSetAccess]
 		public decimal? ValProfit { get; set; }
+		/// <summary>
+		/// Title: "Sold date" | Type: "D"
+		/// </summary>
+		public DateTime? ValDtsold { get; set; }
+		/// <summary>
+		/// Title: "Sold" | Type: "L"
+		/// </summary>
+		public bool ValSold { get; set; }
+		/// <summary>
+		/// Title: "Order" | Type: "N"
+		/// </summary>
+		public decimal? ValId { get; set; }
 
 		#region Navigations
 		#endregion
@@ -303,12 +308,10 @@ namespace GenioMVC.ViewModels.Prope
 			{
 				ValCodagent = ViewModelConversion.ToString(m.ValCodagent);
 				ValCodcity = ViewModelConversion.ToString(m.ValCodcity);
-				ValId = ViewModelConversion.ToNumeric(m.ValId);
-				ValSold = ViewModelConversion.ToLogic(m.ValSold);
-				ValDtsold = ViewModelConversion.ToDateTime(m.ValDtsold);
 				ValPhoto = ViewModelConversion.ToImage(m.ValPhoto);
 				ValTitle = ViewModelConversion.ToString(m.ValTitle);
 				ValPrice = ViewModelConversion.ToNumeric(m.ValPrice);
+				ValAverage = ViewModelConversion.ToNumeric(m.ValAverage);
 				ValDescript = ViewModelConversion.ToString(m.ValDescript);
 				ValTypology = ViewModelConversion.ToNumeric(m.ValTypology);
 				ValBuildtyp = ViewModelConversion.ToString(m.ValBuildtyp);
@@ -321,6 +324,9 @@ namespace GenioMVC.ViewModels.Prope
 				funcAgentValPhotography = () => ViewModelConversion.ToImage(m.Agent.ValPhotography);
 				funcAgentValEmail = () => ViewModelConversion.ToString(m.Agent.ValEmail);
 				ValProfit = ViewModelConversion.ToNumeric(m.ValProfit);
+				ValDtsold = ViewModelConversion.ToDateTime(m.ValDtsold);
+				ValSold = ViewModelConversion.ToLogic(m.ValSold);
+				ValId = ViewModelConversion.ToNumeric(m.ValId);
 				ValCodprope = ViewModelConversion.ToString(m.ValCodprope);
 			}
 			catch (Exception)
@@ -349,9 +355,6 @@ namespace GenioMVC.ViewModels.Prope
 			{
 				m.ValCodagent = ViewModelConversion.ToString(ValCodagent);
 				m.ValCodcity = ViewModelConversion.ToString(ValCodcity);
-				m.ValId = ViewModelConversion.ToNumeric(ValId);
-				m.ValSold = ViewModelConversion.ToLogic(ValSold);
-				m.ValDtsold = ViewModelConversion.ToDateTime(ValDtsold);
 				if (ValPhoto == null || !ValPhoto.IsThumbnail)
 					m.ValPhoto = ViewModelConversion.ToImage(ValPhoto);
 				m.ValTitle = ViewModelConversion.ToString(ValTitle);
@@ -364,6 +367,9 @@ namespace GenioMVC.ViewModels.Prope
 				m.ValSize = ViewModelConversion.ToNumeric(ValSize);
 				m.ValBathnr = ViewModelConversion.ToNumeric(ValBathnr);
 				m.ValDtconst = ViewModelConversion.ToDateTime(ValDtconst);
+				m.ValDtsold = ViewModelConversion.ToDateTime(ValDtsold);
+				m.ValSold = ViewModelConversion.ToLogic(ValSold);
+				m.ValId = ViewModelConversion.ToNumeric(ValId);
 				m.ValCodprope = ViewModelConversion.ToString(ValCodprope);
 
 				/*
@@ -373,6 +379,7 @@ namespace GenioMVC.ViewModels.Prope
 				if (!HasDisabledUserValuesSecurity)
 					return;
 
+				m.ValAverage = ViewModelConversion.ToNumeric(ValAverage);
 				m.ValBuildage = ViewModelConversion.ToNumeric(ValBuildage);
 				m.ValProfit = ViewModelConversion.ToNumeric(ValProfit);
 			}
@@ -399,15 +406,6 @@ namespace GenioMVC.ViewModels.Prope
 						break;
 					case "prope.codcity":
 						this.ValCodcity = ViewModelConversion.ToString(_value);
-						break;
-					case "prope.id":
-						this.ValId = ViewModelConversion.ToNumeric(_value);
-						break;
-					case "prope.sold":
-						this.ValSold = ViewModelConversion.ToLogic(_value);
-						break;
-					case "prope.dtsold":
-						this.ValDtsold = ViewModelConversion.ToDateTime(_value);
 						break;
 					case "prope.photo":
 						this.ValPhoto = ViewModelConversion.ToImage(_value);
@@ -441,6 +439,15 @@ namespace GenioMVC.ViewModels.Prope
 						break;
 					case "prope.dtconst":
 						this.ValDtconst = ViewModelConversion.ToDateTime(_value);
+						break;
+					case "prope.dtsold":
+						this.ValDtsold = ViewModelConversion.ToDateTime(_value);
+						break;
+					case "prope.sold":
+						this.ValSold = ViewModelConversion.ToLogic(_value);
+						break;
+					case "prope.id":
+						this.ValId = ViewModelConversion.ToNumeric(_value);
 						break;
 					case "prope.codprope":
 						this.ValCodprope = ViewModelConversion.ToString(_value);
@@ -996,12 +1003,10 @@ namespace GenioMVC.ViewModels.Prope
 			{
 				"prope.codagent" => ViewModelConversion.ToString(modelValue),
 				"prope.codcity" => ViewModelConversion.ToString(modelValue),
-				"prope.id" => ViewModelConversion.ToNumeric(modelValue),
-				"prope.sold" => ViewModelConversion.ToLogic(modelValue),
-				"prope.dtsold" => ViewModelConversion.ToDateTime(modelValue),
 				"prope.photo" => ViewModelConversion.ToImage(modelValue),
 				"prope.title" => ViewModelConversion.ToString(modelValue),
 				"prope.price" => ViewModelConversion.ToNumeric(modelValue),
+				"prope.average" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.descript" => ViewModelConversion.ToString(modelValue),
 				"count.country" => ViewModelConversion.ToString(modelValue),
 				"prope.typology" => ViewModelConversion.ToNumeric(modelValue),
@@ -1015,6 +1020,9 @@ namespace GenioMVC.ViewModels.Prope
 				"agent.photography" => ViewModelConversion.ToImage(modelValue),
 				"agent.email" => ViewModelConversion.ToString(modelValue),
 				"prope.profit" => ViewModelConversion.ToNumeric(modelValue),
+				"prope.dtsold" => ViewModelConversion.ToDateTime(modelValue),
+				"prope.sold" => ViewModelConversion.ToLogic(modelValue),
+				"prope.id" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.codprope" => ViewModelConversion.ToString(modelValue),
 				"city.codcity" => ViewModelConversion.ToString(modelValue),
 				"city.city" => ViewModelConversion.ToString(modelValue),

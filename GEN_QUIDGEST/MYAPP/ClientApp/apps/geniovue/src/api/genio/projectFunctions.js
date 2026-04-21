@@ -47,7 +47,15 @@ function Age(birthdate)
 // eslint-disable-next-line
 /* eslint-enable indent */
 }
+function Average()
+{
+	/// <summary>
+	/// Calculate the average price of properties
+	/// </summary>
+	return netAPI.executeServerFunction('Average', []);
+}
 
 export default {
 	Age,
+	Average,
 }
