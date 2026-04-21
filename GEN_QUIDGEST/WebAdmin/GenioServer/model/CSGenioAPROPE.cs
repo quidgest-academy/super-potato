@@ -305,7 +305,8 @@ namespace CSGenio.business
 			Qfield.FieldDescription = "Tax";
 			Qfield.FieldSize =  5;
 			Qfield.MQueue = false;
-			Qfield.IntegerDigits = 5;
+			Qfield.IntegerDigits = 2;
+			Qfield.Decimals = 2;
 			Qfield.CavDesignation = "TAX37977";
 
 			Qfield.Dupmsg = "";

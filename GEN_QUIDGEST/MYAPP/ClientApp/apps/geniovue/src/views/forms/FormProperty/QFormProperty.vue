@@ -1755,8 +1755,8 @@
 						labelPosition: computed(() => this.labelAlignment.topleft),
 						container: 'PROPERTYPSEUDNEWGRP02',
 						isFormulaBlocked: true,
-						maxIntegers: 5,
-						maxDecimals: 0,
+						maxIntegers: 2,
+						maxDecimals: 2,
 						controlLimits: [
 						],
 					}, this),

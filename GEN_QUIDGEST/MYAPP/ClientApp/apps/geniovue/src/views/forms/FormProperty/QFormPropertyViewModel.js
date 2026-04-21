@@ -365,8 +365,8 @@ export default class ViewModel extends FormViewModelBase
 			originId: 'ValTax',
 			area: 'PROPE',
 			field: 'TAX',
-			maxDigits: 5,
-			decimalDigits: 0,
+			maxDigits: 2,
+			decimalDigits: 2,
 			isFixed: true,
 			valueFormula: {
 				stopRecalcCondition() { return false },

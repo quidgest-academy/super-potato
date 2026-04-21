@@ -178,8 +178,8 @@ namespace GenioMVC.Models
 		[DisplayName("Tax")]
 		/// <summary>Field : "Tax" Tipo: "N" Formula: + "getCityTax([PROPE->CODPROPE])"</summary>
 		[ShouldSerialize("Prope.ValTax")]
-		[NumericAttribute(0)]
-		public decimal? ValTax { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValTax, 0)); } set { klass.ValTax = Convert.ToDecimal(value); } }
+		[NumericAttribute(2)]
+		public decimal? ValTax { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValTax, 2)); } set { klass.ValTax = Convert.ToDecimal(value); } }
 
 		[DisplayName("ZZSTATE")]
 		[ShouldSerialize("Prope.ValZzstate")]
