@@ -16,7 +16,7 @@
 							v-on="controls.menu.handlers">
 						</q-table-config>
 					</template>
-					<!-- USE /[MANUAL FOR CUSTOM_TABLE FOR_Menu_321]/ -->
+					<!-- USE /[MANUAL FOR CUSTOM_TABLE FOR_Menu_3211]/ -->
 				</q-table>
 			</q-row-container>
 		</div>
@@ -73,17 +73,17 @@
 	import qProjArrays from '@/api/genio/projectArrays.js'
 	/* eslint-enable @typescript-eslint/no-unused-vars */
 
-	import MenuViewModel from './QMenuFOR_321ViewModel.js'
+	import MenuViewModel from './QMenuFOR_3211ViewModel.js'
 
-	const requiredTextResources = ['QMenuFOR_321', 'hardcoded', 'messages']
+	const requiredTextResources = ['QMenuFOR_3211', 'hardcoded', 'messages']
 
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR FORM_INCLUDEJS FOR_MENU_321]/
+// USE /[MANUAL FOR FORM_INCLUDEJS FOR_MENU_3211]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 
 	export default {
-		name: 'QMenuFor321',
+		name: 'QMenuFor3211',
 
 		mixins: [
 			MenuHandlers
@@ -112,23 +112,23 @@
 			// eslint-disable-next-line
 			const vm = this
 			return {
-				componentOnLoadProc: asyncProcM.getProcListMonitor('QMenuFOR_321', false),
+				componentOnLoadProc: asyncProcM.getProcListMonitor('QMenuFOR_3211', false),
 
 				interfaceMetadata: {
-					id: 'QMenuFOR_321', // Used for resources
+					id: 'QMenuFOR_3211', // Used for resources
 					requiredTextResources
 				},
 
 				menuInfo: {
-					id: '321',
+					id: '3211',
 					isMenuList: true,
-					designation: computed(() => this.Resources.CITIES41573),
-					acronym: 'FOR_321',
-					name: 'CITY',
-					route: 'menu-FOR_321',
-					order: '321',
-					controller: 'CITY',
-					action: 'FOR_Menu_321',
+					designation: computed(() => this.Resources.CITY_TAXES02597),
+					acronym: 'FOR_3211',
+					name: 'CTAX',
+					route: 'menu-FOR_3211',
+					order: '3211',
+					controller: 'CTAX',
+					action: 'FOR_Menu_3211',
 					isPopup: false
 				},
 
@@ -137,9 +137,9 @@
 				controls: {
 					menu: new controlClass.TableListControl({
 						fnHydrateViewModel: (data) => vm.model.hydrate(data),
-						id: 'FOR_Menu_321',
-						controller: 'CITY',
-						action: 'FOR_Menu_321',
+						id: 'FOR_Menu_3211',
+						controller: 'CTAX',
+						action: 'FOR_Menu_3211',
 						hasDependencies: false,
 						isInCollapsible: false,
 						tableModeClasses: [
@@ -149,35 +149,36 @@
 						columnsOriginal: [
 							new listColumnTypes.TextColumn({
 								order: 1,
-								name: 'Count.ValCountry',
-								area: 'COUNT',
-								field: 'COUNTRY',
-								label: computed(() => this.Resources.COUNTRY64133),
-								dataLength: 50,
-								scrollData: 30,
-								export: 1,
-								pkColumn: 'ValCodcount',
-							}, computed(() => vm.model), computed(() => vm.internalEvents)),
-							new listColumnTypes.TextColumn({
-								order: 2,
-								name: 'ValCity',
+								name: 'City.ValCity',
 								area: 'CITY',
 								field: 'CITY',
 								label: computed(() => this.Resources.CITY42505),
 								dataLength: 50,
 								scrollData: 30,
 								export: 1,
+								pkColumn: 'ValCodcity',
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.NumericColumn({
+								order: 2,
+								name: 'ValTax',
+								area: 'CTAX',
+								field: 'TAX',
+								label: computed(() => this.Resources.TAX37977),
+								scrollData: 6,
+								maxDigits: 3,
+								decimalPlaces: 2,
+								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
 						config: {
-							name: 'FOR_Menu_321',
+							name: 'FOR_Menu_3211',
 							serverMode: true,
-							pkColumn: 'ValCodcity',
-							tableAlias: 'CITY',
-							tableNamePlural: computed(() => this.Resources.CITIES41573),
+							pkColumn: 'ValCodctax',
+							tableAlias: 'CTAX',
+							tableNamePlural: computed(() => this.Resources.CITY_TAXES02597),
 							viewManagement: '',
 							showLimitsInfo: true,
-							tableTitle: computed(() => this.Resources.CITIES41573),
+							tableTitle: computed(() => this.Resources.CITY_TAXES02597),
 							showAlternatePagination: true,
 							permissions: {
 							},
@@ -198,7 +199,7 @@
 									params: {
 										action: vm.openFormAction,
 										type: 'form',
-										formName: 'CITY',
+										formName: 'CTAX',
 										mode: 'SHOW',
 										isControlled: true
 									}
@@ -214,7 +215,7 @@
 									params: {
 										action: vm.openFormAction,
 										type: 'form',
-										formName: 'CITY',
+										formName: 'CTAX',
 										mode: 'EDIT',
 										isControlled: true
 									}
@@ -230,7 +231,7 @@
 									params: {
 										action: vm.openFormAction,
 										type: 'form',
-										formName: 'CITY',
+										formName: 'CTAX',
 										mode: 'DUPLICATE',
 										isControlled: true
 									}
@@ -246,7 +247,7 @@
 									params: {
 										action: vm.openFormAction,
 										type: 'form',
-										formName: 'CITY',
+										formName: 'CTAX',
 										mode: 'DELETE',
 										isControlled: true
 									}
@@ -262,7 +263,7 @@
 									params: {
 										action: vm.openFormAction,
 										type: 'form',
-										formName: 'CITY',
+										formName: 'CTAX',
 										mode: 'NEW',
 										repeatInsertion: false,
 										isControlled: true
@@ -278,37 +279,48 @@
 							MCActions: [
 							],
 							rowClickAction: {
-								id: 'RCA_FOR_3211',
-								name: 'menu-FOR_3211',
+								id: 'RCA_FOR_32111',
+								name: 'form-CTAX',
 								isVisible: true,
 								params: {
 									isRoute: true,
 									limits: [
 										{
-											identifier: 'city',
-											fnValueSelector: (row) => row.ValCodcity
+											identifier: 'id',
+											fnValueSelector: (row) => row.ValCodctax
 										},
 									],
-									action: vm.openMenuAction, type: 'menu', menuName: 'FOR_3211'
+									isControlled: true,
+									action: vm.openFormAction, type: 'form', mode: 'SHOW', formName: 'CTAX'
 								}
 							},
 							formsDefinition: {
-								'CITY': {
-									fnKeySelector: (row) => row.Fields.ValCodcity,
+								'CTAX': {
+									fnKeySelector: (row) => row.Fields.ValCodctax,
 									isPopup: false
 								},
 							},
-							defaultSearchColumnName: 'ValCity',
-							defaultSearchColumnNameOriginal: 'ValCity',
+							defaultSearchColumnName: '',
+							defaultSearchColumnNameOriginal: '',
 							defaultColumnSorting: {
-								columnName: 'ValCity',
+								columnName: '',
 								sortOrder: 'asc'
 							}
 						},
-						globalEvents: ['changed-COUNT', 'changed-CITY'],
-						uuid: '0074b86d-2c18-4b22-8e0b-6cc1bfdba3d6',
+						globalEvents: ['changed-CITY', 'changed-CTAX'],
+						uuid: 'f295a4fc-df27-448a-a3ab-7d53bbcf4475',
 						allSelectedRows: 'false',
 						headerLevel: 1,
+						/** Menu limits */
+						controlLimits: [
+							/** DB */
+							{
+								identifier: 'city',
+								dependencyEvents: [],
+								dependencyField: '',
+								fnValueSelector: () => vm.$route.params['city'],
+							},
+						],
 						isActiveControl: computed(() => this.isActiveMenu)
 					}, this),
 				}
@@ -332,7 +344,7 @@
 		mounted()
 		{
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR FORM_CODEJS FOR_MENU_321]/
+// USE /[MANUAL FOR FORM_CODEJS FOR_MENU_3211]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 		},
@@ -340,18 +352,18 @@
 		beforeUnmount()
 		{
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR COMPONENT_BEFORE_UNMOUNT FOR_MENU_321]/
+// USE /[MANUAL FOR COMPONENT_BEFORE_UNMOUNT FOR_MENU_3211]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 		},
 
 		methods: {
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR FUNCTIONS_JS FOR_321]/
+// USE /[MANUAL FOR FUNCTIONS_JS FOR_3211]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR LISTING_CODEJS FOR_MENU_321]/
+// USE /[MANUAL FOR LISTING_CODEJS FOR_MENU_3211]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 		}

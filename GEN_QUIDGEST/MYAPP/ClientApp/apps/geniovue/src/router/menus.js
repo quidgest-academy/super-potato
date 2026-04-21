@@ -5,6 +5,22 @@ export default function getMenusRoutes()
 {
 	return [
 		{
+			path: '/:culture/:system/FOR/menu/FOR_3211',
+			name: 'menu-FOR_3211',
+			component: () => import('@/views/menus/ModuleFOR/MenuFOR_3211/QMenuFor3211.vue'),
+			beforeEnter: [updateQueryParams],
+			meta: {
+				routeType: 'menu',
+				module: 'FOR',
+				order: '3211',
+				baseArea: 'CTAX',
+				hasInitialPHE: false,
+				humanKeyFields: [],
+				limitations: ['city' /* DB */],
+				isPopup: false
+			}
+		},
+		{
 			path: '/:culture/:system/FOR/menu/FOR_321',
 			name: 'menu-FOR_321',
 			component: () => import('@/views/menus/ModuleFOR/MenuFOR_321/QMenuFor321.vue'),

@@ -64,6 +64,18 @@ export default function getFormsRoutes()
 			}
 		},
 		{
+			path: '/:culture/:system/:module/form/CTAX/:mode/:id?',
+			name: 'form-CTAX',
+			props: route => propsConverter(route),
+			component: () => import('@/views/forms/FormCtax/QFormCtax.vue'),
+			meta: {
+				routeType: 'form',
+				baseArea: 'CTAX',
+				humanKeyFields: [],
+				isPopup: false
+			}
+		},
+		{
 			path: '/:culture/:system/:module/form/PROPERTY/:mode/:id?',
 			name: 'form-PROPERTY',
 			props: route => propsConverter(route),
