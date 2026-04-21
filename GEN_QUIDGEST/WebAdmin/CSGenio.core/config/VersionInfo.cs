@@ -45,7 +45,7 @@ namespace CSGenio.framework
         /// <summary>
         /// Generated version. Is incremented each time there is a generation
         /// </summary>
-        public const int Generation = 18;
+        public const int Generation = 19;
 
 
         /// <summary>

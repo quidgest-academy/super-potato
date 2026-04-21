@@ -58,11 +58,25 @@ namespace CSGenio.business
 		/// <summary>
 		/// Calculate age
 		/// </summary>
-		/// <param name="Birthdate">Date of birth to calculate the age</param>
-		public decimal Age(DateTime? Birthdate)
+		/// <param name="birthdate">Date of birth to calculate the age</param>
+		public decimal Age(DateTime? birthdate)
 		{
 //BEGIN_FUNCTION:a0349c0a-2449-49aa-9b25-2d308f802456
-//andre aqui
+			DateTime today = DateTime.Now;
+			int age = 0;
+				         		
+
+            if (birthdate != null) {
+
+                age = today.Year - birthdate.Value.Year;
+			}
+            if (birthdate.Value.Month < today.Month || ((birthdate.Value.Month == today.Month) && (birthdate.Value.Day > today.Day)))
+            {
+                age--;
+
+            }
+
+            return age;
 //END_FUNCTION
 		}
 
