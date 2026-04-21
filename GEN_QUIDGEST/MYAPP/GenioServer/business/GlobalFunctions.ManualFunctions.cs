@@ -90,7 +90,8 @@ namespace CSGenio.business
 //BEGIN_FUNCTION:4c7b4f61-37bc-48d5-a2df-bc378752f723
 var average = new SelectQuery()
 	.Select(SqlFunctions.Average(CSGenioAprope.FldPrice), "average")
-	.From(Area.AreaPROPE);
+	.From(Area.AreaPROPE)
+	.Where(CriteriaSet.And().Equal(CSGenioAprope.FldZzstate,0));
 
 return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 //END_FUNCTION
