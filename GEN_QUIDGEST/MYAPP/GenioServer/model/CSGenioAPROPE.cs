@@ -301,6 +301,22 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
+			Qfield = new Field(info.Alias, "tax", FieldType.NUMERIC);
+			Qfield.FieldDescription = "Tax";
+			Qfield.FieldSize =  5;
+			Qfield.MQueue = false;
+			Qfield.IntegerDigits = 5;
+			Qfield.CavDesignation = "TAX37977";
+
+			Qfield.Dupmsg = "";
+			argumentsListByArea = new List<ByAreaArguments>();
+			argumentsListByArea.Add(new ByAreaArguments(new string[] {"codprope"}, new int[] {0}, "prope", "codprope"));
+			Qfield.Formula = new InternalOperationFormula(argumentsListByArea, 1, delegate(object[] args, User user, string module, PersistentSupport sp) {
+				return new GlobalFunctions(user,module,sp).getCityTax(((string)args[0]));
+			});
+			info.RegisterFieldDB(Qfield);
+
+			//- - - - - - - - - - - - - - - - - - -
 			Qfield = new Field(info.Alias, "zzstate", FieldType.INTEGER);
 			Qfield.FieldDescription = "Estado da ficha";
 			info.RegisterFieldDB(Qfield);
@@ -367,7 +383,7 @@ namespace CSGenio.business
 
 
 			info.InternalOperationFields = new string[] {
-			 "buildage","profit","average"
+			 "buildage","profit","average","tax"
 			};
 
 			info.DefaultValues = new string[] {
@@ -721,6 +737,17 @@ namespace CSGenio.business
 			set { insertNameValueField(FldAverage, value); }
 		}
 
+		/// <summary>Field : "Tax" Tipo: "N" Formula: + "getCityTax([PROPE->CODPROPE])"</summary>
+		public static FieldRef FldTax { get { return m_fldTax; } }
+		private static FieldRef m_fldTax = new FieldRef("prope", "tax");
+
+		/// <summary>Field : "Tax" Tipo: "N" Formula: + "getCityTax([PROPE->CODPROPE])"</summary>
+		public decimal ValTax
+		{
+			get { return (decimal)returnValueField(FldTax); }
+			set { insertNameValueField(FldTax, value); }
+		}
+
 		/// <summary>Field : "ZZSTATE" Type: "INT" Formula:  ""</summary>
 		public static FieldRef FldZzstate { get { return m_fldZzstate; } }
 		private static FieldRef m_fldZzstate = new FieldRef("prope", "zzstate");
@@ -818,7 +845,7 @@ namespace CSGenio.business
 		// USE /[MANUAL FOR TABAUX PROPE]/
 
  
-                     
+                      
 
 	}
 }

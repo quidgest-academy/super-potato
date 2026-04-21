@@ -39,7 +39,7 @@ namespace CSGenio.business
 		/// </summary>
 		private static void initTodasFuncoes()
 		{
-			todasFuncoes = new Hashtable(10, (float)0.5);
+			todasFuncoes = new Hashtable(11, (float)0.5);
 			todasFuncoes.Add("password_alterar", 0);
 			todasFuncoes.Add("password_verificaAntiga", 1);
 			todasFuncoes.Add("validarAssinatura", 2);
@@ -51,6 +51,7 @@ namespace CSGenio.business
 			//funcoes Csharp
 			todasFuncoes.Add("Age", 8);
 			todasFuncoes.Add("Average", 9);
+			todasFuncoes.Add("getCityTax", 10);
 			// Cargas
 		}
 
@@ -95,6 +96,31 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 //END_FUNCTION
 		}
 
+		/// <summary>
+		/// Get the last added tax
+		/// </summary>
+		/// <param name="codProperty"></param>
+		public decimal getCityTax(string codProperty)
+		{
+			try
+			{
+				object paramcodProperty = QueryUtils.ToValidDbValue(codProperty, FieldType.KEY_VARCHAR);
+
+				SelectQuery query = new SelectQuery()
+					.Select(new SqlFunction(SqlFunctionType.Custom,
+						"getCityTax"
+						, paramcodProperty
+						), "x");
+
+				var result = sp.ExecuteScalar(query);
+				return DBConversion.ToNumeric(result);
+			}
+			catch (Exception e)
+			{
+				throw new BusinessException(null, "GlobalFunctions.decimal getCityTax", "Error on execution: " + e.Message, e);
+			}
+		}
+
 		#endregion
 
 		#region MANCS
@@ -105,7 +131,8 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 		private static readonly List<string> m_allManualFuntionsNames = new List<string>()
 		{
 			"Age",
-			"Average"
+			"Average",
+			"getCityTax"
 		};
 
 		public static List<string> AllManualFuntionsNames

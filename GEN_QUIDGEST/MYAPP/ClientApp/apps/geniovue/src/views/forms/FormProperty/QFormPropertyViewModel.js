@@ -54,16 +54,6 @@ export default class ViewModel extends FormViewModelBase
 		this.stopWatchers.push(watch(() => this.ValCodprope.value, (newValue, oldValue) => this.onUpdate('prope.codprope', this.ValCodprope, newValue, oldValue)))
 
 		/** The used foreign keys. */
-		this.ValCodcity = reactive(new modelFieldType.ForeignKey({
-			id: 'ValCodcity',
-			originId: 'ValCodcity',
-			area: 'PROPE',
-			field: 'CODCITY',
-			relatedArea: 'CITY',
-			description: '',
-		}).cloneFrom(values?.ValCodcity))
-		this.stopWatchers.push(watch(() => this.ValCodcity.value, (newValue, oldValue) => this.onUpdate('prope.codcity', this.ValCodcity, newValue, oldValue)))
-
 		this.ValCodagent = reactive(new modelFieldType.ForeignKey({
 			id: 'ValCodagent',
 			originId: 'ValCodagent',
@@ -74,36 +64,76 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValCodagent))
 		this.stopWatchers.push(watch(() => this.ValCodagent.value, (newValue, oldValue) => this.onUpdate('prope.codagent', this.ValCodagent, newValue, oldValue)))
 
+		this.ValCodcity = reactive(new modelFieldType.ForeignKey({
+			id: 'ValCodcity',
+			originId: 'ValCodcity',
+			area: 'PROPE',
+			field: 'CODCITY',
+			relatedArea: 'CITY',
+			description: '',
+		}).cloneFrom(values?.ValCodcity))
+		this.stopWatchers.push(watch(() => this.ValCodcity.value, (newValue, oldValue) => this.onUpdate('prope.codcity', this.ValCodcity, newValue, oldValue)))
+
 		/** The remaining form fields. */
-		this.ValPhoto = reactive(new modelFieldType.Image({
-			id: 'ValPhoto',
-			originId: 'ValPhoto',
+		this.ValId = reactive(new modelFieldType.Number({
+			id: 'ValId',
+			originId: 'ValId',
 			area: 'PROPE',
-			field: 'PHOTO',
-			description: computed(() => this.Resources.MAIN_PHOTO16044),
-		}).cloneFrom(values?.ValPhoto))
-		this.stopWatchers.push(watch(() => this.ValPhoto.value, (newValue, oldValue) => this.onUpdate('prope.photo', this.ValPhoto, newValue, oldValue)))
+			field: 'ID',
+			maxDigits: 5,
+			decimalDigits: 0,
+			description: '',
+		}).cloneFrom(values?.ValId))
+		this.stopWatchers.push(watch(() => this.ValId.value, (newValue, oldValue) => this.onUpdate('prope.id', this.ValId, newValue, oldValue)))
 
-		this.ValTitle = reactive(new modelFieldType.String({
-			id: 'ValTitle',
-			originId: 'ValTitle',
+		this.ValSold = reactive(new modelFieldType.Boolean({
+			id: 'ValSold',
+			originId: 'ValSold',
 			area: 'PROPE',
-			field: 'TITLE',
-			maxLength: 50,
-			description: computed(() => this.Resources.TITLE21885),
-		}).cloneFrom(values?.ValTitle))
-		this.stopWatchers.push(watch(() => this.ValTitle.value, (newValue, oldValue) => this.onUpdate('prope.title', this.ValTitle, newValue, oldValue)))
+			field: 'SOLD',
+			description: computed(() => this.Resources.SOLD59824),
+		}).cloneFrom(values?.ValSold))
+		this.stopWatchers.push(watch(() => this.ValSold.value, (newValue, oldValue) => this.onUpdate('prope.sold', this.ValSold, newValue, oldValue)))
 
-		this.ValPrice = reactive(new modelFieldType.Number({
-			id: 'ValPrice',
-			originId: 'ValPrice',
+		this.ValDtsold = reactive(new modelFieldType.Date({
+			id: 'ValDtsold',
+			originId: 'ValDtsold',
 			area: 'PROPE',
-			field: 'PRICE',
-			maxDigits: 9,
-			decimalDigits: 2,
-			description: computed(() => this.Resources.PRICE06900),
-		}).cloneFrom(values?.ValPrice))
-		this.stopWatchers.push(watch(() => this.ValPrice.value, (newValue, oldValue) => this.onUpdate('prope.price', this.ValPrice, newValue, oldValue)))
+			field: 'DTSOLD',
+			fillWhen: {
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				fnFormula(params)
+				{
+					// Formula: [PROPE->SOLD]==1
+					return (this.ValSold.value ? 1 : 0)===1
+				},
+				dependencyEvents: ['fieldChange:prope.sold'],
+				isServerRecalc: false,
+				isEmpty: qApi.emptyD,
+			},
+			showWhen: {
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				fnFormula(params)
+				{
+					// Formula: [PROPE->SOLD]==1
+					return (this.ValSold.value ? 1 : 0)===1
+				},
+				dependencyEvents: ['fieldChange:prope.sold'],
+				isServerRecalc: false,
+				isEmpty: qApi.emptyD,
+			},
+			description: computed(() => this.Resources.SOLD_DATE37976),
+		}).cloneFrom(values?.ValDtsold))
+		this.stopWatchers.push(watch(() => this.ValDtsold.value, (newValue, oldValue) => this.onUpdate('prope.dtsold', this.ValDtsold, newValue, oldValue)))
+
+		this.ValDescript = reactive(new modelFieldType.MultiLineString({
+			id: 'ValDescript',
+			originId: 'ValDescript',
+			area: 'PROPE',
+			field: 'DESCRIPT',
+			description: computed(() => this.Resources.DESCRIPTION07383),
+		}).cloneFrom(values?.ValDescript))
+		this.stopWatchers.push(watch(() => this.ValDescript.value, (newValue, oldValue) => this.onUpdate('prope.descript', this.ValDescript, newValue, oldValue)))
 
 		this.ValAverage = reactive(new modelFieldType.Number({
 			id: 'ValAverage',
@@ -129,27 +159,6 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValAverage))
 		this.stopWatchers.push(watch(() => this.ValAverage.value, (newValue, oldValue) => this.onUpdate('prope.average', this.ValAverage, newValue, oldValue)))
 
-		this.ValDescript = reactive(new modelFieldType.MultiLineString({
-			id: 'ValDescript',
-			originId: 'ValDescript',
-			area: 'PROPE',
-			field: 'DESCRIPT',
-			description: computed(() => this.Resources.DESCRIPTION07383),
-		}).cloneFrom(values?.ValDescript))
-		this.stopWatchers.push(watch(() => this.ValDescript.value, (newValue, oldValue) => this.onUpdate('prope.descript', this.ValDescript, newValue, oldValue)))
-
-		this.TableCityCity = reactive(new modelFieldType.String({
-			type: 'Lookup',
-			id: 'TableCityCity',
-			originId: 'ValCity',
-			area: 'CITY',
-			field: 'CITY',
-			maxLength: 50,
-			description: computed(() => this.Resources.CITY42505),
-			ignoreFldSubmit: true,
-		}).cloneFrom(values?.TableCityCity))
-		this.stopWatchers.push(watch(() => this.TableCityCity.value, (newValue, oldValue) => this.onUpdate('city.city', this.TableCityCity, newValue, oldValue)))
-
 		this.CityCountValCountry = reactive(new modelFieldType.String({
 			id: 'CityCountValCountry',
 			originId: 'ValCountry',
@@ -160,6 +169,17 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.COUNTRY64133),
 		}).cloneFrom(values?.CityCountValCountry))
 		this.stopWatchers.push(watch(() => this.CityCountValCountry.value, (newValue, oldValue) => this.onUpdate('count.country', this.CityCountValCountry, newValue, oldValue)))
+
+		this.ValPrice = reactive(new modelFieldType.Number({
+			id: 'ValPrice',
+			originId: 'ValPrice',
+			area: 'PROPE',
+			field: 'PRICE',
+			maxDigits: 9,
+			decimalDigits: 2,
+			description: computed(() => this.Resources.PRICE06900),
+		}).cloneFrom(values?.ValPrice))
+		this.stopWatchers.push(watch(() => this.ValPrice.value, (newValue, oldValue) => this.onUpdate('prope.price', this.ValPrice, newValue, oldValue)))
 
 		this.ValTypology = reactive(new modelFieldType.Number({
 			id: 'ValTypology',
@@ -340,56 +360,60 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValProfit))
 		this.stopWatchers.push(watch(() => this.ValProfit.value, (newValue, oldValue) => this.onUpdate('prope.profit', this.ValProfit, newValue, oldValue)))
 
-		this.ValDtsold = reactive(new modelFieldType.Date({
-			id: 'ValDtsold',
-			originId: 'ValDtsold',
+		this.ValTax = reactive(new modelFieldType.Number({
+			id: 'ValTax',
+			originId: 'ValTax',
 			area: 'PROPE',
-			field: 'DTSOLD',
-			fillWhen: {
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				fnFormula(params)
-				{
-					// Formula: [PROPE->SOLD]==1
-					return (this.ValSold.value ? 1 : 0)===1
-				},
-				dependencyEvents: ['fieldChange:prope.sold'],
-				isServerRecalc: false,
-				isEmpty: qApi.emptyD,
-			},
-			showWhen: {
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				fnFormula(params)
-				{
-					// Formula: [PROPE->SOLD]==1
-					return (this.ValSold.value ? 1 : 0)===1
-				},
-				dependencyEvents: ['fieldChange:prope.sold'],
-				isServerRecalc: false,
-				isEmpty: qApi.emptyD,
-			},
-			description: computed(() => this.Resources.SOLD_DATE37976),
-		}).cloneFrom(values?.ValDtsold))
-		this.stopWatchers.push(watch(() => this.ValDtsold.value, (newValue, oldValue) => this.onUpdate('prope.dtsold', this.ValDtsold, newValue, oldValue)))
-
-		this.ValSold = reactive(new modelFieldType.Boolean({
-			id: 'ValSold',
-			originId: 'ValSold',
-			area: 'PROPE',
-			field: 'SOLD',
-			description: computed(() => this.Resources.SOLD59824),
-		}).cloneFrom(values?.ValSold))
-		this.stopWatchers.push(watch(() => this.ValSold.value, (newValue, oldValue) => this.onUpdate('prope.sold', this.ValSold, newValue, oldValue)))
-
-		this.ValId = reactive(new modelFieldType.Number({
-			id: 'ValId',
-			originId: 'ValId',
-			area: 'PROPE',
-			field: 'ID',
+			field: 'TAX',
 			maxDigits: 5,
 			decimalDigits: 0,
-			description: '',
-		}).cloneFrom(values?.ValId))
-		this.stopWatchers.push(watch(() => this.ValId.value, (newValue, oldValue) => this.onUpdate('prope.id', this.ValId, newValue, oldValue)))
+			isFixed: true,
+			valueFormula: {
+				stopRecalcCondition() { return false },
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				fnFormula(params)
+				{
+					// Formula: getCityTax([PROPE->CODPROPE])
+					return qFunctions.getCityTax(this.ValCodprope.value)
+				},
+				dependencyEvents: ['fieldChange:prope.codprope'],
+				isServerRecalc: false,
+				isEmpty: qApi.emptyN,
+			},
+			description: computed(() => this.Resources.TAX37977),
+		}).cloneFrom(values?.ValTax))
+		this.stopWatchers.push(watch(() => this.ValTax.value, (newValue, oldValue) => this.onUpdate('prope.tax', this.ValTax, newValue, oldValue)))
+
+		this.ValTitle = reactive(new modelFieldType.String({
+			id: 'ValTitle',
+			originId: 'ValTitle',
+			area: 'PROPE',
+			field: 'TITLE',
+			maxLength: 50,
+			description: computed(() => this.Resources.TITLE21885),
+		}).cloneFrom(values?.ValTitle))
+		this.stopWatchers.push(watch(() => this.ValTitle.value, (newValue, oldValue) => this.onUpdate('prope.title', this.ValTitle, newValue, oldValue)))
+
+		this.TableCityCity = reactive(new modelFieldType.String({
+			type: 'Lookup',
+			id: 'TableCityCity',
+			originId: 'ValCity',
+			area: 'CITY',
+			field: 'CITY',
+			maxLength: 50,
+			description: computed(() => this.Resources.CITY42505),
+			ignoreFldSubmit: true,
+		}).cloneFrom(values?.TableCityCity))
+		this.stopWatchers.push(watch(() => this.TableCityCity.value, (newValue, oldValue) => this.onUpdate('city.city', this.TableCityCity, newValue, oldValue)))
+
+		this.ValPhoto = reactive(new modelFieldType.Image({
+			id: 'ValPhoto',
+			originId: 'ValPhoto',
+			area: 'PROPE',
+			field: 'PHOTO',
+			description: computed(() => this.Resources.MAIN_PHOTO16044),
+		}).cloneFrom(values?.ValPhoto))
+		this.stopWatchers.push(watch(() => this.ValPhoto.value, (newValue, oldValue) => this.onUpdate('prope.photo', this.ValPhoto, newValue, oldValue)))
 	}
 
 	/**

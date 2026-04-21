@@ -210,6 +210,13 @@ namespace CSGenio.business
 
                             return Average();
                         }
+                    case 10:
+                        {
+                            checkFunctionArgs(obj, 1);
+
+                            string arg0 = obj[0];
+                            return getCityTax(arg0);
+                        }
                     default:
                         throw new BusinessException(null, "GlobalFunctions.executaFuncao", "Unknown function name: " + name);
                 }

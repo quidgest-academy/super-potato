@@ -8,39 +8,19 @@ namespace quidgest.uitests.pages.forms;
 public class PropertyForm : Form
 {
 	/// <summary>
-	/// Main photo
+	/// Order
 	/// </summary>
-	public BaseInputControl PropePhoto => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPHOTO___" + IdSuffix, "#PROPERTYPROPEPHOTO___" + IdSuffix);
+	public BaseInputControl PropeId => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEID______" + IdSuffix, "#PROPERTYPROPEID______" + IdSuffix);
 
 	/// <summary>
-	/// Title
+	/// Sold
 	/// </summary>
-	public BaseInputControl PropeTitle => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPETITLE___" + IdSuffix, "#PROPERTYPROPETITLE___" + IdSuffix);
+	public CheckboxInputControl PropeSold => new CheckboxInputControl(driver, ContainerLocator, "#container-PROPERTYPROPESOLD____" + IdSuffix);
 
 	/// <summary>
-	/// Price
+	/// Sold date
 	/// </summary>
-	public BaseInputControl PropePrice => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPRICE___" + IdSuffix, "#PROPERTYPROPEPRICE___" + IdSuffix);
-
-	/// <summary>
-	/// AveragePrice
-	/// </summary>
-	public BaseInputControl PropeAverage => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEAVERAGE_" + IdSuffix, "#PROPERTYPROPEAVERAGE_" + IdSuffix);
-
-	/// <summary>
-	/// Description
-	/// </summary>
-	public BaseInputControl PropeDescript => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEDESCRIPT" + IdSuffix, "#PROPERTYPROPEDESCRIPT" + IdSuffix);
-
-	/// <summary>
-	/// Album
-	/// </summary>
-	public ListControl PseudField001 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD001" + IdSuffix);
-
-	/// <summary>
-	/// Contacts
-	/// </summary>
-	public ListControl PseudField002 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD002" + IdSuffix);
+	public DateInputControl PropeDtsold => new DateInputControl(driver, ContainerLocator, "#PROPERTYPROPEDTSOLD__" + IdSuffix);
 
 	/// <summary>
 	/// New Group
@@ -53,20 +33,39 @@ public class PropertyForm : Form
 	public CollapsibleZoneControl PseudNewgrp01 => new CollapsibleZoneControl(driver, ContainerLocator, "#PROPERTYPSEUDNEWGRP01" + IdSuffix + "-container");
 
 	/// <summary>
+	/// Album
+	/// </summary>
+	public ListControl PseudField001 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD001" + IdSuffix);
+
+	/// <summary>
+	/// Contacts
+	/// </summary>
+	public ListControl PseudField002 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD002" + IdSuffix);
+
+	/// <summary>
+	/// Description
+	/// </summary>
+	public BaseInputControl PropeDescript => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEDESCRIPT" + IdSuffix, "#PROPERTYPROPEDESCRIPT" + IdSuffix);
+
+	/// <summary>
+	/// AveragePrice
+	/// </summary>
+	public BaseInputControl PropeAverage => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEAVERAGE_" + IdSuffix, "#PROPERTYPROPEAVERAGE_" + IdSuffix);
+
+	/// <summary>
 	/// Localization
 	/// </summary>
 	public CollapsibleZoneControl PseudNewgrp02 => new CollapsibleZoneControl(driver, ContainerLocator, "#PROPERTYPSEUDNEWGRP02" + IdSuffix + "-container");
 
 	/// <summary>
-	/// City
-	/// </summary>
-	public LookupControl CityCity => new LookupControl(driver, ContainerLocator, "container-PROPERTYCITY_CITY____" + IdSuffix);
-	public SeeMorePage CityCitySeeMorePage => new SeeMorePage(driver, "PROPERTY", "PROPERTYCITY_CITY____" + IdSuffix);
-
-	/// <summary>
 	/// Country
 	/// </summary>
 	public IWebElement CountCountry => throw new NotImplementedException();
+
+	/// <summary>
+	/// Price
+	/// </summary>
+	public BaseInputControl PropePrice => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPRICE___" + IdSuffix, "#PROPERTYPROPEPRICE___" + IdSuffix);
 
 	/// <summary>
 	/// Details
@@ -140,19 +139,25 @@ public class PropertyForm : Form
 	public BaseInputControl PropeProfit => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPROFIT__" + IdSuffix, "#PROPERTYPROPEPROFIT__" + IdSuffix);
 
 	/// <summary>
-	/// Sold date
+	/// Tax
 	/// </summary>
-	public DateInputControl PropeDtsold => new DateInputControl(driver, ContainerLocator, "#PROPERTYPROPEDTSOLD__" + IdSuffix);
+	public BaseInputControl PropeTax => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPETAX_____" + IdSuffix, "#PROPERTYPROPETAX_____" + IdSuffix);
 
 	/// <summary>
-	/// Sold
+	/// Title
 	/// </summary>
-	public CheckboxInputControl PropeSold => new CheckboxInputControl(driver, ContainerLocator, "#container-PROPERTYPROPESOLD____" + IdSuffix);
+	public BaseInputControl PropeTitle => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPETITLE___" + IdSuffix, "#PROPERTYPROPETITLE___" + IdSuffix);
 
 	/// <summary>
-	/// Order
+	/// City
 	/// </summary>
-	public BaseInputControl PropeId => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEID______" + IdSuffix, "#PROPERTYPROPEID______" + IdSuffix);
+	public LookupControl CityCity => new LookupControl(driver, ContainerLocator, "container-PROPERTYCITY_CITY____" + IdSuffix);
+	public SeeMorePage CityCitySeeMorePage => new SeeMorePage(driver, "PROPERTY", "PROPERTYCITY_CITY____" + IdSuffix);
+
+	/// <summary>
+	/// Main photo
+	/// </summary>
+	public BaseInputControl PropePhoto => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPHOTO___" + IdSuffix, "#PROPERTYPROPEPHOTO___" + IdSuffix);
 
 	public PropertyForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "PROPERTY", containerLocator: containerLocator, usePkInId: usePkInId) { }

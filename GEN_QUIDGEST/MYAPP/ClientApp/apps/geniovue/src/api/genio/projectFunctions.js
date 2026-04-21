@@ -54,8 +54,17 @@ function Average()
 	/// </summary>
 	return netAPI.executeServerFunction('Average', []);
 }
+function getCityTax(codProperty)
+{
+	/// <summary>
+	/// Get the last added tax
+	/// </summary>
+	/// <param name="codProperty"></param>
+	return netAPI.executeServerFunction('getCityTax', [codProperty]);
+}
 
 export default {
 	Age,
 	Average,
+	getCityTax,
 }
