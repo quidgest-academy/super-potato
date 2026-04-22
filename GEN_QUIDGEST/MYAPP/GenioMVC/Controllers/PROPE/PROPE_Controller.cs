@@ -53,8 +53,20 @@ namespace GenioMVC.Controllers
 				]), "ms", "Time to execute the manual code.")) {
 //Platform: MVC | Type: CONTROLLER_ROUTINE_BODY | Module: FOR | Parameter: BTN_SELL | File:  | Order: 0
 //BEGIN_MANUALCODE_CODMANUA:2d29b629-eb43-4c2d-a0f5-670396c7763d
-//andre
+var sp = m_userContext.PersistentSupport;
+var user = m_userContext.User;
+var selectedList = CSGenioAprope.searchList(sp, user, crs);
 
+sp.openConnection();
+foreach (var item in selectedList)
+{
+				sp.Execute(new UpdateQuery()
+					.Update(Area.AreaPROPE)
+					.Set(CSGenioAprope.FldSold, 1)
+					.Where(CriteriaSet.And().Equal(CSGenioAprope.FldCodprope, item.ValCodprope)));				
+
+}
+sp.closeConnection();
 return Json(new { Success = "sucess", Message = "ok" });
 //END_MANUALCODE
 				}
