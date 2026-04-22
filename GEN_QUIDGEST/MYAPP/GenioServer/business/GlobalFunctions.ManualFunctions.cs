@@ -135,7 +135,7 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
                 .From(Area.AreaPROPE)
                 .Where(CriteriaSet.And()
 				.Equal(CSGenioAprope.FldZzstate, 0)
-				.Equal(CSGenioAagent.FldCodagent, codagent));
+				.Equal(CSGenioAprope.FldCodagent, codagent));
 
             return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 //END_FUNCTION
