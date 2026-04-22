@@ -354,8 +354,6 @@
 							generalCustomActions: [
 							],
 							groupActions: [
-							],
-							customActions: [
 								{
 									id: 'MB_4111',
 									name: 'FOR_Menu_411_MenuR_BTN_SELL',
@@ -371,6 +369,8 @@
 										action: vm.openRoutineAction, type: 'routine', actionRoutine: this.FOR_Menu_411_MenuR_BTN_SELL
 									}
 								},
+							],
+							customActions: [
 							],
 							MCActions: [
 							],

@@ -42,7 +42,7 @@ namespace GenioMVC.Controllers
 
 
 
-		protected JsonResult FOR_MenuR_BTN_SELL(string id, string area)
+		protected JsonResult FOR_MenuR_BTN_SELL(CriteriaSet crs, List<Relation> relations, CSGenio.business.Area routineArea)
 		{
 			try
 			{
@@ -72,9 +72,40 @@ return Json(new { Success = "sucess", Message = "ok" });
 		}
 
 		// POST: /Prope/FOR_Menu_411_MenuR_BTN_SELL
-		public JsonResult FOR_Menu_411_MenuR_BTN_SELL([FromBody] RequestRoutineSingleModel requestModel)
+		public JsonResult FOR_Menu_411_MenuR_BTN_SELL([FromBody] RequestRoutineMultipleModel requestModel)
 		{
-			return FOR_MenuR_BTN_SELL(requestModel.Id, requestModel.Area);
+			CSGenio.business.Area area = CSGenio.business.Area.createArea("prope", UserContext.Current.User, UserContext.Current.User.CurrentModule);
+			ListViewModel model = new FOR_Menu_411_ViewModel(m_userContext);
+			NameValueCollection parameters;
+
+			// Fetch and format the parameters
+			if (requestModel.QueryParams != null && requestModel.QueryParams.Count() > 0)
+				parameters = FormatQueryString(requestModel.QueryParams);
+			else
+				parameters = this.Navigation.GetValue<NameValueCollection>("requestValuesFOR_Menu_411");
+
+			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(
+				requestModel.TableConfiguration,
+				requestModel.UserTableConfigName,
+				requestModel.LoadDefaultView);
+
+			// Get CriteriaSet
+			CriteriaSet crs = model.BuildCriteriaSet(tableConfig, parameters, out bool hasAllRequiredLimits);
+
+			if (!requestModel.AllSelected || crs == null)
+				crs.In("prope", "CODPROPE", requestModel.Ids);
+
+			// Fetch List of Related Areas
+			List<string> relatedTables = [];
+			QueryUtils.checkConditionsForForeignTables(crs, area, relatedTables);
+
+			/*
+			 * This is a list of Relationships that has to be included in the query that will be using the CriteriaSet.
+			 * This can be done using QueryUtils.setFromTabDirect()
+			 */
+			List<CSGenio.framework.Relation> relations = QueryUtils.tablesRelationships(relatedTables, area);
+
+			return FOR_MenuR_BTN_SELL(crs, relations, area);
 		}
 
 		private List<string> GetActionIds(CriteriaSet crs, CSGenio.persistence.PersistentSupport sp = null)
