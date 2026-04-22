@@ -54,6 +54,8 @@ namespace GenioMVC.Controllers
 //Platform: MVC | Type: CONTROLLER_ROUTINE_BODY | Module: FOR | Parameter: BTN_SELL | File:  | Order: 0
 //BEGIN_MANUALCODE_CODMANUA:2d29b629-eb43-4c2d-a0f5-670396c7763d
 //andre
+
+return Json(new { Success = "sucess", Message = "ok" });
 //END_MANUALCODE
 				}
 
