@@ -378,7 +378,7 @@ namespace GenioMVC.ViewModels.Prope
 				]), "ms", "Time to execute the manual code.")) {
 //Platform: MVC | Type: OVERRQ_TOOLTIP | Module: FOR | Parameter: PROP_SOLD_MANUAL | File:  | Order: 0
 //BEGIN_MANUALCODE_CODMANUA:8610a3af-b3fd-4869-b054-5e1200bee96c
-//aqui esta
+limit.ManualHTMLText = "Properties to sell";
 //END_MANUALCODE
 				}
 
