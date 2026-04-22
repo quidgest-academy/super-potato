@@ -31,7 +31,7 @@ namespace GenioMVC.Controllers
 		private static readonly NavigationLocation ACTION_FOR_MENU_21 = new NavigationLocation("PROPERTIES34868", "FOR_Menu_21", "Prope") { vueRouteName = "menu-FOR_21" };
 		private static readonly NavigationLocation ACTION_FOR_MENU_411 = new NavigationLocation("PROPERTIES34868", "FOR_Menu_411", "Prope") { vueRouteName = "menu-FOR_411" };
 		private static readonly NavigationLocation ACTION_FOR_MENU_511 = new NavigationLocation("PROPERTIES34868", "FOR_Menu_511", "Prope") { vueRouteName = "menu-FOR_511" };
-		private static readonly NavigationLocation ACTION_FOR_MENU_61 = new NavigationLocation("PROPERTIES34868", "FOR_Menu_61", "Prope") { vueRouteName = "menu-FOR_61" };
+		private static readonly NavigationLocation ACTION_FOR_MENU_PROP_SOLD_MANUAL = new NavigationLocation("PROPERTIES34868", "FOR_Menu_PROP_SOLD_MANUAL", "Prope") { vueRouteName = "menu-FOR_PROP_SOLD_MANUAL" };
 
 
 		//
@@ -347,14 +347,14 @@ namespace GenioMVC.Controllers
 		}
 
 		//
-		// GET: /Prope/FOR_Menu_61
-		[ActionName("FOR_Menu_61")]
+		// GET: /Prope/FOR_Menu_PROP_SOLD_MANUAL
+		[ActionName("FOR_Menu_PROP_SOLD_MANUAL")]
 		[HttpPost]
-		public ActionResult FOR_Menu_61([FromBody] RequestMenuModel requestModel)
+		public ActionResult FOR_Menu_PROP_SOLD_MANUAL([FromBody] RequestMenuModel requestModel)
 		{
 			var queryParams = requestModel.QueryParams;
 
-			FOR_Menu_61_ViewModel model = new(m_userContext);
+			FOR_Menu_PROP_SOLD_MANUAL_ViewModel model = new(m_userContext);
 
 			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(
 				requestModel.TableConfiguration,
@@ -366,7 +366,7 @@ namespace GenioMVC.Controllers
 
 			bool isHomePage = RouteData.Values.ContainsKey("isHomePage") ? (bool)RouteData.Values["isHomePage"] : false;
 			if (isHomePage)
-				Navigation.SetValue("HomePage", "FOR_Menu_61");
+				Navigation.SetValue("HomePage", "FOR_Menu_PROP_SOLD_MANUAL");
 
 			// If there was a recent operation on this table then force the primary persistence server to be called and ignore the read only feature
 			if (string.IsNullOrEmpty(Navigation.GetStrValue("ForcePrimaryRead_prope")))
@@ -385,18 +385,18 @@ namespace GenioMVC.Controllers
 				querystring.AddRange(queryParams);
 
 			if (!isHomePage &&
-				(Navigation.CurrentLevel == null || !ACTION_FOR_MENU_61.IsSameAction(Navigation.CurrentLevel.Location)) &&
-				Navigation.CurrentLevel.Location.Action != ACTION_FOR_MENU_61.Action)
+				(Navigation.CurrentLevel == null || !ACTION_FOR_MENU_PROP_SOLD_MANUAL.IsSameAction(Navigation.CurrentLevel.Location)) &&
+				Navigation.CurrentLevel.Location.Action != ACTION_FOR_MENU_PROP_SOLD_MANUAL.Action)
 				CSGenio.framework.Audit.registAction(UserContext.Current.User, Resources.Resources.MENU01948 + " " + Navigation.CurrentLevel.Location.ShortDescription());
 			else if (isHomePage)
 			{
-				CSGenio.framework.Audit.registAction(UserContext.Current.User, Resources.Resources.MENU01948 + " " + ACTION_FOR_MENU_61.ShortDescription());
+				CSGenio.framework.Audit.registAction(UserContext.Current.User, Resources.Resources.MENU01948 + " " + ACTION_FOR_MENU_PROP_SOLD_MANUAL.ShortDescription());
 				Navigation.SetValue("HomePageContainsList", true);
 			}
 
 
 
-// USE /[MANUAL FOR MENU_GET 61]/
+// USE /[MANUAL FOR MENU_GET PROP_SOLD_MANUAL]/
 
 			try
 			{

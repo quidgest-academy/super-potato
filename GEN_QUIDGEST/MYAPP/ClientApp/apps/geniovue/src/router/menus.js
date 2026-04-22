@@ -79,9 +79,9 @@ export default function getMenusRoutes()
 			}
 		},
 		{
-			path: '/:culture/:system/FOR/menu/FOR_61',
-			name: 'menu-FOR_61',
-			component: () => import('@/views/menus/ModuleFOR/MenuFOR_61/QMenuFor61.vue'),
+			path: '/:culture/:system/FOR/menu/FOR_PROP_SOLD_MANUAL',
+			name: 'menu-FOR_PROP_SOLD_MANUAL',
+			component: () => import('@/views/menus/ModuleFOR/MenuFOR_PROP_SOLD_MANUAL/QMenuForPropSoldManual.vue'),
 			meta: {
 				routeType: 'menu',
 				module: 'FOR',

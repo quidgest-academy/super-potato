@@ -17,13 +17,13 @@ using Quidgest.Persistence.GenericQuery;
 
 namespace GenioMVC.ViewModels.Prope
 {
-	public class FOR_Menu_61_ViewModel : MenuListViewModel<Models.Prope>
+	public class FOR_Menu_PROP_SOLD_MANUAL_ViewModel : MenuListViewModel<Models.Prope>
 	{
 		/// <summary>
 		/// Gets or sets the object that represents the table and its elements.
 		/// </summary>
 		[JsonPropertyName("table")]
-		public TablePartial<FOR_Menu_61_RowViewModel> Menu { get; set; }
+		public TablePartial<FOR_Menu_PROP_SOLD_MANUAL_RowViewModel> Menu { get; set; }
 
 		/// <inheritdoc/>
 		[JsonIgnore]
@@ -82,7 +82,7 @@ namespace GenioMVC.ViewModels.Prope
 
 		public override CriteriaSet GetCustomizedStaticLimits(CriteriaSet crs)
 		{
-// USE /[MANUAL FOR LIST_LIMITS 61]/
+// USE /[MANUAL FOR LIST_LIMITS PROP_SOLD_MANUAL]/
 
 			return crs;
 		}
@@ -93,7 +93,7 @@ namespace GenioMVC.ViewModels.Prope
 			var areaBase = CSGenio.business.Area.createArea("prope", user, "FOR");
 
 			//gets eph conditions to be applied in listing
-			CriteriaSet conditions = CSGenio.business.Listing.CalculateConditionsEphGeneric(areaBase, "ML61");
+			CriteriaSet conditions = CSGenio.business.Listing.CalculateConditionsEphGeneric(areaBase, "MLPROP_SOLD_MANUAL");
 			conditions.Equal(CSGenioAprope.FldZzstate, 0); //valid zzstate only
 
 			// Fixed limits and relations:
@@ -119,23 +119,23 @@ namespace GenioMVC.ViewModels.Prope
 		/// FOR DESERIALIZATION ONLY
 		/// </summary>
 		[Obsolete("For deserialization only")]
-		public FOR_Menu_61_ViewModel() : base(null!) { }
+		public FOR_Menu_PROP_SOLD_MANUAL_ViewModel() : base(null!) { }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="FOR_Menu_61_ViewModel" /> class.
+		/// Initializes a new instance of the <see cref="FOR_Menu_PROP_SOLD_MANUAL_ViewModel" /> class.
 		/// </summary>
 		/// <param name="userContext">The current user request context</param>
-		public FOR_Menu_61_ViewModel(UserContext userContext) : base(userContext)
+		public FOR_Menu_PROP_SOLD_MANUAL_ViewModel(UserContext userContext) : base(userContext)
 		{
 			this.RoleToShow = CSGenio.framework.Role.ROLE_1;
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="FOR_Menu_61_ViewModel" /> class.
+		/// Initializes a new instance of the <see cref="FOR_Menu_PROP_SOLD_MANUAL_ViewModel" /> class.
 		/// </summary>
 		/// <param name="userContext">The current user request context</param>
 		/// <param name="parentCtx">The context of the parent</param>
-		public FOR_Menu_61_ViewModel(UserContext userContext, Models.ModelBase parentCtx) : this(userContext)
+		public FOR_Menu_PROP_SOLD_MANUAL_ViewModel(UserContext userContext, Models.ModelBase parentCtx) : this(userContext)
 		{
 			ParentCtx = parentCtx;
 		}
@@ -197,7 +197,7 @@ namespace GenioMVC.ViewModels.Prope
 
 			crs ??= CriteriaSet.And();
 
-			Menu ??= new TablePartial<FOR_Menu_61_RowViewModel>();
+			Menu ??= new TablePartial<FOR_Menu_PROP_SOLD_MANUAL_RowViewModel>();
 			// Set table name (used in getting searchable column names)
 			Menu.TableName = TableAlias;
 
@@ -220,7 +220,7 @@ namespace GenioMVC.ViewModels.Prope
 			if (isToExport)
 			{
 				// EPH
-				crs = Models.Prope.AddEPH<CSGenioAprope>(ref u, crs, "ML61");
+				crs = Models.Prope.AddEPH<CSGenioAprope>(ref u, crs, "MLPROP_SOLD_MANUAL");
 
 				// Export only records with ZZState == 0
 				crs.Equal(CSGenioAprope.FldZzstate, 0);
@@ -238,7 +238,7 @@ namespace GenioMVC.ViewModels.Prope
 				string QMVC_POS_RECORD = Navigation.GetStrValue("QMVC_POS_RECORD_prope");
 				Navigation.DestroyEntry("QMVC_POS_RECORD_prope");
 				if (!string.IsNullOrEmpty(QMVC_POS_RECORD))
-					crs.Equals(Models.Prope.AddEPH<CSGenioAprope>(ref u, null, "ML61"));
+					crs.Equals(Models.Prope.AddEPH<CSGenioAprope>(ref u, null, "MLPROP_SOLD_MANUAL"));
 			}
 
 			return crs;
@@ -313,9 +313,9 @@ namespace GenioMVC.ViewModels.Prope
 		public void Load(CSGenio.core.framework.table.TableConfiguration tableConfig, NameValueCollection requestValues, bool ajaxRequest, bool isToExport, ref ListingMVC<CSGenioAprope> Qlisting, ref CriteriaSet conditions)
 		{
 			User u = m_userContext.User;
-			Menu = new TablePartial<FOR_Menu_61_RowViewModel>();
+			Menu = new TablePartial<FOR_Menu_PROP_SOLD_MANUAL_RowViewModel>();
 
-			CriteriaSet for_menu_61Conds = CriteriaSet.And();
+			CriteriaSet for_menu_prop_sold_manualConds = CriteriaSet.And();
 			bool tableReload = true;
 
 			//FOR: MENU LIST SORTING
@@ -363,7 +363,7 @@ namespace GenioMVC.ViewModels.Prope
 				Limit limit = new Limit();
 				limit.TipoLimite = LimitType.EPH;
 				CSGenioAprope model_limit_area = new CSGenioAprope(m_userContext.User);
-				List<Limit> area_EPH_limits = EPH_Limit_Filler(ref limit, model_limit_area, "ML61");
+				List<Limit> area_EPH_limits = EPH_Limit_Filler(ref limit, model_limit_area, "MLPROP_SOLD_MANUAL");
 				if (area_EPH_limits.Count > 0)
 					this.TableLimits.AddRange(area_EPH_limits);
 			}
@@ -372,11 +372,11 @@ namespace GenioMVC.ViewModels.Prope
 			if (conditions == null)
 				conditions = CriteriaSet.And();
 
-			conditions.SubSets.Add(for_menu_61Conds);
-			for_menu_61Conds = BuildCriteriaSet(tableConfig, requestValues, out bool hasAllRequiredLimits, conditions, isToExport);
+			conditions.SubSets.Add(for_menu_prop_sold_manualConds);
+			for_menu_prop_sold_manualConds = BuildCriteriaSet(tableConfig, requestValues, out bool hasAllRequiredLimits, conditions, isToExport);
 			tableReload &= hasAllRequiredLimits;
 
-// USE /[MANUAL FOR OVERRQ 61]/
+// USE /[MANUAL FOR OVERRQ PROP_SOLD_MANUAL]/
 
 			bool distinct = false;
 
@@ -388,16 +388,16 @@ namespace GenioMVC.ViewModels.Prope
 				var exportColumns = GetExportColumns(tableConfig.ColumnConfigurations);
 				var exportFieldRefs = exportColumns.Select(eCol => eCol.Field).Where(fldRef => fldRef != null).ToArray();
 
-				Qlisting = Models.ModelBase.BuildListingForExport<CSGenioAprope>(m_userContext, false, ref for_menu_61Conds, exportFieldRefs, (pageNumber - 1) * numberListItems, numberListItems, sorts, "ML61", true, firstVisibleColumn: firstVisibleColumn);
+				Qlisting = Models.ModelBase.BuildListingForExport<CSGenioAprope>(m_userContext, false, ref for_menu_prop_sold_manualConds, exportFieldRefs, (pageNumber - 1) * numberListItems, numberListItems, sorts, "MLPROP_SOLD_MANUAL", true, firstVisibleColumn: firstVisibleColumn);
 
-// USE /[MANUAL FOR OVERRQLSTEXP 61]/
+// USE /[MANUAL FOR OVERRQLSTEXP PROP_SOLD_MANUAL]/
 
 				return;
 			}
 
 			if (tableReload)
 			{
-// USE /[MANUAL FOR OVERRQLIST 61]/
+// USE /[MANUAL FOR OVERRQLIST PROP_SOLD_MANUAL]/
 
 				string QMVC_POS_RECORD = Navigation.GetStrValue("QMVC_POS_RECORD_prope");
 				Navigation.DestroyEntry("QMVC_POS_RECORD_prope");
@@ -405,12 +405,12 @@ namespace GenioMVC.ViewModels.Prope
 
 				if (!string.IsNullOrEmpty(QMVC_POS_RECORD))
 				{
-					var m_iCurPag = m_userContext.PersistentSupport.getPagingPos(CSGenioAprope.GetInformation(), QMVC_POS_RECORD, sorts, for_menu_61Conds, m_PagingPosEPHs, firstVisibleColumn: firstVisibleColumn);
+					var m_iCurPag = m_userContext.PersistentSupport.getPagingPos(CSGenioAprope.GetInformation(), QMVC_POS_RECORD, sorts, for_menu_prop_sold_manualConds, m_PagingPosEPHs, firstVisibleColumn: firstVisibleColumn);
 					if (m_iCurPag != -1)
 						pageNumber = ((m_iCurPag - 1) / numberListItems) + 1;
 				}
 
-				ListingMVC<CSGenioAprope> listing = Models.ModelBase.Where<CSGenioAprope>(m_userContext, distinct, for_menu_61Conds, fields, (pageNumber - 1) * numberListItems, numberListItems, sorts, "ML61", true, false, QMVC_POS_RECORD, m_PagingPosEPHs, firstVisibleColumn, fieldsWithTotalizers, tableConfig.SelectedRows);
+				ListingMVC<CSGenioAprope> listing = Models.ModelBase.Where<CSGenioAprope>(m_userContext, distinct, for_menu_prop_sold_manualConds, fields, (pageNumber - 1) * numberListItems, numberListItems, sorts, "MLPROP_SOLD_MANUAL", true, false, QMVC_POS_RECORD, m_PagingPosEPHs, firstVisibleColumn, fieldsWithTotalizers, tableConfig.SelectedRows);
 
 				if (listing.CurrentPage > 0)
 					pageNumber = listing.CurrentPage;
@@ -422,15 +422,15 @@ namespace GenioMVC.ViewModels.Prope
 				//Set document field values to objects
 				SetDocumentFields(listing);
 
-				Menu.Elements = MapFOR_Menu_61(listing);
+				Menu.Elements = MapFOR_Menu_PROP_SOLD_MANUAL(listing);
 
-				Menu.Identifier = "ML61";
+				Menu.Identifier = "MLPROP_SOLD_MANUAL";
 				Menu.Slots = new Dictionary<string, List<object>>();
 
 				// Last updated by [CJP] at [2015.02.03]
 				// Adds the identifier to each element
 				foreach (var element in Menu.Elements)
-					element.Identifier = "ML61";
+					element.Identifier = "MLPROP_SOLD_MANUAL";
 
 				Menu.SetPagination(pageNumber, listing.NumRegs, listing.HasMore, listing.GetTotal, listing.TotalRecords);
 
@@ -449,9 +449,9 @@ namespace GenioMVC.ViewModels.Prope
 			LoadUserTableConfigNameProperties();
 		}
 
-		private List<FOR_Menu_61_RowViewModel> MapFOR_Menu_61(ListingMVC<CSGenioAprope> Qlisting)
+		private List<FOR_Menu_PROP_SOLD_MANUAL_RowViewModel> MapFOR_Menu_PROP_SOLD_MANUAL(ListingMVC<CSGenioAprope> Qlisting)
 		{
-			List<FOR_Menu_61_RowViewModel> Elements = [];
+			List<FOR_Menu_PROP_SOLD_MANUAL_RowViewModel> Elements = [];
 			int i = 0;
 
 			if (Qlisting.Rows != null)
@@ -460,7 +460,7 @@ namespace GenioMVC.ViewModels.Prope
 				{
 					if (Qlisting.NumRegs > 0 && i >= Qlisting.NumRegs) // Copiado da versão antiga do RowsToViewModels
 						break;
-					Elements.Add(MapFOR_Menu_61(row));
+					Elements.Add(MapFOR_Menu_PROP_SOLD_MANUAL(row));
 					i++;
 				}
 			}
@@ -470,12 +470,12 @@ namespace GenioMVC.ViewModels.Prope
 
 		/// <summary>
 		/// Maps a single CSGenioAprope row
-		/// to a FOR_Menu_61_RowViewModel object.
+		/// to a FOR_Menu_PROP_SOLD_MANUAL_RowViewModel object.
 		/// </summary>
 		/// <param name="row">The row.</param>
-		private FOR_Menu_61_RowViewModel MapFOR_Menu_61(CSGenioAprope row)
+		private FOR_Menu_PROP_SOLD_MANUAL_RowViewModel MapFOR_Menu_PROP_SOLD_MANUAL(CSGenioAprope row)
 		{
-			var model = new FOR_Menu_61_RowViewModel(m_userContext, true, _fieldsToSerialize);
+			var model = new FOR_Menu_PROP_SOLD_MANUAL_RowViewModel(m_userContext, true, _fieldsToSerialize);
 			if (row == null)
 				return model;
 
@@ -535,7 +535,7 @@ namespace GenioMVC.ViewModels.Prope
 
 		#region Custom code
 
-// USE /[MANUAL FOR VIEWMODEL_CUSTOM FOR_MENU_61]/
+// USE /[MANUAL FOR VIEWMODEL_CUSTOM FOR_MENU_PROP_SOLD_MANUAL]/
 
 		#endregion
 

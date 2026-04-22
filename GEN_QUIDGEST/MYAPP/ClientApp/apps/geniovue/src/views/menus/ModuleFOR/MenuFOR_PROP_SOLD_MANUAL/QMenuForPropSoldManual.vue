@@ -16,7 +16,7 @@
 							v-on="controls.menu.handlers">
 						</q-table-config>
 					</template>
-					<!-- USE /[MANUAL FOR CUSTOM_TABLE FOR_Menu_61]/ -->
+					<!-- USE /[MANUAL FOR CUSTOM_TABLE FOR_Menu_PROP_SOLD_MANUAL]/ -->
 				</q-table>
 			</q-row-container>
 		</div>
@@ -73,17 +73,17 @@
 	import qProjArrays from '@/api/genio/projectArrays.js'
 	/* eslint-enable @typescript-eslint/no-unused-vars */
 
-	import MenuViewModel from './QMenuFOR_61ViewModel.js'
+	import MenuViewModel from './QMenuFOR_PROP_SOLD_MANUALViewModel.js'
 
-	const requiredTextResources = ['QMenuFOR_61', 'hardcoded', 'messages']
+	const requiredTextResources = ['QMenuFOR_PROP_SOLD_MANUAL', 'hardcoded', 'messages']
 
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR FORM_INCLUDEJS FOR_MENU_61]/
+// USE /[MANUAL FOR FORM_INCLUDEJS FOR_MENU_PROP_SOLD_MANUAL]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 
 	export default {
-		name: 'QMenuFor61',
+		name: 'QMenuForPropSoldManual',
 
 		mixins: [
 			MenuHandlers
@@ -112,23 +112,23 @@
 			// eslint-disable-next-line
 			const vm = this
 			return {
-				componentOnLoadProc: asyncProcM.getProcListMonitor('QMenuFOR_61', false),
+				componentOnLoadProc: asyncProcM.getProcListMonitor('QMenuFOR_PROP_SOLD_MANUAL', false),
 
 				interfaceMetadata: {
-					id: 'QMenuFOR_61', // Used for resources
+					id: 'QMenuFOR_PROP_SOLD_MANUAL', // Used for resources
 					requiredTextResources
 				},
 
 				menuInfo: {
-					id: '61',
+					id: 'PROP_SOLD_MANUAL',
 					isMenuList: true,
 					designation: computed(() => this.Resources.PROPERTIES34868),
-					acronym: 'FOR_61',
+					acronym: 'FOR_PROP_SOLD_MANUAL',
 					name: 'PROPE',
-					route: 'menu-FOR_61',
+					route: 'menu-FOR_PROP_SOLD_MANUAL',
 					order: '61',
 					controller: 'PROPE',
-					action: 'FOR_Menu_61',
+					action: 'FOR_Menu_PROP_SOLD_MANUAL',
 					isPopup: false
 				},
 
@@ -137,9 +137,9 @@
 				controls: {
 					menu: new controlClass.TableListControl({
 						fnHydrateViewModel: (data) => vm.model.hydrate(data),
-						id: 'FOR_Menu_61',
+						id: 'FOR_Menu_PROP_SOLD_MANUAL',
 						controller: 'PROPE',
-						action: 'FOR_Menu_61',
+						action: 'FOR_Menu_PROP_SOLD_MANUAL',
 						hasDependencies: false,
 						isInCollapsible: false,
 						tableModeClasses: [
@@ -290,7 +290,7 @@
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
 						config: {
-							name: 'FOR_Menu_61',
+							name: 'FOR_Menu_PROP_SOLD_MANUAL',
 							serverMode: true,
 							pkColumn: 'ValCodprope',
 							tableAlias: 'PROPE',
@@ -453,7 +453,7 @@
 		mounted()
 		{
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR FORM_CODEJS FOR_MENU_61]/
+// USE /[MANUAL FOR FORM_CODEJS FOR_MENU_PROP_SOLD_MANUAL]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 		},
@@ -461,18 +461,18 @@
 		beforeUnmount()
 		{
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR COMPONENT_BEFORE_UNMOUNT FOR_MENU_61]/
+// USE /[MANUAL FOR COMPONENT_BEFORE_UNMOUNT FOR_MENU_PROP_SOLD_MANUAL]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 		},
 
 		methods: {
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR FUNCTIONS_JS FOR_61]/
+// USE /[MANUAL FOR FUNCTIONS_JS FOR_PROP_SOLD_MANUAL]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR LISTING_CODEJS FOR_MENU_61]/
+// USE /[MANUAL FOR LISTING_CODEJS FOR_MENU_PROP_SOLD_MANUAL]/
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
 		}
