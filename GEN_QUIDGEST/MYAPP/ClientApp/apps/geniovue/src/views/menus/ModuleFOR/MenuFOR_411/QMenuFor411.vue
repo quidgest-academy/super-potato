@@ -247,6 +247,15 @@
 								array: computed(() => new qProjArrays.QArrayTypology(vm.$getResource).elements),
 								arrayDisplayMode: 'D',
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.BooleanColumn({
+								order: 10,
+								name: 'ValSold',
+								area: 'PROPE',
+								field: 'SOLD',
+								label: computed(() => this.Resources.SOLD59824),
+								scrollData: 1,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
 						config: {
 							name: 'FOR_Menu_411',

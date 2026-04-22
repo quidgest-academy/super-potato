@@ -101,7 +101,7 @@ namespace GenioMVC.ViewModels.Prope
 			conditions.SubSets.Add(GetCustomizedStaticLimits(StaticLimits));
 
 			// Checks for foreign tables in fields and conditions
-			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldPhoto, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldDescript, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldSize, CSGenioAprope.FldBathnr, CSGenioAprope.FldDtconst, CSGenioAprope.FldBuildtyp, CSGenioAprope.FldTypology };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldPhoto, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldDescript, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldSize, CSGenioAprope.FldBathnr, CSGenioAprope.FldDtconst, CSGenioAprope.FldBuildtyp, CSGenioAprope.FldTypology, CSGenioAprope.FldSold };
 
 			ListingMVC<CSGenioAprope> listing = new(fields, null, 1, 1, false, user, true, string.Empty, false);
 			SelectQuery qs = sp.getSelectQueryFromListingMVC(conditions, listing);
@@ -157,6 +157,7 @@ namespace GenioMVC.ViewModels.Prope
 				new Exports.QColumn(CSGenioAprope.FldDtconst, FieldType.DATE, Resources.Resources.CONSTRUCTION_DATE18132, 8, 0, true),
 				new Exports.QColumn(CSGenioAprope.FldBuildtyp, FieldType.ARRAY_TEXT, Resources.Resources.BUILDING_TYPE57152, 1, 0, true, "buildtyp"),
 				new Exports.QColumn(CSGenioAprope.FldTypology, FieldType.ARRAY_NUMERIC, Resources.Resources.BUILDING_TYPOLOGY54011, 1, 0, true, "typology"),
+				new Exports.QColumn(CSGenioAprope.FldSold, FieldType.LOGIC, Resources.Resources.SOLD59824, 1, 0, true),
 			];
 		}
 
@@ -343,7 +344,7 @@ namespace GenioMVC.ViewModels.Prope
 
 			}
 
-			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldPhoto, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldDescript, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldSize, CSGenioAprope.FldBathnr, CSGenioAprope.FldDtconst, CSGenioAprope.FldBuildtyp, CSGenioAprope.FldTypology };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldPhoto, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldDescript, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldSize, CSGenioAprope.FldBathnr, CSGenioAprope.FldDtconst, CSGenioAprope.FldBuildtyp, CSGenioAprope.FldTypology, CSGenioAprope.FldSold };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
@@ -563,7 +564,7 @@ namespace GenioMVC.ViewModels.Prope
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValPhoto", "Agent", "Agent.ValName", "Prope.ValDescript", "City", "City.ValCity", "Prope.ValSize", "Prope.ValBathnr", "Prope.ValDtconst", "Prope.ValBuildtyp", "Prope.ValTypology", "Prope.ValCodagent", "Prope.ValCodcity"
+			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValPhoto", "Agent", "Agent.ValName", "Prope.ValDescript", "City", "City.ValCity", "Prope.ValSize", "Prope.ValBathnr", "Prope.ValDtconst", "Prope.ValBuildtyp", "Prope.ValTypology", "Prope.ValSold", "Prope.ValCodagent", "Prope.ValCodcity"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
@@ -576,6 +577,7 @@ namespace GenioMVC.ViewModels.Prope
 			new TableSearchColumn("ValDtconst", CSGenioAprope.FldDtconst, typeof(DateTime?)),
 			new TableSearchColumn("ValBuildtyp", CSGenioAprope.FldBuildtyp, typeof(string), array : "buildtyp"),
 			new TableSearchColumn("ValTypology", CSGenioAprope.FldTypology, typeof(decimal), array : "typology"),
+			new TableSearchColumn("ValSold", CSGenioAprope.FldSold, typeof(bool)),
 		];
 		protected void SetTicketToImageFields(Models.Prope row)
 		{

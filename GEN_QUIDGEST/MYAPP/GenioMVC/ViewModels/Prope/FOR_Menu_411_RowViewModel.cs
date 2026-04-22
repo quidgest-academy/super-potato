@@ -87,6 +87,12 @@ public class FOR_Menu_411_RowViewModel : Models.Prope
 				Area = "PROPE",
 				Field = "TYPOLOGY",
 			},
+			new ListColumn()
+			{
+				Order = 10,
+				Area = "PROPE",
+				Field = "SOLD",
+			},
 		];
 	}
 
