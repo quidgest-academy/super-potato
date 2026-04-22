@@ -15,9 +15,9 @@ using GenioMVC.Models.Navigation;
 using Quidgest.Persistence;
 using Quidgest.Persistence.GenericQuery;
 
-namespace GenioMVC.ViewModels.Stats
+namespace GenioMVC.ViewModels.Prope
 {
-	public class FOR_Menu_61_ViewModel : MenuListViewModel<Models.Stats>
+	public class FOR_Menu_61_ViewModel : MenuListViewModel<Models.Prope>
 	{
 		/// <summary>
 		/// Gets or sets the object that represents the table and its elements.
@@ -27,11 +27,11 @@ namespace GenioMVC.ViewModels.Stats
 
 		/// <inheritdoc/>
 		[JsonIgnore]
-		public override string TableAlias => "stats";
+		public override string TableAlias => "prope";
 
 		/// <inheritdoc/>
 		[JsonPropertyName("uuid")]
-		public override string Uuid => "504c53a8-afd2-497c-8bc1-6523e0ae37ee";
+		public override string Uuid => "b720d491-ed3d-40f1-91ef-c85d9c3ac854";
 
 		/// <inheritdoc/>
 		protected override string[] FieldsToSerialize => _fieldsToSerialize;
@@ -90,19 +90,19 @@ namespace GenioMVC.ViewModels.Stats
 		public override int GetCount(User user)
 		{
 			CSGenio.persistence.PersistentSupport sp = m_userContext.PersistentSupport;
-			var areaBase = CSGenio.business.Area.createArea("stats", user, "FOR");
+			var areaBase = CSGenio.business.Area.createArea("prope", user, "FOR");
 
 			//gets eph conditions to be applied in listing
 			CriteriaSet conditions = CSGenio.business.Listing.CalculateConditionsEphGeneric(areaBase, "ML61");
-			conditions.Equal(CSGenioAstats.FldZzstate, 0); //valid zzstate only
+			conditions.Equal(CSGenioAprope.FldZzstate, 0); //valid zzstate only
 
 			// Fixed limits and relations:
 			conditions.SubSets.Add(GetCustomizedStaticLimits(StaticLimits));
 
 			// Checks for foreign tables in fields and conditions
-			FieldRef[] fields = new FieldRef[] { CSGenioAstats.FldCodstats, CSGenioAstats.FldZzstate, CSGenioAstats.FldProfit, CSGenioAstats.FldNotsold, CSGenioAstats.FldCountry };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldPrice, CSGenioAprope.FldBuildage, CSGenioAprope.FldFloornr, CSGenioAprope.FldId, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldBuildtyp, CSGenioAprope.FldDtconst, CSGenioAprope.FldDescript, CSGenioAprope.FldDtsold, CSGenioAprope.FldTypology, CSGenioAprope.FldTitle, CSGenioAprope.FldPhoto };
 
-			ListingMVC<CSGenioAstats> listing = new(fields, null, 1, 1, false, user, true, string.Empty, false);
+			ListingMVC<CSGenioAprope> listing = new(fields, null, 1, 1, false, user, true, string.Empty, false);
 			SelectQuery qs = sp.getSelectQueryFromListingMVC(conditions, listing);
 
 			// Menu relations:
@@ -145,19 +145,28 @@ namespace GenioMVC.ViewModels.Stats
 		{
 			return
 			[
-				new Exports.QColumn(CSGenioAstats.FldProfit, FieldType.CURRENCY, Resources.Resources.PROFIT55910, 12, 0, true),
-				new Exports.QColumn(CSGenioAstats.FldNotsold, FieldType.NUMERIC, Resources.Resources.PROPERTIES_NOT_SOLD48533, 3, 0, true),
-				new Exports.QColumn(CSGenioAstats.FldCountry, FieldType.TEXT, Resources.Resources.COUNTRY64133, 30, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldName, FieldType.TEXT, Resources.Resources.AGENT_S_NAME42642, 30, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldPrice, FieldType.CURRENCY, Resources.Resources.PRICE06900, 12, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldBuildage, FieldType.NUMERIC, Resources.Resources.BUILDING_AGE27311, 4, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldFloornr, FieldType.NUMERIC, Resources.Resources.FLOOR19993, 2, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldId, FieldType.NUMERIC, string.Empty, 5, 0, true),
+				new Exports.QColumn(CSGenioAcity.FldCity, FieldType.TEXT, Resources.Resources.CITY42505, 30, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldBuildtyp, FieldType.ARRAY_TEXT, Resources.Resources.BUILDING_TYPE57152, 1, 0, true, "buildtyp"),
+				new Exports.QColumn(CSGenioAprope.FldDtconst, FieldType.DATE, Resources.Resources.CONSTRUCTION_DATE18132, 8, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldDescript, FieldType.MEMO, Resources.Resources.DESCRIPTION07383, 30, 5, true),
+				new Exports.QColumn(CSGenioAprope.FldDtsold, FieldType.DATE, Resources.Resources.SOLD_DATE37976, 8, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldTypology, FieldType.ARRAY_NUMERIC, Resources.Resources.BUILDING_TYPOLOGY54011, 1, 0, true, "typology"),
+				new Exports.QColumn(CSGenioAprope.FldTitle, FieldType.TEXT, Resources.Resources.TITLE21885, 30, 0, true),
 			];
 		}
 
-		public void LoadToExport(out ListingMVC<CSGenioAstats> listing, out CriteriaSet conditions, out List<Exports.QColumn> columns, NameValueCollection requestValues, bool ajaxRequest = false)
+		public void LoadToExport(out ListingMVC<CSGenioAprope> listing, out CriteriaSet conditions, out List<Exports.QColumn> columns, NameValueCollection requestValues, bool ajaxRequest = false)
 		{
 			CSGenio.core.framework.table.TableConfiguration tableConfig = new();
 			LoadToExport(out listing, out conditions, out columns, tableConfig, requestValues, ajaxRequest);
 		}
 
-		public void LoadToExport(out ListingMVC<CSGenioAstats> listing, out CriteriaSet conditions, out List<Exports.QColumn> columns, CSGenio.core.framework.table.TableConfiguration tableConfig, NameValueCollection requestValues, bool ajaxRequest = false)
+		public void LoadToExport(out ListingMVC<CSGenioAprope> listing, out CriteriaSet conditions, out List<Exports.QColumn> columns, CSGenio.core.framework.table.TableConfiguration tableConfig, NameValueCollection requestValues, bool ajaxRequest = false)
 		{
 			listing = null;
 			conditions = null;
@@ -211,25 +220,25 @@ namespace GenioMVC.ViewModels.Stats
 			if (isToExport)
 			{
 				// EPH
-				crs = Models.Stats.AddEPH<CSGenioAstats>(ref u, crs, "ML61");
+				crs = Models.Prope.AddEPH<CSGenioAprope>(ref u, crs, "ML61");
 
 				// Export only records with ZZState == 0
-				crs.Equal(CSGenioAstats.FldZzstate, 0);
+				crs.Equal(CSGenioAprope.FldZzstate, 0);
 
 				return crs;
 			}
 
 			// Limitation by Zzstate
-			if (!Navigation.checkFormMode("STATS", FormMode.New)) // TODO: Check in Duplicate mode
-				crs = extendWithZzstateCondition(crs, CSGenioAstats.FldZzstate, null);
+			if (!Navigation.checkFormMode("PROPE", FormMode.New)) // TODO: Check in Duplicate mode
+				crs = extendWithZzstateCondition(crs, CSGenioAprope.FldZzstate, null);
 
 
 			if (tableReload)
 			{
-				string QMVC_POS_RECORD = Navigation.GetStrValue("QMVC_POS_RECORD_stats");
-				Navigation.DestroyEntry("QMVC_POS_RECORD_stats");
+				string QMVC_POS_RECORD = Navigation.GetStrValue("QMVC_POS_RECORD_prope");
+				Navigation.DestroyEntry("QMVC_POS_RECORD_prope");
 				if (!string.IsNullOrEmpty(QMVC_POS_RECORD))
-					crs.Equals(Models.Stats.AddEPH<CSGenioAstats>(ref u, null, "ML61"));
+					crs.Equals(Models.Prope.AddEPH<CSGenioAprope>(ref u, null, "ML61"));
 			}
 
 			return crs;
@@ -254,7 +263,7 @@ namespace GenioMVC.ViewModels.Stats
 		/// <param name="conditions">The conditions.</param>
 		public void Load(int numberListItems, NameValueCollection requestValues, bool ajaxRequest = false, CriteriaSet conditions = null)
 		{
-			ListingMVC<CSGenioAstats> listing = null;
+			ListingMVC<CSGenioAprope> listing = null;
 
 			Load(numberListItems, requestValues, ajaxRequest, false, ref listing, ref conditions);
 		}
@@ -268,7 +277,7 @@ namespace GenioMVC.ViewModels.Stats
 		/// <param name="isToExport">Whether the list is being loaded to be exported</param>
 		/// <param name="Qlisting">The rows.</param>
 		/// <param name="conditions">The conditions.</param>
-		public void Load(int numberListItems, NameValueCollection requestValues, bool ajaxRequest, bool isToExport, ref ListingMVC<CSGenioAstats> Qlisting, ref CriteriaSet conditions)
+		public void Load(int numberListItems, NameValueCollection requestValues, bool ajaxRequest, bool isToExport, ref ListingMVC<CSGenioAprope> Qlisting, ref CriteriaSet conditions)
 		{
 			CSGenio.core.framework.table.TableConfiguration tableConfig = new();
 
@@ -287,7 +296,7 @@ namespace GenioMVC.ViewModels.Stats
 		/// <param name="conditions">The conditions.</param>
 		public void Load(CSGenio.core.framework.table.TableConfiguration tableConfig, NameValueCollection requestValues, bool ajaxRequest, bool isToExport = false, CriteriaSet conditions = null)
 		{
-			ListingMVC<CSGenioAstats> listing = null;
+			ListingMVC<CSGenioAprope> listing = null;
 
 			Load(tableConfig, requestValues, ajaxRequest, isToExport, ref listing, ref conditions);
 		}
@@ -301,7 +310,7 @@ namespace GenioMVC.ViewModels.Stats
 		/// <param name="isToExport">Whether the list is being loaded to be exported</param>
 		/// <param name="Qlisting">The rows.</param>
 		/// <param name="conditions">The conditions.</param>
-		public void Load(CSGenio.core.framework.table.TableConfiguration tableConfig, NameValueCollection requestValues, bool ajaxRequest, bool isToExport, ref ListingMVC<CSGenioAstats> Qlisting, ref CriteriaSet conditions)
+		public void Load(CSGenio.core.framework.table.TableConfiguration tableConfig, NameValueCollection requestValues, bool ajaxRequest, bool isToExport, ref ListingMVC<CSGenioAprope> Qlisting, ref CriteriaSet conditions)
 		{
 			User u = m_userContext.User;
 			Menu = new TablePartial<FOR_Menu_61_RowViewModel>();
@@ -311,8 +320,8 @@ namespace GenioMVC.ViewModels.Stats
 
 			//FOR: MENU LIST SORTING
 			Dictionary<string, OrderedDictionary> allSortOrders = new Dictionary<string, OrderedDictionary>();
-			allSortOrders.Add("STATS.COUNTRY", new OrderedDictionary());
-			allSortOrders["STATS.COUNTRY"].Add("STATS.COUNTRY", "A");
+			allSortOrders.Add("PROPE.DTCONST", new OrderedDictionary());
+			allSortOrders["PROPE.DTCONST"].Add("PROPE.DTCONST", "A");
 
 
 			int numberListItems = tableConfig.RowsPerPage;
@@ -322,16 +331,16 @@ namespace GenioMVC.ViewModels.Stats
 			if (pageNumber < 1)
 				pageNumber = 1;
 
-			List<ColumnSort> sorts = GetRequestSorts(this.Menu, tableConfig, "stats", allSortOrders);
+			List<ColumnSort> sorts = GetRequestSorts(this.Menu, tableConfig, "prope", allSortOrders);
 
 			if (sorts == null || sorts.Count == 0)
 			{
 				sorts = new List<ColumnSort>();
-				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAstats.FldCountry), SortOrder.Ascending));
+				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAprope.FldDtconst), SortOrder.Ascending));
 
 			}
 
-			FieldRef[] fields = new FieldRef[] { CSGenioAstats.FldCodstats, CSGenioAstats.FldZzstate, CSGenioAstats.FldProfit, CSGenioAstats.FldNotsold, CSGenioAstats.FldCountry };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldPrice, CSGenioAprope.FldBuildage, CSGenioAprope.FldFloornr, CSGenioAprope.FldId, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldBuildtyp, CSGenioAprope.FldDtconst, CSGenioAprope.FldDescript, CSGenioAprope.FldDtsold, CSGenioAprope.FldTypology, CSGenioAprope.FldTitle, CSGenioAprope.FldPhoto };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
@@ -342,7 +351,7 @@ namespace GenioMVC.ViewModels.Stats
 			{
 				firstVisibleColumn = tableConfig?.GetFirstVisibleColumn(TableAlias);
 
-				firstVisibleColumn ??= new FieldRef("stats", "profit");
+				firstVisibleColumn ??= new FieldRef("agent", "name");
 			}
 			// Limitations
 			this.TableLimits ??= [];
@@ -353,7 +362,7 @@ namespace GenioMVC.ViewModels.Stats
 			{
 				Limit limit = new Limit();
 				limit.TipoLimite = LimitType.EPH;
-				CSGenioAstats model_limit_area = new CSGenioAstats(m_userContext.User);
+				CSGenioAprope model_limit_area = new CSGenioAprope(m_userContext.User);
 				List<Limit> area_EPH_limits = EPH_Limit_Filler(ref limit, model_limit_area, "ML61");
 				if (area_EPH_limits.Count > 0)
 					this.TableLimits.AddRange(area_EPH_limits);
@@ -379,7 +388,7 @@ namespace GenioMVC.ViewModels.Stats
 				var exportColumns = GetExportColumns(tableConfig.ColumnConfigurations);
 				var exportFieldRefs = exportColumns.Select(eCol => eCol.Field).Where(fldRef => fldRef != null).ToArray();
 
-				Qlisting = Models.ModelBase.BuildListingForExport<CSGenioAstats>(m_userContext, false, ref for_menu_61Conds, exportFieldRefs, (pageNumber - 1) * numberListItems, numberListItems, sorts, "ML61", true, firstVisibleColumn: firstVisibleColumn);
+				Qlisting = Models.ModelBase.BuildListingForExport<CSGenioAprope>(m_userContext, false, ref for_menu_61Conds, exportFieldRefs, (pageNumber - 1) * numberListItems, numberListItems, sorts, "ML61", true, firstVisibleColumn: firstVisibleColumn);
 
 // USE /[MANUAL FOR OVERRQLSTEXP 61]/
 
@@ -390,18 +399,18 @@ namespace GenioMVC.ViewModels.Stats
 			{
 // USE /[MANUAL FOR OVERRQLIST 61]/
 
-				string QMVC_POS_RECORD = Navigation.GetStrValue("QMVC_POS_RECORD_stats");
-				Navigation.DestroyEntry("QMVC_POS_RECORD_stats");
+				string QMVC_POS_RECORD = Navigation.GetStrValue("QMVC_POS_RECORD_prope");
+				Navigation.DestroyEntry("QMVC_POS_RECORD_prope");
 				CriteriaSet m_PagingPosEPHs = null;
 
 				if (!string.IsNullOrEmpty(QMVC_POS_RECORD))
 				{
-					var m_iCurPag = m_userContext.PersistentSupport.getPagingPos(CSGenioAstats.GetInformation(), QMVC_POS_RECORD, sorts, for_menu_61Conds, m_PagingPosEPHs, firstVisibleColumn: firstVisibleColumn);
+					var m_iCurPag = m_userContext.PersistentSupport.getPagingPos(CSGenioAprope.GetInformation(), QMVC_POS_RECORD, sorts, for_menu_61Conds, m_PagingPosEPHs, firstVisibleColumn: firstVisibleColumn);
 					if (m_iCurPag != -1)
 						pageNumber = ((m_iCurPag - 1) / numberListItems) + 1;
 				}
 
-				ListingMVC<CSGenioAstats> listing = Models.ModelBase.Where<CSGenioAstats>(m_userContext, distinct, for_menu_61Conds, fields, (pageNumber - 1) * numberListItems, numberListItems, sorts, "ML61", true, false, QMVC_POS_RECORD, m_PagingPosEPHs, firstVisibleColumn, fieldsWithTotalizers, tableConfig.SelectedRows);
+				ListingMVC<CSGenioAprope> listing = Models.ModelBase.Where<CSGenioAprope>(m_userContext, distinct, for_menu_61Conds, fields, (pageNumber - 1) * numberListItems, numberListItems, sorts, "ML61", true, false, QMVC_POS_RECORD, m_PagingPosEPHs, firstVisibleColumn, fieldsWithTotalizers, tableConfig.SelectedRows);
 
 				if (listing.CurrentPage > 0)
 					pageNumber = listing.CurrentPage;
@@ -440,7 +449,7 @@ namespace GenioMVC.ViewModels.Stats
 			LoadUserTableConfigNameProperties();
 		}
 
-		private List<FOR_Menu_61_RowViewModel> MapFOR_Menu_61(ListingMVC<CSGenioAstats> Qlisting)
+		private List<FOR_Menu_61_RowViewModel> MapFOR_Menu_61(ListingMVC<CSGenioAprope> Qlisting)
 		{
 			List<FOR_Menu_61_RowViewModel> Elements = [];
 			int i = 0;
@@ -460,11 +469,11 @@ namespace GenioMVC.ViewModels.Stats
 		}
 
 		/// <summary>
-		/// Maps a single CSGenioAstats row
+		/// Maps a single CSGenioAprope row
 		/// to a FOR_Menu_61_RowViewModel object.
 		/// </summary>
 		/// <param name="row">The row.</param>
-		private FOR_Menu_61_RowViewModel MapFOR_Menu_61(CSGenioAstats row)
+		private FOR_Menu_61_RowViewModel MapFOR_Menu_61(CSGenioAprope row)
 		{
 			var model = new FOR_Menu_61_RowViewModel(m_userContext, true, _fieldsToSerialize);
 			if (row == null)
@@ -474,8 +483,12 @@ namespace GenioMVC.ViewModels.Stats
 			{
 				switch (Qfield.Area)
 				{
-					case "stats":
+					case "prope":
 						model.klass.insertNameValueField(Qfield.FullName, Qfield.Value); break;
+					case "agent":
+						model.Agent.klass.insertNameValueField(Qfield.FullName, Qfield.Value); break;
+					case "city":
+						model.City.klass.insertNameValueField(Qfield.FullName, Qfield.Value); break;
 					default:
 						break;
 				}
@@ -483,6 +496,7 @@ namespace GenioMVC.ViewModels.Stats
 
 			model.InitRowData();
 
+			SetTicketToImageFields(model);
 			return model;
 		}
 
@@ -501,19 +515,19 @@ namespace GenioMVC.ViewModels.Stats
 		/// Sets the document field values to objects.
 		/// </summary>
 		/// <param name="listing">The rows</param>
-		private void SetDocumentFields(ListingMVC<CSGenioAstats> listing)
+		private void SetDocumentFields(ListingMVC<CSGenioAprope> listing)
 		{
 		}
 
 		#region Mapper
 
 		/// <inheritdoc />
-		public override void MapFromModel(Models.Stats m)
+		public override void MapFromModel(Models.Prope m)
 		{
 		}
 
 		/// <inheritdoc />
-		public override void MapToModel(Models.Stats m)
+		public override void MapToModel(Models.Prope m)
 		{
 		}
 
@@ -527,14 +541,30 @@ namespace GenioMVC.ViewModels.Stats
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Stats", "Stats.ValCodstats", "Stats.ValZzstate", "Stats.ValProfit", "Stats.ValNotsold", "Stats.ValCountry"
+			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Agent", "Agent.ValName", "Prope.ValPrice", "Prope.ValBuildage", "Prope.ValFloornr", "Prope.ValId", "City", "City.ValCity", "Prope.ValBuildtyp", "Prope.ValDtconst", "Prope.ValDescript", "Prope.ValDtsold", "Prope.ValTypology", "Prope.ValTitle", "Prope.ValPhoto", "Prope.ValCodagent", "Prope.ValCodcity"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
 		[
-			new TableSearchColumn("ValProfit", CSGenioAstats.FldProfit, typeof(decimal?)),
-			new TableSearchColumn("ValNotsold", CSGenioAstats.FldNotsold, typeof(decimal?)),
-			new TableSearchColumn("ValCountry", CSGenioAstats.FldCountry, typeof(string)),
+			new TableSearchColumn("Agent_ValName", CSGenioAagent.FldName, typeof(string)),
+			new TableSearchColumn("ValPrice", CSGenioAprope.FldPrice, typeof(decimal?)),
+			new TableSearchColumn("ValBuildage", CSGenioAprope.FldBuildage, typeof(decimal?)),
+			new TableSearchColumn("ValFloornr", CSGenioAprope.FldFloornr, typeof(decimal?)),
+			new TableSearchColumn("ValId", CSGenioAprope.FldId, typeof(decimal?)),
+			new TableSearchColumn("City_ValCity", CSGenioAcity.FldCity, typeof(string)),
+			new TableSearchColumn("ValBuildtyp", CSGenioAprope.FldBuildtyp, typeof(string), array : "buildtyp"),
+			new TableSearchColumn("ValDtconst", CSGenioAprope.FldDtconst, typeof(DateTime?)),
+			new TableSearchColumn("ValDescript", CSGenioAprope.FldDescript, typeof(string)),
+			new TableSearchColumn("ValDtsold", CSGenioAprope.FldDtsold, typeof(DateTime?)),
+			new TableSearchColumn("ValTypology", CSGenioAprope.FldTypology, typeof(decimal), array : "typology"),
+			new TableSearchColumn("ValTitle", CSGenioAprope.FldTitle, typeof(string), defaultSearch : true),
 		];
+		protected void SetTicketToImageFields(Models.Prope row)
+		{
+			if (row == null)
+				return;
+
+			row.ValPhotoQTicket = Helpers.Helpers.GetFileTicket(m_userContext.User, CSGenio.business.Area.AreaPROPE, CSGenioAprope.FldPhoto.Field, null, row.ValCodprope);
+		}
 	}
 }

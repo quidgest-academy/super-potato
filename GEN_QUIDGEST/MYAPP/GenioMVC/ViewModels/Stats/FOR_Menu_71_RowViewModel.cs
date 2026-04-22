@@ -6,16 +6,16 @@ using GenioMVC.Models.Navigation;
 
 namespace GenioMVC.ViewModels.Stats;
 
-public class FOR_Menu_61_RowViewModel : Models.Stats
+public class FOR_Menu_71_RowViewModel : Models.Stats
 {
 	#region Constructors
 
-	public FOR_Menu_61_RowViewModel(UserContext userContext, bool isEmpty = false, string[]? fieldsToSerialize = null) : base(userContext, isEmpty, fieldsToSerialize)
+	public FOR_Menu_71_RowViewModel(UserContext userContext, bool isEmpty = false, string[]? fieldsToSerialize = null) : base(userContext, isEmpty, fieldsToSerialize)
 	{
 		InitRowProperties();
 	}
 
-	public FOR_Menu_61_RowViewModel(UserContext userContext, CSGenioAstats val, bool isEmpty = false, string[]? fieldsToSerialize = null) : base(userContext, val, isEmpty, fieldsToSerialize)
+	public FOR_Menu_71_RowViewModel(UserContext userContext, CSGenioAstats val, bool isEmpty = false, string[]? fieldsToSerialize = null) : base(userContext, val, isEmpty, fieldsToSerialize)
 	{
 		InitRowProperties();
 	}

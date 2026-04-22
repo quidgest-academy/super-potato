@@ -28,18 +28,18 @@ namespace GenioMVC.Controllers
 {
 	public partial class StatsController : ControllerBase
 	{
-		private static readonly NavigationLocation ACTION_FOR_MENU_61 = new NavigationLocation("STATISTICS11845", "FOR_Menu_61", "Stats") { vueRouteName = "menu-FOR_61" };
+		private static readonly NavigationLocation ACTION_FOR_MENU_71 = new NavigationLocation("STATISTICS11845", "FOR_Menu_71", "Stats") { vueRouteName = "menu-FOR_71" };
 
 
 		//
-		// GET: /Stats/FOR_Menu_61
-		[ActionName("FOR_Menu_61")]
+		// GET: /Stats/FOR_Menu_71
+		[ActionName("FOR_Menu_71")]
 		[HttpPost]
-		public ActionResult FOR_Menu_61([FromBody] RequestMenuModel requestModel)
+		public ActionResult FOR_Menu_71([FromBody] RequestMenuModel requestModel)
 		{
 			var queryParams = requestModel.QueryParams;
 
-			FOR_Menu_61_ViewModel model = new(m_userContext);
+			FOR_Menu_71_ViewModel model = new(m_userContext);
 
 			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(
 				requestModel.TableConfiguration,
@@ -51,7 +51,7 @@ namespace GenioMVC.Controllers
 
 			bool isHomePage = RouteData.Values.ContainsKey("isHomePage") ? (bool)RouteData.Values["isHomePage"] : false;
 			if (isHomePage)
-				Navigation.SetValue("HomePage", "FOR_Menu_61");
+				Navigation.SetValue("HomePage", "FOR_Menu_71");
 
 			// If there was a recent operation on this table then force the primary persistence server to be called and ignore the read only feature
 			if (string.IsNullOrEmpty(Navigation.GetStrValue("ForcePrimaryRead_stats")))
@@ -70,18 +70,18 @@ namespace GenioMVC.Controllers
 				querystring.AddRange(queryParams);
 
 			if (!isHomePage &&
-				(Navigation.CurrentLevel == null || !ACTION_FOR_MENU_61.IsSameAction(Navigation.CurrentLevel.Location)) &&
-				Navigation.CurrentLevel.Location.Action != ACTION_FOR_MENU_61.Action)
+				(Navigation.CurrentLevel == null || !ACTION_FOR_MENU_71.IsSameAction(Navigation.CurrentLevel.Location)) &&
+				Navigation.CurrentLevel.Location.Action != ACTION_FOR_MENU_71.Action)
 				CSGenio.framework.Audit.registAction(UserContext.Current.User, Resources.Resources.MENU01948 + " " + Navigation.CurrentLevel.Location.ShortDescription());
 			else if (isHomePage)
 			{
-				CSGenio.framework.Audit.registAction(UserContext.Current.User, Resources.Resources.MENU01948 + " " + ACTION_FOR_MENU_61.ShortDescription());
+				CSGenio.framework.Audit.registAction(UserContext.Current.User, Resources.Resources.MENU01948 + " " + ACTION_FOR_MENU_71.ShortDescription());
 				Navigation.SetValue("HomePageContainsList", true);
 			}
 
 
 
-// USE /[MANUAL FOR MENU_GET 61]/
+// USE /[MANUAL FOR MENU_GET 71]/
 
 			try
 			{

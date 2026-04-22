@@ -171,6 +171,15 @@ namespace GenioMVC.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to "Properties Sold Manual"
+		/// </summary>
+		public static string PROPERTIES_SOLD_MANU05449 {
+			get {
+				return ResourceManager.GetString("PROPERTIES_SOLD_MANU05449", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to "Sender"
 		/// </summary>
 		public static string SENDER07671 {

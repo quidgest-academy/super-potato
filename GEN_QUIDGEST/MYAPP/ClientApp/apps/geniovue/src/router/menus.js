@@ -79,6 +79,20 @@ export default function getMenusRoutes()
 			}
 		},
 		{
+			path: '/:culture/:system/FOR/menu/FOR_61',
+			name: 'menu-FOR_61',
+			component: () => import('@/views/menus/ModuleFOR/MenuFOR_61/QMenuFor61.vue'),
+			meta: {
+				routeType: 'menu',
+				module: 'FOR',
+				order: '61',
+				baseArea: 'PROPE',
+				hasInitialPHE: false,
+				humanKeyFields: ['ValTitle', 'ValPrice'],
+				isPopup: false
+			}
+		},
+		{
 			path: '/:culture/:system/FOR/menu/FOR_311',
 			name: 'menu-FOR_311',
 			component: () => import('@/views/menus/ModuleFOR/MenuFOR_311/QMenuFor311.vue'),
@@ -93,13 +107,13 @@ export default function getMenusRoutes()
 			}
 		},
 		{
-			path: '/:culture/:system/FOR/menu/FOR_61',
-			name: 'menu-FOR_61',
-			component: () => import('@/views/menus/ModuleFOR/MenuFOR_61/QMenuFor61.vue'),
+			path: '/:culture/:system/FOR/menu/FOR_71',
+			name: 'menu-FOR_71',
+			component: () => import('@/views/menus/ModuleFOR/MenuFOR_71/QMenuFor71.vue'),
 			meta: {
 				routeType: 'menu',
 				module: 'FOR',
-				order: '61',
+				order: '71',
 				baseArea: 'STATS',
 				hasInitialPHE: false,
 				humanKeyFields: [],

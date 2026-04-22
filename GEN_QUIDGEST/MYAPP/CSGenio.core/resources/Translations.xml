@@ -36,6 +36,9 @@
   <msg id="City tax" code="CITY_TAX48454">
     <ENUS>City tax</ENUS>
   </msg>
+  <msg id="Properties Sold Manual" code="PROPERTIES_SOLD_MANU05449">
+    <ENUS>Properties Sold Manual</ENUS>
+  </msg>
   <msg id="Sender" code="SENDER07671">
     <ENUS>Sender</ENUS>
   </msg>

@@ -122,12 +122,12 @@
 				menuInfo: {
 					id: '61',
 					isMenuList: true,
-					designation: computed(() => this.Resources.STATISTICS11845),
+					designation: computed(() => this.Resources.PROPERTIES34868),
 					acronym: 'FOR_61',
-					name: 'STATS',
+					name: 'PROPE',
 					route: 'menu-FOR_61',
 					order: '61',
-					controller: 'STATS',
+					controller: 'PROPE',
 					action: 'FOR_Menu_61',
 					isPopup: false
 				},
@@ -135,10 +135,10 @@
 				model: new MenuViewModel(this),
 
 				controls: {
-					menu: new controlClass.TableSpecialRenderingControl({
+					menu: new controlClass.TableListControl({
 						fnHydrateViewModel: (data) => vm.model.hydrate(data),
 						id: 'FOR_Menu_61',
-						controller: 'STATS',
+						controller: 'PROPE',
 						action: 'FOR_Menu_61',
 						hasDependencies: false,
 						isInCollapsible: false,
@@ -147,61 +147,248 @@
 							'page-full-height'
 						],
 						columnsOriginal: [
-							new listColumnTypes.CurrencyColumn({
+							new listColumnTypes.TextColumn({
 								order: 1,
-								name: 'ValProfit',
-								area: 'STATS',
-								field: 'PROFIT',
-								label: computed(() => this.Resources.PROFIT55910),
+								name: 'Agent.ValName',
+								area: 'AGENT',
+								field: 'NAME',
+								label: computed(() => this.Resources.AGENT_S_NAME42642),
+								dataLength: 50,
+								scrollData: 30,
+								export: 1,
+								pkColumn: 'ValCodagent',
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.CurrencyColumn({
+								order: 2,
+								name: 'ValPrice',
+								area: 'PROPE',
+								field: 'PRICE',
+								label: computed(() => this.Resources.PRICE06900),
 								scrollData: 12,
 								maxDigits: 9,
 								decimalPlaces: 2,
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 							new listColumnTypes.NumericColumn({
-								order: 2,
-								name: 'ValNotsold',
-								area: 'STATS',
-								field: 'NOTSOLD',
-								label: computed(() => this.Resources.PROPERTIES_NOT_SOLD48533),
-								scrollData: 3,
-								maxDigits: 3,
+								order: 3,
+								name: 'ValBuildage',
+								area: 'PROPE',
+								field: 'BUILDAGE',
+								label: computed(() => this.Resources.BUILDING_AGE27311),
+								scrollData: 4,
+								maxDigits: 4,
+								decimalPlaces: 0,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.NumericColumn({
+								order: 4,
+								name: 'ValFloornr',
+								area: 'PROPE',
+								field: 'FLOORNR',
+								label: computed(() => this.Resources.FLOOR19993),
+								scrollData: 2,
+								maxDigits: 2,
+								decimalPlaces: 0,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.NumericColumn({
+								order: 5,
+								name: 'ValId',
+								area: 'PROPE',
+								field: 'ID',
+								scrollData: 5,
+								maxDigits: 5,
 								decimalPlaces: 0,
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 							new listColumnTypes.TextColumn({
-								order: 3,
-								name: 'ValCountry',
-								area: 'STATS',
-								field: 'COUNTRY',
-								label: computed(() => this.Resources.COUNTRY64133),
+								order: 6,
+								name: 'City.ValCity',
+								area: 'CITY',
+								field: 'CITY',
+								label: computed(() => this.Resources.CITY42505),
 								dataLength: 50,
 								scrollData: 30,
+								export: 1,
+								pkColumn: 'ValCodcity',
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.ArrayColumn({
+								order: 7,
+								name: 'ValBuildtyp',
+								area: 'PROPE',
+								field: 'BUILDTYP',
+								label: computed(() => this.Resources.BUILDING_TYPE57152),
+								dataLength: 1,
+								scrollData: 1,
+								export: 1,
+								array: computed(() => new qProjArrays.QArrayBuildtyp(vm.$getResource).elements),
+								arrayDisplayMode: 'D',
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.DateColumn({
+								order: 8,
+								name: 'ValDtconst',
+								area: 'PROPE',
+								field: 'DTCONST',
+								label: computed(() => this.Resources.CONSTRUCTION_DATE18132),
+								scrollData: 8,
+								dateTimeType: 'date',
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.TextColumn({
+								order: 9,
+								name: 'ValDescript',
+								area: 'PROPE',
+								field: 'DESCRIPT',
+								label: computed(() => this.Resources.DESCRIPTION07383),
+								scrollData: 30,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.DateColumn({
+								order: 10,
+								name: 'ValDtsold',
+								area: 'PROPE',
+								field: 'DTSOLD',
+								label: computed(() => this.Resources.SOLD_DATE37976),
+								scrollData: 8,
+								dateTimeType: 'date',
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.ArrayColumn({
+								order: 11,
+								name: 'ValTypology',
+								area: 'PROPE',
+								field: 'TYPOLOGY',
+								label: computed(() => this.Resources.BUILDING_TYPOLOGY54011),
+								scrollData: 1,
+								maxDigits: 1,
+								decimalPlaces: 0,
+								export: 1,
+								array: computed(() => new qProjArrays.QArrayTypology(vm.$getResource).elements),
+								arrayDisplayMode: 'D',
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.TextColumn({
+								order: 12,
+								name: 'ValTitle',
+								area: 'PROPE',
+								field: 'TITLE',
+								label: computed(() => this.Resources.TITLE21885),
+								dataLength: 50,
+								scrollData: 30,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.ImageColumn({
+								order: 13,
+								name: 'ValPhoto',
+								area: 'PROPE',
+								field: 'PHOTO',
+								label: computed(() => this.Resources.MAIN_PHOTO16044),
+								dataTitle: computed(() => genericFunctions.formatString(vm.Resources.IMAGEM_UTILIZADA_PAR58591, vm.Resources.MAIN_PHOTO16044)),
+								scrollData: 3,
+								sortable: false,
+								searchable: false,
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
 						config: {
 							name: 'FOR_Menu_61',
 							serverMode: true,
-							pkColumn: 'ValCodstats',
-							tableAlias: 'STATS',
-							tableNamePlural: computed(() => this.Resources.STATISTICS11845),
+							pkColumn: 'ValCodprope',
+							tableAlias: 'PROPE',
+							tableNamePlural: computed(() => this.Resources.PROPERTIES34868),
 							viewManagement: '',
 							showLimitsInfo: true,
-							tableTitle: computed(() => this.Resources.STATISTICS11845),
+							tableTitle: computed(() => this.Resources.PROPERTIES34868),
 							showAlternatePagination: true,
 							permissions: {
-								canView: false,
-								canEdit: false,
-								canDuplicate: false,
-								canDelete: false,
-								canInsert: false
 							},
 							searchBarConfig: {
 								visibility: true
 							},
 							allowColumnFilters: true,
 							allowColumnSort: true,
+							crudActions: [
+								{
+									id: 'show',
+									name: 'show',
+									title: computed(() => this.Resources.CONSULTAR57388),
+									icon: {
+										icon: 'view'
+									},
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'PROPERTY',
+										mode: 'SHOW',
+										isControlled: true
+									}
+								},
+								{
+									id: 'edit',
+									name: 'edit',
+									title: computed(() => this.Resources.EDITAR11616),
+									icon: {
+										icon: 'pencil'
+									},
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'PROPERTY',
+										mode: 'EDIT',
+										isControlled: true
+									}
+								},
+								{
+									id: 'duplicate',
+									name: 'duplicate',
+									title: computed(() => this.Resources.DUPLICAR09748),
+									icon: {
+										icon: 'duplicate'
+									},
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'PROPERTY',
+										mode: 'DUPLICATE',
+										isControlled: true
+									}
+								},
+								{
+									id: 'delete',
+									name: 'delete',
+									title: computed(() => this.Resources.ELIMINAR21155),
+									icon: {
+										icon: 'delete'
+									},
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'PROPERTY',
+										mode: 'DELETE',
+										isControlled: true
+									}
+								}
+							],
+							generalActions: [
+								{
+									id: 'insert',
+									name: 'insert',
+									title: computed(() => this.Resources.INSERIR43365),
+									icon: { icon: 'add' },
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'PROPERTY',
+										mode: 'NEW',
+										repeatInsertion: false,
+										isControlled: true
+									}
+								},
+							],
 							generalCustomActions: [
 							],
 							groupActions: [
@@ -211,187 +398,37 @@
 							MCActions: [
 							],
 							rowClickAction: {
+								id: 'RCA_FOR_611',
+								name: 'form-PROPERTY',
+								isVisible: true,
+								params: {
+									isRoute: true,
+									limits: [
+										{
+											identifier: 'id',
+											fnValueSelector: (row) => row.ValCodprope
+										},
+									],
+									isControlled: true,
+									action: vm.openFormAction, type: 'form', mode: 'SHOW', formName: 'PROPERTY'
+								}
 							},
 							formsDefinition: {
+								'PROPERTY': {
+									fnKeySelector: (row) => row.Fields.ValCodprope,
+									isPopup: false
+								},
 							},
-							defaultSearchColumnName: '',
-							defaultSearchColumnNameOriginal: '',
+							defaultSearchColumnName: 'ValTitle',
+							defaultSearchColumnNameOriginal: 'ValTitle',
 							defaultColumnSorting: {
-								columnName: 'ValCountry',
+								columnName: 'ValDtconst',
 								sortOrder: 'asc'
 							}
 						},
-						globalEvents: ['changed-STATS'],
-						uuid: '504c53a8-afd2-497c-8bc1-6523e0ae37ee',
+						globalEvents: ['changed-AGENT', 'changed-CITY', 'changed-PROPE'],
+						uuid: 'b720d491-ed3d-40f1-91ef-c85d9c3ac854',
 						allSelectedRows: 'false',
-						viewModes: [
-							{
-								id: 'LIST',
-								type: 'list',
-								subtype: '',
-								label: computed(() => this.Resources.LISTA13474),
-								order: 1,
-								mappingVariables: readonly({
-								}),
-								styleVariables: {
-								},
-								groups: {
-								}
-							},
-							{
-								id: 'CHART',
-								type: 'chart',
-								subtype: 'genericgraph',
-								label: computed(() => this.Resources.GRAFICO38823),
-								order: 2,
-								mappingVariables: readonly({
-									xaxis: {
-										allowsMultiple: false,
-										sources: [
-											'STATS.COUNTRY',
-										]
-									},
-									yaxis: {
-										allowsMultiple: true,
-										sources: [
-											'STATS.PROFIT',
-										]
-									},
-								}),
-								styleVariables: {
-									chartType: {
-										rawValue: 'column',
-										isMapped: false
-									},
-									firstColor: {
-										rawValue: 'undefined',
-										isMapped: false
-									},
-									chartColorArray: {
-										rawValue: 'Highcharts Default',
-										isMapped: false
-									},
-									invertColorArray: {
-										rawValue: false,
-										isMapped: false
-									},
-									xaxisType: {
-										rawValue: 'linear',
-										isMapped: false
-									},
-									yaxisType: {
-										rawValue: 'linear',
-										isMapped: false
-									},
-									graphTitle: {
-										rawValue: undefined,
-										isMapped: false
-									},
-									description: {
-										rawValue: undefined,
-										isMapped: false
-									},
-									alignDescription: {
-										rawValue: 'left',
-										isMapped: false
-									},
-									yaxisName: {
-										rawValue: undefined,
-										isMapped: false
-									},
-									xaxisName: {
-										rawValue: undefined,
-										isMapped: false
-									},
-									groupType: {
-										rawValue: 'join',
-										isMapped: false
-									},
-									inverted: {
-										rawValue: false,
-										isMapped: false
-									},
-									showLabels: {
-										rawValue: true,
-										isMapped: false
-									},
-									showLegend: {
-										rawValue: true,
-										isMapped: false
-									},
-									widthPercentage: {
-										rawValue: 100,
-										isMapped: false
-									},
-									showPieLabel: {
-										rawValue: 'outside',
-										isMapped: false
-									},
-									lineMarker: {
-										rawValue: 'enabled',
-										isMapped: false
-									},
-									heightPx: {
-										rawValue: 400,
-										isMapped: false
-									},
-									pieInnerSizePercentage: {
-										rawValue: 0,
-										isMapped: false
-									},
-									showBreaks: {
-										rawValue: false,
-										isMapped: false
-									},
-									enableHover: {
-										rawValue: true,
-										isMapped: false
-									},
-									zoomType: {
-										rawValue: 'x',
-										isMapped: false
-									},
-									legendLayout: {
-										rawValue: 'horizontal',
-										isMapped: false
-									},
-									legendXPosition: {
-										rawValue: 0,
-										isMapped: false
-									},
-									showLastN: {
-										rawValue: -1,
-										isMapped: false
-									},
-									legendYPosition: {
-										rawValue: 0,
-										isMapped: false
-									},
-									legendFloating: {
-										rawValue: false,
-										isMapped: false
-									},
-									legendAlign: {
-										rawValue: 'center',
-										isMapped: false
-									},
-									legendVerticalAlign: {
-										rawValue: 'bottom',
-										isMapped: false
-									},
-									stackingType: {
-										rawValue: 'undefined',
-										isMapped: false
-									},
-									valuesDecimals: {
-										rawValue: 0,
-										isMapped: false
-									},
-								},
-								groups: {
-								}
-							},
-						],
 						headerLevel: 1,
 						isActiveControl: computed(() => this.isActiveMenu)
 					}, this),

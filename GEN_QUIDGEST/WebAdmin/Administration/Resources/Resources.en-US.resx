@@ -153,6 +153,9 @@
   <data name="CITY_TAX48454" xml:space="preserve">
     <value>City tax</value>
   </data>
+  <data name="PROPERTIES_SOLD_MANU05449" xml:space="preserve">
+    <value>Properties Sold Manual</value>
+  </data>
   <data name="SENDER07671" xml:space="preserve">
     <value>Sender</value>
   </data>
