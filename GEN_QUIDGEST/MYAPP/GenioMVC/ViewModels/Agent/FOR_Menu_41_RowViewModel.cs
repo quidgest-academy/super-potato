@@ -37,29 +37,35 @@ public class FOR_Menu_41_RowViewModel : Models.Agent
 			{
 				Order = 1,
 				Area = "AGENT",
-				Field = "PHOTOGRAPHY",
+				Field = "NAME",
 			},
 			new ListColumn()
 			{
 				Order = 2,
 				Area = "AGENT",
-				Field = "BIRTHDAT",
+				Field = "PHOTOGRAPHY",
 			},
 			new ListColumn()
 			{
 				Order = 3,
 				Area = "AGENT",
-				Field = "TELEPHON",
+				Field = "BIRTHDAT",
 			},
 			new ListColumn()
 			{
 				Order = 4,
+				Area = "AGENT",
+				Field = "TELEPHON",
+			},
+			new ListColumn()
+			{
+				Order = 5,
 				Area = "CBORN",
 				Field = "COUNTRY",
 			},
 			new ListColumn()
 			{
-				Order = 5,
+				Order = 6,
 				Area = "CADDR",
 				Field = "COUNTRY",
 			},
@@ -76,6 +82,10 @@ public class FOR_Menu_41_RowViewModel : Models.Agent
 		bool canDelete = true;
 		bool canDuplicate = true;
 		bool canInsert = true;
+
+		using (new CSGenio.persistence.ScopedPersistentSupport(m_userContext.PersistentSupport))
+		{
+		}
 
 		BtnPermission = new TableRowCrudButtonPermissions()
 		{

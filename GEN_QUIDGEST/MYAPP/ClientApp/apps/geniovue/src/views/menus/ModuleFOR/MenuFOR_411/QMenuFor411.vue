@@ -258,6 +258,9 @@
 							showLimitsInfo: true,
 							tableTitle: computed(() => this.Resources.PROPERTIES34868),
 							showAlternatePagination: true,
+							rowClickActionInternal: 'selectMultiple',
+							showRowsSelectedCount: true,
+							showRowsSelectedTotalizer: true,
 							permissions: {
 							},
 							searchBarConfig: {
@@ -351,26 +354,26 @@
 							generalCustomActions: [
 							],
 							groupActions: [
+								{
+									id: 'MFJ_4111',
+									name: 'form-PROPERTY',
+									title: computed(() => this.Resources.SUBMETER21206),
+									params: {
+										limits: [
+											{
+												identifier: 'id',
+												fnValueSelector: (row) => row.ValCodprope
+											},
+										],
+										action: vm.openFormAction, type: 'form', mode: 'SHOW', formName: 'PROPERTY'
+									}
+								},
 							],
 							customActions: [
 							],
 							MCActions: [
 							],
 							rowClickAction: {
-								id: 'RCA_FOR_4111',
-								name: 'form-PROPERTY',
-								isVisible: true,
-								params: {
-									isRoute: true,
-									limits: [
-										{
-											identifier: 'id',
-											fnValueSelector: (row) => row.ValCodprope
-										},
-									],
-									isControlled: true,
-									action: vm.openFormAction, type: 'form', mode: 'SHOW', formName: 'PROPERTY'
-								}
 							},
 							formsDefinition: {
 								'PROPERTY': {

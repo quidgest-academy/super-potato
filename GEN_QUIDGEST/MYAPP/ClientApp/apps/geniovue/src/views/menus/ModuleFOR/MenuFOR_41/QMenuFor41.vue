@@ -147,8 +147,18 @@
 							'page-full-height'
 						],
 						columnsOriginal: [
-							new listColumnTypes.ImageColumn({
+							new listColumnTypes.TextColumn({
 								order: 1,
+								name: 'ValName',
+								area: 'AGENT',
+								field: 'NAME',
+								label: computed(() => this.Resources.AGENT_S_NAME42642),
+								dataLength: 50,
+								scrollData: 30,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.ImageColumn({
+								order: 2,
 								name: 'ValPhotography',
 								area: 'AGENT',
 								field: 'PHOTOGRAPHY',
@@ -160,7 +170,7 @@
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 							new listColumnTypes.DateColumn({
-								order: 2,
+								order: 3,
 								name: 'ValBirthdat',
 								area: 'AGENT',
 								field: 'BIRTHDAT',
@@ -170,7 +180,7 @@
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 							new listColumnTypes.TextColumn({
-								order: 3,
+								order: 4,
 								name: 'ValTelephon',
 								area: 'AGENT',
 								field: 'TELEPHON',
@@ -180,7 +190,7 @@
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 							new listColumnTypes.TextColumn({
-								order: 4,
+								order: 5,
 								name: 'Cborn.ValCountry',
 								area: 'CBORN',
 								field: 'COUNTRY',
@@ -191,7 +201,7 @@
 								pkColumn: 'ValCodcount',
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 							new listColumnTypes.TextColumn({
-								order: 5,
+								order: 6,
 								name: 'Caddr.ValCountry',
 								area: 'CADDR',
 								field: 'COUNTRY',
@@ -213,17 +223,95 @@
 							tableTitle: computed(() => this.Resources.AGENTS29376),
 							showAlternatePagination: true,
 							permissions: {
-								canView: false,
-								canEdit: false,
-								canDuplicate: false,
-								canDelete: false,
-								canInsert: false
 							},
 							searchBarConfig: {
 								visibility: true
 							},
 							allowColumnFilters: true,
 							allowColumnSort: true,
+							crudActions: [
+								{
+									id: 'show',
+									name: 'show',
+									title: computed(() => this.Resources.CONSULTAR57388),
+									icon: {
+										icon: 'view'
+									},
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'AGENT',
+										mode: 'SHOW',
+										isControlled: true
+									}
+								},
+								{
+									id: 'edit',
+									name: 'edit',
+									title: computed(() => this.Resources.EDITAR11616),
+									icon: {
+										icon: 'pencil'
+									},
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'AGENT',
+										mode: 'EDIT',
+										isControlled: true
+									}
+								},
+								{
+									id: 'duplicate',
+									name: 'duplicate',
+									title: computed(() => this.Resources.DUPLICAR09748),
+									icon: {
+										icon: 'duplicate'
+									},
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'AGENT',
+										mode: 'DUPLICATE',
+										isControlled: true
+									}
+								},
+								{
+									id: 'delete',
+									name: 'delete',
+									title: computed(() => this.Resources.ELIMINAR21155),
+									icon: {
+										icon: 'delete'
+									},
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'AGENT',
+										mode: 'DELETE',
+										isControlled: true
+									}
+								}
+							],
+							generalActions: [
+								{
+									id: 'insert',
+									name: 'insert',
+									title: computed(() => this.Resources.INSERIR43365),
+									icon: { icon: 'add' },
+									isInReadOnly: true,
+									params: {
+										action: vm.openFormAction,
+										type: 'form',
+										formName: 'AGENT',
+										mode: 'NEW',
+										repeatInsertion: false,
+										isControlled: true
+									}
+								},
+							],
 							generalCustomActions: [
 							],
 							groupActions: [
@@ -248,16 +336,20 @@
 								}
 							},
 							formsDefinition: {
+								'AGENT': {
+									fnKeySelector: (row) => row.Fields.ValCodagent,
+									isPopup: false
+								},
 							},
-							defaultSearchColumnName: '',
-							defaultSearchColumnNameOriginal: '',
+							defaultSearchColumnName: 'ValName',
+							defaultSearchColumnNameOriginal: 'ValName',
 							defaultColumnSorting: {
-								columnName: 'ValBirthdat',
+								columnName: '',
 								sortOrder: 'asc'
 							}
 						},
 						globalEvents: ['changed-CADDR', 'changed-AGENT', 'changed-CBORN'],
-						uuid: '708fe44b-b081-4f58-aec0-5de6d894490b',
+						uuid: '15d3d881-79cc-4231-a028-4ff56dbc3dd4',
 						allSelectedRows: 'false',
 						headerLevel: 1,
 						isActiveControl: computed(() => this.isActiveMenu)

@@ -201,6 +201,18 @@ namespace GenioMVC.Controllers
 
 		//
 		// GET: /Prope/FOR_Menu_411
+		[ActionName("FOR_Menu_411_Selections")]
+		[HttpPost]
+		public ActionResult FOR_Menu_411_Selections([FromBody] RequestSelectionsModel requestModel)
+		{
+			var ids = requestModel.Ids.ToArray();
+
+			Navigation.ClearValue("prope_Selections");
+			if (ids != null && ids.Length != 0)
+				Navigation.SetValue("prope_Selections", ids);
+			return Json(new { Success = true });
+		}
+
 		[ActionName("FOR_Menu_411")]
 		[HttpPost]
 		public ActionResult FOR_Menu_411([FromBody] RequestMenuModel requestModel)

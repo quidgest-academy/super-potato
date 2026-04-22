@@ -31,7 +31,7 @@ namespace GenioMVC.ViewModels.Agent
 
 		/// <inheritdoc/>
 		[JsonPropertyName("uuid")]
-		public override string Uuid => "708fe44b-b081-4f58-aec0-5de6d894490b";
+		public override string Uuid => "15d3d881-79cc-4231-a028-4ff56dbc3dd4";
 
 		/// <inheritdoc/>
 		protected override string[] FieldsToSerialize => _fieldsToSerialize;
@@ -100,7 +100,7 @@ namespace GenioMVC.ViewModels.Agent
 			conditions.SubSets.Add(GetCustomizedStaticLimits(StaticLimits));
 
 			// Checks for foreign tables in fields and conditions
-			FieldRef[] fields = new FieldRef[] { CSGenioAagent.FldCodagent, CSGenioAagent.FldZzstate, CSGenioAagent.FldPhotography, CSGenioAagent.FldBirthdat, CSGenioAagent.FldTelephon, CSGenioAagent.FldCborn, CSGenioAcborn.FldCodcount, CSGenioAcborn.FldCountry, CSGenioAagent.FldCodcaddr, CSGenioAcaddr.FldCodcount, CSGenioAcaddr.FldCountry };
+			FieldRef[] fields = new FieldRef[] { CSGenioAagent.FldCodagent, CSGenioAagent.FldZzstate, CSGenioAagent.FldName, CSGenioAagent.FldPhotography, CSGenioAagent.FldBirthdat, CSGenioAagent.FldTelephon, CSGenioAagent.FldCborn, CSGenioAcborn.FldCodcount, CSGenioAcborn.FldCountry, CSGenioAagent.FldCodcaddr, CSGenioAcaddr.FldCodcount, CSGenioAcaddr.FldCountry };
 
 			ListingMVC<CSGenioAagent> listing = new(fields, null, 1, 1, false, user, true, string.Empty, false);
 			SelectQuery qs = sp.getSelectQueryFromListingMVC(conditions, listing);
@@ -145,6 +145,7 @@ namespace GenioMVC.ViewModels.Agent
 		{
 			return
 			[
+				new Exports.QColumn(CSGenioAagent.FldName, FieldType.TEXT, Resources.Resources.AGENT_S_NAME42642, 30, 0, true),
 				new Exports.QColumn(CSGenioAagent.FldBirthdat, FieldType.DATE, Resources.Resources.BIRTHDATE22743, 8, 0, true),
 				new Exports.QColumn(CSGenioAagent.FldTelephon, FieldType.TEXT, Resources.Resources.TELEPHONE28697, 14, 0, true),
 				new Exports.QColumn(CSGenioAcborn.FldCountry, FieldType.TEXT, Resources.Resources.COUNTRY64133, 30, 0, true),
@@ -312,8 +313,6 @@ namespace GenioMVC.ViewModels.Agent
 
 			//FOR: MENU LIST SORTING
 			Dictionary<string, OrderedDictionary> allSortOrders = new Dictionary<string, OrderedDictionary>();
-			allSortOrders.Add("AGENT.BIRTHDAT", new OrderedDictionary());
-			allSortOrders["AGENT.BIRTHDAT"].Add("AGENT.BIRTHDAT", "A");
 
 
 			int numberListItems = tableConfig.RowsPerPage;
@@ -325,14 +324,8 @@ namespace GenioMVC.ViewModels.Agent
 
 			List<ColumnSort> sorts = GetRequestSorts(this.Menu, tableConfig, "agent", allSortOrders);
 
-			if (sorts == null || sorts.Count == 0)
-			{
-				sorts = new List<ColumnSort>();
-				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAagent.FldBirthdat), SortOrder.Ascending));
 
-			}
-
-			FieldRef[] fields = new FieldRef[] { CSGenioAagent.FldCodagent, CSGenioAagent.FldZzstate, CSGenioAagent.FldPhotography, CSGenioAagent.FldBirthdat, CSGenioAagent.FldTelephon, CSGenioAagent.FldCborn, CSGenioAcborn.FldCodcount, CSGenioAcborn.FldCountry, CSGenioAagent.FldCodcaddr, CSGenioAcaddr.FldCodcount, CSGenioAcaddr.FldCountry };
+			FieldRef[] fields = new FieldRef[] { CSGenioAagent.FldCodagent, CSGenioAagent.FldZzstate, CSGenioAagent.FldName, CSGenioAagent.FldPhotography, CSGenioAagent.FldBirthdat, CSGenioAagent.FldTelephon, CSGenioAagent.FldCborn, CSGenioAcborn.FldCodcount, CSGenioAcborn.FldCountry, CSGenioAagent.FldCodcaddr, CSGenioAcaddr.FldCodcount, CSGenioAcaddr.FldCountry };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
@@ -343,7 +336,7 @@ namespace GenioMVC.ViewModels.Agent
 			{
 				firstVisibleColumn = tableConfig?.GetFirstVisibleColumn(TableAlias);
 
-				firstVisibleColumn ??= new FieldRef("agent", "photography");
+				firstVisibleColumn ??= new FieldRef("agent", "name");
 			}
 			// Limitations
 			this.TableLimits ??= [];
@@ -533,11 +526,12 @@ namespace GenioMVC.ViewModels.Agent
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Agent", "Agent.ValCodagent", "Agent.ValZzstate", "Agent.ValPhotography", "Agent.ValBirthdat", "Agent.ValTelephon", "Cborn", "Cborn.ValCountry", "Caddr", "Caddr.ValCountry", "Agent.ValCodcaddr", "Agent.ValCborn"
+			"Agent", "Agent.ValCodagent", "Agent.ValZzstate", "Agent.ValName", "Agent.ValPhotography", "Agent.ValBirthdat", "Agent.ValTelephon", "Cborn", "Cborn.ValCountry", "Caddr", "Caddr.ValCountry", "Agent.ValCodcaddr", "Agent.ValCborn"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
 		[
+			new TableSearchColumn("ValName", CSGenioAagent.FldName, typeof(string), defaultSearch : true),
 			new TableSearchColumn("ValBirthdat", CSGenioAagent.FldBirthdat, typeof(DateTime?)),
 			new TableSearchColumn("ValTelephon", CSGenioAagent.FldTelephon, typeof(string)),
 			new TableSearchColumn("Cborn_ValCountry", CSGenioAcborn.FldCountry, typeof(string)),
