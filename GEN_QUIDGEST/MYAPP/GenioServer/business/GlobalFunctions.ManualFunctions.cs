@@ -39,7 +39,7 @@ namespace CSGenio.business
 		/// </summary>
 		private static void initTodasFuncoes()
 		{
-			todasFuncoes = new Hashtable(11, (float)0.5);
+			todasFuncoes = new Hashtable(12, (float)0.5);
 			todasFuncoes.Add("password_alterar", 0);
 			todasFuncoes.Add("password_verificaAntiga", 1);
 			todasFuncoes.Add("validarAssinatura", 2);
@@ -52,6 +52,7 @@ namespace CSGenio.business
 			todasFuncoes.Add("Age", 8);
 			todasFuncoes.Add("Average", 9);
 			todasFuncoes.Add("getCityTax", 10);
+			todasFuncoes.Add("averagePriceAgent", 11);
 			// Cargas
 		}
 
@@ -122,6 +123,17 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 			}
 		}
 
+		/// <summary>
+		/// Calculates average price of properties sold by one agent
+		/// </summary>
+		/// <param name="codagent"></param>
+		public decimal averagePriceAgent(decimal codagent)
+		{
+//BEGIN_FUNCTION:3188a6b9-8ca5-47e4-a321-7d0597fec81d
+//implementa
+//END_FUNCTION
+		}
+
 		#endregion
 
 		#region MANCS
@@ -133,7 +145,8 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 		{
 			"Age",
 			"Average",
-			"getCityTax"
+			"getCityTax",
+			"averagePriceAgent"
 		};
 
 		public static List<string> AllManualFuntionsNames

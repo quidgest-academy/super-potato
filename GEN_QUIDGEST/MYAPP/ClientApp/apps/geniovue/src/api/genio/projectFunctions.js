@@ -62,9 +62,18 @@ function getCityTax(codProperty)
 	/// <param name="codProperty"></param>
 	return netAPI.executeServerFunction('getCityTax', [codProperty]);
 }
+function averagePriceAgent(codagent)
+{
+	/// <summary>
+	/// Calculates average price of properties sold by one agent
+	/// </summary>
+	/// <param name="codagent"></param>
+	return netAPI.executeServerFunction('averagePriceAgent', [codagent]);
+}
 
 export default {
 	Age,
 	Average,
 	getCityTax,
+	averagePriceAgent,
 }

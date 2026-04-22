@@ -217,6 +217,13 @@ namespace CSGenio.business
                             string arg0 = obj[0];
                             return getCityTax(arg0);
                         }
+                    case 11:
+                        {
+                            checkFunctionArgs(obj, 1);
+
+                            decimal arg0 = Conversion.string2Numeric(obj[0]);
+                            return averagePriceAgent(arg0);
+                        }
                     default:
                         throw new BusinessException(null, "GlobalFunctions.executaFuncao", "Unknown function name: " + name);
                 }
