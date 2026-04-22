@@ -525,56 +525,12 @@
 					// eslint-disable-next-line
 					(data) => {
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
-// USE /[MANUAL FOR DONE_ROUTINE BTN_SELL]/
+//Platform: VUE | Type: DONE_ROUTINE | Module: FOR | Parameter: BTN_SELL | File:  | Order: 0
+//BEGIN_MANUALCODE_CODMANUA:a1578787-62e3-4a41-b8bc-aed356329f08
+this.loadList();
+//END_MANUALCODE
 // eslint-disable-next-line
 /* eslint-enable indent, vue/html-indent, vue/script-indent */
-
-						// DISCLAIMER: Adding code to "DONE_ROUTINE" will override the code below.
-						try
-						{
-							if (typeof data.success !== 'string' || typeof data.message !== 'string')
-								throw new Error('Invalid data structure.')
-
-							const result = qEnums.messageTypes[data.success]
-							if (!genericFunctions.isEmpty(result))
-							{
-								this.$eventTracker.addTrace({
-									origin: 'Routine BTN_SELL',
-									message: 'Manual routine "BTN_SELL" finished execution with result: ' + qEnums.messageTypes[data.success]
-								})
-
-								const message = data.message
-
-								if (!genericFunctions.isEmpty(message))
-								{
-									const buttons = {
-										confirm: {
-											label: this.Resources.OK15819,
-											action: () => this.FOR_MenuR_BTN_SELL_AfterDone(data)
-										}
-									}
-
-									genericFunctions.displayMessage(message, result, null, buttons)
-								}
-								else
-									this.FOR_MenuR_BTN_SELL_AfterDone(data)
-							}
-							else
-							{
-								this.$eventTracker.addError({
-									origin: 'Routine BTN_SELL',
-									message: 'Routine "BTN_SELL" finished execution with an unknown result type: ' + data.success
-								})
-							}
-						}
-						catch (e)
-						{
-							genericFunctions.displayMessage(this.Resources.NAO_FOI_POSSIVEL_CON65121, 'error')
-							this.$eventTracker.addError({
-								origin: 'Routine BTN_SELL (catch)',
-								message: e.toString()
-							})
-						}
 					},
 					() => {
 						genericFunctions.displayMessage(this.Resources.NAO_FOI_POSSIVEL_CON65121, 'error')
