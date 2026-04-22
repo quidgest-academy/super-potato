@@ -15,7 +15,7 @@
 <!-- eslint-disable-next-line -->
 <!-- eslint-enable indent, vue/html-indent, vue/script-indent -->
 		<div class="welcome-authenticated">
-			<span>{{ Resources.BEM_VINDO38622 }} {{ userData.name }}</span>
+			<span></span>
 		</div>
 	</div>
 </template>
