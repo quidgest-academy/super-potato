@@ -254,7 +254,7 @@
 									</base-input-structure>
 								</q-col>
 							</q-row>
-							<q-row v-if="controls.AGENT___AGENTNRPROPS_.isVisible || controls.AGENT___AGENTPROFIT__.isVisible">
+							<q-row v-if="controls.AGENT___AGENTNRPROPS_.isVisible || controls.AGENT___AGENTPROFIT__.isVisible || controls.AGENT__AGENT__AVERAGE_PRICE.isVisible">
 								<q-col
 									v-if="controls.AGENT___AGENTNRPROPS_.isVisible"
 									cols="auto">
@@ -275,7 +275,7 @@
 									</base-input-structure>
 								</q-col>
 								<q-col
-									v-if="controls.AGENT___AGENTPROFIT__.isVisible"
+									v-if="controls.AGENT___AGENTPROFIT__.isVisible || controls.AGENT__AGENT__AVERAGE_PRICE.isVisible"
 									cols="auto">
 									<base-input-structure
 										v-if="controls.AGENT___AGENTPROFIT__.isVisible"
@@ -291,6 +291,21 @@
 											v-bind="controls.AGENT___AGENTPROFIT__.props"
 											:id="getControlId(controls.AGENT___AGENTPROFIT__)"
 											@update:model-value="model.ValProfit.fnUpdateValue" />
+									</base-input-structure>
+									<base-input-structure
+										v-if="controls.AGENT__AGENT__AVERAGE_PRICE.isVisible"
+										class="i-text"
+										v-bind="controls.AGENT__AGENT__AVERAGE_PRICE.wrapperProps"
+										:id="getControlId(controls.AGENT__AGENT__AVERAGE_PRICE)"
+										v-on="controls.AGENT__AGENT__AVERAGE_PRICE.handlers"
+										:loading="controls.AGENT__AGENT__AVERAGE_PRICE.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-numeric-input
+											v-if="controls.AGENT__AGENT__AVERAGE_PRICE.isVisible"
+											v-bind="controls.AGENT__AGENT__AVERAGE_PRICE.props"
+											:id="getControlId(controls.AGENT__AGENT__AVERAGE_PRICE)"
+											@update:model-value="model.ValAverage_price.fnUpdateValue" />
 									</base-input-structure>
 								</q-col>
 							</q-row>
@@ -686,21 +701,6 @@
 				},
 
 				controls: {
-					AGENT___PSEUDNEWGRP01: new fieldControlClass.GroupControl({
-						id: 'AGENT___PSEUDNEWGRP01',
-						name: 'NEWGRP01',
-						size: 'block',
-						label: computed(() => this.Resources.AGENT_INFORMATION06141),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						borderless: false,
-						isCollapsible: false,
-						anchored: false,
-						directChildren: ['AGENT___AGENTNAME____', 'AGENT___AGENTBIRTHDAT', 'AGENT___AGENTAGE_____', 'AGENT___AGENTEMAIL___', 'AGENT___AGENTTELEPHON', 'AGENT___CBORNCOUNTRY_', 'AGENT___CADDRCOUNTRY_', 'AGENT___AGENTNRPROPS_', 'AGENT___AGENTPROFIT__', 'AGENT___AGENTLASTPROP', 'AGENT___AGENTPHOTOGRA'],
-						mustBeFilled: true,
-						controlLimits: [
-						],
-					}, this),
 					AGENT___AGENTNAME____: new fieldControlClass.StringControl({
 						modelField: 'ValName',
 						valueChangeEvent: 'fieldChange:agent.name',
@@ -871,6 +871,22 @@
 						controlLimits: [
 						],
 					}, this),
+					AGENT__AGENT__AVERAGE_PRICE: new fieldControlClass.CurrencyControl({
+						modelField: 'ValAverage_price',
+						valueChangeEvent: 'fieldChange:agent.average_price',
+						id: 'AGENT__AGENT__AVERAGE_PRICE',
+						name: 'AVERAGE_PRICE',
+						size: 'medium',
+						label: computed(() => this.Resources.AVERAGEPRICE13700),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'AGENT___PSEUDNEWGRP01',
+						isFormulaBlocked: true,
+						maxIntegers: 9,
+						maxDecimals: 2,
+						controlLimits: [
+						],
+					}, this),
 					AGENT___AGENTLASTPROP: new fieldControlClass.CurrencyControl({
 						modelField: 'ValLastprop',
 						valueChangeEvent: 'fieldChange:agent.lastprop',
@@ -905,6 +921,21 @@
 						controlLimits: [
 						],
 					}, this),
+					AGENT___PSEUDNEWGRP01: new fieldControlClass.GroupControl({
+						id: 'AGENT___PSEUDNEWGRP01',
+						name: 'NEWGRP01',
+						size: 'block',
+						label: computed(() => this.Resources.AGENT_INFORMATION06141),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						borderless: false,
+						isCollapsible: false,
+						anchored: false,
+						directChildren: ['AGENT___AGENTNAME____', 'AGENT___AGENTBIRTHDAT', 'AGENT___AGENTAGE_____', 'AGENT___AGENTEMAIL___', 'AGENT___AGENTTELEPHON', 'AGENT___CBORNCOUNTRY_', 'AGENT___CADDRCOUNTRY_', 'AGENT___AGENTNRPROPS_', 'AGENT___AGENTPROFIT__', 'AGENT__AGENT__AVERAGE_PRICE', 'AGENT___AGENTLASTPROP', 'AGENT___AGENTPHOTOGRA'],
+						mustBeFilled: true,
+						controlLimits: [
+						],
+					}, this),
 				},
 
 				model: new FormViewModel(this, {
@@ -931,10 +962,14 @@
 					Agent: {
 						get ValAge() { return vm.model.ValAge.value },
 						set ValAge(value) { vm.model.ValAge.updateValue(value) },
+						get ValAverage_price() { return vm.model.ValAverage_price.value },
+						set ValAverage_price(value) { vm.model.ValAverage_price.updateValue(value) },
 						get ValBirthdat() { return vm.model.ValBirthdat.value },
 						set ValBirthdat(value) { vm.model.ValBirthdat.updateValue(value) },
 						get ValCborn() { return vm.model.ValCborn.value },
 						set ValCborn(value) { vm.model.ValCborn.updateValue(value) },
+						get ValCodagent() { return vm.model.ValCodagent.value },
+						set ValCodagent(value) { vm.model.ValCodagent.updateValue(value) },
 						get ValCodcaddr() { return vm.model.ValCodcaddr.value },
 						set ValCodcaddr(value) { vm.model.ValCodcaddr.updateValue(value) },
 						get ValEmail() { return vm.model.ValEmail.value },

@@ -185,6 +185,23 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
+			Qfield = new Field(info.Alias, "average_price", FieldType.CURRENCY);
+			Qfield.FieldDescription = "AveragePrice";
+			Qfield.FieldSize =  12;
+			Qfield.MQueue = false;
+			Qfield.IntegerDigits = 9;
+			Qfield.Decimals = 2;
+			Qfield.CavDesignation = "AVERAGEPRICE13700";
+
+			Qfield.Dupmsg = "";
+			argumentsListByArea = new List<ByAreaArguments>();
+			argumentsListByArea.Add(new ByAreaArguments(new string[] {"codagent"}, new int[] {0}, "agent", "codagent"));
+			Qfield.Formula = new InternalOperationFormula(argumentsListByArea, 1, delegate(object[] args, User user, string module, PersistentSupport sp) {
+				return new GlobalFunctions(user,module,sp).averagePriceAgent(((string)args[0]));
+			});
+			info.RegisterFieldDB(Qfield);
+
+			//- - - - - - - - - - - - - - - - - - -
 			Qfield = new Field(info.Alias, "zzstate", FieldType.INTEGER);
 			Qfield.FieldDescription = "Estado da ficha";
 			info.RegisterFieldDB(Qfield);
@@ -231,7 +248,7 @@ namespace CSGenio.business
 
 
 			info.InternalOperationFields = new string[] {
-			 "age"
+			 "age","average_price"
 			};
 
 			info.DefaultValues = new string[] {
@@ -484,6 +501,17 @@ namespace CSGenio.business
 			set { insertNameValueField(FldAge, value); }
 		}
 
+		/// <summary>Field : "AveragePrice" Tipo: "$" Formula: + "averagePriceAgent([AGENT->CODAGENT])"</summary>
+		public static FieldRef FldAverage_price { get { return m_fldAverage_price; } }
+		private static FieldRef m_fldAverage_price = new FieldRef("agent", "average_price");
+
+		/// <summary>Field : "AveragePrice" Tipo: "$" Formula: + "averagePriceAgent([AGENT->CODAGENT])"</summary>
+		public decimal ValAverage_price
+		{
+			get { return (decimal)returnValueField(FldAverage_price); }
+			set { insertNameValueField(FldAverage_price, value); }
+		}
+
 		/// <summary>Field : "ZZSTATE" Type: "INT" Formula:  ""</summary>
 		public static FieldRef FldZzstate { get { return m_fldZzstate; } }
 		private static FieldRef m_fldZzstate = new FieldRef("agent", "zzstate");
@@ -581,7 +609,7 @@ namespace CSGenio.business
 		// USE /[MANUAL FOR TABAUX AGENT]/
 
  
-             
+              
 
 	}
 }

@@ -127,10 +127,17 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 		/// Calculates average price of properties sold by one agent
 		/// </summary>
 		/// <param name="codagent"></param>
-		public decimal averagePriceAgent(decimal codagent)
+		public decimal averagePriceAgent(string codagent)
 		{
 //BEGIN_FUNCTION:3188a6b9-8ca5-47e4-a321-7d0597fec81d
-//implementa
+            var average = new SelectQuery()
+                .Select(SqlFunctions.Average(CSGenioAprope.FldPrice), "averagePerAgent")
+                .From(Area.AreaPROPE)
+                .Where(CriteriaSet.And()
+				.Equal(CSGenioAprope.FldZzstate, 0)
+				.Equal(CSGenioAagent.FldCodagent, codagent));
+
+            return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 //END_FUNCTION
 		}
 

@@ -8,11 +8,6 @@ namespace quidgest.uitests.pages.forms;
 public class AgentForm : Form
 {
 	/// <summary>
-	/// Agent information
-	/// </summary>
-	public CollapsibleZoneControl PseudNewgrp01 => new CollapsibleZoneControl(driver, ContainerLocator, "#AGENT___PSEUDNEWGRP01" + IdSuffix + "-container");
-
-	/// <summary>
 	/// Agent's name
 	/// </summary>
 	public BaseInputControl AgentName => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTNAME____" + IdSuffix, "#AGENT___AGENTNAME____" + IdSuffix);
@@ -60,6 +55,11 @@ public class AgentForm : Form
 	public BaseInputControl AgentProfit => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTPROFIT__" + IdSuffix, "#AGENT___AGENTPROFIT__" + IdSuffix);
 
 	/// <summary>
+	/// AveragePrice
+	/// </summary>
+	public BaseInputControl AgentAverage_price => new BaseInputControl(driver, ContainerLocator, "container-AGENT__AGENT__AVERAGE_PRICE" + IdSuffix, "#AGENT__AGENT__AVERAGE_PRICE" + IdSuffix);
+
+	/// <summary>
 	/// Last property sold (price)
 	/// </summary>
 	public BaseInputControl AgentLastprop => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTLASTPROP" + IdSuffix, "#AGENT___AGENTLASTPROP" + IdSuffix);
@@ -68,6 +68,11 @@ public class AgentForm : Form
 	/// Photography
 	/// </summary>
 	public BaseInputControl AgentPhotogra => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTPHOTOGRA" + IdSuffix, "#AGENT___AGENTPHOTOGRA" + IdSuffix);
+
+	/// <summary>
+	/// Agent information
+	/// </summary>
+	public CollapsibleZoneControl PseudNewgrp01 => new CollapsibleZoneControl(driver, ContainerLocator, "#AGENT___PSEUDNEWGRP01" + IdSuffix + "-container");
 
 	public AgentForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "AGENT", containerLocator: containerLocator, usePkInId: usePkInId) { }

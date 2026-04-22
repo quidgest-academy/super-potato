@@ -189,6 +189,30 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValProfit))
 		this.stopWatchers.push(watch(() => this.ValProfit.value, (newValue, oldValue) => this.onUpdate('agent.profit', this.ValProfit, newValue, oldValue)))
 
+		this.ValAverage_price = reactive(new modelFieldType.Number({
+			id: 'ValAverage_price',
+			originId: 'ValAverage_price',
+			area: 'AGENT',
+			field: 'AVERAGE_PRICE',
+			maxDigits: 9,
+			decimalDigits: 2,
+			isFixed: true,
+			valueFormula: {
+				stopRecalcCondition() { return false },
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				fnFormula(params)
+				{
+					// Formula: averagePriceAgent([AGENT->CODAGENT])
+					return qFunctions.averagePriceAgent(this.ValCodagent.value)
+				},
+				dependencyEvents: ['fieldChange:agent.codagent'],
+				isServerRecalc: false,
+				isEmpty: qApi.emptyN,
+			},
+			description: computed(() => this.Resources.AVERAGEPRICE13700),
+		}).cloneFrom(values?.ValAverage_price))
+		this.stopWatchers.push(watch(() => this.ValAverage_price.value, (newValue, oldValue) => this.onUpdate('agent.average_price', this.ValAverage_price, newValue, oldValue)))
+
 		this.ValLastprop = reactive(new modelFieldType.Number({
 			id: 'ValLastprop',
 			originId: 'ValLastprop',

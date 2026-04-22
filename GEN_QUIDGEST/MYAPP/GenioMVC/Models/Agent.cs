@@ -121,6 +121,12 @@ namespace GenioMVC.Models
 		[NumericAttribute(0)]
 		public decimal? ValAge { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValAge, 0)); } set { klass.ValAge = Convert.ToDecimal(value); } }
 
+		[DisplayName("AveragePrice")]
+		/// <summary>Field : "AveragePrice" Tipo: "$" Formula: + "averagePriceAgent([AGENT->CODAGENT])"</summary>
+		[ShouldSerialize("Agent.ValAverage_price")]
+		[CurrencyAttribute("EUR", 2)]
+		public decimal? ValAverage_price { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValAverage_price, 2)); } set { klass.ValAverage_price = Convert.ToDecimal(value); } }
+
 		[DisplayName("ZZSTATE")]
 		[ShouldSerialize("Agent.ValZzstate")]
 		/// <summary>Field: "ZZSTATE", Type: "INT", Formula: ""</summary>

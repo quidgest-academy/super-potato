@@ -83,6 +83,11 @@ namespace GenioMVC.ViewModels.Agent
 		[ValidateSetAccess]
 		public decimal? ValProfit { get; set; }
 		/// <summary>
+		/// Title: "AveragePrice" | Type: "$"
+		/// </summary>
+		[ValidateSetAccess]
+		public decimal? ValAverage_price { get; set; }
+		/// <summary>
 		/// Title: "Last property sold (price)" | Type: "$"
 		/// </summary>
 		[ValidateSetAccess]
@@ -110,10 +115,13 @@ namespace GenioMVC.ViewModels.Agent
 
 		#region Fields for formulas
 
+		// Field for formula
+		/// <summary>Field: "" Tipo: "+"</summary>
+		[ValidateSetAccess]
+		public string ValCodagent { get; set; }
 
 		#endregion
 
-		public string ValCodagent { get; set; }
 
 
 		/// <summary>
@@ -232,6 +240,7 @@ namespace GenioMVC.ViewModels.Agent
 				ValTelephon = ViewModelConversion.ToString(m.ValTelephon);
 				ValNrprops = ViewModelConversion.ToNumeric(m.ValNrprops);
 				ValProfit = ViewModelConversion.ToNumeric(m.ValProfit);
+				ValAverage_price = ViewModelConversion.ToNumeric(m.ValAverage_price);
 				ValLastprop = ViewModelConversion.ToNumeric(m.ValLastprop);
 				ValPhotography = ViewModelConversion.ToImage(m.ValPhotography);
 				ValCodagent = ViewModelConversion.ToString(m.ValCodagent);
@@ -268,7 +277,6 @@ namespace GenioMVC.ViewModels.Agent
 				m.ValTelephon = ViewModelConversion.ToString(ValTelephon);
 				if (ValPhotography == null || !ValPhotography.IsThumbnail)
 					m.ValPhotography = ViewModelConversion.ToImage(ValPhotography);
-				m.ValCodagent = ViewModelConversion.ToString(ValCodagent);
 
 				/*
 					At this moment, in the case of runtime calculation of server-side formulas, to improve performance and reduce database load,
@@ -280,7 +288,9 @@ namespace GenioMVC.ViewModels.Agent
 				m.ValAge = ViewModelConversion.ToNumeric(ValAge);
 				m.ValNrprops = ViewModelConversion.ToNumeric(ValNrprops);
 				m.ValProfit = ViewModelConversion.ToNumeric(ValProfit);
+				m.ValAverage_price = ViewModelConversion.ToNumeric(ValAverage_price);
 				m.ValLastprop = ViewModelConversion.ToNumeric(ValLastprop);
+				m.ValCodagent = ViewModelConversion.ToString(ValCodagent);
 			}
 			catch (Exception)
 			{
@@ -320,9 +330,6 @@ namespace GenioMVC.ViewModels.Agent
 						break;
 					case "agent.photography":
 						this.ValPhotography = ViewModelConversion.ToImage(_value);
-						break;
-					case "agent.codagent":
-						this.ValCodagent = ViewModelConversion.ToString(_value);
 						break;
 					default:
 						Log.Error($"SetViewModelValue (Agent) - Unexpected field identifier {fullFieldName}");
@@ -877,6 +884,7 @@ namespace GenioMVC.ViewModels.Agent
 				"agent.telephon" => ViewModelConversion.ToString(modelValue),
 				"agent.nrprops" => ViewModelConversion.ToNumeric(modelValue),
 				"agent.profit" => ViewModelConversion.ToNumeric(modelValue),
+				"agent.average_price" => ViewModelConversion.ToNumeric(modelValue),
 				"agent.lastprop" => ViewModelConversion.ToNumeric(modelValue),
 				"agent.photography" => ViewModelConversion.ToImage(modelValue),
 				"agent.codagent" => ViewModelConversion.ToString(modelValue),

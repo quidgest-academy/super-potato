@@ -221,7 +221,7 @@ namespace CSGenio.business
                         {
                             checkFunctionArgs(obj, 1);
 
-                            decimal arg0 = Conversion.string2Numeric(obj[0]);
+                            string arg0 = obj[0];
                             return averagePriceAgent(arg0);
                         }
                     default:
