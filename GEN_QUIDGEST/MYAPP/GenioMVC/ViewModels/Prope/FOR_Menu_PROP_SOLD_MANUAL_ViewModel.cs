@@ -367,6 +367,29 @@ namespace GenioMVC.ViewModels.Prope
 				if (area_EPH_limits.Count > 0)
 					this.TableLimits.AddRange(area_EPH_limits);
 			}
+			//Tooltip for "Manual Filter" affecting this viewmodel list
+			{
+				Limit limit = new Limit();
+				limit.TipoLimite = LimitType.OVERRQ;
+				//Readme:
+				//Please create a Genio manual routine with the tag OVERRQ_TOOLTIP and same module ('FOR') and parameter ('PROP_SOLD_MANUAL') as in OVERRQ, providing information about the limit being done mannually, so it can appear as tooltip about list limits in application.
+				//This text will be displayed to the final user, in order to make possible to know what kind of limits are being applied to the list.
+
+				//Put in this two lines in the OVERRQ_TOOLTIP manwin, setting the ManualHTMLText property (in HTML) with the information about the limit being applied to current list (that is being done in OVERRQ):
+				limit.ManualHTMLText = ""; //Text that will be shown to users.
+				this.TableLimits.Add(limit);
+
+				//Alternatively to just filling the property ManualHTMLText, you can change the default TipoLimite to one of the main limits supported by genio and use the available function Limit_Filler below, that will fill the object limit with information collected dinamically, and after that, just add the limit to TableLimits (as done above):
+				//Limit_Filler(ref limit, model_limit_area, limit_field, limit_field_value, this_limit_field, LimitAreaType.AreaLimita);
+				//this.TableLimits.Add(limit);
+				//Where:
+				///<param name="area_limit">(ref) limit to be loaded with information aquired</param>
+				///<param name="model_limit_area">Area class object responsible for this limit</param>
+				///<param name="limit_field">Name of the area field that will establish the limit (in lowercase)</param>
+				///<param name="limit_field_value">Field value to use to infer (area, field in lowercase or field value) for this limit</param>
+				///<param name="this_limit_field">ViewModel private object with information about the field (loaded with the limit value/key)</param>
+				///<param name="limitAreaType">The area to place the boundary information within the limit object</param>
+			}
 
 
 			if (conditions == null)
@@ -376,7 +399,17 @@ namespace GenioMVC.ViewModels.Prope
 			for_menu_prop_sold_manualConds = BuildCriteriaSet(tableConfig, requestValues, out bool hasAllRequiredLimits, conditions, isToExport);
 			tableReload &= hasAllRequiredLimits;
 
-// USE /[MANUAL FOR OVERRQ PROP_SOLD_MANUAL]/
+				using (CSGenio.core.di.GenioDI.MetricsOtlp.RecordTime("manua_exec_time", new System.Diagnostics.TagList([
+					new("Name", "OVERRQ"),
+					new("Parameter", "PROP_SOLD_MANUAL"),
+					new("ModuleOrSystem", "FOR")
+				]), "ms", "Time to execute the manual code.")) {
+//Platform: MVC | Type: OVERRQ | Module: FOR | Parameter: PROP_SOLD_MANUAL | File:  | Order: 0
+//BEGIN_MANUALCODE_CODMANUA:7e681b62-7637-4eab-9596-e74fecea7f03
+for_menu_prop_sold_manualConds = CriteriaSet.And().Equal(CSGenioAprope.FldSold, 1);
+//END_MANUALCODE
+				}
+
 
 			bool distinct = false;
 
