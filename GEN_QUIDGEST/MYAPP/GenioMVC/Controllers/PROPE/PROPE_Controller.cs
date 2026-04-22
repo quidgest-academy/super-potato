@@ -80,20 +80,20 @@ namespace GenioMVC.Controllers
 			{
 				switch (string.IsNullOrEmpty(Identifier) ? "" : Identifier)
 				{
-					case "PROPERTYAGENTNAME____":	// Field (DB)
-						{
-							var model = new Property_ViewModel(UserContext.Current) { editable = false };
-							model.MapFromModel(row);
-							model.Load_Propertyagentname____(qs);
-							result = model.TableAgentName;
-						}
-						break;
 					case "PROPERTYCITY_CITY____":	// Field (DB)
 						{
 							var model = new Property_ViewModel(UserContext.Current) { editable = false };
 							model.MapFromModel(row);
 							model.Load_Propertycity_city____(qs);
 							result = model.TableCityCity;
+						}
+						break;
+					case "PROPERTYAGENTNAME____":	// Field (DB)
+						{
+							var model = new Property_ViewModel(UserContext.Current) { editable = false };
+							model.MapFromModel(row);
+							model.Load_Propertyagentname____(qs);
+							result = model.TableAgentName;
 						}
 						break;
 					default:
@@ -129,11 +129,11 @@ namespace GenioMVC.Controllers
 				UserContext.Current.PersistentSupport.openConnection();
 				switch (string.IsNullOrEmpty(Identifier) ? "" : Identifier)
 				{
-					case "PROPERTYAGENTNAME____":	// Field (DB)
-						values = new Property_ViewModel(UserContext.Current).GetDependant_PropertyTableAgentName(Selected);
-						break;
 					case "PROPERTYCITY_CITY____":	// Field (DB)
 						values = new Property_ViewModel(UserContext.Current).GetDependant_PropertyTableCityCity(Selected);
+						break;
+					case "PROPERTYAGENTNAME____":	// Field (DB)
+						values = new Property_ViewModel(UserContext.Current).GetDependant_PropertyTableAgentName(Selected);
 						break;
 					default: break;
 				}

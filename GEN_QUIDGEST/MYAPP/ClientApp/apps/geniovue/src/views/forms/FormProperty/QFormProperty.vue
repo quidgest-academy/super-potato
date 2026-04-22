@@ -176,7 +176,30 @@
 								value="PROPERTYPSEUDNEWGRP02"
 								:title="controls.PROPERTYPSEUDNEWGRP02.label">
 								<!-- Start PROPERTYPSEUDNEWGRP02 -->
-								<q-row v-if="controls.PROPERTYCOUNTCOUNTRY_.isVisible || controls.PROPERTYPROPETAX_____.isVisible || controls.PROPERTYCITY_CITY____.isVisible">
+								<q-row v-if="controls.PROPERTYCITY_CITY____.isVisible || controls.PROPERTYCOUNTCOUNTRY_.isVisible || controls.PROPERTYPROPETAX_____.isVisible">
+									<q-col
+										v-if="controls.PROPERTYCITY_CITY____.isVisible"
+										cols="auto">
+										<base-input-structure
+											v-if="controls.PROPERTYCITY_CITY____.isVisible"
+											class="i-text"
+											v-bind="controls.PROPERTYCITY_CITY____.wrapperProps"
+											:id="getControlId(controls.PROPERTYCITY_CITY____)"
+											v-on="controls.PROPERTYCITY_CITY____.handlers"
+											:loading="controls.PROPERTYCITY_CITY____.props.loading"
+											:reporting-mode-on="reportingModeCAV"
+											:suggestion-mode-on="suggestionModeOn">
+											<q-lookup
+												v-if="controls.PROPERTYCITY_CITY____.isVisible"
+												v-bind="controls.PROPERTYCITY_CITY____.props"
+												:id="getControlId(controls.PROPERTYCITY_CITY____)"
+												v-on="controls.PROPERTYCITY_CITY____.handlers" />
+											<q-see-more-propertycity-city
+												v-if="controls.PROPERTYCITY_CITY____.seeMoreIsVisible"
+												v-bind="controls.PROPERTYCITY_CITY____.seeMoreParams"
+												v-on="controls.PROPERTYCITY_CITY____.handlers" />
+										</base-input-structure>
+									</q-col>
 									<q-col
 										v-if="controls.PROPERTYCOUNTCOUNTRY_.isVisible"
 										cols="auto">
@@ -213,29 +236,6 @@
 												v-bind="controls.PROPERTYPROPETAX_____.props"
 												:id="getControlId(controls.PROPERTYPROPETAX_____)"
 												@update:model-value="model.ValTax.fnUpdateValue" />
-										</base-input-structure>
-									</q-col>
-									<q-col
-										v-if="controls.PROPERTYCITY_CITY____.isVisible"
-										cols="auto">
-										<base-input-structure
-											v-if="controls.PROPERTYCITY_CITY____.isVisible"
-											class="i-text"
-											v-bind="controls.PROPERTYCITY_CITY____.wrapperProps"
-											:id="getControlId(controls.PROPERTYCITY_CITY____)"
-											v-on="controls.PROPERTYCITY_CITY____.handlers"
-											:loading="controls.PROPERTYCITY_CITY____.props.loading"
-											:reporting-mode-on="reportingModeCAV"
-											:suggestion-mode-on="suggestionModeOn">
-											<q-lookup
-												v-if="controls.PROPERTYCITY_CITY____.isVisible"
-												v-bind="controls.PROPERTYCITY_CITY____.props"
-												:id="getControlId(controls.PROPERTYCITY_CITY____)"
-												v-on="controls.PROPERTYCITY_CITY____.handlers" />
-											<q-see-more-propertycity-city
-												v-if="controls.PROPERTYCITY_CITY____.seeMoreIsVisible"
-												v-bind="controls.PROPERTYCITY_CITY____.seeMoreParams"
-												v-on="controls.PROPERTYCITY_CITY____.handlers" />
 										</base-input-structure>
 									</q-col>
 								</q-row>
@@ -705,8 +705,8 @@
 		name: 'QFormProperty',
 
 		components: {
-			QSeeMorePropertyagentname: defineAsyncComponent(() => import('@/views/forms/FormProperty/dbedits/PropertyagentnameSeeMore.vue')),
 			QSeeMorePropertycityCity: defineAsyncComponent(() => import('@/views/forms/FormProperty/dbedits/PropertycityCitySeeMore.vue')),
+			QSeeMorePropertyagentname: defineAsyncComponent(() => import('@/views/forms/FormProperty/dbedits/PropertyagentnameSeeMore.vue')),
 		},
 
 		mixins: [
@@ -1480,13 +1480,45 @@
 						borderless: false,
 						isCollapsible: true,
 						anchored: false,
-						directChildren: ['PROPERTYCOUNTCOUNTRY_', 'PROPERTYPROPETAX_____', 'PROPERTYCITY_CITY____'],
+						directChildren: ['PROPERTYCITY_CITY____', 'PROPERTYCOUNTCOUNTRY_', 'PROPERTYPROPETAX_____'],
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYCITY_CITY____: new fieldControlClass.LookupControl({
+						modelField: 'TableCityCity',
+						valueChangeEvent: 'fieldChange:city.city',
+						id: 'PROPERTYCITY_CITY____',
+						name: 'CITY',
+						size: 'xxlarge',
+						label: computed(() => this.Resources.CITY42505),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP02',
+						externalCallbacks: {
+							getModelField: vm.getModelField,
+							getModelFieldValue: vm.getModelFieldValue,
+							setModelFieldValue: vm.setModelFieldValue
+						},
+						externalProperties: {
+							modelKeys: computed(() => vm.modelKeys)
+						},
+						lookupKeyModelField: {
+							name: 'ValCodcity',
+							dependencyEvent: 'fieldChange:prope.codcity'
+						},
+						dependentFields: () => ({
+							set 'city.codcity'(value) { vm.model.ValCodcity.updateValue(value) },
+							set 'city.city'(value) { vm.model.TableCityCity.updateValue(value) },
+							set 'count.country'(value) { vm.model.CityCountValCountry.updateValue(value) },
+						}),
 						controlLimits: [
 						],
 					}, this),
 					PROPERTYCOUNTCOUNTRY_: new fieldControlClass.StringControl({
 						modelField: 'CityCountValCountry',
 						valueChangeEvent: 'fieldChange:count.country',
+						dependentModelField: 'ValCodcount',
+						dependentChangeEvent: 'fieldChange:city.codcount',
 						id: 'PROPERTYCOUNTCOUNTRY_',
 						name: 'COUNTRY',
 						size: 'xlarge',
@@ -1770,35 +1802,6 @@
 						container: 'PROPERTYPSEUDNEWGRP01',
 						maxLength: 50,
 						mustBeFilled: true,
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYCITY_CITY____: new fieldControlClass.LookupControl({
-						modelField: 'TableCityCity',
-						valueChangeEvent: 'fieldChange:city.city',
-						id: 'PROPERTYCITY_CITY____',
-						name: 'CITY',
-						size: 'xxlarge',
-						label: computed(() => this.Resources.CITY42505),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP02',
-						externalCallbacks: {
-							getModelField: vm.getModelField,
-							getModelFieldValue: vm.getModelFieldValue,
-							setModelFieldValue: vm.setModelFieldValue
-						},
-						externalProperties: {
-							modelKeys: computed(() => vm.modelKeys)
-						},
-						lookupKeyModelField: {
-							name: 'ValCodcity',
-							dependencyEvent: 'fieldChange:prope.codcity'
-						},
-						dependentFields: () => ({
-							set 'city.codcity'(value) { vm.model.ValCodcity.updateValue(value) },
-							set 'city.city'(value) { vm.model.TableCityCity.updateValue(value) },
-						}),
 						controlLimits: [
 						],
 					}, this),

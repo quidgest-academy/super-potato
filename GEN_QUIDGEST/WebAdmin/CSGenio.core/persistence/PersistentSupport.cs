@@ -184,7 +184,9 @@ namespace CSGenio.persistence
 
         private static void InitManualQueries()
         {
-            
+            manualQueries = new Hashtable();
+	manualQueries.Add("VIEW_STATS___",new Q_view_stats());
+
         }
 
         public static Hashtable getManualQueries()

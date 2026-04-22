@@ -172,6 +172,9 @@ export const components = {
 	QTimeline: defineAsyncComponent(() => import('./timeline/QTimeline.vue')),
 	QDashboard: defineAsyncComponent(() => import('./dashboard/QDashboard.vue')),
 
+	// Special renderings
+	QChart: defineAsyncComponent(() => import('./rendering/chart/QChart.vue')),
+
 	// Table components
 	QTable: defineAsyncComponent(() => import('./table/QTable.vue')),
 	QTableSearch: defineAsyncComponent(() => import('./table/QTableSearch.vue')),

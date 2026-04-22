@@ -58,9 +58,15 @@ public class PropertyForm : Form
 	public CollapsibleZoneControl PseudNewgrp02 => new CollapsibleZoneControl(driver, ContainerLocator, "#PROPERTYPSEUDNEWGRP02" + IdSuffix + "-container");
 
 	/// <summary>
+	/// City
+	/// </summary>
+	public LookupControl CityCity => new LookupControl(driver, ContainerLocator, "container-PROPERTYCITY_CITY____" + IdSuffix);
+	public SeeMorePage CityCitySeeMorePage => new SeeMorePage(driver, "PROPERTY", "PROPERTYCITY_CITY____" + IdSuffix);
+
+	/// <summary>
 	/// Country
 	/// </summary>
-	public BaseInputControl CountCountry => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYCOUNTCOUNTRY_" + IdSuffix, "#PROPERTYCOUNTCOUNTRY_" + IdSuffix);
+	public IWebElement CountCountry => throw new NotImplementedException();
 
 	/// <summary>
 	/// Price
@@ -147,12 +153,6 @@ public class PropertyForm : Form
 	/// Title
 	/// </summary>
 	public BaseInputControl PropeTitle => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPETITLE___" + IdSuffix, "#PROPERTYPROPETITLE___" + IdSuffix);
-
-	/// <summary>
-	/// City
-	/// </summary>
-	public LookupControl CityCity => new LookupControl(driver, ContainerLocator, "container-PROPERTYCITY_CITY____" + IdSuffix);
-	public SeeMorePage CityCitySeeMorePage => new SeeMorePage(driver, "PROPERTY", "PROPERTYCITY_CITY____" + IdSuffix);
 
 	/// <summary>
 	/// Main photo

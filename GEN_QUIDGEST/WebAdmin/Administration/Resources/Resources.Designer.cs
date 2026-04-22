@@ -115,6 +115,15 @@ namespace Administration.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Statistics"
+        /// </summary>
+        public static string STATISTICS11845 {
+            get {
+                return ResourceManager.GetString("STATISTICS11845", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Country"
         /// </summary>
         public static string COUNTRY64133 {
@@ -615,6 +624,15 @@ namespace Administration.Resources {
         public static string GLOBAL58588 {
             get {
                 return ResourceManager.GetString("GLOBAL58588", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Properties Not Sold"
+        /// </summary>
+        public static string PROPERTIES_NOT_SOLD48533 {
+            get {
+                return ResourceManager.GetString("PROPERTIES_NOT_SOLD48533", resourceCulture);
             }
         }
 
@@ -1425,6 +1443,15 @@ namespace Administration.Resources {
         public static string HAS_LOGIN_58044 {
             get {
                 return ResourceManager.GetString("HAS_LOGIN_58044", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "Statistic"
+        /// </summary>
+        public static string STATISTIC29983 {
+            get {
+                return ResourceManager.GetString("STATISTIC29983", resourceCulture);
             }
         }
 

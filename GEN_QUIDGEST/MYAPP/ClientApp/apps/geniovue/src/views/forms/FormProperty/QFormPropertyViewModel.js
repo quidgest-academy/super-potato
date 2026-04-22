@@ -54,16 +54,6 @@ export default class ViewModel extends FormViewModelBase
 		this.stopWatchers.push(watch(() => this.ValCodprope.value, (newValue, oldValue) => this.onUpdate('prope.codprope', this.ValCodprope, newValue, oldValue)))
 
 		/** The used foreign keys. */
-		this.ValCodagent = reactive(new modelFieldType.ForeignKey({
-			id: 'ValCodagent',
-			originId: 'ValCodagent',
-			area: 'PROPE',
-			field: 'CODAGENT',
-			relatedArea: 'AGENT',
-			description: '',
-		}).cloneFrom(values?.ValCodagent))
-		this.stopWatchers.push(watch(() => this.ValCodagent.value, (newValue, oldValue) => this.onUpdate('prope.codagent', this.ValCodagent, newValue, oldValue)))
-
 		this.ValCodcity = reactive(new modelFieldType.ForeignKey({
 			id: 'ValCodcity',
 			originId: 'ValCodcity',
@@ -73,6 +63,16 @@ export default class ViewModel extends FormViewModelBase
 			description: '',
 		}).cloneFrom(values?.ValCodcity))
 		this.stopWatchers.push(watch(() => this.ValCodcity.value, (newValue, oldValue) => this.onUpdate('prope.codcity', this.ValCodcity, newValue, oldValue)))
+
+		this.ValCodagent = reactive(new modelFieldType.ForeignKey({
+			id: 'ValCodagent',
+			originId: 'ValCodagent',
+			area: 'PROPE',
+			field: 'CODAGENT',
+			relatedArea: 'AGENT',
+			description: '',
+		}).cloneFrom(values?.ValCodagent))
+		this.stopWatchers.push(watch(() => this.ValCodagent.value, (newValue, oldValue) => this.onUpdate('prope.codagent', this.ValCodagent, newValue, oldValue)))
 
 		/** The remaining form fields. */
 		this.ValId = reactive(new modelFieldType.Number({
@@ -159,12 +159,25 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValAverage))
 		this.stopWatchers.push(watch(() => this.ValAverage.value, (newValue, oldValue) => this.onUpdate('prope.average', this.ValAverage, newValue, oldValue)))
 
+		this.TableCityCity = reactive(new modelFieldType.String({
+			type: 'Lookup',
+			id: 'TableCityCity',
+			originId: 'ValCity',
+			area: 'CITY',
+			field: 'CITY',
+			maxLength: 50,
+			description: computed(() => this.Resources.CITY42505),
+			ignoreFldSubmit: true,
+		}).cloneFrom(values?.TableCityCity))
+		this.stopWatchers.push(watch(() => this.TableCityCity.value, (newValue, oldValue) => this.onUpdate('city.city', this.TableCityCity, newValue, oldValue)))
+
 		this.CityCountValCountry = reactive(new modelFieldType.String({
 			id: 'CityCountValCountry',
 			originId: 'ValCountry',
 			area: 'COUNT',
 			field: 'COUNTRY',
 			maxLength: 50,
+			isFixed: true,
 			description: computed(() => this.Resources.COUNTRY64133),
 		}).cloneFrom(values?.CityCountValCountry))
 		this.stopWatchers.push(watch(() => this.CityCountValCountry.value, (newValue, oldValue) => this.onUpdate('count.country', this.CityCountValCountry, newValue, oldValue)))
@@ -392,18 +405,6 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.TITLE21885),
 		}).cloneFrom(values?.ValTitle))
 		this.stopWatchers.push(watch(() => this.ValTitle.value, (newValue, oldValue) => this.onUpdate('prope.title', this.ValTitle, newValue, oldValue)))
-
-		this.TableCityCity = reactive(new modelFieldType.String({
-			type: 'Lookup',
-			id: 'TableCityCity',
-			originId: 'ValCity',
-			area: 'CITY',
-			field: 'CITY',
-			maxLength: 50,
-			description: computed(() => this.Resources.CITY42505),
-			ignoreFldSubmit: true,
-		}).cloneFrom(values?.TableCityCity))
-		this.stopWatchers.push(watch(() => this.TableCityCity.value, (newValue, oldValue) => this.onUpdate('city.city', this.TableCityCity, newValue, oldValue)))
 
 		this.ValPhoto = reactive(new modelFieldType.Image({
 			id: 'ValPhoto',

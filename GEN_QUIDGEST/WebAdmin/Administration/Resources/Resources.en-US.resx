@@ -135,6 +135,9 @@
   <data name="PROPERTIES34868" xml:space="preserve">
     <value>Properties</value>
   </data>
+  <data name="STATISTICS11845" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
   <data name="COUNTRY64133" xml:space="preserve">
     <value>Country</value>
   </data>
@@ -302,6 +305,9 @@
   </data>
   <data name="GLOBAL58588" xml:space="preserve">
     <value>Global</value>
+  </data>
+  <data name="PROPERTIES_NOT_SOLD48533" xml:space="preserve">
+    <value>Properties Not Sold</value>
   </data>
   <data name="ROLES61449" xml:space="preserve">
     <value>Roles</value>
@@ -572,6 +578,9 @@
   </data>
   <data name="HAS_LOGIN_58044" xml:space="preserve">
     <value>Has login?</value>
+  </data>
+  <data name="STATISTIC29983" xml:space="preserve">
+    <value>Statistic</value>
   </data>
   <data name="ALL38603" xml:space="preserve">
     <value>All</value>

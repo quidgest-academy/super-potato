@@ -18,6 +18,9 @@
   <msg id="Properties" code="PROPERTIES34868">
     <ENUS>Properties</ENUS>
   </msg>
+  <msg id="Statistics" code="STATISTICS11845">
+    <ENUS>Statistics</ENUS>
+  </msg>
   <msg id="Country" code="COUNTRY64133">
     <ENUS>Country</ENUS>
   </msg>
@@ -185,6 +188,9 @@
   </msg>
   <msg id="Global" code="GLOBAL58588">
     <ENUS>Global</ENUS>
+  </msg>
+  <msg id="Properties Not Sold" code="PROPERTIES_NOT_SOLD48533">
+    <ENUS>Properties Not Sold</ENUS>
   </msg>
   <msg id="Roles" code="ROLES61449">
     <ENUS>Roles</ENUS>
@@ -455,6 +461,9 @@
   </msg>
   <msg id="Has login?" code="HAS_LOGIN_58044">
     <ENUS>Has login?</ENUS>
+  </msg>
+  <msg id="Statistic" code="STATISTIC29983">
+    <ENUS>Statistic</ENUS>
   </msg>
   <msg id="All" code="ALL38603">
     <ENUS>All</ENUS>

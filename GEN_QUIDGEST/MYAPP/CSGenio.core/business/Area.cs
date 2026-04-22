@@ -52,6 +52,8 @@ namespace CSGenio.business
         private static AreaRef m_AreaCBORN = new AreaRef("FOR", "forcount", "cborn");
         public static AreaRef AreaCADDR { get { return m_AreaCADDR; } }
         private static AreaRef m_AreaCADDR = new AreaRef("FOR", "forcount", "caddr");
+        public static AreaRef AreaSTATS { get { return m_AreaSTATS; } }
+        private static AreaRef m_AreaSTATS = new AreaRef("FOR", "stats", "stats");
         public static AreaRef AreaAGENT { get { return m_AreaAGENT; } }
         private static AreaRef m_AreaAGENT = new AreaRef("FOR", "foragent", "agent");
         //areas hardcoded
@@ -101,6 +103,7 @@ namespace CSGenio.business
             "count",
             "cborn",
             "caddr",
+            "stats",
             "agent",
         });
 

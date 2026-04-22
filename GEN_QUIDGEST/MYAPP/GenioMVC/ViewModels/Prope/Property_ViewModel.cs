@@ -63,6 +63,11 @@ namespace GenioMVC.ViewModels.Prope
 		[ValidateSetAccess]
 		public decimal? ValAverage { get; set; }
 		/// <summary>
+		/// Title: "City" | Type: "C"
+		/// </summary>
+		[ValidateSetAccess]
+		public TableDBEdit<GenioMVC.Models.City> TableCityCity { get; set; }
+		/// <summary>
 		/// Title: "Country" | Type: "C"
 		/// </summary>
 		[ValidateSetAccess]
@@ -170,11 +175,6 @@ namespace GenioMVC.ViewModels.Prope
 		/// Title: "Title" | Type: "C"
 		/// </summary>
 		public string ValTitle { get; set; }
-		/// <summary>
-		/// Title: "City" | Type: "C"
-		/// </summary>
-		[ValidateSetAccess]
-		public TableDBEdit<GenioMVC.Models.City> TableCityCity { get; set; }
 		/// <summary>
 		/// Title: "Main photo" | Type: "IJ"
 		/// </summary>
@@ -566,8 +566,8 @@ namespace GenioMVC.ViewModels.Prope
 			// Add characteristics
 			Characs = new List<string>();
 
-			Load_Propertyagentname____(qs, lazyLoad);
 			Load_Propertycity_city____(qs, lazyLoad);
+			Load_Propertyagentname____(qs, lazyLoad);
 
 // USE /[MANUAL FOR VIEWMODEL_LOADPARTIAL PROPERTY]/
 		}
@@ -626,6 +626,194 @@ namespace GenioMVC.ViewModels.Prope
 		public void LoadChecklistsSelectedIDs()
 		{
 		}
+
+		/// <summary>
+		/// TableCityCity -> (DB)
+		/// </summary>
+		/// <param name="qs"></param>
+		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
+		public void Load_Propertycity_city____(NameValueCollection qs, bool lazyLoad = false)
+		{
+			bool propertycity_city____DoLoad = true;
+			CriteriaSet propertycity_city____Conds = CriteriaSet.And();
+			{
+				object hValue = Navigation.GetValue("city", true);
+				if (hValue != null && !(hValue is Array) && !string.IsNullOrEmpty(Convert.ToString(hValue)))
+				{
+					propertycity_city____Conds.Equal(CSGenioAcity.FldCodcity, hValue);
+					this.ValCodcity = DBConversion.ToString(hValue);
+				}
+			}
+
+			TableCityCity = new TableDBEdit<Models.City>();
+
+			if (lazyLoad)
+			{
+				if (Navigation.CurrentLevel.GetEntry("RETURN_city") != null)
+				{
+					this.ValCodcity = Navigation.GetStrValue("RETURN_city");
+					Navigation.CurrentLevel.SetEntry("RETURN_city", null);
+				}
+				FillDependant_PropertyTableCityCity(lazyLoad);
+				return;
+			}
+
+			if (propertycity_city____DoLoad)
+			{
+				List<ColumnSort> sorts = [];
+				ColumnSort requestedSort = GetRequestSort(TableCityCity, "sTableCityCity", "dTableCityCity", qs, "city");
+				if (requestedSort != null)
+					sorts.Add(requestedSort);
+				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAcity.FldCity), SortOrder.Ascending));
+
+				string query = "";
+				if (!string.IsNullOrEmpty(qs["TableCityCity_tableFilters"]))
+					TableCityCity.TableFilters = bool.Parse(qs["TableCityCity_tableFilters"]);
+				else
+					TableCityCity.TableFilters = false;
+
+				query = qs["qTableCityCity"];
+
+				//RS 26.07.2016 O preenchimento da lista de ajuda dos Dbedits passa a basear-se apenas no campo do próprio DbEdit
+				// O interface de pesquisa rápida não fica coerente quando se visualiza apenas uma coluna mas a pesquisa faz matching com 5 ou 6 colunas diferentes
+				//  tornando confuso to o user porque determinada row foi devolvida quando o Qresult não mostra como o matching foi feito
+				CriteriaSet search_filters = CriteriaSet.And();
+				if (!string.IsNullOrEmpty(query))
+				{
+					search_filters.Like(CSGenioAcity.FldCity, query + "%");
+				}
+				propertycity_city____Conds.SubSet(search_filters);
+
+				string tryParsePage = qs["pTableCityCity"] != null ? qs["pTableCityCity"].ToString() : "1";
+				int page = !string.IsNullOrEmpty(tryParsePage) ? int.Parse(tryParsePage) : 1;
+				int numberItems = CSGenio.framework.Configuration.NrRegDBedit;
+				int offset = (page - 1) * numberItems;
+
+				FieldRef[] fields = [CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAcity.FldZzstate];
+
+// USE /[MANUAL FOR OVERRQ PROPERTY_CITYCITY]/
+
+				// Limitation by Zzstate
+				/*
+					Records that are currently being inserted or duplicated will also be included.
+					Client-side persistence will try to fill the "text" value of that option.
+				*/
+				if (Navigation.checkFormMode("city", FormMode.New) || Navigation.checkFormMode("city", FormMode.Duplicate))
+					propertycity_city____Conds.SubSet(CriteriaSet.Or()
+						.Equal(CSGenioAcity.FldZzstate, 0)
+						.Equal(CSGenioAcity.FldCodcity, Navigation.GetStrValue("city")));
+				else
+					propertycity_city____Conds.Criterias.Add(new Criteria(new ColumnReference(CSGenioAcity.FldZzstate), CriteriaOperator.Equal, 0));
+
+				FieldRef firstVisibleColumn = new FieldRef("city", "city");
+				ListingMVC<CSGenioAcity> listing = Models.ModelBase.Where<CSGenioAcity>(m_userContext, false, propertycity_city____Conds, fields, offset, numberItems, sorts, "LED_PROPERTYCITY_CITY____", true, false, firstVisibleColumn: firstVisibleColumn);
+
+				TableCityCity.SetPagination(page, numberItems, listing.HasMore, listing.GetTotal, listing.TotalRecords);
+				TableCityCity.Query = query;
+				TableCityCity.Elements = listing.RowsForViewModel((r) => new GenioMVC.Models.City(m_userContext, r, true, _fieldsToSerialize_PROPERTYCITY_CITY____));
+
+				//created by [ MH ] at [ 14.04.2016 ] - Foi alterada a forma de retornar a key do novo registo inserido / editado no form de apoio do DBEdit.
+				//last update by [ MH ] at [ 10.05.2016 ] - Validação se key encontra-se no level atual, as chaves dos niveis anteriores devem ser ignorados.
+				if (Navigation.CurrentLevel.GetEntry("RETURN_city") != null)
+				{
+					this.ValCodcity = Navigation.GetStrValue("RETURN_city");
+					Navigation.CurrentLevel.SetEntry("RETURN_city", null);
+				}
+
+				TableCityCity.List = new SelectList(TableCityCity.Elements.ToSelectList(x => x.ValCity, x => x.ValCodcity,  x => x.ValCodcity == this.ValCodcity), "Value", "Text", this.ValCodcity);
+				FillDependant_PropertyTableCityCity();
+			}
+		}
+
+		/// <summary>
+		/// Get Dependant fields values -> TableCityCity (DB)
+		/// </summary>
+		/// <param name="PKey">Primary Key of City</param>
+		public ConcurrentDictionary<string, object> GetDependant_PropertyTableCityCity(string PKey)
+		{
+			FieldRef[] refDependantFields = [CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAcount.FldCodcount, CSGenioAcount.FldCountry];
+
+			var returnEmptyDependants = false;
+			CriteriaSet wherecodition = CriteriaSet.And();
+
+			// Return default values
+			if (GenFunctions.emptyG(PKey) == 1)
+				returnEmptyDependants = true;
+
+			// Check if the limit(s) is filled if exists
+			// - - - - - - - - - - - - - - - - - - - - -
+
+			if (returnEmptyDependants)
+				return GetViewModelFieldValues(refDependantFields);
+
+			PersistentSupport sp = m_userContext.PersistentSupport;
+			User u = m_userContext.User;
+
+			CSGenioAcity tempArea = new(u);
+
+			// Fields to select
+			SelectQuery querySelect = new();
+			querySelect.PageSize(1);
+			foreach (FieldRef field in refDependantFields)
+				querySelect.Select(field);
+
+			querySelect.From(tempArea.QSystem, tempArea.TableName, tempArea.Alias)
+				.Where(wherecodition.Equal(CSGenioAcity.FldCodcity, PKey));
+
+			string[] dependantFields = refDependantFields.Select(f => f.FullName).ToArray();
+			QueryUtils.SetInnerJoins(dependantFields, null, tempArea, querySelect);
+
+			ArrayList values = sp.executeReaderOneRow(querySelect);
+			bool useDefaults = values.Count == 0;
+
+			if (useDefaults)
+				return GetViewModelFieldValues(refDependantFields);
+			return GetViewModelFieldValues(refDependantFields, values);
+		}
+
+		/// <summary>
+		/// Fill Dependant fields values -> TableCityCity (DB)
+		/// </summary>
+		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
+		public void FillDependant_PropertyTableCityCity(bool lazyLoad = false)
+		{
+			var row = GetDependant_PropertyTableCityCity(this.ValCodcity);
+			try
+			{
+				this.funcCityCountValCountry = () => (string)row["count.country"];
+
+				// Fill List fields
+				this.ValCodcity = ViewModelConversion.ToString(row["city.codcity"]);
+				TableCityCity.Value = (string)row["city.city"];
+				if (GenFunctions.emptyG(this.ValCodcity) == 1)
+				{
+					this.ValCodcity = "";
+					TableCityCity.Value = "";
+					Navigation.ClearValue("city");
+				}
+				else if (lazyLoad)
+				{
+					TableCityCity.SetPagination(1, 0, false, false, 1);
+					TableCityCity.List = new SelectList(new List<SelectListItem>()
+					{
+						new SelectListItem
+						{
+							Value = Convert.ToString(this.ValCodcity),
+							Text = Convert.ToString(TableCityCity.Value),
+							Selected = true
+						}
+					}, "Value", "Text", this.ValCodcity);
+				}
+
+				TableCityCity.Selected = this.ValCodcity;
+			}
+			catch (Exception ex)
+			{
+				CSGenio.framework.Log.Error(string.Format("FillDependant_Error (TableCityCity): {0}; {1}", ex.Message, ex.InnerException != null ? ex.InnerException.Message : ""));
+			}
+		}
+
+		private readonly string[] _fieldsToSerialize_PROPERTYCITY_CITY____ = ["City", "City.ValCodcity", "City.ValZzstate", "City.ValCity"];
 
 		/// <summary>
 		/// TableAgentName -> (DB)
@@ -816,193 +1004,6 @@ namespace GenioMVC.ViewModels.Prope
 
 		private readonly string[] _fieldsToSerialize_PROPERTYAGENTNAME____ = ["Agent", "Agent.ValCodagent", "Agent.ValZzstate", "Agent.ValName", "Agent.ValEmail"];
 
-		/// <summary>
-		/// TableCityCity -> (DB)
-		/// </summary>
-		/// <param name="qs"></param>
-		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
-		public void Load_Propertycity_city____(NameValueCollection qs, bool lazyLoad = false)
-		{
-			bool propertycity_city____DoLoad = true;
-			CriteriaSet propertycity_city____Conds = CriteriaSet.And();
-			{
-				object hValue = Navigation.GetValue("city", true);
-				if (hValue != null && !(hValue is Array) && !string.IsNullOrEmpty(Convert.ToString(hValue)))
-				{
-					propertycity_city____Conds.Equal(CSGenioAcity.FldCodcity, hValue);
-					this.ValCodcity = DBConversion.ToString(hValue);
-				}
-			}
-
-			TableCityCity = new TableDBEdit<Models.City>();
-
-			if (lazyLoad)
-			{
-				if (Navigation.CurrentLevel.GetEntry("RETURN_city") != null)
-				{
-					this.ValCodcity = Navigation.GetStrValue("RETURN_city");
-					Navigation.CurrentLevel.SetEntry("RETURN_city", null);
-				}
-				FillDependant_PropertyTableCityCity(lazyLoad);
-				return;
-			}
-
-			if (propertycity_city____DoLoad)
-			{
-				List<ColumnSort> sorts = [];
-				ColumnSort requestedSort = GetRequestSort(TableCityCity, "sTableCityCity", "dTableCityCity", qs, "city");
-				if (requestedSort != null)
-					sorts.Add(requestedSort);
-				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAcity.FldCity), SortOrder.Ascending));
-
-				string query = "";
-				if (!string.IsNullOrEmpty(qs["TableCityCity_tableFilters"]))
-					TableCityCity.TableFilters = bool.Parse(qs["TableCityCity_tableFilters"]);
-				else
-					TableCityCity.TableFilters = false;
-
-				query = qs["qTableCityCity"];
-
-				//RS 26.07.2016 O preenchimento da lista de ajuda dos Dbedits passa a basear-se apenas no campo do próprio DbEdit
-				// O interface de pesquisa rápida não fica coerente quando se visualiza apenas uma coluna mas a pesquisa faz matching com 5 ou 6 colunas diferentes
-				//  tornando confuso to o user porque determinada row foi devolvida quando o Qresult não mostra como o matching foi feito
-				CriteriaSet search_filters = CriteriaSet.And();
-				if (!string.IsNullOrEmpty(query))
-				{
-					search_filters.Like(CSGenioAcity.FldCity, query + "%");
-				}
-				propertycity_city____Conds.SubSet(search_filters);
-
-				string tryParsePage = qs["pTableCityCity"] != null ? qs["pTableCityCity"].ToString() : "1";
-				int page = !string.IsNullOrEmpty(tryParsePage) ? int.Parse(tryParsePage) : 1;
-				int numberItems = CSGenio.framework.Configuration.NrRegDBedit;
-				int offset = (page - 1) * numberItems;
-
-				FieldRef[] fields = [CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAcity.FldZzstate];
-
-// USE /[MANUAL FOR OVERRQ PROPERTY_CITYCITY]/
-
-				// Limitation by Zzstate
-				/*
-					Records that are currently being inserted or duplicated will also be included.
-					Client-side persistence will try to fill the "text" value of that option.
-				*/
-				if (Navigation.checkFormMode("city", FormMode.New) || Navigation.checkFormMode("city", FormMode.Duplicate))
-					propertycity_city____Conds.SubSet(CriteriaSet.Or()
-						.Equal(CSGenioAcity.FldZzstate, 0)
-						.Equal(CSGenioAcity.FldCodcity, Navigation.GetStrValue("city")));
-				else
-					propertycity_city____Conds.Criterias.Add(new Criteria(new ColumnReference(CSGenioAcity.FldZzstate), CriteriaOperator.Equal, 0));
-
-				FieldRef firstVisibleColumn = new FieldRef("city", "city");
-				ListingMVC<CSGenioAcity> listing = Models.ModelBase.Where<CSGenioAcity>(m_userContext, false, propertycity_city____Conds, fields, offset, numberItems, sorts, "LED_PROPERTYCITY_CITY____", true, false, firstVisibleColumn: firstVisibleColumn);
-
-				TableCityCity.SetPagination(page, numberItems, listing.HasMore, listing.GetTotal, listing.TotalRecords);
-				TableCityCity.Query = query;
-				TableCityCity.Elements = listing.RowsForViewModel((r) => new GenioMVC.Models.City(m_userContext, r, true, _fieldsToSerialize_PROPERTYCITY_CITY____));
-
-				//created by [ MH ] at [ 14.04.2016 ] - Foi alterada a forma de retornar a key do novo registo inserido / editado no form de apoio do DBEdit.
-				//last update by [ MH ] at [ 10.05.2016 ] - Validação se key encontra-se no level atual, as chaves dos niveis anteriores devem ser ignorados.
-				if (Navigation.CurrentLevel.GetEntry("RETURN_city") != null)
-				{
-					this.ValCodcity = Navigation.GetStrValue("RETURN_city");
-					Navigation.CurrentLevel.SetEntry("RETURN_city", null);
-				}
-
-				TableCityCity.List = new SelectList(TableCityCity.Elements.ToSelectList(x => x.ValCity, x => x.ValCodcity,  x => x.ValCodcity == this.ValCodcity), "Value", "Text", this.ValCodcity);
-				FillDependant_PropertyTableCityCity();
-			}
-		}
-
-		/// <summary>
-		/// Get Dependant fields values -> TableCityCity (DB)
-		/// </summary>
-		/// <param name="PKey">Primary Key of City</param>
-		public ConcurrentDictionary<string, object> GetDependant_PropertyTableCityCity(string PKey)
-		{
-			FieldRef[] refDependantFields = [CSGenioAcity.FldCodcity, CSGenioAcity.FldCity];
-
-			var returnEmptyDependants = false;
-			CriteriaSet wherecodition = CriteriaSet.And();
-
-			// Return default values
-			if (GenFunctions.emptyG(PKey) == 1)
-				returnEmptyDependants = true;
-
-			// Check if the limit(s) is filled if exists
-			// - - - - - - - - - - - - - - - - - - - - -
-
-			if (returnEmptyDependants)
-				return GetViewModelFieldValues(refDependantFields);
-
-			PersistentSupport sp = m_userContext.PersistentSupport;
-			User u = m_userContext.User;
-
-			CSGenioAcity tempArea = new(u);
-
-			// Fields to select
-			SelectQuery querySelect = new();
-			querySelect.PageSize(1);
-			foreach (FieldRef field in refDependantFields)
-				querySelect.Select(field);
-
-			querySelect.From(tempArea.QSystem, tempArea.TableName, tempArea.Alias)
-				.Where(wherecodition.Equal(CSGenioAcity.FldCodcity, PKey));
-
-			string[] dependantFields = refDependantFields.Select(f => f.FullName).ToArray();
-			QueryUtils.SetInnerJoins(dependantFields, null, tempArea, querySelect);
-
-			ArrayList values = sp.executeReaderOneRow(querySelect);
-			bool useDefaults = values.Count == 0;
-
-			if (useDefaults)
-				return GetViewModelFieldValues(refDependantFields);
-			return GetViewModelFieldValues(refDependantFields, values);
-		}
-
-		/// <summary>
-		/// Fill Dependant fields values -> TableCityCity (DB)
-		/// </summary>
-		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
-		public void FillDependant_PropertyTableCityCity(bool lazyLoad = false)
-		{
-			var row = GetDependant_PropertyTableCityCity(this.ValCodcity);
-			try
-			{
-
-				// Fill List fields
-				this.ValCodcity = ViewModelConversion.ToString(row["city.codcity"]);
-				TableCityCity.Value = (string)row["city.city"];
-				if (GenFunctions.emptyG(this.ValCodcity) == 1)
-				{
-					this.ValCodcity = "";
-					TableCityCity.Value = "";
-					Navigation.ClearValue("city");
-				}
-				else if (lazyLoad)
-				{
-					TableCityCity.SetPagination(1, 0, false, false, 1);
-					TableCityCity.List = new SelectList(new List<SelectListItem>()
-					{
-						new SelectListItem
-						{
-							Value = Convert.ToString(this.ValCodcity),
-							Text = Convert.ToString(TableCityCity.Value),
-							Selected = true
-						}
-					}, "Value", "Text", this.ValCodcity);
-				}
-
-				TableCityCity.Selected = this.ValCodcity;
-			}
-			catch (Exception ex)
-			{
-				CSGenio.framework.Log.Error(string.Format("FillDependant_Error (TableCityCity): {0}; {1}", ex.Message, ex.InnerException != null ? ex.InnerException.Message : ""));
-			}
-		}
-
-		private readonly string[] _fieldsToSerialize_PROPERTYCITY_CITY____ = ["City", "City.ValCodcity", "City.ValZzstate", "City.ValCity"];
-
 		protected override object GetViewModelValue(string identifier, object modelValue)
 		{
 			return identifier switch
@@ -1031,11 +1032,11 @@ namespace GenioMVC.ViewModels.Prope
 				"prope.title" => ViewModelConversion.ToString(modelValue),
 				"prope.photo" => ViewModelConversion.ToImage(modelValue),
 				"prope.codprope" => ViewModelConversion.ToString(modelValue),
+				"city.codcity" => ViewModelConversion.ToString(modelValue),
+				"city.city" => ViewModelConversion.ToString(modelValue),
 				"count.codcount" => ViewModelConversion.ToString(modelValue),
 				"agent.codagent" => ViewModelConversion.ToString(modelValue),
 				"agent.name" => ViewModelConversion.ToString(modelValue),
-				"city.codcity" => ViewModelConversion.ToString(modelValue),
-				"city.city" => ViewModelConversion.ToString(modelValue),
 				_ => modelValue
 			};
 		}

@@ -135,4 +135,41 @@ namespace CSGenio.business
         }    
     }
 
+	class Q_view_stats : ManualQuery
+	{
+
+		public Q_view_stats()
+		{
+			this.m_parameters = new Dictionary<String, ParameterQuery>();
+			this.m_id = "#_QDG_VIEW_STATS____QDG_#";
+			this.m_query = @"with view_stats (COUNTRY, NOTSOLD, PROFIT)
+AS (
+	SELECT COUNTRY, COUNT(CASE WHEN p.SOLD = 0 THEN 1 END) as NOTSOLD, SUM(p.PROFIT)
+	FROM FORCOUNT c
+	LEFT JOIN FORCITY ct ON c.CODCOUNT = ct.CODCOUNT
+	LEFT JOIN FORPROPERTY p ON p.CODCITY = ct.CODCITY
+	group by c.COUNTRY)
+
+SELECT NEWID() CODSTATS, COUNTRY, NOTSOLD, PROFIT, 0 ZZSTATE
+
+FROM view_stats
+";
+		}
+
+
+		private Q_view_stats SetParams()
+		{
+			return this;
+		}
+
+		public override DataMatrix Run(PersistentSupport sp)
+		{
+			return this.SetParams().ExecuteQuery(sp);
+		}
+
+		public override DataMatrix Run(IDictionary<String, ParameterQuery> parameters,PersistentSupport sp)
+		{
+			return new Q_view_stats().SetParams().ExecuteQuery(sp);
+		}
+	}
 }
