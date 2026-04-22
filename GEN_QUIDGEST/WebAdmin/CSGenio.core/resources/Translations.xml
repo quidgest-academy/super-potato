@@ -429,6 +429,9 @@
   <msg id="Created on" code="CREATED_ON00051">
     <ENUS>Created on</ENUS>
   </msg>
+  <msg id="Sell" code="SELL42668">
+    <ENUS>Sell</ENUS>
+  </msg>
   <msg id="Contacts" code="CONTACTS55742">
     <ENUS>Contacts</ENUS>
   </msg>

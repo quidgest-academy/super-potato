@@ -1348,6 +1348,15 @@ namespace Administration.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Sell"
+        /// </summary>
+        public static string SELL42668 {
+            get {
+                return ResourceManager.GetString("SELL42668", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Contacts"
         /// </summary>
         public static string CONTACTS55742 {

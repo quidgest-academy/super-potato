@@ -121,6 +121,13 @@ public class FOR_Menu_411_RowViewModel : Models.Prope
 	{
 		CustomActions ??= new()
 		{
+			{
+				"FOR_4111",
+				new ListCustomAction()
+				{
+					Id = "FOR_4111",
+				}
+			},
 		};
 	}
 

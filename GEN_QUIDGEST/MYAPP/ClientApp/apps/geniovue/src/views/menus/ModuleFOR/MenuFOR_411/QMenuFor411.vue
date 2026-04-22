@@ -354,10 +354,13 @@
 							generalCustomActions: [
 							],
 							groupActions: [
+							],
+							customActions: [
 								{
-									id: 'MFJ_4111',
-									name: 'form-PROPERTY',
-									title: computed(() => this.Resources.SUBMETER21206),
+									id: 'MB_4111',
+									name: 'FOR_Menu_411_MenuR_BTN_SELL',
+									isVisible: true,
+									title: computed(() => this.Resources.SELL42668),
 									params: {
 										limits: [
 											{
@@ -365,11 +368,9 @@
 												fnValueSelector: (row) => row.ValCodprope
 											},
 										],
-										action: vm.openFormAction, type: 'form', mode: 'SHOW', formName: 'PROPERTY'
+										action: vm.openRoutineAction, type: 'routine', actionRoutine: this.FOR_Menu_411_MenuR_BTN_SELL
 									}
 								},
-							],
-							customActions: [
 							],
 							MCActions: [
 							],
@@ -388,6 +389,9 @@
 								sortOrder: 'asc'
 							}
 						},
+						actionIDs: [
+							'FOR_4111',
+						],
 						globalEvents: ['changed-AGENT', 'changed-CITY', 'changed-PROPE'],
 						uuid: '407f1d81-03ca-4ea0-8450-7b31b3489c06',
 						allSelectedRows: 'false',
@@ -403,6 +407,9 @@
 							},
 						],
 						isActiveControl: computed(() => this.isActiveMenu)
+					}, this),
+					FOR_4111: new controlClass.ButtonControl({
+						id: 'FOR_4111',
 					}, this),
 				}
 			}
@@ -424,6 +431,8 @@
 
 		mounted()
 		{
+			this.$eventHub.on('EXEC-MENU-ROUTINE-FOR_411', this.onExecRoutineEvent)
+
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
 // USE /[MANUAL FOR FORM_CODEJS FOR_MENU_411]/
 // eslint-disable-next-line
@@ -439,6 +448,178 @@
 		},
 
 		methods: {
+
+			/**
+			 * Callback function for the routines.
+			 * @param {object} eventData The event data
+			 */
+			onExecRoutineEvent(eventData)
+			{
+				if (typeof this[eventData.routineName] === 'function')
+					this[eventData.routineName].call(this, eventData.params)
+			},
+
+			// eslint-disable-next-line
+			FOR_MenuR_BTN_SELL(jsonRouteValues)
+			{
+				this.$eventTracker.addTrace({
+					origin: 'Routine BTN_SELL',
+					message: 'Start of execution of the manual routine'
+				})
+
+/* eslint-disable indent, vue/html-indent, vue/script-indent */
+// USE /[MANUAL FOR VIEW_MANUAL_ROUTINE BTN_SELL]/
+// eslint-disable-next-line
+/* eslint-enable indent, vue/html-indent, vue/script-indent */
+
+				this.FOR_MenuR_BTN_SELL_BeforeSend(jsonRouteValues).then((result) => {
+					return this.FOR_MenuR_BTN_SELL_AjaxCall(result)
+				})
+			},
+
+			FOR_MenuR_BTN_SELL_AjaxCall(jsonRouteValues)
+			{
+				if (typeof jsonRouteValues !== 'object' || typeof jsonRouteValues.action !== 'string')
+				{
+					this.$eventTracker.addError({
+						origin: 'Routine BTN_SELL',
+						message: 'Parameter "jsonRouteValues" has a wrong format.'
+					})
+					return
+				}
+
+				const params = jsonRouteValues
+
+				this.$eventTracker.addTrace({
+					origin: 'Routine BTN_SELL',
+					message: 'Ajax call method',
+					contextData: { params }
+				})
+
+				/*
+				 * This param can come from the jsonRouteValues that come from the
+				 * component in case of forms, for example. We do not want to replace
+				 * it with this new one!
+				 */
+				if (typeof params.allSelected === 'undefined')
+				{
+					// Check for all selected rows.
+					const allSelected = this.navigation.currentLevel.params.allSelected ?? []
+					const tblId = 'FOR_Menu_411'
+					params.allSelected = allSelected.findIndex((e) => e === tblId) !== -1
+				}
+
+				asyncProcM.addBusy(netAPI.postData(
+					'Prope',
+					params.action,
+					params,
+					// eslint-disable-next-line
+					(data) => {
+/* eslint-disable indent, vue/html-indent, vue/script-indent */
+// USE /[MANUAL FOR DONE_ROUTINE BTN_SELL]/
+// eslint-disable-next-line
+/* eslint-enable indent, vue/html-indent, vue/script-indent */
+
+						// DISCLAIMER: Adding code to "DONE_ROUTINE" will override the code below.
+						try
+						{
+							if (typeof data.success !== 'string' || typeof data.message !== 'string')
+								throw new Error('Invalid data structure.')
+
+							const result = qEnums.messageTypes[data.success]
+							if (!genericFunctions.isEmpty(result))
+							{
+								this.$eventTracker.addTrace({
+									origin: 'Routine BTN_SELL',
+									message: 'Manual routine "BTN_SELL" finished execution with result: ' + qEnums.messageTypes[data.success]
+								})
+
+								const message = data.message
+
+								if (!genericFunctions.isEmpty(message))
+								{
+									const buttons = {
+										confirm: {
+											label: this.Resources.OK15819,
+											action: () => this.FOR_MenuR_BTN_SELL_AfterDone(data)
+										}
+									}
+
+									genericFunctions.displayMessage(message, result, null, buttons)
+								}
+								else
+									this.FOR_MenuR_BTN_SELL_AfterDone(data)
+							}
+							else
+							{
+								this.$eventTracker.addError({
+									origin: 'Routine BTN_SELL',
+									message: 'Routine "BTN_SELL" finished execution with an unknown result type: ' + data.success
+								})
+							}
+						}
+						catch (e)
+						{
+							genericFunctions.displayMessage(this.Resources.NAO_FOI_POSSIVEL_CON65121, 'error')
+							this.$eventTracker.addError({
+								origin: 'Routine BTN_SELL (catch)',
+								message: e.toString()
+							})
+						}
+					},
+					() => {
+						genericFunctions.displayMessage(this.Resources.NAO_FOI_POSSIVEL_CON65121, 'error')
+					},
+					undefined,
+					this.navigationId)
+				)
+			},
+
+			// eslint-disable-next-line
+			async FOR_MenuR_BTN_SELL_AfterDone(data)
+			{
+				this.$eventTracker.addTrace({
+					origin: 'Routine BTN_SELL',
+					message: 'After done method',
+					contextData: { data }
+				})
+
+/* eslint-disable indent, vue/html-indent, vue/script-indent */
+// USE /[MANUAL FOR AFTER_DONE_ROUTINE BTN_SELL]/
+// eslint-disable-next-line
+/* eslint-enable indent, vue/html-indent, vue/script-indent */
+			},
+
+			FOR_MenuR_BTN_SELL_BeforeSend(data)
+			{
+				this.$eventTracker.addTrace({
+					origin: 'Routine BTN_SELL',
+					message: 'Before send method',
+					contextData: { data }
+				})
+
+				return new Promise((resolve, reject) => {
+					try
+					{
+/* eslint-disable indent, vue/html-indent, vue/script-indent */
+// USE /[MANUAL FOR BEFORESEND_ROUTINE BTN_SELL]/
+// eslint-disable-next-line
+/* eslint-enable indent, vue/html-indent, vue/script-indent */
+
+						resolve(data)
+					}
+					catch (e)
+					{
+						reject(e.toString())
+					}
+				})
+			},
+
+			FOR_Menu_411_MenuR_BTN_SELL(jsonRouteValues, fnAfterConfirm)
+			{
+				jsonRouteValues.action = 'FOR_Menu_411_MenuR_BTN_SELL'
+				this.FOR_MenuR_BTN_SELL(jsonRouteValues, fnAfterConfirm)
+			},
 /* eslint-disable indent, vue/html-indent, vue/script-indent */
 // USE /[MANUAL FOR FUNCTIONS_JS FOR_411]/
 // eslint-disable-next-line

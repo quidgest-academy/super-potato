@@ -42,6 +42,39 @@ namespace GenioMVC.Controllers
 
 
 
+		protected JsonResult FOR_MenuR_BTN_SELL(string id, string area)
+		{
+			try
+			{
+				using (CSGenio.core.di.GenioDI.MetricsOtlp.RecordTime("manua_exec_time", new System.Diagnostics.TagList([
+					new("Name", "CONTROLLER_ROUTINE_BODY"),
+					new("Parameter", "BTN_SELL"),
+					new("ModuleOrSystem", "FOR")
+				]), "ms", "Time to execute the manual code.")) {
+//Platform: MVC | Type: CONTROLLER_ROUTINE_BODY | Module: FOR | Parameter: BTN_SELL | File:  | Order: 0
+//BEGIN_MANUALCODE_CODMANUA:2d29b629-eb43-4c2d-a0f5-670396c7763d
+//andre
+//END_MANUALCODE
+				}
+
+			}
+			catch (BusinessException ex)
+			{
+				return Json(new { success = "E", message = ex.UserMessage });
+			}
+			catch (Exception ex)
+			{
+				Log.Error("Error in action FOR_MenuR_BTN_SELL: " + ex.Message);
+				return Json(new { success = "E", message = Resources.Resources.PEDIMOS_DESCULPA__OC63848 });
+			}
+		}
+
+		// POST: /Prope/FOR_Menu_411_MenuR_BTN_SELL
+		public JsonResult FOR_Menu_411_MenuR_BTN_SELL([FromBody] RequestRoutineSingleModel requestModel)
+		{
+			return FOR_MenuR_BTN_SELL(requestModel.Id, requestModel.Area);
+		}
+
 		private List<string> GetActionIds(CriteriaSet crs, CSGenio.persistence.PersistentSupport sp = null)
 		{
 			CSGenio.business.Area area = CSGenio.business.Area.createArea<CSGenioAprope>(UserContext.Current.User, UserContext.Current.User.CurrentModule);
