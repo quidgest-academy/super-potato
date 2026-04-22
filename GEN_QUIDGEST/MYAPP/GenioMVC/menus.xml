@@ -7,13 +7,13 @@
         <MENU TYPE="ITEM" ID="111" PRTID="11" IMG="" ACT="GenGenio.MenuFormConsulta" LVL="-1" PREVIEW="false" SEPARATES="false" SUMMENU="false" HIDEMENUSUM="false" HASCONDITION="false" ISFORM="false" ORDER="111" />
       </MENU>
     </MENU>
-    <MENU TYPE="ITEM" DESC="PROPERTIES34868" SIGLA="" ID="2" HELPTITLE="" IMG="~/Content/img/house.png?v=47" IMGVUE="house.png?v=47" FNT="" SVG="" LVL="1" PREVIEW="false" SEPARATES="false" SUMMENU="false" HIDEMENUSUM="false" HASCONDITION="false" ISFORM="false" ORDER="2" DEFAULTACTION="">
+    <MENU TYPE="ITEM" DESC="PROPERTIES34868" SIGLA="" ID="2" HELPTITLE="" IMG="~/Content/img/house.png?v=48" IMGVUE="house.png?v=48" FNT="" SVG="" LVL="1" PREVIEW="false" SEPARATES="false" SUMMENU="false" HIDEMENUSUM="false" HASCONDITION="false" ISFORM="false" ORDER="2" DEFAULTACTION="">
       <ACCESS>99</ACCESS>
       <MENU TYPE="ITEM" DESC="PROPERTIES34868" ID="21" PRTID="2" IMG="" ACT="GenGenio.MenuDBEdit" ACTMVC="FOR_Menu_21" ACTVUE="menu-FOR_21" CONT="PROPE" LVL="-1" PREVIEW="false" SEPARATES="false" SUMMENU="true" HIDEMENUSUM="false" HASCONDITION="false" ISFORM="false" ORDER="21">
         <MENU TYPE="ITEM" ID="211" PRTID="21" IMG="" ACT="GenGenio.MenuFormConsulta" LVL="-1" PREVIEW="false" SEPARATES="false" SUMMENU="false" HIDEMENUSUM="false" HASCONDITION="false" ISFORM="false" ORDER="211" />
       </MENU>
     </MENU>
-    <MENU TYPE="ITEM" DESC="LOCALIZATION34148" SIGLA="" ID="3" HELPTITLE="" IMG="~/Content/img/local.png?v=47" IMGVUE="local.png?v=47" FNT="" SVG="" LVL="1" PREVIEW="false" SEPARATES="true" SUMMENU="false" HIDEMENUSUM="false" HASCONDITION="false" ISFORM="false" ORDER="3" DEFAULTACTION="">
+    <MENU TYPE="ITEM" DESC="LOCALIZATION34148" SIGLA="" ID="3" HELPTITLE="" IMG="~/Content/img/local.png?v=48" IMGVUE="local.png?v=48" FNT="" SVG="" LVL="1" PREVIEW="false" SEPARATES="true" SUMMENU="false" HIDEMENUSUM="false" HASCONDITION="false" ISFORM="false" ORDER="3" DEFAULTACTION="">
       <ACCESS>2</ACCESS>
       <MENU TYPE="ITEM" DESC="COUNTRIES64527" SIGLA="" ID="31" PRTID="3" HELPTITLE="" LVL="2" PREVIEW="false" SEPARATES="false" SUMMENU="false" HIDEMENUSUM="false" HASCONDITION="false" ISFORM="false" ORDER="31" DEFAULTACTION="">
         <ACCESS>1</ACCESS>
