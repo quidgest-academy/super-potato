@@ -148,15 +148,17 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValVisit_date))
 		this.stopWatchers.push(watch(() => this.ValVisit_date.value, (newValue, oldValue) => this.onUpdate('conta.visit_date', this.ValVisit_date, newValue, oldValue)))
 
-		this.PropeValCodprope = reactive(new modelFieldType.PrimaryKey({
-			id: 'PropeValCodprope',
-			originId: 'ValCodprope',
+		this.PropeValId = reactive(new modelFieldType.Number({
+			id: 'PropeValId',
+			originId: 'ValId',
 			area: 'PROPE',
-			field: 'CODPROPE',
+			field: 'ID',
+			maxDigits: 5,
+			decimalDigits: 0,
 			isFixed: true,
 			description: '',
-		}).cloneFrom(values?.PropeValCodprope))
-		this.stopWatchers.push(watch(() => this.PropeValCodprope.value, (newValue, oldValue) => this.onUpdate('prope.codprope', this.PropeValCodprope, newValue, oldValue)))
+		}).cloneFrom(values?.PropeValId))
+		this.stopWatchers.push(watch(() => this.PropeValId.value, (newValue, oldValue) => this.onUpdate('prope.id', this.PropeValId, newValue, oldValue)))
 	}
 
 	/**

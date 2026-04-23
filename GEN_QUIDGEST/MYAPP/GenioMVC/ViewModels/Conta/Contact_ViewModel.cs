@@ -67,22 +67,22 @@ namespace GenioMVC.ViewModels.Conta
 		/// </summary>
 		public DateTime? ValVisit_date { get; set; }
 		/// <summary>
-		/// Title: "Property" | Type: "+"
+		/// Title: "Property" | Type: "N"
 		/// </summary>
 		[ValidateSetAccess]
-		public string PropeValCodprope
+		public decimal? PropeValId
 		{
 			get
 			{
-				return funcPropeValCodprope != null ? funcPropeValCodprope() : _auxPropeValCodprope;
+				return funcPropeValId != null ? funcPropeValId() : _auxPropeValId;
 			}
-			set { funcPropeValCodprope = () => value; }
+			set { funcPropeValId = () => value; }
 		}
 
 		[JsonIgnore]
-		public Func<string> funcPropeValCodprope { get; set; }
+		public Func<decimal?> funcPropeValId { get; set; }
 
-		private string _auxPropeValCodprope { get; set; }
+		private decimal? _auxPropeValId { get; set; }
 
 		#region Navigations
 		#endregion
@@ -221,7 +221,7 @@ namespace GenioMVC.ViewModels.Conta
 				ValPhone = ViewModelConversion.ToString(m.ValPhone);
 				ValDescript = ViewModelConversion.ToString(m.ValDescript);
 				ValVisit_date = ViewModelConversion.ToDateTime(m.ValVisit_date);
-				funcPropeValCodprope = () => ViewModelConversion.ToString(m.Prope.ValCodprope);
+				funcPropeValId = () => ViewModelConversion.ToNumeric(m.Prope.ValId);
 				ValCodconta = ViewModelConversion.ToString(m.ValCodconta);
 			}
 			catch (Exception)
@@ -584,7 +584,7 @@ namespace GenioMVC.ViewModels.Conta
 		/// <param name="PKey">Primary Key of Prope</param>
 		public ConcurrentDictionary<string, object> GetDependant_ContactTablePropeTitle(string PKey)
 		{
-			FieldRef[] refDependantFields = [CSGenioAprope.FldCodprope, CSGenioAprope.FldTitle];
+			FieldRef[] refDependantFields = [CSGenioAprope.FldCodprope, CSGenioAprope.FldTitle, CSGenioAprope.FldId];
 
 			var returnEmptyDependants = false;
 			CriteriaSet wherecodition = CriteriaSet.And();
@@ -633,7 +633,7 @@ namespace GenioMVC.ViewModels.Conta
 			var row = GetDependant_ContactTablePropeTitle(this.ValCodprope);
 			try
 			{
-				this.funcPropeValCodprope = () => (string)row["prope.codprope"];
+				this.funcPropeValId = () => (decimal?)row["prope.id"];
 
 				// Fill List fields
 				this.ValCodprope = ViewModelConversion.ToString(row["prope.codprope"]);
@@ -679,8 +679,9 @@ namespace GenioMVC.ViewModels.Conta
 				"conta.phone" => ViewModelConversion.ToString(modelValue),
 				"conta.descript" => ViewModelConversion.ToString(modelValue),
 				"conta.visit_date" => ViewModelConversion.ToDateTime(modelValue),
-				"prope.codprope" => ViewModelConversion.ToString(modelValue),
+				"prope.id" => ViewModelConversion.ToNumeric(modelValue),
 				"conta.codconta" => ViewModelConversion.ToString(modelValue),
+				"prope.codprope" => ViewModelConversion.ToString(modelValue),
 				"prope.title" => ViewModelConversion.ToString(modelValue),
 				_ => modelValue
 			};
