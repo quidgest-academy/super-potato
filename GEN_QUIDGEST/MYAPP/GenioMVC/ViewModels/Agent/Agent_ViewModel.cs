@@ -42,10 +42,6 @@ namespace GenioMVC.ViewModels.Agent
 		#endregion
 
 		/// <summary>
-		/// Title: "Agent's name" | Type: "C"
-		/// </summary>
-		public string ValName { get; set; }
-		/// <summary>
 		/// Title: "Birthdate" | Type: "D"
 		/// </summary>
 		public DateTime? ValBirthdat { get; set; }
@@ -97,6 +93,10 @@ namespace GenioMVC.ViewModels.Agent
 		/// </summary>
 		[ImageThumbnailJsonConverter(30, 50)]
 		public GenioMVC.Models.ImageModel ValPhotography { get; set; }
+		/// <summary>
+		/// Title: "Agent's name" | Type: "C"
+		/// </summary>
+		public string ValName { get; set; }
 
 		#region Navigations
 		#endregion
@@ -233,7 +233,6 @@ namespace GenioMVC.ViewModels.Agent
 			{
 				ValCodcaddr = ViewModelConversion.ToString(m.ValCodcaddr);
 				ValCborn = ViewModelConversion.ToString(m.ValCborn);
-				ValName = ViewModelConversion.ToString(m.ValName);
 				ValBirthdat = ViewModelConversion.ToDateTime(m.ValBirthdat);
 				ValAge = ViewModelConversion.ToNumeric(m.ValAge);
 				ValEmail = ViewModelConversion.ToString(m.ValEmail);
@@ -243,6 +242,7 @@ namespace GenioMVC.ViewModels.Agent
 				ValAverage_price = ViewModelConversion.ToNumeric(m.ValAverage_price);
 				ValLastprop = ViewModelConversion.ToNumeric(m.ValLastprop);
 				ValPhotography = ViewModelConversion.ToImage(m.ValPhotography);
+				ValName = ViewModelConversion.ToString(m.ValName);
 				ValCodagent = ViewModelConversion.ToString(m.ValCodagent);
 			}
 			catch (Exception)
@@ -271,12 +271,12 @@ namespace GenioMVC.ViewModels.Agent
 			{
 				m.ValCodcaddr = ViewModelConversion.ToString(ValCodcaddr);
 				m.ValCborn = ViewModelConversion.ToString(ValCborn);
-				m.ValName = ViewModelConversion.ToString(ValName);
 				m.ValBirthdat = ViewModelConversion.ToDateTime(ValBirthdat);
 				m.ValEmail = ViewModelConversion.ToString(ValEmail);
 				m.ValTelephon = ViewModelConversion.ToString(ValTelephon);
 				if (ValPhotography == null || !ValPhotography.IsThumbnail)
 					m.ValPhotography = ViewModelConversion.ToImage(ValPhotography);
+				m.ValName = ViewModelConversion.ToString(ValName);
 
 				/*
 					At this moment, in the case of runtime calculation of server-side formulas, to improve performance and reduce database load,
@@ -316,9 +316,6 @@ namespace GenioMVC.ViewModels.Agent
 					case "agent.cborn":
 						this.ValCborn = ViewModelConversion.ToString(_value);
 						break;
-					case "agent.name":
-						this.ValName = ViewModelConversion.ToString(_value);
-						break;
 					case "agent.birthdat":
 						this.ValBirthdat = ViewModelConversion.ToDateTime(_value);
 						break;
@@ -330,6 +327,9 @@ namespace GenioMVC.ViewModels.Agent
 						break;
 					case "agent.photography":
 						this.ValPhotography = ViewModelConversion.ToImage(_value);
+						break;
+					case "agent.name":
+						this.ValName = ViewModelConversion.ToString(_value);
 						break;
 					default:
 						Log.Error($"SetViewModelValue (Agent) - Unexpected field identifier {fullFieldName}");
@@ -455,13 +455,13 @@ namespace GenioMVC.ViewModels.Agent
 		{
 			CrudViewModelFieldValidator validator = new(m_userContext.User.Language);
 
-			validator.StringLength("ValName", Resources.Resources.AGENT_S_NAME42642, ValName, 50);
-
-			validator.Required("ValName", Resources.Resources.AGENT_S_NAME42642, ViewModelConversion.ToString(ValName), FieldType.TEXT.GetFormatting());
 			validator.StringLength("ValEmail", Resources.Resources.E_MAIL42251, ValEmail, 80);
 
 			validator.Required("ValEmail", Resources.Resources.E_MAIL42251, ViewModelConversion.ToString(ValEmail), FieldType.TEXT.GetFormatting());
 			validator.StringLength("ValTelephon", Resources.Resources.TELEPHONE28697, ValTelephon, 14);
+			validator.StringLength("ValName", Resources.Resources.AGENT_S_NAME42642, ValName, 50);
+
+			validator.Required("ValName", Resources.Resources.AGENT_S_NAME42642, ViewModelConversion.ToString(ValName), FieldType.TEXT.GetFormatting());
 
 
 			return validator.GetResult();
@@ -877,7 +877,6 @@ namespace GenioMVC.ViewModels.Agent
 			{
 				"agent.codcaddr" => ViewModelConversion.ToString(modelValue),
 				"agent.cborn" => ViewModelConversion.ToString(modelValue),
-				"agent.name" => ViewModelConversion.ToString(modelValue),
 				"agent.birthdat" => ViewModelConversion.ToDateTime(modelValue),
 				"agent.age" => ViewModelConversion.ToNumeric(modelValue),
 				"agent.email" => ViewModelConversion.ToString(modelValue),
@@ -887,6 +886,7 @@ namespace GenioMVC.ViewModels.Agent
 				"agent.average_price" => ViewModelConversion.ToNumeric(modelValue),
 				"agent.lastprop" => ViewModelConversion.ToNumeric(modelValue),
 				"agent.photography" => ViewModelConversion.ToImage(modelValue),
+				"agent.name" => ViewModelConversion.ToString(modelValue),
 				"agent.codagent" => ViewModelConversion.ToString(modelValue),
 				"cborn.codcount" => ViewModelConversion.ToString(modelValue),
 				"cborn.country" => ViewModelConversion.ToString(modelValue),

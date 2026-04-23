@@ -916,6 +916,15 @@ namespace Administration.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Last Visit"
+        /// </summary>
+        public static string LAST_VISIT61343 {
+            get {
+                return ResourceManager.GetString("LAST_VISIT61343", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Agent"
         /// </summary>
         public static string AGENT00994 {

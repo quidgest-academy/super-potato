@@ -126,14 +126,15 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValDtsold))
 		this.stopWatchers.push(watch(() => this.ValDtsold.value, (newValue, oldValue) => this.onUpdate('prope.dtsold', this.ValDtsold, newValue, oldValue)))
 
-		this.ValDescript = reactive(new modelFieldType.MultiLineString({
-			id: 'ValDescript',
-			originId: 'ValDescript',
+		this.ValLastvisit = reactive(new modelFieldType.Date({
+			id: 'ValLastvisit',
+			originId: 'ValLastvisit',
 			area: 'PROPE',
-			field: 'DESCRIPT',
-			description: computed(() => this.Resources.DESCRIPTION07383),
-		}).cloneFrom(values?.ValDescript))
-		this.stopWatchers.push(watch(() => this.ValDescript.value, (newValue, oldValue) => this.onUpdate('prope.descript', this.ValDescript, newValue, oldValue)))
+			field: 'LASTVISIT',
+			isFixed: true,
+			description: computed(() => this.Resources.LAST_VISIT61343),
+		}).cloneFrom(values?.ValLastvisit))
+		this.stopWatchers.push(watch(() => this.ValLastvisit.value, (newValue, oldValue) => this.onUpdate('prope.lastvisit', this.ValLastvisit, newValue, oldValue)))
 
 		this.ValAverage = reactive(new modelFieldType.Number({
 			id: 'ValAverage',
@@ -414,6 +415,15 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.MAIN_PHOTO16044),
 		}).cloneFrom(values?.ValPhoto))
 		this.stopWatchers.push(watch(() => this.ValPhoto.value, (newValue, oldValue) => this.onUpdate('prope.photo', this.ValPhoto, newValue, oldValue)))
+
+		this.ValDescript = reactive(new modelFieldType.MultiLineString({
+			id: 'ValDescript',
+			originId: 'ValDescript',
+			area: 'PROPE',
+			field: 'DESCRIPT',
+			description: computed(() => this.Resources.DESCRIPTION07383),
+		}).cloneFrom(values?.ValDescript))
+		this.stopWatchers.push(watch(() => this.ValDescript.value, (newValue, oldValue) => this.onUpdate('prope.descript', this.ValDescript, newValue, oldValue)))
 	}
 
 	/**

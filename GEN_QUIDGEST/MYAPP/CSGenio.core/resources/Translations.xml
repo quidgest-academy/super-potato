@@ -285,6 +285,9 @@
   <msg id="Certified Series Number" code="CERTIFIED_SERIES_NUM14349">
     <ENUS>Certified Series Number</ENUS>
   </msg>
+  <msg id="Last Visit" code="LAST_VISIT61343">
+    <ENUS>Last Visit</ENUS>
+  </msg>
   <msg id="Agent" code="AGENT00994">
     <ENUS>Agent</ENUS>
   </msg>

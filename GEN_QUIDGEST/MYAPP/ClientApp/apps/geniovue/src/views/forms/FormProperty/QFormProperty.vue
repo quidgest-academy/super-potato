@@ -163,6 +163,29 @@
 						</base-input-structure>
 					</q-col>
 				</q-row>
+				<q-row v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible">
+					<q-col
+						v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible"
+							class="i-text"
+							v-bind="controls.PROPERTY__PROPE__LASTVISIT.wrapperProps"
+							:id="getControlId(controls.PROPERTY__PROPE__LASTVISIT)"
+							v-on="controls.PROPERTY__PROPE__LASTVISIT.handlers"
+							:loading="controls.PROPERTY__PROPE__LASTVISIT.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
+							<q-date-time-picker
+								v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible"
+								v-bind="controls.PROPERTY__PROPE__LASTVISIT.props"
+								:id="getControlId(controls.PROPERTY__PROPE__LASTVISIT)"
+								:model-value="model.ValLastvisit.value"
+								@reset-icon-click="model.ValLastvisit.fnUpdateValue(model.ValLastvisit.originalValue ?? new Date())"
+								@update:model-value="model.ValLastvisit.fnUpdateValue($event ?? '')" />
+						</base-input-structure>
+					</q-col>
+				</q-row>
 				<q-row v-if="controls.PROPERTYPSEUDNEWGRP05.isVisible">
 					<q-col v-if="controls.PROPERTYPSEUDNEWGRP05.isVisible">
 						<q-accordion
@@ -501,27 +524,6 @@
 							:id="getControlId(controls.PROPERTYPSEUDNEWGRP01)"
 							:no-border="controls.PROPERTYPSEUDNEWGRP01.borderless">
 							<!-- Start PROPERTYPSEUDNEWGRP01 -->
-							<q-row v-if="controls.PROPERTYPROPEDESCRIPT.isVisible">
-								<q-col
-									v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
-									cols="auto">
-									<base-input-structure
-										v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
-										class="i-textarea"
-										v-bind="controls.PROPERTYPROPEDESCRIPT.wrapperProps"
-										:id="getControlId(controls.PROPERTYPROPEDESCRIPT)"
-										v-on="controls.PROPERTYPROPEDESCRIPT.handlers"
-										:loading="controls.PROPERTYPROPEDESCRIPT.props.loading"
-										:reporting-mode-on="reportingModeCAV"
-										:suggestion-mode-on="suggestionModeOn">
-										<q-text-area
-											v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
-											v-bind="controls.PROPERTYPROPEDESCRIPT.props"
-											:id="getControlId(controls.PROPERTYPROPEDESCRIPT)"
-											v-on="controls.PROPERTYPROPEDESCRIPT.handlers" />
-									</base-input-structure>
-								</q-col>
-							</q-row>
 							<q-row v-if="controls.PROPERTYPROPEAVERAGE_.isVisible">
 								<q-col
 									v-if="controls.PROPERTYPROPEAVERAGE_.isVisible"
@@ -595,6 +597,27 @@
 											v-bind="controls.PROPERTYPROPEPHOTO___.props"
 											:id="getControlId(controls.PROPERTYPROPEPHOTO___)"
 											v-on="controls.PROPERTYPROPEPHOTO___.handlers" />
+									</base-input-structure>
+								</q-col>
+							</q-row>
+							<q-row v-if="controls.PROPERTYPROPEDESCRIPT.isVisible">
+								<q-col
+									v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
+									cols="auto">
+									<base-input-structure
+										v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
+										class="i-textarea"
+										v-bind="controls.PROPERTYPROPEDESCRIPT.wrapperProps"
+										:id="getControlId(controls.PROPERTYPROPEDESCRIPT)"
+										v-on="controls.PROPERTYPROPEDESCRIPT.handlers"
+										:loading="controls.PROPERTYPROPEDESCRIPT.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-text-area
+											v-if="controls.PROPERTYPROPEDESCRIPT.isVisible"
+											v-bind="controls.PROPERTYPROPEDESCRIPT.props"
+											:id="getControlId(controls.PROPERTYPROPEDESCRIPT)"
+											v-on="controls.PROPERTYPROPEDESCRIPT.handlers" />
 									</base-input-structure>
 								</q-col>
 							</q-row>
@@ -1022,6 +1045,20 @@
 						controlLimits: [
 						],
 					}, this),
+					PROPERTY__PROPE__LASTVISIT: new fieldControlClass.DateControl({
+						modelField: 'ValLastvisit',
+						valueChangeEvent: 'fieldChange:prope.lastvisit',
+						id: 'PROPERTY__PROPE__LASTVISIT',
+						name: 'LASTVISIT',
+						size: 'small',
+						label: computed(() => this.Resources.LAST_VISIT61343),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						isFormulaBlocked: true,
+						dateTimeType: 'date',
+						controlLimits: [
+						],
+					}, this),
 					PROPERTYPSEUDNEWGRP05: new fieldControlClass.AccordionControl({
 						id: 'PROPERTYPSEUDNEWGRP05',
 						name: 'NEWGRP05',
@@ -1045,7 +1082,7 @@
 						borderless: false,
 						isCollapsible: false,
 						anchored: false,
-						directChildren: ['PROPERTYPROPEDESCRIPT', 'PROPERTYPROPEAVERAGE_', 'PROPERTYPROPEPRICE___', 'PROPERTYPROPETITLE___', 'PROPERTYPROPEPHOTO___'],
+						directChildren: ['PROPERTYPROPEAVERAGE_', 'PROPERTYPROPEPRICE___', 'PROPERTYPROPETITLE___', 'PROPERTYPROPEPHOTO___', 'PROPERTYPROPEDESCRIPT'],
 						mustBeFilled: true,
 						controlLimits: [
 						],
@@ -1250,7 +1287,7 @@
 						headerLevel: computed(() => this.baseHeadingLevel + 1),
 						controller: 'PROPE',
 						action: 'Property_ValField002',
-						hasDependencies: false,
+						hasDependencies: true,
 						isInCollapsible: false,
 						columnsOriginal: [
 							new listColumnTypes.DateColumn({
@@ -1435,21 +1472,6 @@
 								dependencyField: 'PROPE.CODPROPE',
 								fnValueSelector: (model) => model.ValCodprope.value
 							},
-						],
-					}, this),
-					PROPERTYPROPEDESCRIPT: new fieldControlClass.MultilineStringControl({
-						modelField: 'ValDescript',
-						valueChangeEvent: 'fieldChange:prope.descript',
-						id: 'PROPERTYPROPEDESCRIPT',
-						name: 'DESCRIPT',
-						size: 'xxlarge',
-						label: computed(() => this.Resources.DESCRIPTION07383),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP01',
-						rows: 5,
-						cols: 80,
-						controlLimits: [
 						],
 					}, this),
 					PROPERTYPROPEAVERAGE_: new fieldControlClass.NumberControl({
@@ -1823,6 +1845,21 @@
 						controlLimits: [
 						],
 					}, this),
+					PROPERTYPROPEDESCRIPT: new fieldControlClass.MultilineStringControl({
+						modelField: 'ValDescript',
+						valueChangeEvent: 'fieldChange:prope.descript',
+						id: 'PROPERTYPROPEDESCRIPT',
+						name: 'DESCRIPT',
+						size: 'xxlarge',
+						label: computed(() => this.Resources.DESCRIPTION07383),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP01',
+						rows: 5,
+						cols: 80,
+						controlLimits: [
+						],
+					}, this),
 				},
 
 				model: new FormViewModel(this, {
@@ -1895,6 +1932,8 @@
 						set ValGrdsize(value) { vm.model.ValGrdsize.updateValue(value) },
 						get ValId() { return vm.model.ValId.value },
 						set ValId(value) { vm.model.ValId.updateValue(value) },
+						get ValLastvisit() { return vm.model.ValLastvisit.value },
+						set ValLastvisit(value) { vm.model.ValLastvisit.updateValue(value) },
 						get ValPhoto() { return vm.model.ValPhoto.value },
 						set ValPhoto(value) { vm.model.ValPhoto.updateValue(value) },
 						get ValPrice() { return vm.model.ValPrice.value },

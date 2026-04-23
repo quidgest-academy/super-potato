@@ -54,9 +54,10 @@ namespace GenioMVC.ViewModels.Prope
 		/// </summary>
 		public DateTime? ValDtsold { get; set; }
 		/// <summary>
-		/// Title: "Description" | Type: "MO"
+		/// Title: "Last Visit" | Type: "D"
 		/// </summary>
-		public string ValDescript { get; set; }
+		[ValidateSetAccess]
+		public DateTime? ValLastvisit { get; set; }
 		/// <summary>
 		/// Title: "AveragePrice" | Type: "N"
 		/// </summary>
@@ -180,6 +181,10 @@ namespace GenioMVC.ViewModels.Prope
 		/// </summary>
 		[ImageThumbnailJsonConverter(30, 50)]
 		public GenioMVC.Models.ImageModel ValPhoto { get; set; }
+		/// <summary>
+		/// Title: "Description" | Type: "MO"
+		/// </summary>
+		public string ValDescript { get; set; }
 
 		#region Navigations
 		#endregion
@@ -319,7 +324,7 @@ namespace GenioMVC.ViewModels.Prope
 				ValId = ViewModelConversion.ToNumeric(m.ValId);
 				ValSold = ViewModelConversion.ToLogic(m.ValSold);
 				ValDtsold = ViewModelConversion.ToDateTime(m.ValDtsold);
-				ValDescript = ViewModelConversion.ToString(m.ValDescript);
+				ValLastvisit = ViewModelConversion.ToDateTime(m.ValLastvisit);
 				ValAverage = ViewModelConversion.ToNumeric(m.ValAverage);
 				ValPrice = ViewModelConversion.ToNumeric(m.ValPrice);
 				ValTypology = ViewModelConversion.ToNumeric(m.ValTypology);
@@ -336,6 +341,7 @@ namespace GenioMVC.ViewModels.Prope
 				ValTax = ViewModelConversion.ToNumeric(m.ValTax);
 				ValTitle = ViewModelConversion.ToString(m.ValTitle);
 				ValPhoto = ViewModelConversion.ToImage(m.ValPhoto);
+				ValDescript = ViewModelConversion.ToString(m.ValDescript);
 				ValCodprope = ViewModelConversion.ToString(m.ValCodprope);
 			}
 			catch (Exception)
@@ -367,7 +373,6 @@ namespace GenioMVC.ViewModels.Prope
 				m.ValId = ViewModelConversion.ToNumeric(ValId);
 				m.ValSold = ViewModelConversion.ToLogic(ValSold);
 				m.ValDtsold = ViewModelConversion.ToDateTime(ValDtsold);
-				m.ValDescript = ViewModelConversion.ToString(ValDescript);
 				m.ValPrice = ViewModelConversion.ToNumeric(ValPrice);
 				m.ValTypology = ViewModelConversion.ToNumeric(ValTypology);
 				m.ValBuildtyp = ViewModelConversion.ToString(ValBuildtyp);
@@ -379,6 +384,7 @@ namespace GenioMVC.ViewModels.Prope
 				m.ValTitle = ViewModelConversion.ToString(ValTitle);
 				if (ValPhoto == null || !ValPhoto.IsThumbnail)
 					m.ValPhoto = ViewModelConversion.ToImage(ValPhoto);
+				m.ValDescript = ViewModelConversion.ToString(ValDescript);
 
 				/*
 					At this moment, in the case of runtime calculation of server-side formulas, to improve performance and reduce database load,
@@ -387,6 +393,7 @@ namespace GenioMVC.ViewModels.Prope
 				if (!HasDisabledUserValuesSecurity)
 					return;
 
+				m.ValLastvisit = ViewModelConversion.ToDateTime(ValLastvisit);
 				m.ValAverage = ViewModelConversion.ToNumeric(ValAverage);
 				m.ValBuildage = ViewModelConversion.ToNumeric(ValBuildage);
 				m.ValProfit = ViewModelConversion.ToNumeric(ValProfit);
@@ -426,9 +433,6 @@ namespace GenioMVC.ViewModels.Prope
 					case "prope.dtsold":
 						this.ValDtsold = ViewModelConversion.ToDateTime(_value);
 						break;
-					case "prope.descript":
-						this.ValDescript = ViewModelConversion.ToString(_value);
-						break;
 					case "prope.price":
 						this.ValPrice = ViewModelConversion.ToNumeric(_value);
 						break;
@@ -458,6 +462,9 @@ namespace GenioMVC.ViewModels.Prope
 						break;
 					case "prope.photo":
 						this.ValPhoto = ViewModelConversion.ToImage(_value);
+						break;
+					case "prope.descript":
+						this.ValDescript = ViewModelConversion.ToString(_value);
 						break;
 					default:
 						Log.Error($"SetViewModelValue (Property) - Unexpected field identifier {fullFieldName}");
@@ -1013,7 +1020,7 @@ namespace GenioMVC.ViewModels.Prope
 				"prope.id" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.sold" => ViewModelConversion.ToLogic(modelValue),
 				"prope.dtsold" => ViewModelConversion.ToDateTime(modelValue),
-				"prope.descript" => ViewModelConversion.ToString(modelValue),
+				"prope.lastvisit" => ViewModelConversion.ToDateTime(modelValue),
 				"prope.average" => ViewModelConversion.ToNumeric(modelValue),
 				"count.country" => ViewModelConversion.ToString(modelValue),
 				"prope.price" => ViewModelConversion.ToNumeric(modelValue),
@@ -1031,6 +1038,7 @@ namespace GenioMVC.ViewModels.Prope
 				"prope.tax" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.title" => ViewModelConversion.ToString(modelValue),
 				"prope.photo" => ViewModelConversion.ToImage(modelValue),
+				"prope.descript" => ViewModelConversion.ToString(modelValue),
 				"prope.codprope" => ViewModelConversion.ToString(modelValue),
 				"city.codcity" => ViewModelConversion.ToString(modelValue),
 				"city.city" => ViewModelConversion.ToString(modelValue),

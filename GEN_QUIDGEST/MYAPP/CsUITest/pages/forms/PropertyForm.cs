@@ -23,6 +23,11 @@ public class PropertyForm : Form
 	public DateInputControl PropeDtsold => new DateInputControl(driver, ContainerLocator, "#PROPERTYPROPEDTSOLD__" + IdSuffix);
 
 	/// <summary>
+	/// Last Visit
+	/// </summary>
+	public DateInputControl PropeLastvisit => new DateInputControl(driver, ContainerLocator, "#PROPERTY__PROPE__LASTVISIT" + IdSuffix);
+
+	/// <summary>
 	/// New Group
 	/// </summary>
 	public IWebElement PseudNewgrp05 => throw new NotImplementedException();
@@ -41,11 +46,6 @@ public class PropertyForm : Form
 	/// Contacts
 	/// </summary>
 	public ListControl PseudField002 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD002" + IdSuffix);
-
-	/// <summary>
-	/// Description
-	/// </summary>
-	public BaseInputControl PropeDescript => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEDESCRIPT" + IdSuffix, "#PROPERTYPROPEDESCRIPT" + IdSuffix);
 
 	/// <summary>
 	/// AveragePrice
@@ -158,6 +158,11 @@ public class PropertyForm : Form
 	/// Main photo
 	/// </summary>
 	public BaseInputControl PropePhoto => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPHOTO___" + IdSuffix, "#PROPERTYPROPEPHOTO___" + IdSuffix);
+
+	/// <summary>
+	/// Description
+	/// </summary>
+	public BaseInputControl PropeDescript => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEDESCRIPT" + IdSuffix, "#PROPERTYPROPEDESCRIPT" + IdSuffix);
 
 	public PropertyForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "PROPERTY", containerLocator: containerLocator, usePkInId: usePkInId) { }

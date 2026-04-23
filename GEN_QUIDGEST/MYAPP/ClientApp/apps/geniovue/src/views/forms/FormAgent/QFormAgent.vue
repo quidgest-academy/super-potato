@@ -106,26 +106,7 @@
 							:id="getControlId(controls.AGENT___PSEUDNEWGRP01)"
 							:no-border="controls.AGENT___PSEUDNEWGRP01.borderless">
 							<!-- Start AGENT___PSEUDNEWGRP01 -->
-							<q-row v-if="controls.AGENT___AGENTNAME____.isVisible || controls.AGENT___AGENTBIRTHDAT.isVisible || controls.AGENT___AGENTAGE_____.isVisible || controls.AGENT___AGENTEMAIL___.isVisible || controls.AGENT___AGENTTELEPHON.isVisible">
-								<q-col
-									v-if="controls.AGENT___AGENTNAME____.isVisible"
-									cols="auto">
-									<base-input-structure
-										v-if="controls.AGENT___AGENTNAME____.isVisible"
-										class="i-text"
-										v-bind="controls.AGENT___AGENTNAME____.wrapperProps"
-										:id="getControlId(controls.AGENT___AGENTNAME____)"
-										v-on="controls.AGENT___AGENTNAME____.handlers"
-										:loading="controls.AGENT___AGENTNAME____.props.loading"
-										:reporting-mode-on="reportingModeCAV"
-										:suggestion-mode-on="suggestionModeOn">
-										<q-text-field
-											v-bind="controls.AGENT___AGENTNAME____.props"
-											:id="getControlId(controls.AGENT___AGENTNAME____)"
-											@blur="onBlur(controls.AGENT___AGENTNAME____, model.ValName.value)"
-											@change="model.ValName.fnUpdateValueOnChange" />
-									</base-input-structure>
-								</q-col>
+							<q-row v-if="controls.AGENT___AGENTBIRTHDAT.isVisible || controls.AGENT___AGENTAGE_____.isVisible || controls.AGENT___AGENTEMAIL___.isVisible || controls.AGENT___AGENTTELEPHON.isVisible">
 								<q-col
 									v-if="controls.AGENT___AGENTBIRTHDAT.isVisible"
 									cols="auto">
@@ -346,6 +327,27 @@
 											v-bind="controls.AGENT___AGENTPHOTOGRA.props"
 											:id="getControlId(controls.AGENT___AGENTPHOTOGRA)"
 											v-on="controls.AGENT___AGENTPHOTOGRA.handlers" />
+									</base-input-structure>
+								</q-col>
+							</q-row>
+							<q-row v-if="controls.AGENT___AGENTNAME____.isVisible">
+								<q-col
+									v-if="controls.AGENT___AGENTNAME____.isVisible"
+									cols="auto">
+									<base-input-structure
+										v-if="controls.AGENT___AGENTNAME____.isVisible"
+										class="i-text"
+										v-bind="controls.AGENT___AGENTNAME____.wrapperProps"
+										:id="getControlId(controls.AGENT___AGENTNAME____)"
+										v-on="controls.AGENT___AGENTNAME____.handlers"
+										:loading="controls.AGENT___AGENTNAME____.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-text-field
+											v-bind="controls.AGENT___AGENTNAME____.props"
+											:id="getControlId(controls.AGENT___AGENTNAME____)"
+											@blur="onBlur(controls.AGENT___AGENTNAME____, model.ValName.value)"
+											@change="model.ValName.fnUpdateValueOnChange" />
 									</base-input-structure>
 								</q-col>
 							</q-row>
@@ -701,23 +703,17 @@
 				},
 
 				controls: {
-					AGENT___AGENTNAME____: new fieldControlClass.StringControl({
-						modelField: 'ValName',
-						valueChangeEvent: 'fieldChange:agent.name',
-						id: 'AGENT___AGENTNAME____',
-						name: 'NAME',
-						size: 'xxlarge',
-						helpControl: {
-							shortHelp: {
-								type: '',
-								text: '',
-							},
-						},
-						label: computed(() => this.Resources.AGENT_S_NAME42642),
+					AGENT___PSEUDNEWGRP01: new fieldControlClass.GroupControl({
+						id: 'AGENT___PSEUDNEWGRP01',
+						name: 'NEWGRP01',
+						size: 'block',
+						label: computed(() => this.Resources.AGENT_INFORMATION06141),
 						placeholder: '',
 						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'AGENT___PSEUDNEWGRP01',
-						maxLength: 50,
+						borderless: false,
+						isCollapsible: false,
+						anchored: false,
+						directChildren: ['AGENT___AGENTBIRTHDAT', 'AGENT___AGENTAGE_____', 'AGENT___AGENTEMAIL___', 'AGENT___AGENTTELEPHON', 'AGENT___CBORNCOUNTRY_', 'AGENT___CADDRCOUNTRY_', 'AGENT___AGENTNRPROPS_', 'AGENT___AGENTPROFIT__', 'AGENT__AGENT__AVERAGE_PRICE', 'AGENT___AGENTLASTPROP', 'AGENT___AGENTPHOTOGRA', 'AGENT___AGENTNAME____'],
 						mustBeFilled: true,
 						controlLimits: [
 						],
@@ -921,17 +917,23 @@
 						controlLimits: [
 						],
 					}, this),
-					AGENT___PSEUDNEWGRP01: new fieldControlClass.GroupControl({
-						id: 'AGENT___PSEUDNEWGRP01',
-						name: 'NEWGRP01',
-						size: 'block',
-						label: computed(() => this.Resources.AGENT_INFORMATION06141),
+					AGENT___AGENTNAME____: new fieldControlClass.StringControl({
+						modelField: 'ValName',
+						valueChangeEvent: 'fieldChange:agent.name',
+						id: 'AGENT___AGENTNAME____',
+						name: 'NAME',
+						size: 'xxlarge',
+						helpControl: {
+							shortHelp: {
+								type: '',
+								text: '',
+							},
+						},
+						label: computed(() => this.Resources.AGENT_S_NAME42642),
 						placeholder: '',
 						labelPosition: computed(() => this.labelAlignment.topleft),
-						borderless: false,
-						isCollapsible: false,
-						anchored: false,
-						directChildren: ['AGENT___AGENTNAME____', 'AGENT___AGENTBIRTHDAT', 'AGENT___AGENTAGE_____', 'AGENT___AGENTEMAIL___', 'AGENT___AGENTTELEPHON', 'AGENT___CBORNCOUNTRY_', 'AGENT___CADDRCOUNTRY_', 'AGENT___AGENTNRPROPS_', 'AGENT___AGENTPROFIT__', 'AGENT__AGENT__AVERAGE_PRICE', 'AGENT___AGENTLASTPROP', 'AGENT___AGENTPHOTOGRA'],
+						container: 'AGENT___PSEUDNEWGRP01',
+						maxLength: 50,
 						mustBeFilled: true,
 						controlLimits: [
 						],

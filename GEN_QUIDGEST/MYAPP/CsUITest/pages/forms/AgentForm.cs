@@ -8,9 +8,9 @@ namespace quidgest.uitests.pages.forms;
 public class AgentForm : Form
 {
 	/// <summary>
-	/// Agent's name
+	/// Agent information
 	/// </summary>
-	public BaseInputControl AgentName => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTNAME____" + IdSuffix, "#AGENT___AGENTNAME____" + IdSuffix);
+	public CollapsibleZoneControl PseudNewgrp01 => new CollapsibleZoneControl(driver, ContainerLocator, "#AGENT___PSEUDNEWGRP01" + IdSuffix + "-container");
 
 	/// <summary>
 	/// Birthdate
@@ -70,9 +70,9 @@ public class AgentForm : Form
 	public BaseInputControl AgentPhotogra => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTPHOTOGRA" + IdSuffix, "#AGENT___AGENTPHOTOGRA" + IdSuffix);
 
 	/// <summary>
-	/// Agent information
+	/// Agent's name
 	/// </summary>
-	public CollapsibleZoneControl PseudNewgrp01 => new CollapsibleZoneControl(driver, ContainerLocator, "#AGENT___PSEUDNEWGRP01" + IdSuffix + "-container");
+	public BaseInputControl AgentName => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTNAME____" + IdSuffix, "#AGENT___AGENTNAME____" + IdSuffix);
 
 	public AgentForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "AGENT", containerLocator: containerLocator, usePkInId: usePkInId) { }

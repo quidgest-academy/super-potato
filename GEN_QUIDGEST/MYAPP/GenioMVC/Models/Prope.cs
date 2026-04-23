@@ -187,6 +187,13 @@ namespace GenioMVC.Models
 		[NumericAttribute(0)]
 		public decimal? ValNumbercontacts { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValNumbercontacts, 0)); } set { klass.ValNumbercontacts = Convert.ToDecimal(value); } }
 
+		[DisplayName("Last Visit")]
+		/// <summary>Field : "Last Visit" Tipo: "D" Formula: U1 "CONTA[CONTA->VISIT_DATE][CONTA->VISIT_DATE]"</summary>
+		[ShouldSerialize("Prope.ValLastvisit")]
+		[DataType(DataType.Date)]
+		[DateAttribute("D")]
+		public DateTime? ValLastvisit { get { return klass.ValLastvisit; } set { klass.ValLastvisit = value ?? DateTime.MinValue; } }
+
 		[DisplayName("ZZSTATE")]
 		[ShouldSerialize("Prope.ValZzstate")]
 		/// <summary>Field: "ZZSTATE", Type: "INT", Formula: ""</summary>
