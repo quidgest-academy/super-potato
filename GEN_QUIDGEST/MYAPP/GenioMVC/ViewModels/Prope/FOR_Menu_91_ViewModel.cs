@@ -31,7 +31,7 @@ namespace GenioMVC.ViewModels.Prope
 
 		/// <inheritdoc/>
 		[JsonPropertyName("uuid")]
-		public override string Uuid => "77112ee9-e4e7-49c6-ab03-c96b6db63fba";
+		public override string Uuid => "51904689-f05c-4ca0-951a-0ecfffef417a";
 
 		/// <inheritdoc/>
 		protected override string[] FieldsToSerialize => _fieldsToSerialize;
@@ -100,7 +100,7 @@ namespace GenioMVC.ViewModels.Prope
 			conditions.SubSets.Add(GetCustomizedStaticLimits(StaticLimits));
 
 			// Checks for foreign tables in fields and conditions
-			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldTitle, CSGenioAprope.FldPrice };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldPrice, CSGenioAprope.FldBuildage, CSGenioAprope.FldFloornr, CSGenioAprope.FldId, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldBuildtyp, CSGenioAprope.FldDtconst, CSGenioAprope.FldDescript, CSGenioAprope.FldDtsold, CSGenioAprope.FldProfit, CSGenioAprope.FldTypology, CSGenioAprope.FldBathnr, CSGenioAprope.FldGrdsize, CSGenioAprope.FldSold, CSGenioAprope.FldTax, CSGenioAprope.FldAverage, CSGenioAprope.FldTitle, CSGenioAprope.FldPhoto, CSGenioAprope.FldSize };
 
 			ListingMVC<CSGenioAprope> listing = new(fields, null, 1, 1, false, user, true, string.Empty, false);
 			SelectQuery qs = sp.getSelectQueryFromListingMVC(conditions, listing);
@@ -145,8 +145,25 @@ namespace GenioMVC.ViewModels.Prope
 		{
 			return
 			[
-				new Exports.QColumn(CSGenioAprope.FldTitle, FieldType.TEXT, Resources.Resources.TITLE21885, 30, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldName, FieldType.TEXT, Resources.Resources.AGENT_S_NAME42642, 30, 0, true),
 				new Exports.QColumn(CSGenioAprope.FldPrice, FieldType.CURRENCY, Resources.Resources.PRICE06900, 12, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldBuildage, FieldType.NUMERIC, Resources.Resources.BUILDING_AGE27311, 4, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldFloornr, FieldType.NUMERIC, Resources.Resources.FLOOR19993, 2, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldId, FieldType.NUMERIC, string.Empty, 5, 0, true),
+				new Exports.QColumn(CSGenioAcity.FldCity, FieldType.TEXT, Resources.Resources.CITY42505, 30, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldBuildtyp, FieldType.ARRAY_TEXT, Resources.Resources.BUILDING_TYPE57152, 1, 0, true, "buildtyp"),
+				new Exports.QColumn(CSGenioAprope.FldDtconst, FieldType.DATE, Resources.Resources.CONSTRUCTION_DATE18132, 8, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldDescript, FieldType.MEMO, Resources.Resources.DESCRIPTION07383, 30, 5, true),
+				new Exports.QColumn(CSGenioAprope.FldDtsold, FieldType.DATE, Resources.Resources.SOLD_DATE37976, 8, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldProfit, FieldType.CURRENCY, Resources.Resources.PROFIT55910, 12, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldTypology, FieldType.ARRAY_NUMERIC, Resources.Resources.BUILDING_TYPOLOGY54011, 1, 0, true, "typology"),
+				new Exports.QColumn(CSGenioAprope.FldBathnr, FieldType.NUMERIC, Resources.Resources.BATHROOMS_NUMBER52698, 2, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldGrdsize, FieldType.NUMERIC, Resources.Resources.GROUND_SIZE01563, 9, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldSold, FieldType.LOGIC, Resources.Resources.SOLD59824, 1, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldTax, FieldType.NUMERIC, Resources.Resources.TAX37977, 5, 2, true),
+				new Exports.QColumn(CSGenioAprope.FldAverage, FieldType.NUMERIC, Resources.Resources.AVERAGEPRICE13700, 12, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldTitle, FieldType.TEXT, Resources.Resources.TITLE21885, 30, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldSize, FieldType.NUMERIC, Resources.Resources.SIZE__M2_57059, 8, 0, true),
 			];
 		}
 
@@ -310,6 +327,8 @@ namespace GenioMVC.ViewModels.Prope
 
 			//FOR: MENU LIST SORTING
 			Dictionary<string, OrderedDictionary> allSortOrders = new Dictionary<string, OrderedDictionary>();
+			allSortOrders.Add("PROPE.DTCONST", new OrderedDictionary());
+			allSortOrders["PROPE.DTCONST"].Add("PROPE.DTCONST", "A");
 
 
 			int numberListItems = tableConfig.RowsPerPage;
@@ -321,8 +340,14 @@ namespace GenioMVC.ViewModels.Prope
 
 			List<ColumnSort> sorts = GetRequestSorts(this.Menu, tableConfig, "prope", allSortOrders);
 
+			if (sorts == null || sorts.Count == 0)
+			{
+				sorts = new List<ColumnSort>();
+				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAprope.FldDtconst), SortOrder.Ascending));
 
-			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldTitle, CSGenioAprope.FldPrice };
+			}
+
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldCodagent, CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAprope.FldPrice, CSGenioAprope.FldBuildage, CSGenioAprope.FldFloornr, CSGenioAprope.FldId, CSGenioAprope.FldCodcity, CSGenioAcity.FldCodcity, CSGenioAcity.FldCity, CSGenioAprope.FldBuildtyp, CSGenioAprope.FldDtconst, CSGenioAprope.FldDescript, CSGenioAprope.FldDtsold, CSGenioAprope.FldProfit, CSGenioAprope.FldTypology, CSGenioAprope.FldBathnr, CSGenioAprope.FldGrdsize, CSGenioAprope.FldSold, CSGenioAprope.FldTax, CSGenioAprope.FldAverage, CSGenioAprope.FldTitle, CSGenioAprope.FldPhoto, CSGenioAprope.FldSize };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
@@ -333,7 +358,7 @@ namespace GenioMVC.ViewModels.Prope
 			{
 				firstVisibleColumn = tableConfig?.GetFirstVisibleColumn(TableAlias);
 
-				firstVisibleColumn ??= new FieldRef("prope", "title");
+				firstVisibleColumn ??= new FieldRef("agent", "name");
 			}
 			// Limitations
 			this.TableLimits ??= [];
@@ -349,6 +374,29 @@ namespace GenioMVC.ViewModels.Prope
 				if (area_EPH_limits.Count > 0)
 					this.TableLimits.AddRange(area_EPH_limits);
 			}
+			//Tooltip for "Manual Filter" affecting this viewmodel list
+			{
+				Limit limit = new Limit();
+				limit.TipoLimite = LimitType.OVERRQ;
+				//Readme:
+				//Please create a Genio manual routine with the tag OVERRQ_TOOLTIP and same module ('FOR') and parameter ('91') as in OVERRQ, providing information about the limit being done mannually, so it can appear as tooltip about list limits in application.
+				//This text will be displayed to the final user, in order to make possible to know what kind of limits are being applied to the list.
+
+				//Put in this two lines in the OVERRQ_TOOLTIP manwin, setting the ManualHTMLText property (in HTML) with the information about the limit being applied to current list (that is being done in OVERRQ):
+				limit.ManualHTMLText = ""; //Text that will be shown to users.
+				this.TableLimits.Add(limit);
+
+				//Alternatively to just filling the property ManualHTMLText, you can change the default TipoLimite to one of the main limits supported by genio and use the available function Limit_Filler below, that will fill the object limit with information collected dinamically, and after that, just add the limit to TableLimits (as done above):
+				//Limit_Filler(ref limit, model_limit_area, limit_field, limit_field_value, this_limit_field, LimitAreaType.AreaLimita);
+				//this.TableLimits.Add(limit);
+				//Where:
+				///<param name="area_limit">(ref) limit to be loaded with information aquired</param>
+				///<param name="model_limit_area">Area class object responsible for this limit</param>
+				///<param name="limit_field">Name of the area field that will establish the limit (in lowercase)</param>
+				///<param name="limit_field_value">Field value to use to infer (area, field in lowercase or field value) for this limit</param>
+				///<param name="this_limit_field">ViewModel private object with information about the field (loaded with the limit value/key)</param>
+				///<param name="limitAreaType">The area to place the boundary information within the limit object</param>
+			}
 
 
 			if (conditions == null)
@@ -358,7 +406,17 @@ namespace GenioMVC.ViewModels.Prope
 			for_menu_91Conds = BuildCriteriaSet(tableConfig, requestValues, out bool hasAllRequiredLimits, conditions, isToExport);
 			tableReload &= hasAllRequiredLimits;
 
-// USE /[MANUAL FOR OVERRQ 91]/
+				using (CSGenio.core.di.GenioDI.MetricsOtlp.RecordTime("manua_exec_time", new System.Diagnostics.TagList([
+					new("Name", "OVERRQ"),
+					new("Parameter", "91"),
+					new("ModuleOrSystem", "FOR")
+				]), "ms", "Time to execute the manual code.")) {
+//Platform: MVC | Type: OVERRQ | Module: FOR | Parameter: 91 | File:  | Order: 0
+//BEGIN_MANUALCODE_CODMANUA:8ecb436f-0cc6-4621-8bcf-91e3028975ea
+for_menu_91Conds = CriteriaSet.And().Equal(CSGenioAconta.FldVisit_date, null);
+//END_MANUALCODE
+				}
+
 
 			bool distinct = false;
 
@@ -467,6 +525,10 @@ namespace GenioMVC.ViewModels.Prope
 				{
 					case "prope":
 						model.klass.insertNameValueField(Qfield.FullName, Qfield.Value); break;
+					case "agent":
+						model.Agent.klass.insertNameValueField(Qfield.FullName, Qfield.Value); break;
+					case "city":
+						model.City.klass.insertNameValueField(Qfield.FullName, Qfield.Value); break;
 					default:
 						break;
 				}
@@ -474,6 +536,7 @@ namespace GenioMVC.ViewModels.Prope
 
 			model.InitRowData();
 
+			SetTicketToImageFields(model);
 			return model;
 		}
 
@@ -518,13 +581,37 @@ namespace GenioMVC.ViewModels.Prope
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValTitle", "Prope.ValPrice", "Prope.ValCodagent", "Prope.ValCodcity"
+			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Agent", "Agent.ValName", "Prope.ValPrice", "Prope.ValBuildage", "Prope.ValFloornr", "Prope.ValId", "City", "City.ValCity", "Prope.ValBuildtyp", "Prope.ValDtconst", "Prope.ValDescript", "Prope.ValDtsold", "Prope.ValProfit", "Prope.ValTypology", "Prope.ValBathnr", "Prope.ValGrdsize", "Prope.ValSold", "Prope.ValTax", "Prope.ValAverage", "Prope.ValTitle", "Prope.ValPhoto", "Prope.ValSize", "Prope.ValCodagent", "Prope.ValCodcity"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
 		[
-			new TableSearchColumn("ValTitle", CSGenioAprope.FldTitle, typeof(string), defaultSearch : true),
+			new TableSearchColumn("Agent_ValName", CSGenioAagent.FldName, typeof(string)),
 			new TableSearchColumn("ValPrice", CSGenioAprope.FldPrice, typeof(decimal?)),
+			new TableSearchColumn("ValBuildage", CSGenioAprope.FldBuildage, typeof(decimal?)),
+			new TableSearchColumn("ValFloornr", CSGenioAprope.FldFloornr, typeof(decimal?)),
+			new TableSearchColumn("ValId", CSGenioAprope.FldId, typeof(decimal?)),
+			new TableSearchColumn("City_ValCity", CSGenioAcity.FldCity, typeof(string)),
+			new TableSearchColumn("ValBuildtyp", CSGenioAprope.FldBuildtyp, typeof(string), array : "buildtyp"),
+			new TableSearchColumn("ValDtconst", CSGenioAprope.FldDtconst, typeof(DateTime?)),
+			new TableSearchColumn("ValDescript", CSGenioAprope.FldDescript, typeof(string)),
+			new TableSearchColumn("ValDtsold", CSGenioAprope.FldDtsold, typeof(DateTime?)),
+			new TableSearchColumn("ValProfit", CSGenioAprope.FldProfit, typeof(decimal?)),
+			new TableSearchColumn("ValTypology", CSGenioAprope.FldTypology, typeof(decimal), array : "typology"),
+			new TableSearchColumn("ValBathnr", CSGenioAprope.FldBathnr, typeof(decimal?)),
+			new TableSearchColumn("ValGrdsize", CSGenioAprope.FldGrdsize, typeof(decimal?)),
+			new TableSearchColumn("ValSold", CSGenioAprope.FldSold, typeof(bool)),
+			new TableSearchColumn("ValTax", CSGenioAprope.FldTax, typeof(decimal?)),
+			new TableSearchColumn("ValAverage", CSGenioAprope.FldAverage, typeof(decimal?)),
+			new TableSearchColumn("ValTitle", CSGenioAprope.FldTitle, typeof(string), defaultSearch : true),
+			new TableSearchColumn("ValSize", CSGenioAprope.FldSize, typeof(decimal?)),
 		];
+		protected void SetTicketToImageFields(Models.Prope row)
+		{
+			if (row == null)
+				return;
+
+			row.ValPhotoQTicket = Helpers.Helpers.GetFileTicket(m_userContext.User, CSGenio.business.Area.AreaPROPE, CSGenioAprope.FldPhoto.Field, null, row.ValCodprope);
+		}
 	}
 }

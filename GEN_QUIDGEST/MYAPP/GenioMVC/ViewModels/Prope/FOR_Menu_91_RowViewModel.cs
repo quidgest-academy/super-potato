@@ -36,14 +36,122 @@ public class FOR_Menu_91_RowViewModel : Models.Prope
 			new ListColumn()
 			{
 				Order = 1,
-				Area = "PROPE",
-				Field = "TITLE",
+				Area = "AGENT",
+				Field = "NAME",
 			},
 			new ListColumn()
 			{
 				Order = 2,
 				Area = "PROPE",
 				Field = "PRICE",
+			},
+			new ListColumn()
+			{
+				Order = 3,
+				Area = "PROPE",
+				Field = "BUILDAGE",
+			},
+			new ListColumn()
+			{
+				Order = 4,
+				Area = "PROPE",
+				Field = "FLOORNR",
+			},
+			new ListColumn()
+			{
+				Order = 5,
+				Area = "PROPE",
+				Field = "ID",
+			},
+			new ListColumn()
+			{
+				Order = 6,
+				Area = "CITY",
+				Field = "CITY",
+			},
+			new ListColumn()
+			{
+				Order = 7,
+				Area = "PROPE",
+				Field = "BUILDTYP",
+			},
+			new ListColumn()
+			{
+				Order = 8,
+				Area = "PROPE",
+				Field = "DTCONST",
+			},
+			new ListColumn()
+			{
+				Order = 9,
+				Area = "PROPE",
+				Field = "DESCRIPT",
+			},
+			new ListColumn()
+			{
+				Order = 10,
+				Area = "PROPE",
+				Field = "DTSOLD",
+			},
+			new ListColumn()
+			{
+				Order = 11,
+				Area = "PROPE",
+				Field = "PROFIT",
+			},
+			new ListColumn()
+			{
+				Order = 12,
+				Area = "PROPE",
+				Field = "TYPOLOGY",
+			},
+			new ListColumn()
+			{
+				Order = 13,
+				Area = "PROPE",
+				Field = "BATHNR",
+			},
+			new ListColumn()
+			{
+				Order = 14,
+				Area = "PROPE",
+				Field = "GRDSIZE",
+			},
+			new ListColumn()
+			{
+				Order = 15,
+				Area = "PROPE",
+				Field = "SOLD",
+			},
+			new ListColumn()
+			{
+				Order = 16,
+				Area = "PROPE",
+				Field = "TAX",
+			},
+			new ListColumn()
+			{
+				Order = 17,
+				Area = "PROPE",
+				Field = "AVERAGE",
+			},
+			new ListColumn()
+			{
+				Order = 18,
+				Area = "PROPE",
+				Field = "TITLE",
+			},
+			new ListColumn()
+			{
+				Order = 19,
+				Area = "PROPE",
+				Field = "PHOTO",
+			},
+			new ListColumn()
+			{
+				Order = 20,
+				Area = "PROPE",
+				Field = "SIZE",
 			},
 		];
 	}
