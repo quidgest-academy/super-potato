@@ -70,10 +70,19 @@ function averagePriceAgent(codagent)
 	/// <param name="codagent"></param>
 	return netAPI.executeServerFunction('averagePriceAgent', [codagent]);
 }
+function propsNotBooking(visitDate)
+{
+	/// <summary>
+	/// Return properties not booked in specific day
+	/// </summary>
+	/// <param name="visitDate"></param>
+	return netAPI.executeServerFunction('propsNotBooking', [visitDate]);
+}
 
 export default {
 	Age,
 	Average,
 	getCityTax,
 	averagePriceAgent,
+	propsNotBooking,
 }

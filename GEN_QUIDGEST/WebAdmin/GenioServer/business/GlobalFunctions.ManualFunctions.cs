@@ -39,7 +39,7 @@ namespace CSGenio.business
 		/// </summary>
 		private static void initTodasFuncoes()
 		{
-			todasFuncoes = new Hashtable(12, (float)0.5);
+			todasFuncoes = new Hashtable(13, (float)0.5);
 			todasFuncoes.Add("password_alterar", 0);
 			todasFuncoes.Add("password_verificaAntiga", 1);
 			todasFuncoes.Add("validarAssinatura", 2);
@@ -53,6 +53,7 @@ namespace CSGenio.business
 			todasFuncoes.Add("Average", 9);
 			todasFuncoes.Add("getCityTax", 10);
 			todasFuncoes.Add("averagePriceAgent", 11);
+			todasFuncoes.Add("propsNotBooking", 12);
 			// Cargas
 		}
 
@@ -141,6 +142,17 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 //END_FUNCTION
 		}
 
+		/// <summary>
+		/// Return properties not booked in specific day
+		/// </summary>
+		/// <param name="visitDate"></param>
+		public System.Collections.Generic.List<object> propsNotBooking(DateTime? visitDate)
+		{
+//BEGIN_FUNCTION:083f7b70-5add-4e77-9082-ae33d7097a18
+//implementa aqui
+//END_FUNCTION
+		}
+
 		#endregion
 
 		#region MANCS
@@ -153,7 +165,8 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 			"Age",
 			"Average",
 			"getCityTax",
-			"averagePriceAgent"
+			"averagePriceAgent",
+			"propsNotBooking"
 		};
 
 		public static List<string> AllManualFuntionsNames

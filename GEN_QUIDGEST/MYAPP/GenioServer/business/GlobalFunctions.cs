@@ -224,6 +224,13 @@ namespace CSGenio.business
                             string arg0 = obj[0];
                             return averagePriceAgent(arg0);
                         }
+                    case 12:
+                        {
+                            checkFunctionArgs(obj, 1);
+
+                            DateTime arg0 = Conversion.dateString2DateTime(obj[0]);
+                            return propsNotBooking(arg0);
+                        }
                     default:
                         throw new BusinessException(null, "GlobalFunctions.executaFuncao", "Unknown function name: " + name);
                 }
