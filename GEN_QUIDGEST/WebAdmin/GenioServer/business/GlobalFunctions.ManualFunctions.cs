@@ -153,7 +153,7 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 			SelectQuery query = new SelectQuery()
 				.Select(CSGenioAprope.FldCodprope)
 				.From(Area.AreaPROPE)
-				.Join(Area.AreaCONTA, TableJoinType.Left).On(CriteriaSet.And().Equal(CSGenioAconta.FldCodprope, CSGenioAprope.FldCodprope).Equal(CSGenioAconta.FldVisit_date, visitDate))
+				.Join(Area.AreaCONTA, TableJoinType.Left).On(CriteriaSet.And().Equal(CSGenioAconta.FldCodprope, CSGenioAprope.FldCodprope).Equal(CSGenioAconta.FldVisit_date, visitDate?.Date))
 				.Where(CriteriaSet.And().Equal(CSGenioAconta.FldVisit_date, null));	
 
 			var data = sp.Execute(query);
