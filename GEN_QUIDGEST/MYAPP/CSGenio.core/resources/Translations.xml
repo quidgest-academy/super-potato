@@ -339,6 +339,9 @@
   <msg id="Routine" code="ROUTINE58306">
     <ENUS>Routine</ENUS>
   </msg>
+  <msg id="Properties without contacts" code="PROPERTIES_WITHOUT_C12096">
+    <ENUS>Properties without contacts</ENUS>
+  </msg>
   <msg id="Population" code="POPULATION00718">
     <ENUS>Population</ENUS>
   </msg>

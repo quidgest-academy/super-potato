@@ -107,6 +107,20 @@ export default function getMenusRoutes()
 			}
 		},
 		{
+			path: '/:culture/:system/FOR/menu/FOR_91',
+			name: 'menu-FOR_91',
+			component: () => import('@/views/menus/ModuleFOR/MenuFOR_91/QMenuFor91.vue'),
+			meta: {
+				routeType: 'menu',
+				module: 'FOR',
+				order: '91',
+				baseArea: 'PROPE',
+				hasInitialPHE: false,
+				humanKeyFields: ['ValTitle', 'ValPrice'],
+				isPopup: false
+			}
+		},
+		{
 			path: '/:culture/:system/FOR/menu/FOR_311',
 			name: 'menu-FOR_311',
 			component: () => import('@/views/menus/ModuleFOR/MenuFOR_311/QMenuFor311.vue'),

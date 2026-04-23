@@ -32,6 +32,7 @@ namespace GenioMVC.Controllers
 		private static readonly NavigationLocation ACTION_FOR_MENU_411 = new NavigationLocation("PROPERTIES34868", "FOR_Menu_411", "Prope") { vueRouteName = "menu-FOR_411" };
 		private static readonly NavigationLocation ACTION_FOR_MENU_511 = new NavigationLocation("PROPERTIES34868", "FOR_Menu_511", "Prope") { vueRouteName = "menu-FOR_511" };
 		private static readonly NavigationLocation ACTION_FOR_MENU_PROP_SOLD_MANUAL = new NavigationLocation("PROPERTIES34868", "FOR_Menu_PROP_SOLD_MANUAL", "Prope") { vueRouteName = "menu-FOR_PROP_SOLD_MANUAL" };
+		private static readonly NavigationLocation ACTION_FOR_MENU_91 = new NavigationLocation("PROPERTIES34868", "FOR_Menu_91", "Prope") { vueRouteName = "menu-FOR_91" };
 
 
 		//
@@ -397,6 +398,71 @@ namespace GenioMVC.Controllers
 
 
 // USE /[MANUAL FOR MENU_GET PROP_SOLD_MANUAL]/
+
+			try
+			{
+				model.Load(tableConfig, querystring, Request.IsAjaxRequest());
+			}
+			catch (Exception e)
+			{
+				return JsonERROR(HandleException(e), model);
+			}
+
+
+			return JsonOK(model);
+		}
+
+		//
+		// GET: /Prope/FOR_Menu_91
+		[ActionName("FOR_Menu_91")]
+		[HttpPost]
+		public ActionResult FOR_Menu_91([FromBody] RequestMenuModel requestModel)
+		{
+			var queryParams = requestModel.QueryParams;
+
+			FOR_Menu_91_ViewModel model = new(m_userContext);
+
+			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(
+				requestModel.TableConfiguration,
+				requestModel.UserTableConfigName,
+				requestModel.LoadDefaultView);
+
+			// Determine rows per page
+			tableConfig.RowsPerPage = tableConfig.DetermineRowsPerPage(CSGenio.framework.Configuration.NrRegDBedit, "");
+
+			bool isHomePage = RouteData.Values.ContainsKey("isHomePage") ? (bool)RouteData.Values["isHomePage"] : false;
+			if (isHomePage)
+				Navigation.SetValue("HomePage", "FOR_Menu_91");
+
+			// If there was a recent operation on this table then force the primary persistence server to be called and ignore the read only feature
+			if (string.IsNullOrEmpty(Navigation.GetStrValue("ForcePrimaryRead_prope")))
+				UserContext.Current.SetPersistenceReadOnly(true);
+			else
+			{
+				Navigation.DestroyEntry("ForcePrimaryRead_prope");
+				UserContext.Current.SetPersistenceReadOnly(false);
+			}
+			CSGenio.framework.StatusMessage result = model.CheckPermissions(FormMode.List);
+			if (result.Status.Equals(CSGenio.framework.Status.E))
+				return PermissionError(result.Message);
+
+			NameValueCollection querystring = [];
+			if (queryParams != null && queryParams.Count > 0)
+				querystring.AddRange(queryParams);
+
+			if (!isHomePage &&
+				(Navigation.CurrentLevel == null || !ACTION_FOR_MENU_91.IsSameAction(Navigation.CurrentLevel.Location)) &&
+				Navigation.CurrentLevel.Location.Action != ACTION_FOR_MENU_91.Action)
+				CSGenio.framework.Audit.registAction(UserContext.Current.User, Resources.Resources.MENU01948 + " " + Navigation.CurrentLevel.Location.ShortDescription());
+			else if (isHomePage)
+			{
+				CSGenio.framework.Audit.registAction(UserContext.Current.User, Resources.Resources.MENU01948 + " " + ACTION_FOR_MENU_91.ShortDescription());
+				Navigation.SetValue("HomePageContainsList", true);
+			}
+
+
+
+// USE /[MANUAL FOR MENU_GET 91]/
 
 			try
 			{

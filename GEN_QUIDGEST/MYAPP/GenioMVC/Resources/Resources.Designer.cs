@@ -1080,6 +1080,15 @@ namespace GenioMVC.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to "Properties without contacts"
+		/// </summary>
+		public static string PROPERTIES_WITHOUT_C12096 {
+			get {
+				return ResourceManager.GetString("PROPERTIES_WITHOUT_C12096", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to "Population"
 		/// </summary>
 		public static string POPULATION00718 {

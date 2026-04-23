@@ -456,6 +456,9 @@
 	<data name="ROUTINE58306" xml:space="preserve">
 		<value>Routine</value>
 	</data>
+	<data name="PROPERTIES_WITHOUT_C12096" xml:space="preserve">
+		<value>Properties without contacts</value>
+	</data>
 	<data name="POPULATION00718" xml:space="preserve">
 		<value>Population</value>
 	</data>
