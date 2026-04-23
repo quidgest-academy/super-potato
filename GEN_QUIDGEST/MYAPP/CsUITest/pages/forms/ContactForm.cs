@@ -46,7 +46,7 @@ public class ContactForm : PopupForm
 	/// <summary>
 	/// Property
 	/// </summary>
-	public IWebElement PropeId => throw new NotImplementedException();
+	public IWebElement PropeCodprope => throw new NotImplementedException();
 
 	public ContactForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "CONTACT", usePkInId: usePkInId) { }
