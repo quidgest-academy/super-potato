@@ -6,16 +6,16 @@ using GenioMVC.Models.Navigation;
 
 namespace GenioMVC.ViewModels.Conta;
 
-public class Contact_PropeValTitle_RowViewModel : Models.Prope
+public class Contact_PropeValId_RowViewModel : Models.Prope
 {
 	#region Constructors
 
-	public Contact_PropeValTitle_RowViewModel(UserContext userContext, bool isEmpty = false, string[]? fieldsToSerialize = null) : base(userContext, isEmpty, fieldsToSerialize)
+	public Contact_PropeValId_RowViewModel(UserContext userContext, bool isEmpty = false, string[]? fieldsToSerialize = null) : base(userContext, isEmpty, fieldsToSerialize)
 	{
 		InitRowProperties();
 	}
 
-	public Contact_PropeValTitle_RowViewModel(UserContext userContext, CSGenioAprope val, bool isEmpty = false, string[]? fieldsToSerialize = null) : base(userContext, val, isEmpty, fieldsToSerialize)
+	public Contact_PropeValId_RowViewModel(UserContext userContext, CSGenioAprope val, bool isEmpty = false, string[]? fieldsToSerialize = null) : base(userContext, val, isEmpty, fieldsToSerialize)
 	{
 		InitRowProperties();
 	}
@@ -33,18 +33,6 @@ public class Contact_PropeValTitle_RowViewModel : Models.Prope
 	private void SetColumns()
 	{
 		Columns ??= [
-			new ListColumn()
-			{
-				Order = 1,
-				Area = "PROPE",
-				Field = "TITLE",
-			},
-			new ListColumn()
-			{
-				Order = 2,
-				Area = "PROPE",
-				Field = "PRICE",
-			},
 		];
 	}
 

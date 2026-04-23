@@ -320,6 +320,7 @@
 
 		components: {
 			QSeeMoreContactPropetitle: defineAsyncComponent(() => import('@/views/forms/FormContact/dbedits/ContactPropetitleSeeMore.vue')),
+			QSeeMoreContactPropeid: defineAsyncComponent(() => import('@/views/forms/FormContact/dbedits/ContactPropeidSeeMore.vue')),
 		},
 
 		mixins: [
@@ -717,6 +718,40 @@
 						controlLimits: [
 						],
 					}, this),
+					CONTACT_PROPEID______: new fieldControlClass.LookupControl({
+						modelField: 'TablePropeId',
+						valueChangeEvent: 'fieldChange:prope.id',
+						id: 'CONTACT_PROPEID______',
+						name: 'ID',
+						size: 'small',
+						label: computed(() => this.Resources.PROPERTY43977),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						externalCallbacks: {
+							getModelField: vm.getModelField,
+							getModelFieldValue: vm.getModelFieldValue,
+							setModelFieldValue: vm.setModelFieldValue
+						},
+						externalProperties: {
+							modelKeys: computed(() => vm.modelKeys)
+						},
+						lookupKeyModelField: {
+							name: 'ValCodprope',
+							dependencyEvent: 'fieldChange:conta.codprope'
+						},
+						dependentFields: () => ({
+							set 'prope.codprope'(value) { vm.model.ValCodprope.updateValue(value) },
+							set 'prope.id'(value) { vm.model.TablePropeId.updateValue(value) },
+						}),
+						controlLimits: [
+							{
+								identifier: 'conta.visit_date',
+								dependencyEvents: ['fieldChange:conta.visit_date'],
+								dependencyField: 'CONTA.VISIT_DATE',
+								fnValueSelector: (model) => model.ValVisit_date.value
+							},
+						],
+					}, this),
 				},
 
 				model: new FormViewModel(this, {
@@ -756,6 +791,8 @@
 						set ValVisit_date(value) { vm.model.ValVisit_date.updateValue(value) },
 					},
 					Prope: {
+						get ValId() { return vm.model.TablePropeId.value },
+						set ValId(value) { vm.model.TablePropeId.updateValue(value) },
 						get ValTitle() { return vm.model.TablePropeTitle.value },
 						set ValTitle(value) { vm.model.TablePropeTitle.updateValue(value) },
 					},

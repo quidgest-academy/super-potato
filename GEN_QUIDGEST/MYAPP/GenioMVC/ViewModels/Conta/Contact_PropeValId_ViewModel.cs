@@ -17,13 +17,13 @@ using Quidgest.Persistence.GenericQuery;
 
 namespace GenioMVC.ViewModels.Conta
 {
-	public class Contact_PropeValTitle_ViewModel : MenuListViewModel<Models.Prope>
+	public class Contact_PropeValId_ViewModel : MenuListViewModel<Models.Prope>
 	{
 		/// <summary>
 		/// Gets or sets the object that represents the table and its elements.
 		/// </summary>
 		[JsonPropertyName("table")]
-		public TablePartial<Contact_PropeValTitle_RowViewModel> Menu { get; set; }
+		public TablePartial<Contact_PropeValId_RowViewModel> Menu { get; set; }
 
 		/// <inheritdoc/>
 		[JsonIgnore]
@@ -31,7 +31,7 @@ namespace GenioMVC.ViewModels.Conta
 
 		/// <inheritdoc/>
 		[JsonPropertyName("uuid")]
-		public override string Uuid => "Contact_PropeValTitle";
+		public override string Uuid => "Contact_PropeValId";
 
 		/// <inheritdoc/>
 		protected override string[] FieldsToSerialize => _fieldsToSerialize;
@@ -88,10 +88,12 @@ namespace GenioMVC.ViewModels.Conta
 
 		public override CriteriaSet GetCustomizedStaticLimits(CriteriaSet crs)
 		{
-// USE /[MANUAL FOR LIST_LIMITS CONTACT_PROPETITLE]/
+// USE /[MANUAL FOR LIST_LIMITS CONTACT_PROPEID]/
 
 			return crs;
 		}
+
+		public DateTime? ValVisit_date { get; set; }
 
 		public override int GetCount(User user)
 		{
@@ -102,23 +104,23 @@ namespace GenioMVC.ViewModels.Conta
 		/// FOR DESERIALIZATION ONLY
 		/// </summary>
 		[Obsolete("For deserialization only")]
-		public Contact_PropeValTitle_ViewModel() : base(null!) { }
+		public Contact_PropeValId_ViewModel() : base(null!) { }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Contact_PropeValTitle_ViewModel" /> class.
+		/// Initializes a new instance of the <see cref="Contact_PropeValId_ViewModel" /> class.
 		/// </summary>
 		/// <param name="userContext">The current user request context</param>
-		public Contact_PropeValTitle_ViewModel(UserContext userContext) : base(userContext)
+		public Contact_PropeValId_ViewModel(UserContext userContext) : base(userContext)
 		{
 			ValCodconta = userContext.CurrentNavigation.CurrentLevel.GetEntry("conta")?.ToString();
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Contact_PropeValTitle_ViewModel" /> class.
+		/// Initializes a new instance of the <see cref="Contact_PropeValId_ViewModel" /> class.
 		/// </summary>
 		/// <param name="userContext">The current user request context</param>
 		/// <param name="parentCtx">The context of the parent</param>
-		public Contact_PropeValTitle_ViewModel(UserContext userContext, Models.ModelBase parentCtx) : this(userContext)
+		public Contact_PropeValId_ViewModel(UserContext userContext, Models.ModelBase parentCtx) : this(userContext)
 		{
 			ParentCtx = parentCtx;
 		}
@@ -128,8 +130,6 @@ namespace GenioMVC.ViewModels.Conta
 		{
 			return
 			[
-				new Exports.QColumn(CSGenioAprope.FldTitle, FieldType.TEXT, Resources.Resources.TITLE21885, 50, 0, true),
-				new Exports.QColumn(CSGenioAprope.FldPrice, FieldType.CURRENCY, Resources.Resources.PRICE06900, 12, 0, true),
 			];
 		}
 
@@ -170,8 +170,27 @@ namespace GenioMVC.ViewModels.Conta
 
 			crs ??= CriteriaSet.And();
 
+			// Limits Generation
 
-			Menu ??= new TablePartial<Contact_PropeValTitle_RowViewModel>();
+			object contact_propeid_______flimitprope_sold = "0";
+			crs.Equal(
+				CSGenio.business.CSGenioAprope.FldSold,
+				contact_propeid_______flimitprope_sold);
+
+			// Multiple value limit with expression propsNotBooking([CONTA->VISIT_DATE])
+			IEnumerable<object> contact_propeid_______mlimitprope_codprope = new CSGenio.business.GlobalFunctions(m_userContext.User, m_userContext.User.CurrentModule, m_userContext.PersistentSupport).propsNotBooking(((DateTime)ValVisit_date));
+			if (contact_propeid_______mlimitprope_codprope != null && contact_propeid_______mlimitprope_codprope.Any())
+			{
+				crs.In(
+					CSGenio.business.CSGenioAprope.FldCodprope,
+					contact_propeid_______mlimitprope_codprope);
+			}
+			else
+			{
+				tableReload = false;
+			}
+
+			Menu ??= new TablePartial<Contact_PropeValId_RowViewModel>();
 			// Set table name (used in getting searchable column names)
 			Menu.TableName = TableAlias;
 
@@ -180,11 +199,6 @@ namespace GenioMVC.ViewModels.Conta
 			crs.SubSets.Add(ProcessSearchFilters(Menu, GetSearchColumns(tableConfig.ColumnConfigurations), tableConfig));
 
 
-			//Subfilters
-			CriteriaSet subfilters = CriteriaSet.And();
-
-
-			crs.SubSets.Add(subfilters);
 
 			// Form field filters
 			crs.SubSets.Add(ProcessFieldFilters(tableConfig.GlobalFilters));
@@ -195,7 +209,7 @@ namespace GenioMVC.ViewModels.Conta
 			if (isToExport)
 			{
 				// EPH
-				crs = Models.Prope.AddEPH<CSGenioAprope>(ref u, crs, "IBL_CONTACT_PROPETITLE___");
+				crs = Models.Prope.AddEPH<CSGenioAprope>(ref u, crs, "IBL_CONTACT_PROPEID______");
 
 				// Export only records with ZZState == 0
 				crs.Equal(CSGenioAprope.FldZzstate, 0);
@@ -211,7 +225,7 @@ namespace GenioMVC.ViewModels.Conta
 			{
 				string QMVC_POS_RECORD = requestValues["Q_POS_RECORD_prope"];
 				if (!string.IsNullOrEmpty(QMVC_POS_RECORD))
-					crs.Equals(Models.Prope.AddEPH<CSGenioAprope>(ref u, null, "IBL_CONTACT_PROPETITLE___"));
+					crs.Equals(Models.Prope.AddEPH<CSGenioAprope>(ref u, null, "IBL_CONTACT_PROPEID______"));
 			}
 
 			return crs;
@@ -286,15 +300,13 @@ namespace GenioMVC.ViewModels.Conta
 		public void Load(CSGenio.core.framework.table.TableConfiguration tableConfig, NameValueCollection requestValues, bool ajaxRequest, bool isToExport, ref ListingMVC<CSGenioAprope> Qlisting, ref CriteriaSet conditions)
 		{
 			User u = m_userContext.User;
-			Menu = new TablePartial<Contact_PropeValTitle_RowViewModel>();
+			Menu = new TablePartial<Contact_PropeValId_RowViewModel>();
 
-			CriteriaSet contact_propetitle___Conds = CriteriaSet.And();
+			CriteriaSet contact_propeid______Conds = CriteriaSet.And();
 			bool tableReload = true;
 
 			//FOR: MENU LIST SORTING
 			Dictionary<string, OrderedDictionary> allSortOrders = new Dictionary<string, OrderedDictionary>();
-			allSortOrders.Add("PROPE.TITLE", new OrderedDictionary());
-			allSortOrders["PROPE.TITLE"].Add("PROPE.TITLE", "A");
 
 
 			int numberListItems = tableConfig.RowsPerPage;
@@ -306,26 +318,14 @@ namespace GenioMVC.ViewModels.Conta
 
 			List<ColumnSort> sorts = GetRequestSorts(this.Menu, tableConfig, "prope", allSortOrders);
 
-			if (sorts == null || sorts.Count == 0)
-			{
-				sorts = new List<ColumnSort>();
-				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAprope.FldTitle), SortOrder.Ascending));
 
-			}
-
-			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldTitle, CSGenioAprope.FldPrice };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
 			List<FieldRef> fieldsWithTotalizers = [.. fields.Where(field => totalizerColumns.Contains(field.FullName))];
 
 			FieldRef firstVisibleColumn = null;
-			if (sorts.Count == 0)
-			{
-				firstVisibleColumn = tableConfig?.GetFirstVisibleColumn(TableAlias);
-
-				firstVisibleColumn ??= new FieldRef("prope", "title");
-			}
 			// Limitations
 			this.TableLimits ??= [];
 			// Comparer to check if limit is already present in TableLimits
@@ -336,20 +336,40 @@ namespace GenioMVC.ViewModels.Conta
 				Limit limit = new Limit();
 				limit.TipoLimite = LimitType.EPH;
 				CSGenioAprope model_limit_area = new CSGenioAprope(m_userContext.User);
-				List<Limit> area_EPH_limits = EPH_Limit_Filler(ref limit, model_limit_area, "IBL_CONTACT_PROPETITLE___");
+				List<Limit> area_EPH_limits = EPH_Limit_Filler(ref limit, model_limit_area, "IBL_CONTACT_PROPEID______");
 				if (area_EPH_limits.Count > 0)
 					this.TableLimits.AddRange(area_EPH_limits);
 			}
 
+			// Tooltips: Making a tooltip for each valid limitation: 2 Limit(s) detected.
+			// Limit origin: form 
+			//Limit type: "F"
+			//Current Area = "PROPE"
+			//1st Area Limit: "PROPE"
+			//1st Area Field: "SOLD"
+			//1st Area Value: "0"
+			{
+				Limit limit = new Limit();
+				limit.TipoLimite = LimitType.F;
+				limit.NaoAplicaSeNulo = false;
+				CSGenioAprope model_limit_area = new CSGenioAprope(m_userContext.User);
+				string limit_field = "sold", limit_field_value = "0";
+				object this_limit_field = Navigation.GetStrValue(limit_field_value);
+				Limit_Filler(ref limit, model_limit_area, limit_field, limit_field_value, this_limit_field, LimitAreaType.AreaLimita);
+				if (!this.TableLimits.Contains(limit, limitComparer)) //to avoid repetitions (i.e: DB and EPH applying same limit)
+					this.TableLimits.Add(limit);
+			}
+			// Tooltip for limit "M" ignored.
+			// Limit origin: form 
 
 			if (conditions == null)
 				conditions = CriteriaSet.And();
 
-			conditions.SubSets.Add(contact_propetitle___Conds);
-			contact_propetitle___Conds = BuildCriteriaSet(tableConfig, requestValues, out bool hasAllRequiredLimits, conditions, isToExport);
+			conditions.SubSets.Add(contact_propeid______Conds);
+			contact_propeid______Conds = BuildCriteriaSet(tableConfig, requestValues, out bool hasAllRequiredLimits, conditions, isToExport);
 			tableReload &= hasAllRequiredLimits;
 
-// USE /[MANUAL FOR OVERRQ CONTACT_PROPETITLE]/
+// USE /[MANUAL FOR OVERRQ CONTACT_PROPEID]/
 
 			bool distinct = false;
 
@@ -361,28 +381,28 @@ namespace GenioMVC.ViewModels.Conta
 				var exportColumns = GetExportColumns(tableConfig.ColumnConfigurations);
 				var exportFieldRefs = exportColumns.Select(eCol => eCol.Field).Where(fldRef => fldRef != null).ToArray();
 
-				Qlisting = Models.ModelBase.BuildListingForExport<CSGenioAprope>(m_userContext, false, ref contact_propetitle___Conds, exportFieldRefs, (pageNumber - 1) * numberListItems, numberListItems, sorts, "IBL_CONTACT_PROPETITLE___", true, firstVisibleColumn: firstVisibleColumn);
+				Qlisting = Models.ModelBase.BuildListingForExport<CSGenioAprope>(m_userContext, false, ref contact_propeid______Conds, exportFieldRefs, (pageNumber - 1) * numberListItems, numberListItems, sorts, "IBL_CONTACT_PROPEID______", true, firstVisibleColumn: firstVisibleColumn);
 
-// USE /[MANUAL FOR OVERRQLSTEXP CONTACT_PROPETITLE]/
+// USE /[MANUAL FOR OVERRQLSTEXP CONTACT_PROPEID]/
 
 				return;
 			}
 
 			if (tableReload)
 			{
-// USE /[MANUAL FOR OVERRQLIST CONTACT_PROPETITLE]/
+// USE /[MANUAL FOR OVERRQLIST CONTACT_PROPEID]/
 
 				string QMVC_POS_RECORD = requestValues["Q_POS_RECORD_prope"];
 				CriteriaSet m_PagingPosEPHs = null;
 
 				if (!string.IsNullOrEmpty(QMVC_POS_RECORD))
 				{
-					var m_iCurPag = m_userContext.PersistentSupport.getPagingPos(CSGenioAprope.GetInformation(), QMVC_POS_RECORD, sorts, contact_propetitle___Conds, m_PagingPosEPHs, firstVisibleColumn: firstVisibleColumn);
+					var m_iCurPag = m_userContext.PersistentSupport.getPagingPos(CSGenioAprope.GetInformation(), QMVC_POS_RECORD, sorts, contact_propeid______Conds, m_PagingPosEPHs, firstVisibleColumn: firstVisibleColumn);
 					if (m_iCurPag != -1)
 						pageNumber = ((m_iCurPag - 1) / numberListItems) + 1;
 				}
 
-				ListingMVC<CSGenioAprope> listing = Models.ModelBase.Where<CSGenioAprope>(m_userContext, distinct, contact_propetitle___Conds, fields, (pageNumber - 1) * numberListItems, numberListItems, sorts, "IBL_CONTACT_PROPETITLE___", true, false, QMVC_POS_RECORD, m_PagingPosEPHs, firstVisibleColumn, fieldsWithTotalizers, tableConfig.SelectedRows);
+				ListingMVC<CSGenioAprope> listing = Models.ModelBase.Where<CSGenioAprope>(m_userContext, distinct, contact_propeid______Conds, fields, (pageNumber - 1) * numberListItems, numberListItems, sorts, "IBL_CONTACT_PROPEID______", true, false, QMVC_POS_RECORD, m_PagingPosEPHs, firstVisibleColumn, fieldsWithTotalizers, tableConfig.SelectedRows);
 
 				if (listing.CurrentPage > 0)
 					pageNumber = listing.CurrentPage;
@@ -394,14 +414,14 @@ namespace GenioMVC.ViewModels.Conta
 				//Set document field values to objects
 				SetDocumentFields(listing);
 
-				Menu.Elements = MapContact_PropeValTitle(listing);
+				Menu.Elements = MapContact_PropeValId(listing);
 
-				Menu.Identifier = "IBL_CONTACT_PROPETITLE___";
+				Menu.Identifier = "IBL_CONTACT_PROPEID______";
 
 				// Last updated by [CJP] at [2015.02.03]
 				// Adds the identifier to each element
 				foreach (var element in Menu.Elements)
-					element.Identifier = "IBL_CONTACT_PROPETITLE___";
+					element.Identifier = "IBL_CONTACT_PROPEID______";
 
 				Menu.SetPagination(pageNumber, listing.NumRegs, listing.HasMore, listing.GetTotal, listing.TotalRecords);
 
@@ -420,9 +440,9 @@ namespace GenioMVC.ViewModels.Conta
 			LoadUserTableConfigNameProperties();
 		}
 
-		private List<Contact_PropeValTitle_RowViewModel> MapContact_PropeValTitle(ListingMVC<CSGenioAprope> Qlisting)
+		private List<Contact_PropeValId_RowViewModel> MapContact_PropeValId(ListingMVC<CSGenioAprope> Qlisting)
 		{
-			List<Contact_PropeValTitle_RowViewModel> Elements = [];
+			List<Contact_PropeValId_RowViewModel> Elements = [];
 			int i = 0;
 
 			if (Qlisting.Rows != null)
@@ -431,7 +451,7 @@ namespace GenioMVC.ViewModels.Conta
 				{
 					if (Qlisting.NumRegs > 0 && i >= Qlisting.NumRegs) // Copiado da versão antiga do RowsToViewModels
 						break;
-					Elements.Add(MapContact_PropeValTitle(row));
+					Elements.Add(MapContact_PropeValId(row));
 					i++;
 				}
 			}
@@ -441,12 +461,12 @@ namespace GenioMVC.ViewModels.Conta
 
 		/// <summary>
 		/// Maps a single CSGenioAprope row
-		/// to a Contact_PropeValTitle_RowViewModel object.
+		/// to a Contact_PropeValId_RowViewModel object.
 		/// </summary>
 		/// <param name="row">The row.</param>
-		private Contact_PropeValTitle_RowViewModel MapContact_PropeValTitle(CSGenioAprope row)
+		private Contact_PropeValId_RowViewModel MapContact_PropeValId(CSGenioAprope row)
 		{
-			var model = new Contact_PropeValTitle_RowViewModel(m_userContext, true, _fieldsToSerialize);
+			var model = new Contact_PropeValId_RowViewModel(m_userContext, true, _fieldsToSerialize);
 			if (row == null)
 				return model;
 
@@ -501,19 +521,17 @@ namespace GenioMVC.ViewModels.Conta
 
 		#region Custom code
 
-// USE /[MANUAL FOR VIEWMODEL_CUSTOM CONTACT_PROPEVALTITLE]/
+// USE /[MANUAL FOR VIEWMODEL_CUSTOM CONTACT_PROPEVALID]/
 
 		#endregion
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValTitle", "Prope.ValPrice", "Prope.ValCodagent", "Prope.ValCodcity"
+			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValCodagent", "Prope.ValCodcity"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
 		[
-			new TableSearchColumn("ValTitle", CSGenioAprope.FldTitle, typeof(string), defaultSearch : true),
-			new TableSearchColumn("ValPrice", CSGenioAprope.FldPrice, typeof(decimal?)),
 		];
 	}
 }

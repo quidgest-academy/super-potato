@@ -1,7 +1,7 @@
 ﻿<template>
 	<teleport
 		v-if="isReady"
-		to="#q-modal-see-more-contact-propetitle-body">
+		to="#q-modal-see-more-contact-propeid-body">
 		<q-row>
 			<q-table
 				v-bind="listCtrl"
@@ -46,10 +46,10 @@
 
 	import ViewModelBase from '@/mixins/viewModelBase.js'
 
-	const requiredTextResources = ['CONTACT_PROPETITLE____SeeMore', 'hardcoded', 'messages']
+	const requiredTextResources = ['CONTACT_PROPEID_______SeeMore', 'hardcoded', 'messages']
 
 	export default {
-		name: 'ContactPropetitleSeeMore',
+		name: 'ContactPropeidSeeMore',
 
 		inheritAttrs: false,
 
@@ -94,18 +94,18 @@
 			return {
 				isReady: false,
 
-				componentOnLoadProc: asyncProcM.getProcListMonitor('CONTACT_PROPETITLE____SeeMore', false),
+				componentOnLoadProc: asyncProcM.getProcListMonitor('CONTACT_PROPEID_______SeeMore', false),
 
 				interfaceMetadata: {
-					id: 'CONTACT_PROPETITLE____SeeMore', // Used for resources
+					id: 'CONTACT_PROPEID_______SeeMore', // Used for resources
 					requiredTextResources
 				},
 
 				menuInfo: {
-					acronym: 'CONTACT_PROPETITLE____SeeMore',
-					name: 'CONTACT_PROPETITLE____SeeMore',
+					acronym: 'CONTACT_PROPEID_______SeeMore',
+					name: 'CONTACT_PROPEID_______SeeMore',
 					controller: 'CONTA',
-					action: 'CONTACT_PropeValTitle'
+					action: 'CONTACT_PropeValId'
 				},
 
 				listCtrl: new TableListControl(this.getListConfig(), this),
@@ -134,9 +134,9 @@
 			this.$eventHub.onMany(this.listCtrl.globalEvents, this.onTableDBDataChanged)
 
 			const modalProps = {
-				id: 'see-more-contact-propetitle',
+				id: 'see-more-contact-propeid',
 				dismissAction: this.close,
-				returnElement: 'CONTACT_PROPETITLE____see-more_button'
+				returnElement: 'CONTACT_PROPEID_______see-more_button'
 			}
 			const props = {
 				class: 'q-dialog-see-more',
@@ -163,7 +163,7 @@
 			this.listCtrl.destroy()
 			this.componentOnLoadProc.destroy()
 
-			removeModal('see-more-contact-propetitle')
+			removeModal('see-more-contact-propeid')
 		},
 
 		methods: {
@@ -215,34 +215,13 @@
 				const listProps = {
 					configuration: {
 						controller: 'CONTA',
-						action: 'Contact_PropeValTitle',
+						action: 'Contact_PropeValId',
 						hasDependencies: false,
 						isInCollapsible: false,
 						columnsOriginal: [
-							new listColumnTypes.TextColumn({
-								order: 1,
-								name: 'ValTitle',
-								area: 'PROPE',
-								field: 'TITLE',
-								label: computed(() => this.Resources.TITLE21885),
-								dataLength: 50,
-								scrollData: 50,
-								export: 1,
-							}, computed(() => vm.model), computed(() => vm.internalEvents)),
-							new listColumnTypes.CurrencyColumn({
-								order: 2,
-								name: 'ValPrice',
-								area: 'PROPE',
-								field: 'PRICE',
-								label: computed(() => this.Resources.PRICE06900),
-								scrollData: 12,
-								maxDigits: 9,
-								decimalPlaces: 2,
-								export: 1,
-							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
 						config: {
-							name: 'Contact_PropeValTitle',
+							name: 'Contact_PropeValId',
 							serverMode: true,
 							pkColumn: 'ValCodprope',
 							tableAlias: 'PROPE',
@@ -272,15 +251,14 @@
 							},
 							formsDefinition: {
 							},
-							defaultSearchColumnName: 'ValTitle',
-							defaultSearchColumnNameOriginal: 'ValTitle',
+							defaultSearchColumnName: '',
+							defaultSearchColumnNameOriginal: '',
 							defaultColumnSorting: {
-								columnName: 'ValTitle',
+								columnName: '',
 								sortOrder: 'asc'
 							}
 						},
-						globalEvents: ['changed-AGENT', 'changed-CITY', 'changed-PROPE'],
-						uuid: 'Contact_Contact_PropeValTitle',
+						uuid: 'Contact_Contact_PropeValId',
 						allSelectedRows: 'false',
 						handlers: {
 							rowAction: vm.handleRowAction

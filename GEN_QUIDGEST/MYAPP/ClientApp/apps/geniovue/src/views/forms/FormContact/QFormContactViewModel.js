@@ -147,6 +147,19 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.VISIT_DATE27188),
 		}).cloneFrom(values?.ValVisit_date))
 		this.stopWatchers.push(watch(() => this.ValVisit_date.value, (newValue, oldValue) => this.onUpdate('conta.visit_date', this.ValVisit_date, newValue, oldValue)))
+
+		this.TablePropeId = reactive(new modelFieldType.Number({
+			type: 'Lookup',
+			id: 'TablePropeId',
+			originId: 'ValId',
+			area: 'PROPE',
+			field: 'ID',
+			maxDigits: 5,
+			decimalDigits: 0,
+			description: '',
+			ignoreFldSubmit: true,
+		}).cloneFrom(values?.TablePropeId))
+		this.stopWatchers.push(watch(() => this.TablePropeId.value, (newValue, oldValue) => this.onUpdate('prope.id', this.TablePropeId, newValue, oldValue)))
 	}
 
 	/**
