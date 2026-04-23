@@ -176,13 +176,11 @@
 							:loading="controls.PROPERTY__PROPE__LASTVISIT.props.loading"
 							:reporting-mode-on="reportingModeCAV"
 							:suggestion-mode-on="suggestionModeOn">
-							<q-date-time-picker
-								v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible"
+							<q-text-field
 								v-bind="controls.PROPERTY__PROPE__LASTVISIT.props"
 								:id="getControlId(controls.PROPERTY__PROPE__LASTVISIT)"
-								:model-value="model.ValLastvisit.value"
-								@reset-icon-click="model.ValLastvisit.fnUpdateValue(model.ValLastvisit.originalValue ?? new Date())"
-								@update:model-value="model.ValLastvisit.fnUpdateValue($event ?? '')" />
+								@blur="onBlur(controls.PROPERTY__PROPE__LASTVISIT, model.ValLastvisit.value)"
+								@change="model.ValLastvisit.fnUpdateValueOnChange" />
 						</base-input-structure>
 					</q-col>
 				</q-row>
@@ -1045,7 +1043,7 @@
 						controlLimits: [
 						],
 					}, this),
-					PROPERTY__PROPE__LASTVISIT: new fieldControlClass.DateControl({
+					PROPERTY__PROPE__LASTVISIT: new fieldControlClass.StringControl({
 						modelField: 'ValLastvisit',
 						valueChangeEvent: 'fieldChange:prope.lastvisit',
 						id: 'PROPERTY__PROPE__LASTVISIT',
@@ -1055,7 +1053,7 @@
 						placeholder: '',
 						labelPosition: computed(() => this.labelAlignment.topleft),
 						isFormulaBlocked: true,
-						dateTimeType: 'date',
+						maxLength: 50,
 						controlLimits: [
 						],
 					}, this),

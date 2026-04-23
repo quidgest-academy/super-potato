@@ -25,7 +25,7 @@ public class PropertyForm : Form
 	/// <summary>
 	/// Last Visit
 	/// </summary>
-	public DateInputControl PropeLastvisit => new DateInputControl(driver, ContainerLocator, "#PROPERTY__PROPE__LASTVISIT" + IdSuffix);
+	public BaseInputControl PropeLastvisit => new BaseInputControl(driver, ContainerLocator, "container-PROPERTY__PROPE__LASTVISIT" + IdSuffix, "#PROPERTY__PROPE__LASTVISIT" + IdSuffix);
 
 	/// <summary>
 	/// New Group

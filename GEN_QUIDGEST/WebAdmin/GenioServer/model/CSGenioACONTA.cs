@@ -207,7 +207,7 @@ namespace CSGenio.business
 			info.LastValueArgs = new List<LastValueArgument>();
 			info.LastValueArgs.Add( new LastValueArgument("prope",
 				new string [] {"lastvisit"},
-				new string [] {"visit_date"},
+				new string [] {"client"},
 				"visit_date",
 				null,
 

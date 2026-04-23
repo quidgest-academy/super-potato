@@ -329,9 +329,9 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
-			Qfield = new Field(info.Alias, "lastvisit", FieldType.DATE);
+			Qfield = new Field(info.Alias, "lastvisit", FieldType.TEXT);
 			Qfield.FieldDescription = "Last Visit";
-			Qfield.FieldSize =  8;
+			Qfield.FieldSize =  50;
 			Qfield.MQueue = false;
 			Qfield.CavDesignation = "LAST_VISIT61343";
 
@@ -788,14 +788,14 @@ namespace CSGenio.business
 			set { insertNameValueField(FldNumbercontacts, value); }
 		}
 
-		/// <summary>Field : "Last Visit" Tipo: "D" Formula: U1 "CONTA[CONTA->VISIT_DATE][CONTA->VISIT_DATE]"</summary>
+		/// <summary>Field : "Last Visit" Tipo: "C" Formula: U1 "CONTA[CONTA->VISIT_DATE][CONTA->CLIENT]"</summary>
 		public static FieldRef FldLastvisit { get { return m_fldLastvisit; } }
 		private static FieldRef m_fldLastvisit = new FieldRef("prope", "lastvisit");
 
-		/// <summary>Field : "Last Visit" Tipo: "D" Formula: U1 "CONTA[CONTA->VISIT_DATE][CONTA->VISIT_DATE]"</summary>
-		public DateTime ValLastvisit
+		/// <summary>Field : "Last Visit" Tipo: "C" Formula: U1 "CONTA[CONTA->VISIT_DATE][CONTA->CLIENT]"</summary>
+		public string ValLastvisit
 		{
-			get { return (DateTime)returnValueField(FldLastvisit); }
+			get { return (string)returnValueField(FldLastvisit); }
 			set { insertNameValueField(FldLastvisit, value); }
 		}
 
