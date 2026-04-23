@@ -329,16 +329,6 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
-			Qfield = new Field(info.Alias, "lastvisit", FieldType.TEXT);
-			Qfield.FieldDescription = "Last Visit";
-			Qfield.FieldSize =  50;
-			Qfield.MQueue = false;
-			Qfield.CavDesignation = "LAST_VISIT61343";
-
-			Qfield.Dupmsg = "";
-			info.RegisterFieldDB(Qfield);
-
-			//- - - - - - - - - - - - - - - - - - -
 			Qfield = new Field(info.Alias, "zzstate", FieldType.INTEGER);
 			Qfield.FieldDescription = "Estado da ficha";
 			info.RegisterFieldDB(Qfield);
@@ -421,9 +411,6 @@ namespace CSGenio.business
 			};
 
 
-			info.LastValueFields = new string[] {
-			 "lastvisit"
-			};
 
 
 			info.FieldsParametersReplicas = new string[] {
@@ -788,17 +775,6 @@ namespace CSGenio.business
 			set { insertNameValueField(FldNumbercontacts, value); }
 		}
 
-		/// <summary>Field : "Last Visit" Tipo: "C" Formula: U1 "CONTA[CONTA->VISIT_DATE][CONTA->CLIENT]"</summary>
-		public static FieldRef FldLastvisit { get { return m_fldLastvisit; } }
-		private static FieldRef m_fldLastvisit = new FieldRef("prope", "lastvisit");
-
-		/// <summary>Field : "Last Visit" Tipo: "C" Formula: U1 "CONTA[CONTA->VISIT_DATE][CONTA->CLIENT]"</summary>
-		public string ValLastvisit
-		{
-			get { return (string)returnValueField(FldLastvisit); }
-			set { insertNameValueField(FldLastvisit, value); }
-		}
-
 		/// <summary>Field : "ZZSTATE" Type: "INT" Formula:  ""</summary>
 		public static FieldRef FldZzstate { get { return m_fldZzstate; } }
 		private static FieldRef m_fldZzstate = new FieldRef("prope", "zzstate");
@@ -896,7 +872,7 @@ namespace CSGenio.business
 		// USE /[MANUAL FOR TABAUX PROPE]/
 
  
-                        
+                       
 
 	}
 }

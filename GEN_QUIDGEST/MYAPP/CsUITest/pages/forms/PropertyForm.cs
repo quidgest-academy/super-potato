@@ -23,11 +23,6 @@ public class PropertyForm : Form
 	public DateInputControl PropeDtsold => new DateInputControl(driver, ContainerLocator, "#PROPERTYPROPEDTSOLD__" + IdSuffix);
 
 	/// <summary>
-	/// Last Visit
-	/// </summary>
-	public BaseInputControl PropeLastvisit => new BaseInputControl(driver, ContainerLocator, "container-PROPERTY__PROPE__LASTVISIT" + IdSuffix, "#PROPERTY__PROPE__LASTVISIT" + IdSuffix);
-
-	/// <summary>
 	/// New Group
 	/// </summary>
 	public IWebElement PseudNewgrp05 => throw new NotImplementedException();

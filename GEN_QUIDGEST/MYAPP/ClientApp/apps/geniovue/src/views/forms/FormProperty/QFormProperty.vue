@@ -163,27 +163,6 @@
 						</base-input-structure>
 					</q-col>
 				</q-row>
-				<q-row v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible">
-					<q-col
-						v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible"
-						cols="auto">
-						<base-input-structure
-							v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible"
-							class="i-text"
-							v-bind="controls.PROPERTY__PROPE__LASTVISIT.wrapperProps"
-							:id="getControlId(controls.PROPERTY__PROPE__LASTVISIT)"
-							v-on="controls.PROPERTY__PROPE__LASTVISIT.handlers"
-							:loading="controls.PROPERTY__PROPE__LASTVISIT.props.loading"
-							:reporting-mode-on="reportingModeCAV"
-							:suggestion-mode-on="suggestionModeOn">
-							<q-text-field
-								v-bind="controls.PROPERTY__PROPE__LASTVISIT.props"
-								:id="getControlId(controls.PROPERTY__PROPE__LASTVISIT)"
-								@blur="onBlur(controls.PROPERTY__PROPE__LASTVISIT, model.ValLastvisit.value)"
-								@change="model.ValLastvisit.fnUpdateValueOnChange" />
-						</base-input-structure>
-					</q-col>
-				</q-row>
 				<q-row v-if="controls.PROPERTYPSEUDNEWGRP05.isVisible">
 					<q-col v-if="controls.PROPERTYPSEUDNEWGRP05.isVisible">
 						<q-accordion
@@ -1043,20 +1022,6 @@
 						controlLimits: [
 						],
 					}, this),
-					PROPERTY__PROPE__LASTVISIT: new fieldControlClass.StringControl({
-						modelField: 'ValLastvisit',
-						valueChangeEvent: 'fieldChange:prope.lastvisit',
-						id: 'PROPERTY__PROPE__LASTVISIT',
-						name: 'LASTVISIT',
-						size: 'small',
-						label: computed(() => this.Resources.LAST_VISIT61343),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						isFormulaBlocked: true,
-						maxLength: 50,
-						controlLimits: [
-						],
-					}, this),
 					PROPERTYPSEUDNEWGRP05: new fieldControlClass.AccordionControl({
 						id: 'PROPERTYPSEUDNEWGRP05',
 						name: 'NEWGRP05',
@@ -1285,7 +1250,7 @@
 						headerLevel: computed(() => this.baseHeadingLevel + 1),
 						controller: 'PROPE',
 						action: 'Property_ValField002',
-						hasDependencies: true,
+						hasDependencies: false,
 						isInCollapsible: false,
 						columnsOriginal: [
 							new listColumnTypes.DateColumn({
@@ -1930,8 +1895,6 @@
 						set ValGrdsize(value) { vm.model.ValGrdsize.updateValue(value) },
 						get ValId() { return vm.model.ValId.value },
 						set ValId(value) { vm.model.ValId.updateValue(value) },
-						get ValLastvisit() { return vm.model.ValLastvisit.value },
-						set ValLastvisit(value) { vm.model.ValLastvisit.updateValue(value) },
 						get ValPhoto() { return vm.model.ValPhoto.value },
 						set ValPhoto(value) { vm.model.ValPhoto.updateValue(value) },
 						get ValPrice() { return vm.model.ValPrice.value },

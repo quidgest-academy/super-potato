@@ -126,17 +126,6 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValDtsold))
 		this.stopWatchers.push(watch(() => this.ValDtsold.value, (newValue, oldValue) => this.onUpdate('prope.dtsold', this.ValDtsold, newValue, oldValue)))
 
-		this.ValLastvisit = reactive(new modelFieldType.String({
-			id: 'ValLastvisit',
-			originId: 'ValLastvisit',
-			area: 'PROPE',
-			field: 'LASTVISIT',
-			maxLength: 50,
-			isFixed: true,
-			description: computed(() => this.Resources.LAST_VISIT61343),
-		}).cloneFrom(values?.ValLastvisit))
-		this.stopWatchers.push(watch(() => this.ValLastvisit.value, (newValue, oldValue) => this.onUpdate('prope.lastvisit', this.ValLastvisit, newValue, oldValue)))
-
 		this.ValAverage = reactive(new modelFieldType.Number({
 			id: 'ValAverage',
 			originId: 'ValAverage',

@@ -54,11 +54,6 @@ namespace GenioMVC.ViewModels.Prope
 		/// </summary>
 		public DateTime? ValDtsold { get; set; }
 		/// <summary>
-		/// Title: "Last Visit" | Type: "C"
-		/// </summary>
-		[ValidateSetAccess]
-		public string ValLastvisit { get; set; }
-		/// <summary>
 		/// Title: "AveragePrice" | Type: "N"
 		/// </summary>
 		[ValidateSetAccess]
@@ -324,7 +319,6 @@ namespace GenioMVC.ViewModels.Prope
 				ValId = ViewModelConversion.ToNumeric(m.ValId);
 				ValSold = ViewModelConversion.ToLogic(m.ValSold);
 				ValDtsold = ViewModelConversion.ToDateTime(m.ValDtsold);
-				ValLastvisit = ViewModelConversion.ToString(m.ValLastvisit);
 				ValAverage = ViewModelConversion.ToNumeric(m.ValAverage);
 				ValPrice = ViewModelConversion.ToNumeric(m.ValPrice);
 				ValTypology = ViewModelConversion.ToNumeric(m.ValTypology);
@@ -393,7 +387,6 @@ namespace GenioMVC.ViewModels.Prope
 				if (!HasDisabledUserValuesSecurity)
 					return;
 
-				m.ValLastvisit = ViewModelConversion.ToString(ValLastvisit);
 				m.ValAverage = ViewModelConversion.ToNumeric(ValAverage);
 				m.ValBuildage = ViewModelConversion.ToNumeric(ValBuildage);
 				m.ValProfit = ViewModelConversion.ToNumeric(ValProfit);
@@ -590,7 +583,6 @@ namespace GenioMVC.ViewModels.Prope
 		{
 			CrudViewModelFieldValidator validator = new(m_userContext.User.Language);
 
-			validator.StringLength("ValLastvisit", Resources.Resources.LAST_VISIT61343, ValLastvisit, 50);
 			validator.StringLength("CityCountValCountry", Resources.Resources.COUNTRY64133, CityCountValCountry, 50);
 
 			validator.Required("ValPrice", Resources.Resources.PRICE06900, ViewModelConversion.ToNumeric(ValPrice), FieldType.CURRENCY.GetFormatting());
@@ -1021,7 +1013,6 @@ namespace GenioMVC.ViewModels.Prope
 				"prope.id" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.sold" => ViewModelConversion.ToLogic(modelValue),
 				"prope.dtsold" => ViewModelConversion.ToDateTime(modelValue),
-				"prope.lastvisit" => ViewModelConversion.ToString(modelValue),
 				"prope.average" => ViewModelConversion.ToNumeric(modelValue),
 				"count.country" => ViewModelConversion.ToString(modelValue),
 				"prope.price" => ViewModelConversion.ToNumeric(modelValue),
