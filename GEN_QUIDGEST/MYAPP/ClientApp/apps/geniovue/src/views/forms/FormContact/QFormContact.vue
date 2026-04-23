@@ -632,7 +632,6 @@
 						dependentFields: () => ({
 							set 'prope.codprope'(value) { vm.model.ValCodprope.updateValue(value) },
 							set 'prope.title'(value) { vm.model.TablePropeTitle.updateValue(value) },
-							set 'prope.id'(value) { vm.model.PropeValId.updateValue(value) },
 						}),
 						controlLimits: [
 						],
@@ -718,23 +717,6 @@
 						controlLimits: [
 						],
 					}, this),
-					CONTACT_PROPEID______: new fieldControlClass.NumberControl({
-						modelField: 'PropeValId',
-						valueChangeEvent: 'fieldChange:prope.id',
-						dependentModelField: 'ValCodprope',
-						dependentChangeEvent: 'fieldChange:conta.codprope',
-						id: 'CONTACT_PROPEID______',
-						name: 'ID',
-						size: 'small',
-						label: computed(() => this.Resources.PROPERTY43977),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						maxIntegers: 5,
-						maxDecimals: 0,
-						isSequencial: true,
-						controlLimits: [
-						],
-					}, this),
 				},
 
 				model: new FormViewModel(this, {
@@ -774,8 +756,6 @@
 						set ValVisit_date(value) { vm.model.ValVisit_date.updateValue(value) },
 					},
 					Prope: {
-						get ValId() { return vm.model.PropeValId.value },
-						set ValId(value) { vm.model.PropeValId.updateValue(value) },
 						get ValTitle() { return vm.model.TablePropeTitle.value },
 						set ValTitle(value) { vm.model.TablePropeTitle.updateValue(value) },
 					},

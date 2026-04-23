@@ -128,8 +128,6 @@ namespace GenioMVC.ViewModels.Conta
 		{
 			return
 			[
-				new Exports.QColumn(CSGenioAprope.FldTitle, FieldType.TEXT, Resources.Resources.TITLE21885, 50, 0, true),
-				new Exports.QColumn(CSGenioAprope.FldPrice, FieldType.CURRENCY, Resources.Resources.PRICE06900, 12, 0, true),
 			];
 		}
 
@@ -180,11 +178,6 @@ namespace GenioMVC.ViewModels.Conta
 			crs.SubSets.Add(ProcessSearchFilters(Menu, GetSearchColumns(tableConfig.ColumnConfigurations), tableConfig));
 
 
-			//Subfilters
-			CriteriaSet subfilters = CriteriaSet.And();
-
-
-			crs.SubSets.Add(subfilters);
 
 			// Form field filters
 			crs.SubSets.Add(ProcessFieldFilters(tableConfig.GlobalFilters));
@@ -293,8 +286,6 @@ namespace GenioMVC.ViewModels.Conta
 
 			//FOR: MENU LIST SORTING
 			Dictionary<string, OrderedDictionary> allSortOrders = new Dictionary<string, OrderedDictionary>();
-			allSortOrders.Add("PROPE.TITLE", new OrderedDictionary());
-			allSortOrders["PROPE.TITLE"].Add("PROPE.TITLE", "A");
 
 
 			int numberListItems = tableConfig.RowsPerPage;
@@ -306,26 +297,14 @@ namespace GenioMVC.ViewModels.Conta
 
 			List<ColumnSort> sorts = GetRequestSorts(this.Menu, tableConfig, "prope", allSortOrders);
 
-			if (sorts == null || sorts.Count == 0)
-			{
-				sorts = new List<ColumnSort>();
-				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAprope.FldTitle), SortOrder.Ascending));
 
-			}
-
-			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldTitle, CSGenioAprope.FldPrice };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
 			List<FieldRef> fieldsWithTotalizers = [.. fields.Where(field => totalizerColumns.Contains(field.FullName))];
 
 			FieldRef firstVisibleColumn = null;
-			if (sorts.Count == 0)
-			{
-				firstVisibleColumn = tableConfig?.GetFirstVisibleColumn(TableAlias);
-
-				firstVisibleColumn ??= new FieldRef("prope", "title");
-			}
 			// Limitations
 			this.TableLimits ??= [];
 			// Comparer to check if limit is already present in TableLimits
@@ -507,13 +486,11 @@ namespace GenioMVC.ViewModels.Conta
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValTitle", "Prope.ValPrice", "Prope.ValCodagent", "Prope.ValCodcity"
+			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValCodagent", "Prope.ValCodcity"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
 		[
-			new TableSearchColumn("ValTitle", CSGenioAprope.FldTitle, typeof(string), defaultSearch : true),
-			new TableSearchColumn("ValPrice", CSGenioAprope.FldPrice, typeof(decimal?)),
 		];
 	}
 }
