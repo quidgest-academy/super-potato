@@ -278,25 +278,11 @@
 							MCActions: [
 							],
 							rowClickAction: {
-								id: 'RCA_FOR_911',
-								name: 'form-CONTACT',
-								isVisible: true,
-								params: {
-									isRoute: true,
-									limits: [
-									],
-									isControlled: true,
-									action: vm.openFormAction, type: 'form', mode: 'SHOW', formName: 'CONTACT'
-								}
 							},
 							formsDefinition: {
 								'PROPERTY': {
 									fnKeySelector: (row) => row.Fields.ValCodprope,
 									isPopup: false
-								},
-								'CONTACT': {
-									fnKeySelector: (row) => row.Fields.ValCodprope,
-									isPopup: true
 								},
 							},
 							defaultSearchColumnName: 'ValTitle',
@@ -306,7 +292,7 @@
 								sortOrder: 'asc'
 							}
 						},
-						globalEvents: ['changed-AGENT', 'changed-CITY', 'changed-PROPE', 'changed-CONTA'],
+						globalEvents: ['changed-AGENT', 'changed-CITY', 'changed-PROPE'],
 						uuid: '77112ee9-e4e7-49c6-ab03-c96b6db63fba',
 						allSelectedRows: 'false',
 						headerLevel: 1,
