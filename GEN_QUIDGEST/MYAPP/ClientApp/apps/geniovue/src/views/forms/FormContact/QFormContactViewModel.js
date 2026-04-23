@@ -74,18 +74,6 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValDate))
 		this.stopWatchers.push(watch(() => this.ValDate.value, (newValue, oldValue) => this.onUpdate('conta.date', this.ValDate, newValue, oldValue)))
 
-		this.TablePropeTitle = reactive(new modelFieldType.String({
-			type: 'Lookup',
-			id: 'TablePropeTitle',
-			originId: 'ValTitle',
-			area: 'PROPE',
-			field: 'TITLE',
-			maxLength: 50,
-			description: computed(() => this.Resources.TITLE21885),
-			ignoreFldSubmit: true,
-		}).cloneFrom(values?.TablePropeTitle))
-		this.stopWatchers.push(watch(() => this.TablePropeTitle.value, (newValue, oldValue) => this.onUpdate('prope.title', this.TablePropeTitle, newValue, oldValue)))
-
 		this.ValClient = reactive(new modelFieldType.String({
 			id: 'ValClient',
 			originId: 'ValClient',
@@ -147,6 +135,18 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.VISIT_DATE27188),
 		}).cloneFrom(values?.ValVisit_date))
 		this.stopWatchers.push(watch(() => this.ValVisit_date.value, (newValue, oldValue) => this.onUpdate('conta.visit_date', this.ValVisit_date, newValue, oldValue)))
+
+		this.TablePropeTitle = reactive(new modelFieldType.String({
+			type: 'Lookup',
+			id: 'TablePropeTitle',
+			originId: 'ValTitle',
+			area: 'PROPE',
+			field: 'TITLE',
+			maxLength: 50,
+			description: computed(() => this.Resources.TITLE21885),
+			ignoreFldSubmit: true,
+		}).cloneFrom(values?.TablePropeTitle))
+		this.stopWatchers.push(watch(() => this.TablePropeTitle.value, (newValue, oldValue) => this.onUpdate('prope.title', this.TablePropeTitle, newValue, oldValue)))
 	}
 
 	/**

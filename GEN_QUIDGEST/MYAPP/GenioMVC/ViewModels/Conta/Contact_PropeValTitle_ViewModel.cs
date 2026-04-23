@@ -93,6 +93,8 @@ namespace GenioMVC.ViewModels.Conta
 			return crs;
 		}
 
+		public DateTime? ValVisit_date { get; set; }
+
 		public override int GetCount(User user)
 		{
 			throw new NotImplementedException("This operation is not supported");
@@ -128,6 +130,8 @@ namespace GenioMVC.ViewModels.Conta
 		{
 			return
 			[
+				new Exports.QColumn(CSGenioAprope.FldTitle, FieldType.TEXT, Resources.Resources.TITLE21885, 30, 0, true),
+				new Exports.QColumn(CSGenioAprope.FldPrice, FieldType.CURRENCY, Resources.Resources.PRICE06900, 12, 0, true),
 			];
 		}
 
@@ -168,6 +172,25 @@ namespace GenioMVC.ViewModels.Conta
 
 			crs ??= CriteriaSet.And();
 
+			// Limits Generation
+
+			object contact_propetitle____flimitprope_sold = "0";
+			crs.Equal(
+				CSGenio.business.CSGenioAprope.FldSold,
+				contact_propetitle____flimitprope_sold);
+
+			// Multiple value limit with expression propsNotBooking([CONTA->VISIT_DATE])
+			IEnumerable<object> contact_propetitle____mlimitprope_codprope = new CSGenio.business.GlobalFunctions(m_userContext.User, m_userContext.User.CurrentModule, m_userContext.PersistentSupport).propsNotBooking(((DateTime)ValVisit_date));
+			if (contact_propetitle____mlimitprope_codprope != null && contact_propetitle____mlimitprope_codprope.Any())
+			{
+				crs.In(
+					CSGenio.business.CSGenioAprope.FldCodprope,
+					contact_propetitle____mlimitprope_codprope);
+			}
+			else
+			{
+				tableReload = false;
+			}
 
 			Menu ??= new TablePartial<Contact_PropeValTitle_RowViewModel>();
 			// Set table name (used in getting searchable column names)
@@ -178,6 +201,11 @@ namespace GenioMVC.ViewModels.Conta
 			crs.SubSets.Add(ProcessSearchFilters(Menu, GetSearchColumns(tableConfig.ColumnConfigurations), tableConfig));
 
 
+			//Subfilters
+			CriteriaSet subfilters = CriteriaSet.And();
+
+
+			crs.SubSets.Add(subfilters);
 
 			// Form field filters
 			crs.SubSets.Add(ProcessFieldFilters(tableConfig.GlobalFilters));
@@ -298,13 +326,19 @@ namespace GenioMVC.ViewModels.Conta
 			List<ColumnSort> sorts = GetRequestSorts(this.Menu, tableConfig, "prope", allSortOrders);
 
 
-			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate };
+			FieldRef[] fields = new FieldRef[] { CSGenioAprope.FldCodprope, CSGenioAprope.FldZzstate, CSGenioAprope.FldTitle, CSGenioAprope.FldPrice };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
 			List<FieldRef> fieldsWithTotalizers = [.. fields.Where(field => totalizerColumns.Contains(field.FullName))];
 
 			FieldRef firstVisibleColumn = null;
+			if (sorts.Count == 0)
+			{
+				firstVisibleColumn = tableConfig?.GetFirstVisibleColumn(TableAlias);
+
+				firstVisibleColumn ??= new FieldRef("prope", "title");
+			}
 			// Limitations
 			this.TableLimits ??= [];
 			// Comparer to check if limit is already present in TableLimits
@@ -320,6 +354,26 @@ namespace GenioMVC.ViewModels.Conta
 					this.TableLimits.AddRange(area_EPH_limits);
 			}
 
+			// Tooltips: Making a tooltip for each valid limitation: 2 Limit(s) detected.
+			// Limit origin: form 
+			//Limit type: "F"
+			//Current Area = "PROPE"
+			//1st Area Limit: "PROPE"
+			//1st Area Field: "SOLD"
+			//1st Area Value: "0"
+			{
+				Limit limit = new Limit();
+				limit.TipoLimite = LimitType.F;
+				limit.NaoAplicaSeNulo = false;
+				CSGenioAprope model_limit_area = new CSGenioAprope(m_userContext.User);
+				string limit_field = "sold", limit_field_value = "0";
+				object this_limit_field = Navigation.GetStrValue(limit_field_value);
+				Limit_Filler(ref limit, model_limit_area, limit_field, limit_field_value, this_limit_field, LimitAreaType.AreaLimita);
+				if (!this.TableLimits.Contains(limit, limitComparer)) //to avoid repetitions (i.e: DB and EPH applying same limit)
+					this.TableLimits.Add(limit);
+			}
+			// Tooltip for limit "M" ignored.
+			// Limit origin: form 
 
 			if (conditions == null)
 				conditions = CriteriaSet.And();
@@ -486,11 +540,13 @@ namespace GenioMVC.ViewModels.Conta
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValCodagent", "Prope.ValCodcity"
+			"Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValTitle", "Prope.ValPrice", "Prope.ValCodagent", "Prope.ValCodcity"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
 		[
+			new TableSearchColumn("ValTitle", CSGenioAprope.FldTitle, typeof(string), defaultSearch : true),
+			new TableSearchColumn("ValPrice", CSGenioAprope.FldPrice, typeof(decimal?)),
 		];
 	}
 }

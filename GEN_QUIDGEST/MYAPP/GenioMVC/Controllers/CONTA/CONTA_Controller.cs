@@ -83,6 +83,10 @@ namespace GenioMVC.Controllers
 					case "CONTACT_PROPETITLE___":	// Field (DB)
 						{
 							var model = new Contact_ViewModel(UserContext.Current) { editable = false };
+							// Map received value to field - The 'multiple values' type limit
+#pragma warning disable QUID001 // Direct Property Access to read only fields - Disabled due to cases where the limit is based on a calculated field.
+							row.ValVisit_date = Navigation.GetValue<DateTime?>("conta.visit_date");
+#pragma warning restore QUID001 // Direct Property Access to read only fields
 							model.MapFromModel(row);
 							model.Load_Contact_propetitle___(qs);
 							result = model.TablePropeTitle;

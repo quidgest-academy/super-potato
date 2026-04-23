@@ -219,6 +219,27 @@
 						hasDependencies: false,
 						isInCollapsible: false,
 						columnsOriginal: [
+							new listColumnTypes.TextColumn({
+								order: 1,
+								name: 'ValTitle',
+								area: 'PROPE',
+								field: 'TITLE',
+								label: computed(() => this.Resources.TITLE21885),
+								dataLength: 50,
+								scrollData: 30,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.CurrencyColumn({
+								order: 2,
+								name: 'ValPrice',
+								area: 'PROPE',
+								field: 'PRICE',
+								label: computed(() => this.Resources.PRICE06900),
+								scrollData: 12,
+								maxDigits: 9,
+								decimalPlaces: 2,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
 						config: {
 							name: 'Contact_PropeValTitle',
@@ -251,13 +272,14 @@
 							},
 							formsDefinition: {
 							},
-							defaultSearchColumnName: '',
-							defaultSearchColumnNameOriginal: '',
+							defaultSearchColumnName: 'ValTitle',
+							defaultSearchColumnNameOriginal: 'ValTitle',
 							defaultColumnSorting: {
 								columnName: '',
 								sortOrder: 'asc'
 							}
 						},
+						globalEvents: ['changed-AGENT', 'changed-CITY', 'changed-PROPE'],
 						uuid: 'Contact_Contact_PropeValTitle',
 						allSelectedRows: 'false',
 						handlers: {

@@ -13,12 +13,6 @@ public class ContactForm : PopupForm
 	public DateInputControl ContaDate => new DateInputControl(driver, ContainerLocator, "#CONTACT_CONTADATE____" + IdSuffix);
 
 	/// <summary>
-	/// Title
-	/// </summary>
-	public LookupControl PropeTitle => new LookupControl(driver, ContainerLocator, "container-CONTACT_PROPETITLE___" + IdSuffix);
-	public SeeMorePage PropeTitleSeeMorePage => new SeeMorePage(driver, "CONTACT", "CONTACT_PROPETITLE___" + IdSuffix);
-
-	/// <summary>
 	/// Client name
 	/// </summary>
 	public BaseInputControl ContaClient => new BaseInputControl(driver, ContainerLocator, "container-CONTACT_CONTACLIENT__" + IdSuffix, "#CONTACT_CONTACLIENT__" + IdSuffix);
@@ -42,6 +36,12 @@ public class ContactForm : PopupForm
 	/// Visit Date
 	/// </summary>
 	public DateInputControl ContaVisit_date => new DateInputControl(driver, ContainerLocator, "#CONTACT__CONTA__VISIT_DATE" + IdSuffix);
+
+	/// <summary>
+	/// Property
+	/// </summary>
+	public LookupControl PropeTitle => new LookupControl(driver, ContainerLocator, "container-CONTACT_PROPETITLE___" + IdSuffix);
+	public SeeMorePage PropeTitleSeeMorePage => new SeeMorePage(driver, "CONTACT", "CONTACT_PROPETITLE___" + IdSuffix);
 
 	public ContactForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "CONTACT", usePkInId: usePkInId) { }

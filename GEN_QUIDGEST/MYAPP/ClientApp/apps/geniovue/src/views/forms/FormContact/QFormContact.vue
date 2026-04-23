@@ -98,7 +98,7 @@
 			:data-identifier="primaryKeyValue"
 			:data-loading="!formInitialDataLoaded || !isActiveForm">
 			<template v-if="formControl.initialized && showFormBody">
-				<q-row v-if="controls.CONTACT_CONTADATE____.isVisible || controls.CONTACT_PROPETITLE___.isVisible">
+				<q-row v-if="controls.CONTACT_CONTADATE____.isVisible || controls.CONTACT_CONTACLIENT__.isVisible || controls.CONTACT_CONTAEMAIL___.isVisible || controls.CONTACT_CONTAPHONE___.isVisible">
 					<q-col
 						v-if="controls.CONTACT_CONTADATE____.isVisible"
 						cols="auto">
@@ -120,31 +120,6 @@
 								@update:model-value="model.ValDate.fnUpdateValue($event ?? '')" />
 						</base-input-structure>
 					</q-col>
-					<q-col
-						v-if="controls.CONTACT_PROPETITLE___.isVisible"
-						cols="auto">
-						<base-input-structure
-							v-if="controls.CONTACT_PROPETITLE___.isVisible"
-							class="i-text"
-							v-bind="controls.CONTACT_PROPETITLE___.wrapperProps"
-							:id="getControlId(controls.CONTACT_PROPETITLE___)"
-							v-on="controls.CONTACT_PROPETITLE___.handlers"
-							:loading="controls.CONTACT_PROPETITLE___.props.loading"
-							:reporting-mode-on="reportingModeCAV"
-							:suggestion-mode-on="suggestionModeOn">
-							<q-lookup
-								v-if="controls.CONTACT_PROPETITLE___.isVisible"
-								v-bind="controls.CONTACT_PROPETITLE___.props"
-								:id="getControlId(controls.CONTACT_PROPETITLE___)"
-								v-on="controls.CONTACT_PROPETITLE___.handlers" />
-							<q-see-more-contact-propetitle
-								v-if="controls.CONTACT_PROPETITLE___.seeMoreIsVisible"
-								v-bind="controls.CONTACT_PROPETITLE___.seeMoreParams"
-								v-on="controls.CONTACT_PROPETITLE___.handlers" />
-						</base-input-structure>
-					</q-col>
-				</q-row>
-				<q-row v-if="controls.CONTACT_CONTACLIENT__.isVisible || controls.CONTACT_CONTAEMAIL___.isVisible || controls.CONTACT_CONTAPHONE___.isVisible">
 					<q-col
 						v-if="controls.CONTACT_CONTACLIENT__.isVisible"
 						cols="auto">
@@ -225,7 +200,7 @@
 						</base-input-structure>
 					</q-col>
 				</q-row>
-				<q-row v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible">
+				<q-row v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible || controls.CONTACT_PROPETITLE___.isVisible">
 					<q-col
 						v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
 						cols="auto">
@@ -245,6 +220,29 @@
 								:model-value="model.ValVisit_date.value"
 								@reset-icon-click="model.ValVisit_date.fnUpdateValue(model.ValVisit_date.originalValue ?? new Date())"
 								@update:model-value="model.ValVisit_date.fnUpdateValue($event ?? '')" />
+						</base-input-structure>
+					</q-col>
+					<q-col
+						v-if="controls.CONTACT_PROPETITLE___.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.CONTACT_PROPETITLE___.isVisible"
+							class="i-text"
+							v-bind="controls.CONTACT_PROPETITLE___.wrapperProps"
+							:id="getControlId(controls.CONTACT_PROPETITLE___)"
+							v-on="controls.CONTACT_PROPETITLE___.handlers"
+							:loading="controls.CONTACT_PROPETITLE___.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
+							<q-lookup
+								v-if="controls.CONTACT_PROPETITLE___.isVisible"
+								v-bind="controls.CONTACT_PROPETITLE___.props"
+								:id="getControlId(controls.CONTACT_PROPETITLE___)"
+								v-on="controls.CONTACT_PROPETITLE___.handlers" />
+							<q-see-more-contact-propetitle
+								v-if="controls.CONTACT_PROPETITLE___.seeMoreIsVisible"
+								v-bind="controls.CONTACT_PROPETITLE___.seeMoreParams"
+								v-on="controls.CONTACT_PROPETITLE___.handlers" />
 						</base-input-structure>
 					</q-col>
 				</q-row>
@@ -608,34 +606,6 @@
 						controlLimits: [
 						],
 					}, this),
-					CONTACT_PROPETITLE___: new fieldControlClass.LookupControl({
-						modelField: 'TablePropeTitle',
-						valueChangeEvent: 'fieldChange:prope.title',
-						id: 'CONTACT_PROPETITLE___',
-						name: 'TITLE',
-						size: 'xxlarge',
-						label: computed(() => this.Resources.TITLE21885),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						externalCallbacks: {
-							getModelField: vm.getModelField,
-							getModelFieldValue: vm.getModelFieldValue,
-							setModelFieldValue: vm.setModelFieldValue
-						},
-						externalProperties: {
-							modelKeys: computed(() => vm.modelKeys)
-						},
-						lookupKeyModelField: {
-							name: 'ValCodprope',
-							dependencyEvent: 'fieldChange:conta.codprope'
-						},
-						dependentFields: () => ({
-							set 'prope.codprope'(value) { vm.model.ValCodprope.updateValue(value) },
-							set 'prope.title'(value) { vm.model.TablePropeTitle.updateValue(value) },
-						}),
-						controlLimits: [
-						],
-					}, this),
 					CONTACT_CONTACLIENT__: new fieldControlClass.StringControl({
 						modelField: 'ValClient',
 						valueChangeEvent: 'fieldChange:conta.client',
@@ -715,6 +685,40 @@
 						dateTimeType: 'date',
 						mustBeFilled: true,
 						controlLimits: [
+						],
+					}, this),
+					CONTACT_PROPETITLE___: new fieldControlClass.LookupControl({
+						modelField: 'TablePropeTitle',
+						valueChangeEvent: 'fieldChange:prope.title',
+						id: 'CONTACT_PROPETITLE___',
+						name: 'TITLE',
+						size: 'xxlarge',
+						label: computed(() => this.Resources.PROPERTY43977),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						externalCallbacks: {
+							getModelField: vm.getModelField,
+							getModelFieldValue: vm.getModelFieldValue,
+							setModelFieldValue: vm.setModelFieldValue
+						},
+						externalProperties: {
+							modelKeys: computed(() => vm.modelKeys)
+						},
+						lookupKeyModelField: {
+							name: 'ValCodprope',
+							dependencyEvent: 'fieldChange:conta.codprope'
+						},
+						dependentFields: () => ({
+							set 'prope.codprope'(value) { vm.model.ValCodprope.updateValue(value) },
+							set 'prope.title'(value) { vm.model.TablePropeTitle.updateValue(value) },
+						}),
+						controlLimits: [
+							{
+								identifier: 'conta.visit_date',
+								dependencyEvents: ['fieldChange:conta.visit_date'],
+								dependencyField: 'CONTA.VISIT_DATE',
+								fnValueSelector: (model) => model.ValVisit_date.value
+							},
 						],
 					}, this),
 				},

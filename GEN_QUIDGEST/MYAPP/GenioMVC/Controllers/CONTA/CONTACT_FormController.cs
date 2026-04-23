@@ -432,6 +432,8 @@ namespace GenioMVC.Controllers
 			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(requestModel.TableConfiguration);
 
 			model.setModes(Request.Query["m"].ToString());
+			// Map received value to field - The 'multiple values' type limit
+			model.ValVisit_date = Navigation.GetValue<DateTime?>("conta.visit_date");
 			model.Load(tableConfig, requestValues, Request.IsAjaxRequest());
 
 			return JsonOK(model);

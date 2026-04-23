@@ -33,6 +33,18 @@ public class Contact_PropeValTitle_RowViewModel : Models.Prope
 	private void SetColumns()
 	{
 		Columns ??= [
+			new ListColumn()
+			{
+				Order = 1,
+				Area = "PROPE",
+				Field = "TITLE",
+			},
+			new ListColumn()
+			{
+				Order = 2,
+				Area = "PROPE",
+				Field = "PRICE",
+			},
 		];
 	}
 
