@@ -374,6 +374,23 @@ namespace GenioMVC.ViewModels.Prope
 				if (area_EPH_limits.Count > 0)
 					this.TableLimits.AddRange(area_EPH_limits);
 			}
+			//Tooltip for "Manual Filter" affecting this viewmodel list
+			{
+				Limit limit = new Limit();
+				limit.TipoLimite = LimitType.OVERRQ;
+				using (CSGenio.core.di.GenioDI.MetricsOtlp.RecordTime("manua_exec_time", new System.Diagnostics.TagList([
+					new("Name", "OVERRQ_TOOLTIP"),
+					new("Parameter", "91"),
+					new("ModuleOrSystem", "FOR")
+				]), "ms", "Time to execute the manual code.")) {
+//Platform: MVC | Type: OVERRQ_TOOLTIP | Module: FOR | Parameter: 91 | File:  | Order: 0
+//BEGIN_MANUALCODE_CODMANUA:c9cc2dde-efe0-4966-b6f5-fbac56bed1c8
+limit.ManualHTMLText = "Properties without contacts";
+this.TableLimits.Add(limit);
+//END_MANUALCODE
+				}
+
+			}
 
 
 			if (conditions == null)
@@ -383,7 +400,17 @@ namespace GenioMVC.ViewModels.Prope
 			for_menu_91Conds = BuildCriteriaSet(tableConfig, requestValues, out bool hasAllRequiredLimits, conditions, isToExport);
 			tableReload &= hasAllRequiredLimits;
 
-// USE /[MANUAL FOR OVERRQ 91]/
+				using (CSGenio.core.di.GenioDI.MetricsOtlp.RecordTime("manua_exec_time", new System.Diagnostics.TagList([
+					new("Name", "OVERRQ"),
+					new("Parameter", "91"),
+					new("ModuleOrSystem", "FOR")
+				]), "ms", "Time to execute the manual code.")) {
+//Platform: MVC | Type: OVERRQ | Module: FOR | Parameter: 91 | File:  | Order: 0
+//BEGIN_MANUALCODE_CODMANUA:28840411-255b-424e-902d-ff2dca2e603a
+for_menu_91Conds = CriteriaSet.And().Equal(CSGenioAprope.FldNumbercontacts, 0);
+//END_MANUALCODE
+				}
+
 
 			bool distinct = false;
 
