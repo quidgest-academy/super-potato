@@ -378,24 +378,18 @@ namespace GenioMVC.ViewModels.Prope
 			{
 				Limit limit = new Limit();
 				limit.TipoLimite = LimitType.OVERRQ;
-				//Readme:
-				//Please create a Genio manual routine with the tag OVERRQ_TOOLTIP and same module ('FOR') and parameter ('91') as in OVERRQ, providing information about the limit being done mannually, so it can appear as tooltip about list limits in application.
-				//This text will be displayed to the final user, in order to make possible to know what kind of limits are being applied to the list.
+				using (CSGenio.core.di.GenioDI.MetricsOtlp.RecordTime("manua_exec_time", new System.Diagnostics.TagList([
+					new("Name", "OVERRQ_TOOLTIP"),
+					new("Parameter", "91"),
+					new("ModuleOrSystem", "FOR")
+				]), "ms", "Time to execute the manual code.")) {
+//Platform: MVC | Type: OVERRQ_TOOLTIP | Module: FOR | Parameter: 91 | File:  | Order: 0
+//BEGIN_MANUALCODE_CODMANUA:52c95726-c024-4bdd-8f1d-5478c60f5f19
+limit.ManualHTMLText = "Properties without contacts";
+this.TableLimits.Add(limit);
+//END_MANUALCODE
+				}
 
-				//Put in this two lines in the OVERRQ_TOOLTIP manwin, setting the ManualHTMLText property (in HTML) with the information about the limit being applied to current list (that is being done in OVERRQ):
-				limit.ManualHTMLText = ""; //Text that will be shown to users.
-				this.TableLimits.Add(limit);
-
-				//Alternatively to just filling the property ManualHTMLText, you can change the default TipoLimite to one of the main limits supported by genio and use the available function Limit_Filler below, that will fill the object limit with information collected dinamically, and after that, just add the limit to TableLimits (as done above):
-				//Limit_Filler(ref limit, model_limit_area, limit_field, limit_field_value, this_limit_field, LimitAreaType.AreaLimita);
-				//this.TableLimits.Add(limit);
-				//Where:
-				///<param name="area_limit">(ref) limit to be loaded with information aquired</param>
-				///<param name="model_limit_area">Area class object responsible for this limit</param>
-				///<param name="limit_field">Name of the area field that will establish the limit (in lowercase)</param>
-				///<param name="limit_field_value">Field value to use to infer (area, field in lowercase or field value) for this limit</param>
-				///<param name="this_limit_field">ViewModel private object with information about the field (loaded with the limit value/key)</param>
-				///<param name="limitAreaType">The area to place the boundary information within the limit object</param>
 			}
 
 
