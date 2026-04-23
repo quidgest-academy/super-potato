@@ -203,6 +203,18 @@ namespace CSGenio.business
 
 
 
+			//Actualiza as seguintes rotinas de ultimo Qvalue:
+			info.LastValueArgs = new List<LastValueArgument>();
+			info.LastValueArgs.Add( new LastValueArgument("prope",
+				new string [] {"lastvisit"},
+				new string [] {"client"},
+				"visit_date",
+				null,
+
+				null, false));
+
+
+
 			info.ReplicaFields = new string[] {
 			 "pricepro"
 			};

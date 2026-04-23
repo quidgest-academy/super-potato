@@ -23,6 +23,11 @@ public class PropertyForm : Form
 	public DateInputControl PropeDtsold => new DateInputControl(driver, ContainerLocator, "#PROPERTYPROPEDTSOLD__" + IdSuffix);
 
 	/// <summary>
+	/// Last Visitor
+	/// </summary>
+	public BaseInputControl PropeLastvisit => new BaseInputControl(driver, ContainerLocator, "container-PROPERTY__PROPE__LASTVISIT" + IdSuffix, "#PROPERTY__PROPE__LASTVISIT" + IdSuffix);
+
+	/// <summary>
 	/// New Group
 	/// </summary>
 	public IWebElement PseudNewgrp05 => throw new NotImplementedException();
@@ -41,11 +46,6 @@ public class PropertyForm : Form
 	/// Contacts
 	/// </summary>
 	public ListControl PseudField002 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD002" + IdSuffix);
-
-	/// <summary>
-	/// AveragePrice
-	/// </summary>
-	public BaseInputControl PropeAverage => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEAVERAGE_" + IdSuffix, "#PROPERTYPROPEAVERAGE_" + IdSuffix);
 
 	/// <summary>
 	/// Localization
@@ -158,6 +158,11 @@ public class PropertyForm : Form
 	/// Description
 	/// </summary>
 	public BaseInputControl PropeDescript => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEDESCRIPT" + IdSuffix, "#PROPERTYPROPEDESCRIPT" + IdSuffix);
+
+	/// <summary>
+	/// AveragePrice
+	/// </summary>
+	public BaseInputControl PropeAverage => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEAVERAGE_" + IdSuffix, "#PROPERTYPROPEAVERAGE_" + IdSuffix);
 
 	public PropertyForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "PROPERTY", containerLocator: containerLocator, usePkInId: usePkInId) { }

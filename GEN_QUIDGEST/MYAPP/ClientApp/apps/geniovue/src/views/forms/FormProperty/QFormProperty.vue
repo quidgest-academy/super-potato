@@ -163,6 +163,27 @@
 						</base-input-structure>
 					</q-col>
 				</q-row>
+				<q-row v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible">
+					<q-col
+						v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.PROPERTY__PROPE__LASTVISIT.isVisible"
+							class="i-text"
+							v-bind="controls.PROPERTY__PROPE__LASTVISIT.wrapperProps"
+							:id="getControlId(controls.PROPERTY__PROPE__LASTVISIT)"
+							v-on="controls.PROPERTY__PROPE__LASTVISIT.handlers"
+							:loading="controls.PROPERTY__PROPE__LASTVISIT.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
+							<q-text-field
+								v-bind="controls.PROPERTY__PROPE__LASTVISIT.props"
+								:id="getControlId(controls.PROPERTY__PROPE__LASTVISIT)"
+								@blur="onBlur(controls.PROPERTY__PROPE__LASTVISIT, model.ValLastvisit.value)"
+								@change="model.ValLastvisit.fnUpdateValueOnChange" />
+						</base-input-structure>
+					</q-col>
+				</q-row>
 				<q-row v-if="controls.PROPERTYPSEUDNEWGRP05.isVisible">
 					<q-col v-if="controls.PROPERTYPSEUDNEWGRP05.isVisible">
 						<q-accordion
@@ -501,27 +522,6 @@
 							:id="getControlId(controls.PROPERTYPSEUDNEWGRP01)"
 							:no-border="controls.PROPERTYPSEUDNEWGRP01.borderless">
 							<!-- Start PROPERTYPSEUDNEWGRP01 -->
-							<q-row v-if="controls.PROPERTYPROPEAVERAGE_.isVisible">
-								<q-col
-									v-if="controls.PROPERTYPROPEAVERAGE_.isVisible"
-									cols="auto">
-									<base-input-structure
-										v-if="controls.PROPERTYPROPEAVERAGE_.isVisible"
-										class="i-text"
-										v-bind="controls.PROPERTYPROPEAVERAGE_.wrapperProps"
-										:id="getControlId(controls.PROPERTYPROPEAVERAGE_)"
-										v-on="controls.PROPERTYPROPEAVERAGE_.handlers"
-										:loading="controls.PROPERTYPROPEAVERAGE_.props.loading"
-										:reporting-mode-on="reportingModeCAV"
-										:suggestion-mode-on="suggestionModeOn">
-										<q-numeric-input
-											v-if="controls.PROPERTYPROPEAVERAGE_.isVisible"
-											v-bind="controls.PROPERTYPROPEAVERAGE_.props"
-											:id="getControlId(controls.PROPERTYPROPEAVERAGE_)"
-											@update:model-value="model.ValAverage.fnUpdateValue" />
-									</base-input-structure>
-								</q-col>
-							</q-row>
 							<q-row v-if="controls.PROPERTYPROPEPRICE___.isVisible || controls.PROPERTYPROPETITLE___.isVisible || controls.PROPERTYPROPEPHOTO___.isVisible">
 								<q-col
 									v-if="controls.PROPERTYPROPEPRICE___.isVisible || controls.PROPERTYPROPETITLE___.isVisible"
@@ -595,6 +595,27 @@
 											v-bind="controls.PROPERTYPROPEDESCRIPT.props"
 											:id="getControlId(controls.PROPERTYPROPEDESCRIPT)"
 											v-on="controls.PROPERTYPROPEDESCRIPT.handlers" />
+									</base-input-structure>
+								</q-col>
+							</q-row>
+							<q-row v-if="controls.PROPERTYPROPEAVERAGE_.isVisible">
+								<q-col
+									v-if="controls.PROPERTYPROPEAVERAGE_.isVisible"
+									cols="auto">
+									<base-input-structure
+										v-if="controls.PROPERTYPROPEAVERAGE_.isVisible"
+										class="i-text"
+										v-bind="controls.PROPERTYPROPEAVERAGE_.wrapperProps"
+										:id="getControlId(controls.PROPERTYPROPEAVERAGE_)"
+										v-on="controls.PROPERTYPROPEAVERAGE_.handlers"
+										:loading="controls.PROPERTYPROPEAVERAGE_.props.loading"
+										:reporting-mode-on="reportingModeCAV"
+										:suggestion-mode-on="suggestionModeOn">
+										<q-numeric-input
+											v-if="controls.PROPERTYPROPEAVERAGE_.isVisible"
+											v-bind="controls.PROPERTYPROPEAVERAGE_.props"
+											:id="getControlId(controls.PROPERTYPROPEAVERAGE_)"
+											@update:model-value="model.ValAverage.fnUpdateValue" />
 									</base-input-structure>
 								</q-col>
 							</q-row>
@@ -1022,6 +1043,20 @@
 						controlLimits: [
 						],
 					}, this),
+					PROPERTY__PROPE__LASTVISIT: new fieldControlClass.StringControl({
+						modelField: 'ValLastvisit',
+						valueChangeEvent: 'fieldChange:prope.lastvisit',
+						id: 'PROPERTY__PROPE__LASTVISIT',
+						name: 'LASTVISIT',
+						size: 'xxlarge',
+						label: computed(() => this.Resources.LAST_VISITOR08357),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						isFormulaBlocked: true,
+						maxLength: 50,
+						controlLimits: [
+						],
+					}, this),
 					PROPERTYPSEUDNEWGRP05: new fieldControlClass.AccordionControl({
 						id: 'PROPERTYPSEUDNEWGRP05',
 						name: 'NEWGRP05',
@@ -1045,7 +1080,7 @@
 						borderless: false,
 						isCollapsible: false,
 						anchored: false,
-						directChildren: ['PROPERTYPROPEAVERAGE_', 'PROPERTYPROPEPRICE___', 'PROPERTYPROPETITLE___', 'PROPERTYPROPEPHOTO___', 'PROPERTYPROPEDESCRIPT'],
+						directChildren: ['PROPERTYPROPEPRICE___', 'PROPERTYPROPETITLE___', 'PROPERTYPROPEPHOTO___', 'PROPERTYPROPEDESCRIPT', 'PROPERTYPROPEAVERAGE_'],
 						mustBeFilled: true,
 						controlLimits: [
 						],
@@ -1250,7 +1285,7 @@
 						headerLevel: computed(() => this.baseHeadingLevel + 1),
 						controller: 'PROPE',
 						action: 'Property_ValField002',
-						hasDependencies: false,
+						hasDependencies: true,
 						isInCollapsible: false,
 						columnsOriginal: [
 							new listColumnTypes.DateColumn({
@@ -1435,22 +1470,6 @@
 								dependencyField: 'PROPE.CODPROPE',
 								fnValueSelector: (model) => model.ValCodprope.value
 							},
-						],
-					}, this),
-					PROPERTYPROPEAVERAGE_: new fieldControlClass.NumberControl({
-						modelField: 'ValAverage',
-						valueChangeEvent: 'fieldChange:prope.average',
-						id: 'PROPERTYPROPEAVERAGE_',
-						name: 'AVERAGE',
-						size: 'medium',
-						label: computed(() => this.Resources.AVERAGEPRICE13700),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP01',
-						isFormulaBlocked: true,
-						maxIntegers: 12,
-						maxDecimals: 0,
-						controlLimits: [
 						],
 					}, this),
 					PROPERTYPSEUDNEWGRP02: new fieldControlClass.GroupControl({
@@ -1823,6 +1842,22 @@
 						controlLimits: [
 						],
 					}, this),
+					PROPERTYPROPEAVERAGE_: new fieldControlClass.NumberControl({
+						modelField: 'ValAverage',
+						valueChangeEvent: 'fieldChange:prope.average',
+						id: 'PROPERTYPROPEAVERAGE_',
+						name: 'AVERAGE',
+						size: 'medium',
+						label: computed(() => this.Resources.AVERAGEPRICE13700),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP01',
+						isFormulaBlocked: true,
+						maxIntegers: 12,
+						maxDecimals: 0,
+						controlLimits: [
+						],
+					}, this),
 				},
 
 				model: new FormViewModel(this, {
@@ -1895,6 +1930,8 @@
 						set ValGrdsize(value) { vm.model.ValGrdsize.updateValue(value) },
 						get ValId() { return vm.model.ValId.value },
 						set ValId(value) { vm.model.ValId.updateValue(value) },
+						get ValLastvisit() { return vm.model.ValLastvisit.value },
+						set ValLastvisit(value) { vm.model.ValLastvisit.updateValue(value) },
 						get ValPhoto() { return vm.model.ValPhoto.value },
 						set ValPhoto(value) { vm.model.ValPhoto.updateValue(value) },
 						get ValPrice() { return vm.model.ValPrice.value },

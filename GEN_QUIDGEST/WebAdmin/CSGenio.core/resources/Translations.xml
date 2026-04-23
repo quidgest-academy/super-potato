@@ -435,6 +435,9 @@
   <msg id="Profit" code="PROFIT55910">
     <ENUS>Profit</ENUS>
   </msg>
+  <msg id="Last Visitor" code="LAST_VISITOR08357">
+    <ENUS>Last Visitor</ENUS>
+  </msg>
   <msg id="Album" code="ALBUM37050">
     <ENUS>Album</ENUS>
   </msg>

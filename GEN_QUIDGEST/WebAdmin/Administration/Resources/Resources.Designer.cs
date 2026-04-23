@@ -1366,6 +1366,15 @@ namespace Administration.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Last Visitor"
+        /// </summary>
+        public static string LAST_VISITOR08357 {
+            get {
+                return ResourceManager.GetString("LAST_VISITOR08357", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Album"
         /// </summary>
         public static string ALBUM37050 {

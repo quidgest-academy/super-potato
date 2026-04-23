@@ -54,10 +54,10 @@ namespace GenioMVC.ViewModels.Prope
 		/// </summary>
 		public DateTime? ValDtsold { get; set; }
 		/// <summary>
-		/// Title: "AveragePrice" | Type: "N"
+		/// Title: "Last Visitor" | Type: "C"
 		/// </summary>
 		[ValidateSetAccess]
-		public decimal? ValAverage { get; set; }
+		public string ValLastvisit { get; set; }
 		/// <summary>
 		/// Title: "City" | Type: "C"
 		/// </summary>
@@ -180,6 +180,11 @@ namespace GenioMVC.ViewModels.Prope
 		/// Title: "Description" | Type: "MO"
 		/// </summary>
 		public string ValDescript { get; set; }
+		/// <summary>
+		/// Title: "AveragePrice" | Type: "N"
+		/// </summary>
+		[ValidateSetAccess]
+		public decimal? ValAverage { get; set; }
 
 		#region Navigations
 		#endregion
@@ -319,7 +324,7 @@ namespace GenioMVC.ViewModels.Prope
 				ValId = ViewModelConversion.ToNumeric(m.ValId);
 				ValSold = ViewModelConversion.ToLogic(m.ValSold);
 				ValDtsold = ViewModelConversion.ToDateTime(m.ValDtsold);
-				ValAverage = ViewModelConversion.ToNumeric(m.ValAverage);
+				ValLastvisit = ViewModelConversion.ToString(m.ValLastvisit);
 				ValPrice = ViewModelConversion.ToNumeric(m.ValPrice);
 				ValTypology = ViewModelConversion.ToNumeric(m.ValTypology);
 				ValBuildtyp = ViewModelConversion.ToString(m.ValBuildtyp);
@@ -336,6 +341,7 @@ namespace GenioMVC.ViewModels.Prope
 				ValTitle = ViewModelConversion.ToString(m.ValTitle);
 				ValPhoto = ViewModelConversion.ToImage(m.ValPhoto);
 				ValDescript = ViewModelConversion.ToString(m.ValDescript);
+				ValAverage = ViewModelConversion.ToNumeric(m.ValAverage);
 				ValCodprope = ViewModelConversion.ToString(m.ValCodprope);
 			}
 			catch (Exception)
@@ -387,10 +393,11 @@ namespace GenioMVC.ViewModels.Prope
 				if (!HasDisabledUserValuesSecurity)
 					return;
 
-				m.ValAverage = ViewModelConversion.ToNumeric(ValAverage);
+				m.ValLastvisit = ViewModelConversion.ToString(ValLastvisit);
 				m.ValBuildage = ViewModelConversion.ToNumeric(ValBuildage);
 				m.ValProfit = ViewModelConversion.ToNumeric(ValProfit);
 				m.ValTax = ViewModelConversion.ToNumeric(ValTax);
+				m.ValAverage = ViewModelConversion.ToNumeric(ValAverage);
 				m.ValCodprope = ViewModelConversion.ToString(ValCodprope);
 			}
 			catch (Exception)
@@ -583,6 +590,7 @@ namespace GenioMVC.ViewModels.Prope
 		{
 			CrudViewModelFieldValidator validator = new(m_userContext.User.Language);
 
+			validator.StringLength("ValLastvisit", Resources.Resources.LAST_VISITOR08357, ValLastvisit, 50);
 			validator.StringLength("CityCountValCountry", Resources.Resources.COUNTRY64133, CityCountValCountry, 50);
 
 			validator.Required("ValPrice", Resources.Resources.PRICE06900, ViewModelConversion.ToNumeric(ValPrice), FieldType.CURRENCY.GetFormatting());
@@ -1013,7 +1021,7 @@ namespace GenioMVC.ViewModels.Prope
 				"prope.id" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.sold" => ViewModelConversion.ToLogic(modelValue),
 				"prope.dtsold" => ViewModelConversion.ToDateTime(modelValue),
-				"prope.average" => ViewModelConversion.ToNumeric(modelValue),
+				"prope.lastvisit" => ViewModelConversion.ToString(modelValue),
 				"count.country" => ViewModelConversion.ToString(modelValue),
 				"prope.price" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.typology" => ViewModelConversion.ToNumeric(modelValue),
@@ -1031,6 +1039,7 @@ namespace GenioMVC.ViewModels.Prope
 				"prope.title" => ViewModelConversion.ToString(modelValue),
 				"prope.photo" => ViewModelConversion.ToImage(modelValue),
 				"prope.descript" => ViewModelConversion.ToString(modelValue),
+				"prope.average" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.codprope" => ViewModelConversion.ToString(modelValue),
 				"city.codcity" => ViewModelConversion.ToString(modelValue),
 				"city.city" => ViewModelConversion.ToString(modelValue),

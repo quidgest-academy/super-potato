@@ -126,29 +126,16 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValDtsold))
 		this.stopWatchers.push(watch(() => this.ValDtsold.value, (newValue, oldValue) => this.onUpdate('prope.dtsold', this.ValDtsold, newValue, oldValue)))
 
-		this.ValAverage = reactive(new modelFieldType.Number({
-			id: 'ValAverage',
-			originId: 'ValAverage',
+		this.ValLastvisit = reactive(new modelFieldType.String({
+			id: 'ValLastvisit',
+			originId: 'ValLastvisit',
 			area: 'PROPE',
-			field: 'AVERAGE',
-			maxDigits: 12,
-			decimalDigits: 0,
+			field: 'LASTVISIT',
+			maxLength: 50,
 			isFixed: true,
-			valueFormula: {
-				stopRecalcCondition() { return false },
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				fnFormula(params)
-				{
-					// Formula: Average()
-					return qFunctions.Average()
-				},
-				dependencyEvents: [],
-				isServerRecalc: false,
-				isEmpty: qApi.emptyN,
-			},
-			description: computed(() => this.Resources.AVERAGEPRICE13700),
-		}).cloneFrom(values?.ValAverage))
-		this.stopWatchers.push(watch(() => this.ValAverage.value, (newValue, oldValue) => this.onUpdate('prope.average', this.ValAverage, newValue, oldValue)))
+			description: computed(() => this.Resources.LAST_VISITOR08357),
+		}).cloneFrom(values?.ValLastvisit))
+		this.stopWatchers.push(watch(() => this.ValLastvisit.value, (newValue, oldValue) => this.onUpdate('prope.lastvisit', this.ValLastvisit, newValue, oldValue)))
 
 		this.TableCityCity = reactive(new modelFieldType.String({
 			type: 'Lookup',
@@ -414,6 +401,30 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.DESCRIPTION07383),
 		}).cloneFrom(values?.ValDescript))
 		this.stopWatchers.push(watch(() => this.ValDescript.value, (newValue, oldValue) => this.onUpdate('prope.descript', this.ValDescript, newValue, oldValue)))
+
+		this.ValAverage = reactive(new modelFieldType.Number({
+			id: 'ValAverage',
+			originId: 'ValAverage',
+			area: 'PROPE',
+			field: 'AVERAGE',
+			maxDigits: 12,
+			decimalDigits: 0,
+			isFixed: true,
+			valueFormula: {
+				stopRecalcCondition() { return false },
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				fnFormula(params)
+				{
+					// Formula: Average()
+					return qFunctions.Average()
+				},
+				dependencyEvents: [],
+				isServerRecalc: false,
+				isEmpty: qApi.emptyN,
+			},
+			description: computed(() => this.Resources.AVERAGEPRICE13700),
+		}).cloneFrom(values?.ValAverage))
+		this.stopWatchers.push(watch(() => this.ValAverage.value, (newValue, oldValue) => this.onUpdate('prope.average', this.ValAverage, newValue, oldValue)))
 	}
 
 	/**

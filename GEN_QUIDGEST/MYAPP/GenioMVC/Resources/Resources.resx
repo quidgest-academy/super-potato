@@ -552,6 +552,9 @@
 	<data name="PROFIT55910" xml:space="preserve">
 		<value>Profit</value>
 	</data>
+	<data name="LAST_VISITOR08357" xml:space="preserve">
+		<value>Last Visitor</value>
+	</data>
 	<data name="ALBUM37050" xml:space="preserve">
 		<value>Album</value>
 	</data>
