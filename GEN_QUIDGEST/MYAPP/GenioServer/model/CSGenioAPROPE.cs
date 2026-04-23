@@ -764,11 +764,11 @@ namespace CSGenio.business
 			set { insertNameValueField(FldTax, value); }
 		}
 
-		/// <summary>Field : "Total Contacts" Tipo: "N" Formula: SR "[CONTA->VISIT_DATE]"</summary>
+		/// <summary>Field : "Total Contacts" Tipo: "N" Formula: SR "[CONTA->1]"</summary>
 		public static FieldRef FldNumbercontacts { get { return m_fldNumbercontacts; } }
 		private static FieldRef m_fldNumbercontacts = new FieldRef("prope", "numbercontacts");
 
-		/// <summary>Field : "Total Contacts" Tipo: "N" Formula: SR "[CONTA->VISIT_DATE]"</summary>
+		/// <summary>Field : "Total Contacts" Tipo: "N" Formula: SR "[CONTA->1]"</summary>
 		public decimal ValNumbercontacts
 		{
 			get { return (decimal)returnValueField(FldNumbercontacts); }

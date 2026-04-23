@@ -199,7 +199,7 @@ namespace CSGenio.business
 			//------------------------------
 			//Actualiza as seguintes somas relacionadas:
 			info.RelatedSumArgs = new List<RelatedSumArgument>();
-			info.RelatedSumArgs.Add( new RelatedSumArgument("conta", "prope", "numbercontacts", "visit_date", '+', true));
+			info.RelatedSumArgs.Add( new RelatedSumArgument("conta", "prope", "numbercontacts", "1", '+', false));
 
 
 

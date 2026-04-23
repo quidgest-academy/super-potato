@@ -182,7 +182,7 @@ namespace GenioMVC.Models
 		public decimal? ValTax { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValTax, 2)); } set { klass.ValTax = Convert.ToDecimal(value); } }
 
 		[DisplayName("Total Contacts")]
-		/// <summary>Field : "Total Contacts" Tipo: "N" Formula: SR "[CONTA->VISIT_DATE]"</summary>
+		/// <summary>Field : "Total Contacts" Tipo: "N" Formula: SR "[CONTA->1]"</summary>
 		[ShouldSerialize("Prope.ValNumbercontacts")]
 		[NumericAttribute(0)]
 		public decimal? ValNumbercontacts { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValNumbercontacts, 0)); } set { klass.ValNumbercontacts = Convert.ToDecimal(value); } }
