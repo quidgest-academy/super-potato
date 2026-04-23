@@ -18,7 +18,7 @@ const framework = createFramework({
 	},
 	defaults: {
 		QIconSvg: {
-			bundle: 'Content/svgbundle.svg?v=88'
+			bundle: 'Content/svgbundle.svg?v=89'
 		},
 		QCollapsible: {
 			icons: {
