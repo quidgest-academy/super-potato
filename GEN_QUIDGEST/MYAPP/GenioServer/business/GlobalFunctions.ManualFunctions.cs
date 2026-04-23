@@ -151,7 +151,7 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 //BEGIN_FUNCTION:083f7b70-5add-4e77-9082-ae33d7097a18
 			var props = new List<object>(); 
 			SelectQuery query = new SelectQuery()
-				.Select(CSGenioAprope.FldTitle)
+				.Select(CSGenioAprope.FldCodprope)
 				.From(Area.AreaPROPE)
 				.Join(Area.AreaCONTA, TableJoinType.Left).On(CriteriaSet.And().Equal(CSGenioAconta.FldCodprope, CSGenioAprope.FldCodprope).Equal(CSGenioAconta.FldVisit_date, visitDate))
 				.Where(CriteriaSet.And().Equal(CSGenioAconta.FldVisit_date, null));	

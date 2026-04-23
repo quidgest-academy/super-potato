@@ -43,11 +43,6 @@ public class ContactForm : PopupForm
 	/// </summary>
 	public DateInputControl ContaVisit_date => new DateInputControl(driver, ContainerLocator, "#CONTACT__CONTA__VISIT_DATE" + IdSuffix);
 
-	/// <summary>
-	/// Property
-	/// </summary>
-	public IWebElement PropeId => throw new NotImplementedException();
-
 	public ContactForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "CONTACT", usePkInId: usePkInId) { }
 }
