@@ -13,6 +13,11 @@ public class ContactForm : PopupForm
 	public DateInputControl ContaDate => new DateInputControl(driver, ContainerLocator, "#CONTACT_CONTADATE____" + IdSuffix);
 
 	/// <summary>
+	/// Visit Date
+	/// </summary>
+	public DateInputControl ContaVisit_date => new DateInputControl(driver, ContainerLocator, "#CONTACT__CONTA__VISIT_DATE" + IdSuffix);
+
+	/// <summary>
 	/// Title
 	/// </summary>
 	public LookupControl PropeTitle => new LookupControl(driver, ContainerLocator, "container-CONTACT_PROPETITLE___" + IdSuffix);

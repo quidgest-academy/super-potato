@@ -42,6 +42,10 @@ namespace GenioMVC.ViewModels.Conta
 		/// </summary>
 		public DateTime? ValDate { get; set; }
 		/// <summary>
+		/// Title: "Visit Date" | Type: "D"
+		/// </summary>
+		public DateTime? ValVisit_date { get; set; }
+		/// <summary>
 		/// Title: "Title" | Type: "C"
 		/// </summary>
 		[ValidateSetAccess]
@@ -195,6 +199,7 @@ namespace GenioMVC.ViewModels.Conta
 			{
 				ValCodprope = ViewModelConversion.ToString(m.ValCodprope);
 				ValDate = ViewModelConversion.ToDateTime(m.ValDate);
+				ValVisit_date = ViewModelConversion.ToDateTime(m.ValVisit_date);
 				ValClient = ViewModelConversion.ToString(m.ValClient);
 				ValEmail = ViewModelConversion.ToString(m.ValEmail);
 				ValPhone = ViewModelConversion.ToString(m.ValPhone);
@@ -227,6 +232,7 @@ namespace GenioMVC.ViewModels.Conta
 			{
 				m.ValCodprope = ViewModelConversion.ToString(ValCodprope);
 				m.ValDate = ViewModelConversion.ToDateTime(ValDate);
+				m.ValVisit_date = ViewModelConversion.ToDateTime(ValVisit_date);
 				m.ValClient = ViewModelConversion.ToString(ValClient);
 				m.ValEmail = ViewModelConversion.ToString(ValEmail);
 				m.ValPhone = ViewModelConversion.ToString(ValPhone);
@@ -260,6 +266,9 @@ namespace GenioMVC.ViewModels.Conta
 						break;
 					case "conta.date":
 						this.ValDate = ViewModelConversion.ToDateTime(_value);
+						break;
+					case "conta.visit_date":
+						this.ValVisit_date = ViewModelConversion.ToDateTime(_value);
 						break;
 					case "conta.client":
 						this.ValClient = ViewModelConversion.ToString(_value);
@@ -399,6 +408,8 @@ namespace GenioMVC.ViewModels.Conta
 		{
 			CrudViewModelFieldValidator validator = new(m_userContext.User.Language);
 
+
+			validator.Required("ValVisit_date", Resources.Resources.VISIT_DATE27188, ViewModelConversion.ToDateTime(ValVisit_date), FieldType.DATE.GetFormatting());
 			validator.StringLength("ValClient", Resources.Resources.CLIENT_NAME39245, ValClient, 50);
 
 			validator.Required("ValClient", Resources.Resources.CLIENT_NAME39245, ViewModelConversion.ToString(ValClient), FieldType.TEXT.GetFormatting());
@@ -636,6 +647,7 @@ namespace GenioMVC.ViewModels.Conta
 			{
 				"conta.codprope" => ViewModelConversion.ToString(modelValue),
 				"conta.date" => ViewModelConversion.ToDateTime(modelValue),
+				"conta.visit_date" => ViewModelConversion.ToDateTime(modelValue),
 				"conta.client" => ViewModelConversion.ToString(modelValue),
 				"conta.email" => ViewModelConversion.ToString(modelValue),
 				"conta.phone" => ViewModelConversion.ToString(modelValue),

@@ -98,7 +98,7 @@
 			:data-identifier="primaryKeyValue"
 			:data-loading="!formInitialDataLoaded || !isActiveForm">
 			<template v-if="formControl.initialized && showFormBody">
-				<q-row v-if="controls.CONTACT_CONTADATE____.isVisible || controls.CONTACT_PROPETITLE___.isVisible || controls.CONTACT_CONTACLIENT__.isVisible || controls.CONTACT_CONTAEMAIL___.isVisible || controls.CONTACT_CONTAPHONE___.isVisible || controls.CONTACT_CONTADESCRIPT.isVisible">
+				<q-row v-if="controls.CONTACT_CONTADATE____.isVisible || controls.CONTACT__CONTA__VISIT_DATE.isVisible || controls.CONTACT_PROPETITLE___.isVisible">
 					<q-col
 						v-if="controls.CONTACT_CONTADATE____.isVisible"
 						cols="auto">
@@ -118,6 +118,27 @@
 								:model-value="model.ValDate.value"
 								@reset-icon-click="model.ValDate.fnUpdateValue(model.ValDate.originalValue ?? new Date())"
 								@update:model-value="model.ValDate.fnUpdateValue($event ?? '')" />
+						</base-input-structure>
+					</q-col>
+					<q-col
+						v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
+							class="i-text"
+							v-bind="controls.CONTACT__CONTA__VISIT_DATE.wrapperProps"
+							:id="getControlId(controls.CONTACT__CONTA__VISIT_DATE)"
+							v-on="controls.CONTACT__CONTA__VISIT_DATE.handlers"
+							:loading="controls.CONTACT__CONTA__VISIT_DATE.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
+							<q-date-time-picker
+								v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
+								v-bind="controls.CONTACT__CONTA__VISIT_DATE.props"
+								:id="getControlId(controls.CONTACT__CONTA__VISIT_DATE)"
+								:model-value="model.ValVisit_date.value"
+								@reset-icon-click="model.ValVisit_date.fnUpdateValue(model.ValVisit_date.originalValue ?? new Date())"
+								@update:model-value="model.ValVisit_date.fnUpdateValue($event ?? '')" />
 						</base-input-structure>
 					</q-col>
 					<q-col
@@ -143,6 +164,8 @@
 								v-on="controls.CONTACT_PROPETITLE___.handlers" />
 						</base-input-structure>
 					</q-col>
+				</q-row>
+				<q-row v-if="controls.CONTACT_CONTACLIENT__.isVisible || controls.CONTACT_CONTAEMAIL___.isVisible || controls.CONTACT_CONTAPHONE___.isVisible">
 					<q-col
 						v-if="controls.CONTACT_CONTACLIENT__.isVisible"
 						cols="auto">
@@ -201,6 +224,8 @@
 								@change="model.ValPhone.fnUpdateValueOnChange" />
 						</base-input-structure>
 					</q-col>
+				</q-row>
+				<q-row v-if="controls.CONTACT_CONTADESCRIPT.isVisible">
 					<q-col
 						v-if="controls.CONTACT_CONTADESCRIPT.isVisible"
 						cols="auto">
@@ -581,6 +606,20 @@
 						controlLimits: [
 						],
 					}, this),
+					CONTACT__CONTA__VISIT_DATE: new fieldControlClass.DateControl({
+						modelField: 'ValVisit_date',
+						valueChangeEvent: 'fieldChange:conta.visit_date',
+						id: 'CONTACT__CONTA__VISIT_DATE',
+						name: 'VISIT_DATE',
+						size: 'small',
+						label: computed(() => this.Resources.VISIT_DATE27188),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						dateTimeType: 'date',
+						mustBeFilled: true,
+						controlLimits: [
+						],
+					}, this),
 					CONTACT_PROPETITLE___: new fieldControlClass.LookupControl({
 						modelField: 'TablePropeTitle',
 						valueChangeEvent: 'fieldChange:prope.title',
@@ -711,6 +750,8 @@
 						set ValEmail(value) { vm.model.ValEmail.updateValue(value) },
 						get ValPhone() { return vm.model.ValPhone.value },
 						set ValPhone(value) { vm.model.ValPhone.updateValue(value) },
+						get ValVisit_date() { return vm.model.ValVisit_date.value },
+						set ValVisit_date(value) { vm.model.ValVisit_date.updateValue(value) },
 					},
 					Prope: {
 						get ValTitle() { return vm.model.TablePropeTitle.value },

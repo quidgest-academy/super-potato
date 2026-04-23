@@ -1087,6 +1087,15 @@ namespace Administration.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "Visit Date"
+        /// </summary>
+        public static string VISIT_DATE27188 {
+            get {
+                return ResourceManager.GetString("VISIT_DATE27188", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "Modo de processamento"
         /// </summary>
         public static string MODO_DE_PROCESSAMENT14469 {

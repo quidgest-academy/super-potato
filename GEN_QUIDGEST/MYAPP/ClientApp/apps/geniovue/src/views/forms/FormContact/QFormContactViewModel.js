@@ -74,6 +74,15 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValDate))
 		this.stopWatchers.push(watch(() => this.ValDate.value, (newValue, oldValue) => this.onUpdate('conta.date', this.ValDate, newValue, oldValue)))
 
+		this.ValVisit_date = reactive(new modelFieldType.Date({
+			id: 'ValVisit_date',
+			originId: 'ValVisit_date',
+			area: 'CONTA',
+			field: 'VISIT_DATE',
+			description: computed(() => this.Resources.VISIT_DATE27188),
+		}).cloneFrom(values?.ValVisit_date))
+		this.stopWatchers.push(watch(() => this.ValVisit_date.value, (newValue, oldValue) => this.onUpdate('conta.visit_date', this.ValVisit_date, newValue, oldValue)))
+
 		this.TablePropeTitle = reactive(new modelFieldType.String({
 			type: 'Lookup',
 			id: 'TablePropeTitle',

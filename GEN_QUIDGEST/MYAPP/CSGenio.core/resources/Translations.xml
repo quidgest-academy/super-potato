@@ -342,6 +342,9 @@
   <msg id="Population" code="POPULATION00718">
     <ENUS>Population</ENUS>
   </msg>
+  <msg id="Visit Date" code="VISIT_DATE27188">
+    <ENUS>Visit Date</ENUS>
+  </msg>
   <msg id="Modo de processamento" code="MODO_DE_PROCESSAMENT14469">
     <ENUS>Modo de processamento</ENUS>
   </msg>

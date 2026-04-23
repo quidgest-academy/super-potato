@@ -81,6 +81,13 @@ namespace GenioMVC.Models
 		[CurrencyAttribute("EUR", 4)]
 		public decimal? ValPricepro { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValPricepro, 4)); } set { klass.ValPricepro = Convert.ToDecimal(value); } }
 
+		[DisplayName("Visit Date")]
+		/// <summary>Field : "Visit Date" Tipo: "D" Formula:  ""</summary>
+		[ShouldSerialize("Conta.ValVisit_date")]
+		[DataType(DataType.Date)]
+		[DateAttribute("D")]
+		public DateTime? ValVisit_date { get { return klass.ValVisit_date; } set { klass.ValVisit_date = value ?? DateTime.MinValue; } }
+
 		[DisplayName("ZZSTATE")]
 		[ShouldSerialize("Conta.ValZzstate")]
 		/// <summary>Field: "ZZSTATE", Type: "INT", Formula: ""</summary>

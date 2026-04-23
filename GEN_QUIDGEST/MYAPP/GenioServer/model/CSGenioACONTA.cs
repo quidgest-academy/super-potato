@@ -142,6 +142,17 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
+			Qfield = new Field(info.Alias, "visit_date", FieldType.DATE);
+			Qfield.FieldDescription = "Visit Date";
+			Qfield.FieldSize =  8;
+			Qfield.MQueue = false;
+			Qfield.CavDesignation = "VISIT_DATE27188";
+
+            Qfield.NotNull = true;
+			Qfield.Dupmsg = "";
+			info.RegisterFieldDB(Qfield);
+
+			//- - - - - - - - - - - - - - - - - - -
 			Qfield = new Field(info.Alias, "zzstate", FieldType.INTEGER);
 			Qfield.FieldDescription = "Estado da ficha";
 			info.RegisterFieldDB(Qfield);
@@ -421,6 +432,17 @@ namespace CSGenio.business
 			set { insertNameValueField(FldPricepro, value); }
 		}
 
+		/// <summary>Field : "Visit Date" Tipo: "D" Formula:  ""</summary>
+		public static FieldRef FldVisit_date { get { return m_fldVisit_date; } }
+		private static FieldRef m_fldVisit_date = new FieldRef("conta", "visit_date");
+
+		/// <summary>Field : "Visit Date" Tipo: "D" Formula:  ""</summary>
+		public DateTime ValVisit_date
+		{
+			get { return (DateTime)returnValueField(FldVisit_date); }
+			set { insertNameValueField(FldVisit_date, value); }
+		}
+
 		/// <summary>Field : "ZZSTATE" Type: "INT" Formula:  ""</summary>
 		public static FieldRef FldZzstate { get { return m_fldZzstate; } }
 		private static FieldRef m_fldZzstate = new FieldRef("conta", "zzstate");
@@ -518,7 +540,7 @@ namespace CSGenio.business
 		// USE /[MANUAL FOR TABAUX CONTA]/
 
  
-         
+          
 
 	}
 }

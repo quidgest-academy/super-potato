@@ -459,6 +459,9 @@
 	<data name="POPULATION00718" xml:space="preserve">
 		<value>Population</value>
 	</data>
+	<data name="VISIT_DATE27188" xml:space="preserve">
+		<value>Visit Date</value>
+	</data>
 	<data name="MODO_DE_PROCESSAMENT14469" xml:space="preserve">
 		<value>Modo de processamento</value>
 	</data>
