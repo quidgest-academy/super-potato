@@ -149,7 +149,20 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 		public System.Collections.Generic.List<object> propsNotBooking(DateTime? visitDate)
 		{
 //BEGIN_FUNCTION:083f7b70-5add-4e77-9082-ae33d7097a18
-//implementa aqui
+			var props = new List<object>(); 
+			SelectQuery query = new SelectQuery()
+				.Select(CSGenioAprope.FldTitle)
+				.From(Area.AreaPROPE)
+				.Join(Area.AreaCONTA, TableJoinType.Left).On(CriteriaSet.And().Equal(CSGenioAconta.FldCodprope, CSGenioAprope.FldCodprope).Equal(CSGenioAconta.FldVisit_date, visitDate))
+				.Where(CriteriaSet.And().Equal(CSGenioAconta.FldVisit_date, null));	
+
+			var data = sp.Execute(query);
+			for (int i = 0; i < data.NumRows; i++) {
+				props.Add(data.GetString(i, 0));
+			
+			}
+
+			return props;
 //END_FUNCTION
 		}
 

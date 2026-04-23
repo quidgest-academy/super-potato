@@ -42,10 +42,6 @@ namespace GenioMVC.ViewModels.Conta
 		/// </summary>
 		public DateTime? ValDate { get; set; }
 		/// <summary>
-		/// Title: "Visit Date" | Type: "D"
-		/// </summary>
-		public DateTime? ValVisit_date { get; set; }
-		/// <summary>
 		/// Title: "Title" | Type: "C"
 		/// </summary>
 		[ValidateSetAccess]
@@ -66,6 +62,27 @@ namespace GenioMVC.ViewModels.Conta
 		/// Title: "Description" | Type: "MO"
 		/// </summary>
 		public string ValDescript { get; set; }
+		/// <summary>
+		/// Title: "Visit Date" | Type: "D"
+		/// </summary>
+		public DateTime? ValVisit_date { get; set; }
+		/// <summary>
+		/// Title: "Property" | Type: "N"
+		/// </summary>
+		[ValidateSetAccess]
+		public decimal? PropeValId
+		{
+			get
+			{
+				return funcPropeValId != null ? funcPropeValId() : _auxPropeValId;
+			}
+			set { funcPropeValId = () => value; }
+		}
+
+		[JsonIgnore]
+		public Func<decimal?> funcPropeValId { get; set; }
+
+		private decimal? _auxPropeValId { get; set; }
 
 		#region Navigations
 		#endregion
@@ -199,11 +216,12 @@ namespace GenioMVC.ViewModels.Conta
 			{
 				ValCodprope = ViewModelConversion.ToString(m.ValCodprope);
 				ValDate = ViewModelConversion.ToDateTime(m.ValDate);
-				ValVisit_date = ViewModelConversion.ToDateTime(m.ValVisit_date);
 				ValClient = ViewModelConversion.ToString(m.ValClient);
 				ValEmail = ViewModelConversion.ToString(m.ValEmail);
 				ValPhone = ViewModelConversion.ToString(m.ValPhone);
 				ValDescript = ViewModelConversion.ToString(m.ValDescript);
+				ValVisit_date = ViewModelConversion.ToDateTime(m.ValVisit_date);
+				funcPropeValId = () => ViewModelConversion.ToNumeric(m.Prope.ValId);
 				ValCodconta = ViewModelConversion.ToString(m.ValCodconta);
 			}
 			catch (Exception)
@@ -232,7 +250,6 @@ namespace GenioMVC.ViewModels.Conta
 			{
 				m.ValCodprope = ViewModelConversion.ToString(ValCodprope);
 				m.ValDate = ViewModelConversion.ToDateTime(ValDate);
-				m.ValVisit_date = ViewModelConversion.ToDateTime(ValVisit_date);
 				m.ValClient = ViewModelConversion.ToString(ValClient);
 				m.ValEmail = ViewModelConversion.ToString(ValEmail);
 				m.ValPhone = ViewModelConversion.ToString(ValPhone);
@@ -241,7 +258,16 @@ namespace GenioMVC.ViewModels.Conta
 				{
 					m.ValDescript = ViewModelConversion.ToString(ValDescript);
 				}
+				m.ValVisit_date = ViewModelConversion.ToDateTime(ValVisit_date);
 				m.ValCodconta = ViewModelConversion.ToString(ValCodconta);
+
+				/*
+					At this moment, in the case of runtime calculation of server-side formulas, to improve performance and reduce database load,
+						the values coming from the client-side will be accepted as valid, since they will not be saved and are only being used for calculation.
+				*/
+				if (!HasDisabledUserValuesSecurity)
+					return;
+
 			}
 			catch (Exception)
 			{
@@ -267,9 +293,6 @@ namespace GenioMVC.ViewModels.Conta
 					case "conta.date":
 						this.ValDate = ViewModelConversion.ToDateTime(_value);
 						break;
-					case "conta.visit_date":
-						this.ValVisit_date = ViewModelConversion.ToDateTime(_value);
-						break;
 					case "conta.client":
 						this.ValClient = ViewModelConversion.ToString(_value);
 						break;
@@ -281,6 +304,9 @@ namespace GenioMVC.ViewModels.Conta
 						break;
 					case "conta.descript":
 						this.ValDescript = ViewModelConversion.ToString(_value);
+						break;
+					case "conta.visit_date":
+						this.ValVisit_date = ViewModelConversion.ToDateTime(_value);
 						break;
 					case "conta.codconta":
 						this.ValCodconta = ViewModelConversion.ToString(_value);
@@ -408,8 +434,6 @@ namespace GenioMVC.ViewModels.Conta
 		{
 			CrudViewModelFieldValidator validator = new(m_userContext.User.Language);
 
-
-			validator.Required("ValVisit_date", Resources.Resources.VISIT_DATE27188, ViewModelConversion.ToDateTime(ValVisit_date), FieldType.DATE.GetFormatting());
 			validator.StringLength("ValClient", Resources.Resources.CLIENT_NAME39245, ValClient, 50);
 
 			validator.Required("ValClient", Resources.Resources.CLIENT_NAME39245, ViewModelConversion.ToString(ValClient), FieldType.TEXT.GetFormatting());
@@ -417,6 +441,8 @@ namespace GenioMVC.ViewModels.Conta
 
 			validator.Required("ValEmail", Resources.Resources.EMAIL_DO_CLIENTE30111, ViewModelConversion.ToString(ValEmail), FieldType.TEXT.GetFormatting());
 			validator.StringLength("ValPhone", Resources.Resources.PHONE_NUMBER20774, ValPhone, 14);
+
+			validator.Required("ValVisit_date", Resources.Resources.VISIT_DATE27188, ViewModelConversion.ToDateTime(ValVisit_date), FieldType.DATE.GetFormatting());
 
 
 			return validator.GetResult();
@@ -558,7 +584,7 @@ namespace GenioMVC.ViewModels.Conta
 		/// <param name="PKey">Primary Key of Prope</param>
 		public ConcurrentDictionary<string, object> GetDependant_ContactTablePropeTitle(string PKey)
 		{
-			FieldRef[] refDependantFields = [CSGenioAprope.FldCodprope, CSGenioAprope.FldTitle];
+			FieldRef[] refDependantFields = [CSGenioAprope.FldCodprope, CSGenioAprope.FldTitle, CSGenioAprope.FldId];
 
 			var returnEmptyDependants = false;
 			CriteriaSet wherecodition = CriteriaSet.And();
@@ -607,6 +633,7 @@ namespace GenioMVC.ViewModels.Conta
 			var row = GetDependant_ContactTablePropeTitle(this.ValCodprope);
 			try
 			{
+				this.funcPropeValId = () => (decimal?)row["prope.id"];
 
 				// Fill List fields
 				this.ValCodprope = ViewModelConversion.ToString(row["prope.codprope"]);
@@ -647,11 +674,12 @@ namespace GenioMVC.ViewModels.Conta
 			{
 				"conta.codprope" => ViewModelConversion.ToString(modelValue),
 				"conta.date" => ViewModelConversion.ToDateTime(modelValue),
-				"conta.visit_date" => ViewModelConversion.ToDateTime(modelValue),
 				"conta.client" => ViewModelConversion.ToString(modelValue),
 				"conta.email" => ViewModelConversion.ToString(modelValue),
 				"conta.phone" => ViewModelConversion.ToString(modelValue),
 				"conta.descript" => ViewModelConversion.ToString(modelValue),
+				"conta.visit_date" => ViewModelConversion.ToDateTime(modelValue),
+				"prope.id" => ViewModelConversion.ToNumeric(modelValue),
 				"conta.codconta" => ViewModelConversion.ToString(modelValue),
 				"prope.codprope" => ViewModelConversion.ToString(modelValue),
 				"prope.title" => ViewModelConversion.ToString(modelValue),

@@ -98,7 +98,7 @@
 			:data-identifier="primaryKeyValue"
 			:data-loading="!formInitialDataLoaded || !isActiveForm">
 			<template v-if="formControl.initialized && showFormBody">
-				<q-row v-if="controls.CONTACT_CONTADATE____.isVisible || controls.CONTACT__CONTA__VISIT_DATE.isVisible || controls.CONTACT_PROPETITLE___.isVisible">
+				<q-row v-if="controls.CONTACT_CONTADATE____.isVisible || controls.CONTACT_PROPETITLE___.isVisible">
 					<q-col
 						v-if="controls.CONTACT_CONTADATE____.isVisible"
 						cols="auto">
@@ -118,27 +118,6 @@
 								:model-value="model.ValDate.value"
 								@reset-icon-click="model.ValDate.fnUpdateValue(model.ValDate.originalValue ?? new Date())"
 								@update:model-value="model.ValDate.fnUpdateValue($event ?? '')" />
-						</base-input-structure>
-					</q-col>
-					<q-col
-						v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
-						cols="auto">
-						<base-input-structure
-							v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
-							class="i-text"
-							v-bind="controls.CONTACT__CONTA__VISIT_DATE.wrapperProps"
-							:id="getControlId(controls.CONTACT__CONTA__VISIT_DATE)"
-							v-on="controls.CONTACT__CONTA__VISIT_DATE.handlers"
-							:loading="controls.CONTACT__CONTA__VISIT_DATE.props.loading"
-							:reporting-mode-on="reportingModeCAV"
-							:suggestion-mode-on="suggestionModeOn">
-							<q-date-time-picker
-								v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
-								v-bind="controls.CONTACT__CONTA__VISIT_DATE.props"
-								:id="getControlId(controls.CONTACT__CONTA__VISIT_DATE)"
-								:model-value="model.ValVisit_date.value"
-								@reset-icon-click="model.ValVisit_date.fnUpdateValue(model.ValVisit_date.originalValue ?? new Date())"
-								@update:model-value="model.ValVisit_date.fnUpdateValue($event ?? '')" />
 						</base-input-structure>
 					</q-col>
 					<q-col
@@ -243,6 +222,48 @@
 								v-bind="controls.CONTACT_CONTADESCRIPT.props"
 								:id="getControlId(controls.CONTACT_CONTADESCRIPT)"
 								v-on="controls.CONTACT_CONTADESCRIPT.handlers" />
+						</base-input-structure>
+					</q-col>
+				</q-row>
+				<q-row v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible || controls.CONTACT_PROPEID______.isVisible">
+					<q-col
+						v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
+							class="i-text"
+							v-bind="controls.CONTACT__CONTA__VISIT_DATE.wrapperProps"
+							:id="getControlId(controls.CONTACT__CONTA__VISIT_DATE)"
+							v-on="controls.CONTACT__CONTA__VISIT_DATE.handlers"
+							:loading="controls.CONTACT__CONTA__VISIT_DATE.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
+							<q-date-time-picker
+								v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
+								v-bind="controls.CONTACT__CONTA__VISIT_DATE.props"
+								:id="getControlId(controls.CONTACT__CONTA__VISIT_DATE)"
+								:model-value="model.ValVisit_date.value"
+								@reset-icon-click="model.ValVisit_date.fnUpdateValue(model.ValVisit_date.originalValue ?? new Date())"
+								@update:model-value="model.ValVisit_date.fnUpdateValue($event ?? '')" />
+						</base-input-structure>
+					</q-col>
+					<q-col
+						v-if="controls.CONTACT_PROPEID______.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.CONTACT_PROPEID______.isVisible"
+							class="i-text"
+							v-bind="controls.CONTACT_PROPEID______.wrapperProps"
+							:id="getControlId(controls.CONTACT_PROPEID______)"
+							v-on="controls.CONTACT_PROPEID______.handlers"
+							:loading="controls.CONTACT_PROPEID______.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
+							<q-numeric-input
+								v-if="controls.CONTACT_PROPEID______.isVisible"
+								v-bind="controls.CONTACT_PROPEID______.props"
+								:id="getControlId(controls.CONTACT_PROPEID______)"
+								@update:model-value="model.PropeValId.fnUpdateValue" />
 						</base-input-structure>
 					</q-col>
 				</q-row>
@@ -606,20 +627,6 @@
 						controlLimits: [
 						],
 					}, this),
-					CONTACT__CONTA__VISIT_DATE: new fieldControlClass.DateControl({
-						modelField: 'ValVisit_date',
-						valueChangeEvent: 'fieldChange:conta.visit_date',
-						id: 'CONTACT__CONTA__VISIT_DATE',
-						name: 'VISIT_DATE',
-						size: 'small',
-						label: computed(() => this.Resources.VISIT_DATE27188),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						dateTimeType: 'date',
-						mustBeFilled: true,
-						controlLimits: [
-						],
-					}, this),
 					CONTACT_PROPETITLE___: new fieldControlClass.LookupControl({
 						modelField: 'TablePropeTitle',
 						valueChangeEvent: 'fieldChange:prope.title',
@@ -644,6 +651,7 @@
 						dependentFields: () => ({
 							set 'prope.codprope'(value) { vm.model.ValCodprope.updateValue(value) },
 							set 'prope.title'(value) { vm.model.TablePropeTitle.updateValue(value) },
+							set 'prope.id'(value) { vm.model.PropeValId.updateValue(value) },
 						}),
 						controlLimits: [
 						],
@@ -715,6 +723,37 @@
 							isServerRecalc: false,
 						},
 					}, this),
+					CONTACT__CONTA__VISIT_DATE: new fieldControlClass.DateControl({
+						modelField: 'ValVisit_date',
+						valueChangeEvent: 'fieldChange:conta.visit_date',
+						id: 'CONTACT__CONTA__VISIT_DATE',
+						name: 'VISIT_DATE',
+						size: 'small',
+						label: computed(() => this.Resources.VISIT_DATE27188),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						dateTimeType: 'date',
+						mustBeFilled: true,
+						controlLimits: [
+						],
+					}, this),
+					CONTACT_PROPEID______: new fieldControlClass.NumberControl({
+						modelField: 'PropeValId',
+						valueChangeEvent: 'fieldChange:prope.id',
+						dependentModelField: 'ValCodprope',
+						dependentChangeEvent: 'fieldChange:conta.codprope',
+						id: 'CONTACT_PROPEID______',
+						name: 'ID',
+						size: 'small',
+						label: computed(() => this.Resources.PROPERTY43977),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						maxIntegers: 5,
+						maxDecimals: 0,
+						isSequencial: true,
+						controlLimits: [
+						],
+					}, this),
 				},
 
 				model: new FormViewModel(this, {
@@ -754,6 +793,8 @@
 						set ValVisit_date(value) { vm.model.ValVisit_date.updateValue(value) },
 					},
 					Prope: {
+						get ValId() { return vm.model.PropeValId.value },
+						set ValId(value) { vm.model.PropeValId.updateValue(value) },
 						get ValTitle() { return vm.model.TablePropeTitle.value },
 						set ValTitle(value) { vm.model.TablePropeTitle.updateValue(value) },
 					},
