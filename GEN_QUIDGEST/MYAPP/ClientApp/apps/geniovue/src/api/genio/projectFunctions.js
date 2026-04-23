@@ -78,6 +78,13 @@ function propsNotBooking(visitDate)
 	/// <param name="visitDate"></param>
 	return netAPI.executeServerFunction('propsNotBooking', [visitDate]);
 }
+function propsWithoutContacts()
+{
+	/// <summary>
+	/// Only shows properties without contacts
+	/// </summary>
+	return netAPI.executeServerFunction('propsWithoutContacts', []);
+}
 
 export default {
 	Age,
@@ -85,4 +92,5 @@ export default {
 	getCityTax,
 	averagePriceAgent,
 	propsNotBooking,
+	propsWithoutContacts,
 }

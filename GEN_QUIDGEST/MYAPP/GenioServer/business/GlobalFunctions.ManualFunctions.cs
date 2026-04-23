@@ -39,7 +39,7 @@ namespace CSGenio.business
 		/// </summary>
 		private static void initTodasFuncoes()
 		{
-			todasFuncoes = new Hashtable(13, (float)0.5);
+			todasFuncoes = new Hashtable(14, (float)0.5);
 			todasFuncoes.Add("password_alterar", 0);
 			todasFuncoes.Add("password_verificaAntiga", 1);
 			todasFuncoes.Add("validarAssinatura", 2);
@@ -54,6 +54,7 @@ namespace CSGenio.business
 			todasFuncoes.Add("getCityTax", 10);
 			todasFuncoes.Add("averagePriceAgent", 11);
 			todasFuncoes.Add("propsNotBooking", 12);
+			todasFuncoes.Add("propsWithoutContacts", 13);
 			// Cargas
 		}
 
@@ -166,6 +167,16 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 //END_FUNCTION
 		}
 
+		/// <summary>
+		/// Only shows properties without contacts
+		/// </summary>
+		public System.Collections.Generic.List<object> propsWithoutContacts()
+		{
+//BEGIN_FUNCTION:075df84f-aa1f-43d4-87aa-a68d14568d2d
+//implementa aqui
+//END_FUNCTION
+		}
+
 		#endregion
 
 		#region MANCS
@@ -179,7 +190,8 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 			"Average",
 			"getCityTax",
 			"averagePriceAgent",
-			"propsNotBooking"
+			"propsNotBooking",
+			"propsWithoutContacts"
 		};
 
 		public static List<string> AllManualFuntionsNames
