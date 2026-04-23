@@ -173,7 +173,22 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 		public System.Collections.Generic.List<object> propsWithoutContacts()
 		{
 //BEGIN_FUNCTION:075df84f-aa1f-43d4-87aa-a68d14568d2d
-//implementa aqui
+			var props = new List<object>();
+			SelectQuery query = new SelectQuery()
+				.Select(CSGenioAprope.FldTitle)
+				.From(Area.AreaPROPE)
+				.Join(Area.AreaCONTA, TableJoinType.Left)
+					.On(CriteriaSet.And().Equal(CSGenioAprope.FldCodprope, CSGenioAconta.FldCodprope))
+				.Where(CriteriaSet.And().Equal(CSGenioAconta.FldVisit_date, null));
+
+            var data = sp.Execute(query);
+            for (int i = 0; i < data.NumRows; i++)
+            {
+                props.Add(data.GetString(i, 0));
+
+            }
+
+            return props;
 //END_FUNCTION
 		}
 
