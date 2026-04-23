@@ -437,53 +437,6 @@ namespace GenioMVC.Controllers
 			return JsonOK(model);
 		}
 
-		public class Contact_PropeValIdModel : RequestLookupModel
-		{
-			public Contact_ViewModel Model { get; set; }
-		}
-
-		//
-		// GET: /Conta/Contact_PropeValId
-		// POST: /Conta/Contact_PropeValId
-		[ActionName("Contact_PropeValId")]
-		public ActionResult Contact_PropeValId([FromBody] Contact_PropeValIdModel requestModel)
-		{
-			var queryParams = requestModel.QueryParams;
-
-			// If there was a recent operation on this table then force the primary persistence server to be called and ignore the read only feature
-			if (string.IsNullOrEmpty(Navigation.GetStrValue("ForcePrimaryRead_prope")))
-				UserContext.Current.SetPersistenceReadOnly(true);
-			else
-			{
-				Navigation.DestroyEntry("ForcePrimaryRead_prope");
-				UserContext.Current.SetPersistenceReadOnly(false);
-			}
-
-			NameValueCollection requestValues = [];
-			if (queryParams != null)
-			{
-				// Add to request values
-				foreach (var kv in queryParams)
-					requestValues.Add(kv.Key, kv.Value);
-			}
-
-			IsStateReadonly = true;
-
-			Models.Conta parentCtx = requestModel.Model == null ? null : new(m_userContext);
-			requestModel.Model?.Init(m_userContext);
-			requestModel.Model?.MapToModel(parentCtx);
-			Contact_PropeValId_ViewModel model = new(m_userContext, parentCtx);
-
-			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(requestModel.TableConfiguration);
-
-			model.setModes(Request.Query["m"].ToString());
-			// Map received value to field - The 'multiple values' type limit
-			model.ValVisit_date = Navigation.GetValue<DateTime?>("conta.visit_date");
-			model.Load(tableConfig, requestValues, Request.IsAjaxRequest());
-
-			return JsonOK(model);
-		}
-
 		// POST: /Conta/Contact_SaveEdit
 		[HttpPost]
 		public ActionResult Contact_SaveEdit([FromBody] Contact_ViewModel model)

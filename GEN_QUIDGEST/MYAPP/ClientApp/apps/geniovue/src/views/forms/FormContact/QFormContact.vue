@@ -225,7 +225,7 @@
 						</base-input-structure>
 					</q-col>
 				</q-row>
-				<q-row v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible">
+				<q-row v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible || controls.CONTACT_PROPECODPROPE.isVisible">
 					<q-col
 						v-if="controls.CONTACT__CONTA__VISIT_DATE.isVisible"
 						cols="auto">
@@ -245,6 +245,20 @@
 								:model-value="model.ValVisit_date.value"
 								@reset-icon-click="model.ValVisit_date.fnUpdateValue(model.ValVisit_date.originalValue ?? new Date())"
 								@update:model-value="model.ValVisit_date.fnUpdateValue($event ?? '')" />
+						</base-input-structure>
+					</q-col>
+					<q-col
+						v-if="controls.CONTACT_PROPECODPROPE.isVisible"
+						cols="auto">
+						<base-input-structure
+							v-if="controls.CONTACT_PROPECODPROPE.isVisible"
+							class="i-text"
+							v-bind="controls.CONTACT_PROPECODPROPE.wrapperProps"
+							:id="getControlId(controls.CONTACT_PROPECODPROPE)"
+							v-on="controls.CONTACT_PROPECODPROPE.handlers"
+							:loading="controls.CONTACT_PROPECODPROPE.props.loading"
+							:reporting-mode-on="reportingModeCAV"
+							:suggestion-mode-on="suggestionModeOn">
 						</base-input-structure>
 					</q-col>
 				</q-row>
@@ -320,7 +334,6 @@
 
 		components: {
 			QSeeMoreContactPropetitle: defineAsyncComponent(() => import('@/views/forms/FormContact/dbedits/ContactPropetitleSeeMore.vue')),
-			QSeeMoreContactPropeid: defineAsyncComponent(() => import('@/views/forms/FormContact/dbedits/ContactPropeidSeeMore.vue')),
 		},
 
 		mixins: [
@@ -627,11 +640,11 @@
 							modelKeys: computed(() => vm.modelKeys)
 						},
 						lookupKeyModelField: {
-							name: 'ValCodprope',
+							name: 'PropeValCodprope',
 							dependencyEvent: 'fieldChange:conta.codprope'
 						},
 						dependentFields: () => ({
-							set 'prope.codprope'(value) { vm.model.ValCodprope.updateValue(value) },
+							set 'prope.codprope'(value) { vm.model.PropeValCodprope.updateValue(value) },
 							set 'prope.title'(value) { vm.model.TablePropeTitle.updateValue(value) },
 						}),
 						controlLimits: [
@@ -718,38 +731,18 @@
 						controlLimits: [
 						],
 					}, this),
-					CONTACT_PROPEID______: new fieldControlClass.LookupControl({
-						modelField: 'TablePropeId',
-						valueChangeEvent: 'fieldChange:prope.id',
-						id: 'CONTACT_PROPEID______',
-						name: 'ID',
+					CONTACT_PROPECODPROPE: new fieldControlClass.StringControl({
+						modelField: 'PropeValCodprope',
+						valueChangeEvent: 'fieldChange:prope.codprope',
+						dependentModelField: 'ValCodprope',
+						dependentChangeEvent: 'fieldChange:conta.codprope',
+						id: 'CONTACT_PROPECODPROPE',
+						name: 'CODPROPE',
 						size: 'small',
 						label: computed(() => this.Resources.PROPERTY43977),
 						placeholder: '',
 						labelPosition: computed(() => this.labelAlignment.topleft),
-						externalCallbacks: {
-							getModelField: vm.getModelField,
-							getModelFieldValue: vm.getModelFieldValue,
-							setModelFieldValue: vm.setModelFieldValue
-						},
-						externalProperties: {
-							modelKeys: computed(() => vm.modelKeys)
-						},
-						lookupKeyModelField: {
-							name: 'ValCodprope',
-							dependencyEvent: 'fieldChange:conta.codprope'
-						},
-						dependentFields: () => ({
-							set 'prope.codprope'(value) { vm.model.ValCodprope.updateValue(value) },
-							set 'prope.id'(value) { vm.model.TablePropeId.updateValue(value) },
-						}),
 						controlLimits: [
-							{
-								identifier: 'conta.visit_date',
-								dependencyEvents: ['fieldChange:conta.visit_date'],
-								dependencyField: 'CONTA.VISIT_DATE',
-								fnValueSelector: (model) => model.ValVisit_date.value
-							},
 						],
 					}, this),
 				},
@@ -791,8 +784,8 @@
 						set ValVisit_date(value) { vm.model.ValVisit_date.updateValue(value) },
 					},
 					Prope: {
-						get ValId() { return vm.model.TablePropeId.value },
-						set ValId(value) { vm.model.TablePropeId.updateValue(value) },
+						get ValCodprope() { return vm.model.PropeValCodprope.value },
+						set ValCodprope(value) { vm.model.PropeValCodprope.updateValue(value) },
 						get ValTitle() { return vm.model.TablePropeTitle.value },
 						set ValTitle(value) { vm.model.TablePropeTitle.updateValue(value) },
 					},

@@ -46,8 +46,7 @@ public class ContactForm : PopupForm
 	/// <summary>
 	/// Property
 	/// </summary>
-	public LookupControl PropeId => new LookupControl(driver, ContainerLocator, "container-CONTACT_PROPEID______" + IdSuffix);
-	public SeeMorePage PropeIdSeeMorePage => new SeeMorePage(driver, "CONTACT", "CONTACT_PROPEID______" + IdSuffix);
+	public IWebElement PropeCodprope => throw new NotImplementedException();
 
 	public ContactForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "CONTACT", usePkInId: usePkInId) { }

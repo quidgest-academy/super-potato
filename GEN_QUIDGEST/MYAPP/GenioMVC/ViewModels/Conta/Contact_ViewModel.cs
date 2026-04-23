@@ -67,10 +67,22 @@ namespace GenioMVC.ViewModels.Conta
 		/// </summary>
 		public DateTime? ValVisit_date { get; set; }
 		/// <summary>
-		/// Title: "Property" | Type: "N"
+		/// Title: "Property" | Type: "+"
 		/// </summary>
 		[ValidateSetAccess]
-		public TableDBEdit<GenioMVC.Models.Prope> TablePropeId { get; set; }
+		public string PropeValCodprope
+		{
+			get
+			{
+				return funcPropeValCodprope != null ? funcPropeValCodprope() : _auxPropeValCodprope;
+			}
+			set { funcPropeValCodprope = () => value; }
+		}
+
+		[JsonIgnore]
+		public Func<string> funcPropeValCodprope { get; set; }
+
+		private string _auxPropeValCodprope { get; set; }
 
 		#region Navigations
 		#endregion
@@ -209,6 +221,7 @@ namespace GenioMVC.ViewModels.Conta
 				ValPhone = ViewModelConversion.ToString(m.ValPhone);
 				ValDescript = ViewModelConversion.ToString(m.ValDescript);
 				ValVisit_date = ViewModelConversion.ToDateTime(m.ValVisit_date);
+				funcPropeValCodprope = () => ViewModelConversion.ToString(m.Prope.ValCodprope);
 				ValCodconta = ViewModelConversion.ToString(m.ValCodconta);
 			}
 			catch (Exception)
@@ -247,6 +260,14 @@ namespace GenioMVC.ViewModels.Conta
 				}
 				m.ValVisit_date = ViewModelConversion.ToDateTime(ValVisit_date);
 				m.ValCodconta = ViewModelConversion.ToString(ValCodconta);
+
+				/*
+					At this moment, in the case of runtime calculation of server-side formulas, to improve performance and reduce database load,
+						the values coming from the client-side will be accepted as valid, since they will not be saved and are only being used for calculation.
+				*/
+				if (!HasDisabledUserValuesSecurity)
+					return;
+
 			}
 			catch (Exception)
 			{
@@ -398,7 +419,6 @@ namespace GenioMVC.ViewModels.Conta
 			Characs = new List<string>();
 
 			Load_Contact_propetitle___(qs, lazyLoad);
-			Load_Contact_propeid______(qs, lazyLoad);
 
 // USE /[MANUAL FOR VIEWMODEL_LOADPARTIAL CONTACT]/
 		}
@@ -613,6 +633,7 @@ namespace GenioMVC.ViewModels.Conta
 			var row = GetDependant_ContactTablePropeTitle(this.ValCodprope);
 			try
 			{
+				this.funcPropeValCodprope = () => (string)row["prope.codprope"];
 
 				// Fill List fields
 				this.ValCodprope = ViewModelConversion.ToString(row["prope.codprope"]);
@@ -647,211 +668,6 @@ namespace GenioMVC.ViewModels.Conta
 
 		private readonly string[] _fieldsToSerialize_CONTACT_PROPETITLE___ = ["Prope", "Prope.ValCodprope", "Prope.ValZzstate", "Prope.ValTitle", "Prope.ValPrice"];
 
-		/// <summary>
-		/// TablePropeId -> (DB)
-		/// </summary>
-		/// <param name="qs"></param>
-		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
-		public void Load_Contact_propeid______(NameValueCollection qs, bool lazyLoad = false)
-		{
-			bool contact_propeid______DoLoad = true;
-			CriteriaSet contact_propeid______Conds = CriteriaSet.And();
-			{
-				object hValue = Navigation.GetValue("prope", true);
-				if (hValue != null && !(hValue is Array) && !string.IsNullOrEmpty(Convert.ToString(hValue)))
-				{
-					contact_propeid______Conds.Equal(CSGenioAprope.FldCodprope, hValue);
-					this.ValCodprope = DBConversion.ToString(hValue);
-				}
-			}
-			// Limits Generation
-
-			object contact_propeid_______flimitprope_sold = "0";
-			contact_propeid______Conds.Equal(
-				CSGenio.business.CSGenioAprope.FldSold,
-				contact_propeid_______flimitprope_sold);
-
-			// Multiple value limit with expression propsNotBooking([CONTA->VISIT_DATE])
-			IEnumerable<object> contact_propeid_______mlimitprope_codprope = new CSGenio.business.GlobalFunctions(m_userContext.User, m_userContext.User.CurrentModule, m_userContext.PersistentSupport).propsNotBooking(((DateTime)ValVisit_date));
-			if (contact_propeid_______mlimitprope_codprope != null && contact_propeid_______mlimitprope_codprope.Any())
-			{
-				contact_propeid______Conds.In(
-					CSGenio.business.CSGenioAprope.FldCodprope,
-					contact_propeid_______mlimitprope_codprope);
-			}
-			else
-			{
-				contact_propeid______DoLoad = false;
-			}
-
-			TablePropeId = new TableDBEdit<Models.Prope>();
-
-			if (lazyLoad)
-			{
-				if (Navigation.CurrentLevel.GetEntry("RETURN_prope") != null)
-				{
-					this.ValCodprope = Navigation.GetStrValue("RETURN_prope");
-					Navigation.CurrentLevel.SetEntry("RETURN_prope", null);
-				}
-				FillDependant_ContactTablePropeId(lazyLoad);
-				return;
-			}
-
-			if (contact_propeid______DoLoad)
-			{
-				List<ColumnSort> sorts = [];
-				ColumnSort requestedSort = GetRequestSort(TablePropeId, "sTablePropeId", "dTablePropeId", qs, "prope");
-				if (requestedSort != null)
-					sorts.Add(requestedSort);
-
-				string query = "";
-				if (!string.IsNullOrEmpty(qs["TablePropeId_tableFilters"]))
-					TablePropeId.TableFilters = bool.Parse(qs["TablePropeId_tableFilters"]);
-				else
-					TablePropeId.TableFilters = false;
-
-				query = qs["qTablePropeId"];
-
-				//RS 26.07.2016 O preenchimento da lista de ajuda dos Dbedits passa a basear-se apenas no campo do próprio DbEdit
-				// O interface de pesquisa rápida não fica coerente quando se visualiza apenas uma coluna mas a pesquisa faz matching com 5 ou 6 colunas diferentes
-				//  tornando confuso to o user porque determinada row foi devolvida quando o Qresult não mostra como o matching foi feito
-				CriteriaSet search_filters = CriteriaSet.And();
-				if (!string.IsNullOrEmpty(query))
-				{
-					search_filters.Like(CSGenioAprope.FldId, query + "%");
-				}
-				contact_propeid______Conds.SubSet(search_filters);
-
-				string tryParsePage = qs["pTablePropeId"] != null ? qs["pTablePropeId"].ToString() : "1";
-				int page = !string.IsNullOrEmpty(tryParsePage) ? int.Parse(tryParsePage) : 1;
-				int numberItems = CSGenio.framework.Configuration.NrRegDBedit;
-				int offset = (page - 1) * numberItems;
-
-				FieldRef[] fields = [CSGenioAprope.FldCodprope, CSGenioAprope.FldId, CSGenioAprope.FldZzstate];
-
-// USE /[MANUAL FOR OVERRQ CONTACT_PROPEID]/
-
-				// Limitation by Zzstate
-				/*
-					Records that are currently being inserted or duplicated will also be included.
-					Client-side persistence will try to fill the "text" value of that option.
-				*/
-				if (Navigation.checkFormMode("prope", FormMode.New) || Navigation.checkFormMode("prope", FormMode.Duplicate))
-					contact_propeid______Conds.SubSet(CriteriaSet.Or()
-						.Equal(CSGenioAprope.FldZzstate, 0)
-						.Equal(CSGenioAprope.FldCodprope, Navigation.GetStrValue("prope")));
-				else
-					contact_propeid______Conds.Criterias.Add(new Criteria(new ColumnReference(CSGenioAprope.FldZzstate), CriteriaOperator.Equal, 0));
-
-				FieldRef firstVisibleColumn = null;
-				ListingMVC<CSGenioAprope> listing = Models.ModelBase.Where<CSGenioAprope>(m_userContext, false, contact_propeid______Conds, fields, offset, numberItems, sorts, "LED_CONTACT_PROPEID______", true, false, firstVisibleColumn: firstVisibleColumn);
-
-				TablePropeId.SetPagination(page, numberItems, listing.HasMore, listing.GetTotal, listing.TotalRecords);
-				TablePropeId.Query = query;
-				TablePropeId.Elements = listing.RowsForViewModel((r) => new GenioMVC.Models.Prope(m_userContext, r, true, _fieldsToSerialize_CONTACT_PROPEID______));
-
-				//created by [ MH ] at [ 14.04.2016 ] - Foi alterada a forma de retornar a key do novo registo inserido / editado no form de apoio do DBEdit.
-				//last update by [ MH ] at [ 10.05.2016 ] - Validação se key encontra-se no level atual, as chaves dos niveis anteriores devem ser ignorados.
-				if (Navigation.CurrentLevel.GetEntry("RETURN_prope") != null)
-				{
-					this.ValCodprope = Navigation.GetStrValue("RETURN_prope");
-					Navigation.CurrentLevel.SetEntry("RETURN_prope", null);
-				}
-
-				TablePropeId.List = new SelectList(TablePropeId.Elements.ToSelectList(x => x.ValId, x => x.ValCodprope,  x => x.ValCodprope == this.ValCodprope), "Value", "Text", this.ValCodprope);
-				FillDependant_ContactTablePropeId();
-			}
-		}
-
-		/// <summary>
-		/// Get Dependant fields values -> TablePropeId (DB)
-		/// </summary>
-		/// <param name="PKey">Primary Key of Prope</param>
-		public ConcurrentDictionary<string, object> GetDependant_ContactTablePropeId(string PKey)
-		{
-			FieldRef[] refDependantFields = [CSGenioAprope.FldCodprope, CSGenioAprope.FldId];
-
-			var returnEmptyDependants = false;
-			CriteriaSet wherecodition = CriteriaSet.And();
-
-			// Return default values
-			if (GenFunctions.emptyG(PKey) == 1)
-				returnEmptyDependants = true;
-
-			// Check if the limit(s) is filled if exists
-			// - - - - - - - - - - - - - - - - - - - - -
-
-			if (returnEmptyDependants)
-				return GetViewModelFieldValues(refDependantFields);
-
-			PersistentSupport sp = m_userContext.PersistentSupport;
-			User u = m_userContext.User;
-
-			CSGenioAprope tempArea = new(u);
-
-			// Fields to select
-			SelectQuery querySelect = new();
-			querySelect.PageSize(1);
-			foreach (FieldRef field in refDependantFields)
-				querySelect.Select(field);
-
-			querySelect.From(tempArea.QSystem, tempArea.TableName, tempArea.Alias)
-				.Where(wherecodition.Equal(CSGenioAprope.FldCodprope, PKey));
-
-			string[] dependantFields = refDependantFields.Select(f => f.FullName).ToArray();
-			QueryUtils.SetInnerJoins(dependantFields, null, tempArea, querySelect);
-
-			ArrayList values = sp.executeReaderOneRow(querySelect);
-			bool useDefaults = values.Count == 0;
-
-			if (useDefaults)
-				return GetViewModelFieldValues(refDependantFields);
-			return GetViewModelFieldValues(refDependantFields, values);
-		}
-
-		/// <summary>
-		/// Fill Dependant fields values -> TablePropeId (DB)
-		/// </summary>
-		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
-		public void FillDependant_ContactTablePropeId(bool lazyLoad = false)
-		{
-			var row = GetDependant_ContactTablePropeId(this.ValCodprope);
-			try
-			{
-
-				// Fill List fields
-				this.ValCodprope = ViewModelConversion.ToString(row["prope.codprope"]);
-				TablePropeId.Value = (decimal?)row["prope.id"];
-				if (GenFunctions.emptyG(this.ValCodprope) == 1)
-				{
-					this.ValCodprope = "";
-					TablePropeId.Value = 0m;
-					Navigation.ClearValue("prope");
-				}
-				else if (lazyLoad)
-				{
-					TablePropeId.SetPagination(1, 0, false, false, 1);
-					TablePropeId.List = new SelectList(new List<SelectListItem>()
-					{
-						new SelectListItem
-						{
-							Value = Convert.ToString(this.ValCodprope),
-							Text = Convert.ToString(TablePropeId.Value),
-							Selected = true
-						}
-					}, "Value", "Text", this.ValCodprope);
-				}
-
-				TablePropeId.Selected = this.ValCodprope;
-			}
-			catch (Exception ex)
-			{
-				CSGenio.framework.Log.Error(string.Format("FillDependant_Error (TablePropeId): {0}; {1}", ex.Message, ex.InnerException != null ? ex.InnerException.Message : ""));
-			}
-		}
-
-		private readonly string[] _fieldsToSerialize_CONTACT_PROPEID______ = ["Prope", "Prope.ValCodprope", "Prope.ValZzstate"];
-
 		protected override object GetViewModelValue(string identifier, object modelValue)
 		{
 			return identifier switch
@@ -863,10 +679,9 @@ namespace GenioMVC.ViewModels.Conta
 				"conta.phone" => ViewModelConversion.ToString(modelValue),
 				"conta.descript" => ViewModelConversion.ToString(modelValue),
 				"conta.visit_date" => ViewModelConversion.ToDateTime(modelValue),
-				"conta.codconta" => ViewModelConversion.ToString(modelValue),
 				"prope.codprope" => ViewModelConversion.ToString(modelValue),
+				"conta.codconta" => ViewModelConversion.ToString(modelValue),
 				"prope.title" => ViewModelConversion.ToString(modelValue),
-				"prope.id" => ViewModelConversion.ToNumeric(modelValue),
 				_ => modelValue
 			};
 		}
