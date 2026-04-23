@@ -318,6 +318,17 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
+			Qfield = new Field(info.Alias, "numbercontacts", FieldType.NUMERIC);
+			Qfield.FieldDescription = "Total Contacts";
+			Qfield.FieldSize =  4;
+			Qfield.MQueue = false;
+			Qfield.IntegerDigits = 4;
+			Qfield.CavDesignation = "TOTAL_CONTACTS58591";
+
+			Qfield.Dupmsg = "";
+			info.RegisterFieldDB(Qfield);
+
+			//- - - - - - - - - - - - - - - - - - -
 			Qfield = new Field(info.Alias, "zzstate", FieldType.INTEGER);
 			Qfield.FieldDescription = "Estado da ficha";
 			info.RegisterFieldDB(Qfield);
@@ -393,6 +404,10 @@ namespace CSGenio.business
 
 			info.SequentialDefaultValues = new string[] {
 			 "id"
+			};
+
+			info.RelatedSumFields = new string[] {
+			 "numbercontacts"
 			};
 
 
@@ -749,6 +764,17 @@ namespace CSGenio.business
 			set { insertNameValueField(FldTax, value); }
 		}
 
+		/// <summary>Field : "Total Contacts" Tipo: "N" Formula: SR "[CONTA->VISIT_DATE]"</summary>
+		public static FieldRef FldNumbercontacts { get { return m_fldNumbercontacts; } }
+		private static FieldRef m_fldNumbercontacts = new FieldRef("prope", "numbercontacts");
+
+		/// <summary>Field : "Total Contacts" Tipo: "N" Formula: SR "[CONTA->VISIT_DATE]"</summary>
+		public decimal ValNumbercontacts
+		{
+			get { return (decimal)returnValueField(FldNumbercontacts); }
+			set { insertNameValueField(FldNumbercontacts, value); }
+		}
+
 		/// <summary>Field : "ZZSTATE" Type: "INT" Formula:  ""</summary>
 		public static FieldRef FldZzstate { get { return m_fldZzstate; } }
 		private static FieldRef m_fldZzstate = new FieldRef("prope", "zzstate");
@@ -846,7 +872,7 @@ namespace CSGenio.business
 		// USE /[MANUAL FOR TABAUX PROPE]/
 
  
-                      
+                       
 
 	}
 }

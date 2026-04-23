@@ -528,6 +528,9 @@
 	<data name="CITY42505" xml:space="preserve">
 		<value>City</value>
 	</data>
+	<data name="TOTAL_CONTACTS58591" xml:space="preserve">
+		<value>Total Contacts</value>
+	</data>
 	<data name="AGENTS29376" xml:space="preserve">
 		<value>Agents</value>
 	</data>

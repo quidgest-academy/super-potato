@@ -411,6 +411,9 @@
   <msg id="City" code="CITY42505">
     <ENUS>City</ENUS>
   </msg>
+  <msg id="Total Contacts" code="TOTAL_CONTACTS58591">
+    <ENUS>Total Contacts</ENUS>
+  </msg>
   <msg id="Agents" code="AGENTS29376">
     <ENUS>Agents</ENUS>
   </msg>

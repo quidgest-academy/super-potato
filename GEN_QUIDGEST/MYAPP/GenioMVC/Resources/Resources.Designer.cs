@@ -1296,6 +1296,15 @@ namespace GenioMVC.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to "Total Contacts"
+		/// </summary>
+		public static string TOTAL_CONTACTS58591 {
+			get {
+				return ResourceManager.GetString("TOTAL_CONTACTS58591", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to "Agents"
 		/// </summary>
 		public static string AGENTS29376 {
