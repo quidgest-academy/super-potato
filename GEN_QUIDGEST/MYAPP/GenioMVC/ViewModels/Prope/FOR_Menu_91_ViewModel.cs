@@ -385,7 +385,7 @@ namespace GenioMVC.ViewModels.Prope
 				]), "ms", "Time to execute the manual code.")) {
 //Platform: MVC | Type: OVERRQ_TOOLTIP | Module: FOR | Parameter: 91 | File:  | Order: 0
 //BEGIN_MANUALCODE_CODMANUA:c9cc2dde-efe0-4966-b6f5-fbac56bed1c8
-limit.ManualHTMLText = "Properties without contacts";
+limit.ManualHTMLText = "Properties with contacts";
 this.TableLimits.Add(limit);
 //END_MANUALCODE
 				}
@@ -407,7 +407,10 @@ this.TableLimits.Add(limit);
 				]), "ms", "Time to execute the manual code.")) {
 //Platform: MVC | Type: OVERRQ | Module: FOR | Parameter: 91 | File:  | Order: 0
 //BEGIN_MANUALCODE_CODMANUA:28840411-255b-424e-902d-ff2dca2e603a
-for_menu_91Conds = CriteriaSet.And().Equal(CSGenioAprope.FldNumbercontacts, 0);
+				for_menu_91Conds = CriteriaSet.And().Exists(new SelectQuery()
+																.Select(CSGenioAprope.FldTitle)
+																.From(Area.AreaPROPE)
+																.Join(Area.AreaCONTA).On(CriteriaSet.And().Equal(CSGenioAprope.FldCodprope, CSGenioAconta.FldCodprope)));    
 //END_MANUALCODE
 				}
 
