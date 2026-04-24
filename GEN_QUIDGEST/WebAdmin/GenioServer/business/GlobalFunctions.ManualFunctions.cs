@@ -204,11 +204,11 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 			SelectQuery query = new SelectQuery()
 				.Select(CSGenioAagent.FldName)
 				.From(Area.AreaAGENT)
+				.Join(Area.AreaCITY)
+                    .On(CriteriaSet.And().Equal(CSGenioAcity.FldCodcount, CSGenioAcount.FldCodcount))
 				.Join(Area.AreaCOUNT)					
 					.On(CriteriaSet.And().Equal(CSGenioAagent.FldCodcaddr, CSGenioAcount.FldCodcount))
-                .Join(Area.AreaCITY)
-                    .On(CriteriaSet.And().Equal(CSGenioAcity.FldCodcount, CSGenioAcount.FldCodcount))
-                .Where(CriteriaSet.And().Equal(CSGenioAcity.FldCity,codCity));
+                .Where(CriteriaSet.And().Equal(CSGenioAcity.FldCodcity,codCity));
 
             var data = sp.Execute(query);
             for (int i = 0; i < data.NumRows; i++)
