@@ -1251,6 +1251,15 @@ namespace GenioMVC.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to "Properties with contacts"
+		/// </summary>
+		public static string PROPERTIES_WITH_CONT16524 {
+			get {
+				return ResourceManager.GetString("PROPERTIES_WITH_CONT16524", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to "Bathrooms number"
 		/// </summary>
 		public static string BATHROOMS_NUMBER52698 {

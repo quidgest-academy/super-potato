@@ -396,6 +396,9 @@
   <msg id="Async process attachment" code="ASYNC_PROCESS_ATTACH34417">
     <ENUS>Async process attachment</ENUS>
   </msg>
+  <msg id="Properties with contacts" code="PROPERTIES_WITH_CONT16524">
+    <ENUS>Properties with contacts</ENUS>
+  </msg>
   <msg id="Bathrooms number" code="BATHROOMS_NUMBER52698">
     <ENUS>Bathrooms number</ENUS>
   </msg>

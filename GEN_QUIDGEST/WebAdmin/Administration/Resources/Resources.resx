@@ -513,6 +513,9 @@
   <data name="ASYNC_PROCESS_ATTACH34417" xml:space="preserve">
     <value>Async process attachment</value>
   </data>
+  <data name="PROPERTIES_WITH_CONT16524" xml:space="preserve">
+    <value>Properties with contacts</value>
+  </data>
   <data name="BATHROOMS_NUMBER52698" xml:space="preserve">
     <value>Bathrooms number</value>
   </data>

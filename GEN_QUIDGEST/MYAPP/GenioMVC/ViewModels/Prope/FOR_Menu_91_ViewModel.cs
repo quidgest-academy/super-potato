@@ -407,10 +407,7 @@ this.TableLimits.Add(limit);
 				]), "ms", "Time to execute the manual code.")) {
 //Platform: MVC | Type: OVERRQ | Module: FOR | Parameter: 91 | File:  | Order: 0
 //BEGIN_MANUALCODE_CODMANUA:28840411-255b-424e-902d-ff2dca2e603a
-				for_menu_91Conds = CriteriaSet.And().Exists(new SelectQuery()
-																.Select(CSGenioAprope.FldTitle)
-																.From(Area.AreaPROPE)
-																.Join(Area.AreaCONTA).On(CriteriaSet.And().Equal(CSGenioAprope.FldCodprope, CSGenioAconta.FldCodprope)));    
+for_menu_91Conds = CriteriaSet.And().Greater(CSGenioAprope.FldNumbercontacts, 0); 
 //END_MANUALCODE
 				}
 
