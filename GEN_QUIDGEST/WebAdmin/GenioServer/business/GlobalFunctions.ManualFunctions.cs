@@ -39,7 +39,7 @@ namespace CSGenio.business
 		/// </summary>
 		private static void initTodasFuncoes()
 		{
-			todasFuncoes = new Hashtable(14, (float)0.5);
+			todasFuncoes = new Hashtable(15, (float)0.5);
 			todasFuncoes.Add("password_alterar", 0);
 			todasFuncoes.Add("password_verificaAntiga", 1);
 			todasFuncoes.Add("validarAssinatura", 2);
@@ -55,6 +55,7 @@ namespace CSGenio.business
 			todasFuncoes.Add("averagePriceAgent", 11);
 			todasFuncoes.Add("propsNotBooking", 12);
 			todasFuncoes.Add("propsWithoutContacts", 13);
+			todasFuncoes.Add("agentSameCountryPrope", 14);
 			// Cargas
 		}
 
@@ -192,6 +193,17 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 //END_FUNCTION
 		}
 
+		/// <summary>
+		/// List the agents that lives in same Country as Property
+		/// </summary>
+		/// <param name="propCountry"></param>
+		public System.Collections.Generic.List<object> agentSameCountryPrope(string propCountry)
+		{
+//BEGIN_FUNCTION:ead68981-adc9-462d-8f81-2150d89e463d
+//implementa aqui
+//END_FUNCTION
+		}
+
 		#endregion
 
 		#region MANCS
@@ -206,7 +218,8 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 			"getCityTax",
 			"averagePriceAgent",
 			"propsNotBooking",
-			"propsWithoutContacts"
+			"propsWithoutContacts",
+			"agentSameCountryPrope"
 		};
 
 		public static List<string> AllManualFuntionsNames

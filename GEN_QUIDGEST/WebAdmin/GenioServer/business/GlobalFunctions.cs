@@ -236,6 +236,13 @@ namespace CSGenio.business
 
                             return propsWithoutContacts();
                         }
+                    case 14:
+                        {
+                            checkFunctionArgs(obj, 1);
+
+                            string arg0 = obj[0];
+                            return agentSameCountryPrope(arg0);
+                        }
                     default:
                         throw new BusinessException(null, "GlobalFunctions.executaFuncao", "Unknown function name: " + name);
                 }
