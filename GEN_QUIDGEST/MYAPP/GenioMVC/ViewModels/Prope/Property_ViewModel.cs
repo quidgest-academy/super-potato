@@ -659,6 +659,19 @@ namespace GenioMVC.ViewModels.Prope
 				CSGenio.business.CSGenioAagent.FldActive,
 				propertyagentname_____flimitagent_active);
 
+			// Multiple value limit with expression agentSameCountryPrope([PROPE->CODCITY])
+			IEnumerable<object> propertyagentname_____mlimitagent_codagent = new CSGenio.business.GlobalFunctions(m_userContext.User, m_userContext.User.CurrentModule, m_userContext.PersistentSupport).agentSameCountryPrope(((string)ValCodcity));
+			if (propertyagentname_____mlimitagent_codagent != null && propertyagentname_____mlimitagent_codagent.Any())
+			{
+				propertyagentname____Conds.In(
+					CSGenio.business.CSGenioAagent.FldCodagent,
+					propertyagentname_____mlimitagent_codagent);
+			}
+			else
+			{
+				propertyagentname____DoLoad = false;
+			}
+
 			TableAgentName = new TableDBEdit<Models.Agent>();
 
 			if (lazyLoad)

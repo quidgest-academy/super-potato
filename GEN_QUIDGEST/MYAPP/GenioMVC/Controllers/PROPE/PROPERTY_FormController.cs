@@ -530,6 +530,8 @@ namespace GenioMVC.Controllers
 			CSGenio.core.framework.table.TableConfiguration tableConfig = model.GetTableConfig(requestModel.TableConfiguration);
 
 			model.setModes(Request.Query["m"].ToString());
+			// Map received value to field - The 'multiple values' type limit
+			model.ValCodcity = Navigation.GetValue<string>("prope.codcity");
 			model.Load(tableConfig, requestValues, Request.IsAjaxRequest());
 
 			return JsonOK(model);

@@ -196,11 +196,28 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 		/// <summary>
 		/// List the agents that lives in same Country as Property
 		/// </summary>
-		/// <param name="propCountry"></param>
-		public System.Collections.Generic.List<object> agentSameCountryPrope(string propCountry)
+		/// <param name="codCity"></param>
+		public System.Collections.Generic.List<object> agentSameCountryPrope(string codCity)
 		{
 //BEGIN_FUNCTION:ead68981-adc9-462d-8f81-2150d89e463d
-//implementa aqui
+            var props = new List<object>();
+			SelectQuery query = new SelectQuery()
+				.Select(CSGenioAagent.FldName)
+				.From(Area.AreaAGENT)
+				.Join(Area.AreaCOUNT)					
+					.On(CriteriaSet.And().Equal(CSGenioAagent.FldCodcaddr, CSGenioAcount.FldCodcount))
+                .Join(Area.AreaCITY)
+                    .On(CriteriaSet.And().Equal(CSGenioAcity.FldCodcount, CSGenioAcount.FldCodcount))
+                .Where(CriteriaSet.And().Equal(CSGenioAcity.FldCity,codCity));
+
+            var data = sp.Execute(query);
+            for (int i = 0; i < data.NumRows; i++)
+            {
+                props.Add(data.GetString(i, 0));
+
+            }
+
+            return props;
 //END_FUNCTION
 		}
 

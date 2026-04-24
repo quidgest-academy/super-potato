@@ -1511,6 +1511,12 @@
 							set 'agent.email'(value) { vm.model.AgentValEmail.updateValue(value) },
 						}),
 						controlLimits: [
+							{
+								identifier: 'prope.codcity',
+								dependencyEvents: ['fieldChange:prope.codcity'],
+								dependencyField: 'PROPE.CODCITY',
+								fnValueSelector: (model) => model.ValCodcity.value
+							},
 						],
 					}, this),
 					PROPERTYAGENTPHOTOGRA: new fieldControlClass.ImageControl({

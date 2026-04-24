@@ -163,6 +163,10 @@ return Json(new { Success = "sucess", Message = "ok" });
 					case "PROPERTYAGENTNAME____":	// Field (DB)
 						{
 							var model = new Property_ViewModel(UserContext.Current) { editable = false };
+							// Map received value to field - The 'multiple values' type limit
+#pragma warning disable QUID001 // Direct Property Access to read only fields - Disabled due to cases where the limit is based on a calculated field.
+							row.ValCodcity = Navigation.GetValue<string>("prope.codcity");
+#pragma warning restore QUID001 // Direct Property Access to read only fields
 							model.MapFromModel(row);
 							model.Load_Propertyagentname____(qs);
 							result = model.TableAgentName;

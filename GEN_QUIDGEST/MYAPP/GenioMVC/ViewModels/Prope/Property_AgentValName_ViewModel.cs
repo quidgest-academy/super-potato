@@ -93,6 +93,7 @@ namespace GenioMVC.ViewModels.Prope
 			return crs;
 		}
 
+		public string ValCodcity { get; set; }
 
 		public override int GetCount(User user)
 		{
@@ -177,6 +178,19 @@ namespace GenioMVC.ViewModels.Prope
 			crs.Equal(
 				CSGenio.business.CSGenioAagent.FldActive,
 				propertyagentname_____flimitagent_active);
+
+			// Multiple value limit with expression agentSameCountryPrope([PROPE->CODCITY])
+			IEnumerable<object> propertyagentname_____mlimitagent_codagent = new CSGenio.business.GlobalFunctions(m_userContext.User, m_userContext.User.CurrentModule, m_userContext.PersistentSupport).agentSameCountryPrope(((string)ValCodcity));
+			if (propertyagentname_____mlimitagent_codagent != null && propertyagentname_____mlimitagent_codagent.Any())
+			{
+				crs.In(
+					CSGenio.business.CSGenioAagent.FldCodagent,
+					propertyagentname_____mlimitagent_codagent);
+			}
+			else
+			{
+				tableReload = false;
+			}
 
 			Menu ??= new TablePartial<Property_AgentValName_RowViewModel>();
 			// Set table name (used in getting searchable column names)
@@ -340,7 +354,7 @@ namespace GenioMVC.ViewModels.Prope
 					this.TableLimits.AddRange(area_EPH_limits);
 			}
 
-			// Tooltips: Making a tooltip for each valid limitation: 1 Limit(s) detected.
+			// Tooltips: Making a tooltip for each valid limitation: 2 Limit(s) detected.
 			// Limit origin: form 
 			//Limit type: "F"
 			//Current Area = "AGENT"
@@ -358,6 +372,8 @@ namespace GenioMVC.ViewModels.Prope
 				if (!this.TableLimits.Contains(limit, limitComparer)) //to avoid repetitions (i.e: DB and EPH applying same limit)
 					this.TableLimits.Add(limit);
 			}
+			// Tooltip for limit "M" ignored.
+			// Limit origin: form 
 
 			if (conditions == null)
 				conditions = CriteriaSet.And();
