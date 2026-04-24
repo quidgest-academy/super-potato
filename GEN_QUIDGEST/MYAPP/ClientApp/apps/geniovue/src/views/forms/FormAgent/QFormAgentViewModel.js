@@ -75,16 +75,6 @@ export default class ViewModel extends FormViewModelBase
 		this.stopWatchers.push(watch(() => this.ValCodcaddr.value, (newValue, oldValue) => this.onUpdate('agent.codcaddr', this.ValCodcaddr, newValue, oldValue)))
 
 		/** The remaining form fields. */
-		this.ValName = reactive(new modelFieldType.String({
-			id: 'ValName',
-			originId: 'ValName',
-			area: 'AGENT',
-			field: 'NAME',
-			maxLength: 50,
-			description: computed(() => this.Resources.AGENT_S_NAME42642),
-		}).cloneFrom(values?.ValName))
-		this.stopWatchers.push(watch(() => this.ValName.value, (newValue, oldValue) => this.onUpdate('agent.name', this.ValName, newValue, oldValue)))
-
 		this.ValBirthdat = reactive(new modelFieldType.Date({
 			id: 'ValBirthdat',
 			originId: 'ValBirthdat',
@@ -140,6 +130,15 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.TELEPHONE28697),
 		}).cloneFrom(values?.ValTelephon))
 		this.stopWatchers.push(watch(() => this.ValTelephon.value, (newValue, oldValue) => this.onUpdate('agent.telephon', this.ValTelephon, newValue, oldValue)))
+
+		this.ValActive = reactive(new modelFieldType.Boolean({
+			id: 'ValActive',
+			originId: 'ValActive',
+			area: 'AGENT',
+			field: 'ACTIVE',
+			description: computed(() => this.Resources.ACTIVE03270),
+		}).cloneFrom(values?.ValActive))
+		this.stopWatchers.push(watch(() => this.ValActive.value, (newValue, oldValue) => this.onUpdate('agent.active', this.ValActive, newValue, oldValue)))
 
 		this.TableCbornCountry = reactive(new modelFieldType.String({
 			type: 'Lookup',
@@ -233,6 +232,16 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.PHOTOGRAPHY38058),
 		}).cloneFrom(values?.ValPhotography))
 		this.stopWatchers.push(watch(() => this.ValPhotography.value, (newValue, oldValue) => this.onUpdate('agent.photography', this.ValPhotography, newValue, oldValue)))
+
+		this.ValName = reactive(new modelFieldType.String({
+			id: 'ValName',
+			originId: 'ValName',
+			area: 'AGENT',
+			field: 'NAME',
+			maxLength: 50,
+			description: computed(() => this.Resources.AGENT_S_NAME42642),
+		}).cloneFrom(values?.ValName))
+		this.stopWatchers.push(watch(() => this.ValName.value, (newValue, oldValue) => this.onUpdate('agent.name', this.ValName, newValue, oldValue)))
 	}
 
 	/**
