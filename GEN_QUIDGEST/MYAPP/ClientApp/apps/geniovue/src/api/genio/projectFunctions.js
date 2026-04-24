@@ -85,6 +85,14 @@ function propsWithoutContacts()
 	/// </summary>
 	return netAPI.executeServerFunction('propsWithoutContacts', []);
 }
+function agentSameCountryPrope(codCity)
+{
+	/// <summary>
+	/// List the agents that lives in same Country as Property
+	/// </summary>
+	/// <param name="codCity"></param>
+	return netAPI.executeServerFunction('agentSameCountryPrope', [codCity]);
+}
 
 export default {
 	Age,
@@ -93,4 +101,5 @@ export default {
 	averagePriceAgent,
 	propsNotBooking,
 	propsWithoutContacts,
+	agentSameCountryPrope,
 }
