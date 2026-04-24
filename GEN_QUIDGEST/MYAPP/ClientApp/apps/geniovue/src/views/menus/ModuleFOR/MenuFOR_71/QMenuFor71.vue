@@ -179,6 +179,17 @@
 								scrollData: 30,
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
+							new listColumnTypes.NumericColumn({
+								order: 4,
+								name: 'ValSold',
+								area: 'STATS',
+								field: 'SOLD',
+								label: computed(() => this.Resources.PROPERTIES_SOLD24318),
+								scrollData: 3,
+								maxDigits: 3,
+								decimalPlaces: 0,
+								export: 1,
+							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
 						config: {
 							name: 'FOR_Menu_71',

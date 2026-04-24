@@ -51,6 +51,12 @@ public class FOR_Menu_71_RowViewModel : Models.Stats
 				Area = "STATS",
 				Field = "COUNTRY",
 			},
+			new ListColumn()
+			{
+				Order = 4,
+				Area = "STATS",
+				Field = "SOLD",
+			},
 		];
 	}
 

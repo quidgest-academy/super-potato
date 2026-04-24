@@ -100,7 +100,7 @@ namespace GenioMVC.ViewModels.Stats
 			conditions.SubSets.Add(GetCustomizedStaticLimits(StaticLimits));
 
 			// Checks for foreign tables in fields and conditions
-			FieldRef[] fields = new FieldRef[] { CSGenioAstats.FldCodstats, CSGenioAstats.FldZzstate, CSGenioAstats.FldProfit, CSGenioAstats.FldNotsold, CSGenioAstats.FldCountry };
+			FieldRef[] fields = new FieldRef[] { CSGenioAstats.FldCodstats, CSGenioAstats.FldZzstate, CSGenioAstats.FldProfit, CSGenioAstats.FldNotsold, CSGenioAstats.FldCountry, CSGenioAstats.FldSold };
 
 			ListingMVC<CSGenioAstats> listing = new(fields, null, 1, 1, false, user, true, string.Empty, false);
 			SelectQuery qs = sp.getSelectQueryFromListingMVC(conditions, listing);
@@ -148,6 +148,7 @@ namespace GenioMVC.ViewModels.Stats
 				new Exports.QColumn(CSGenioAstats.FldProfit, FieldType.CURRENCY, Resources.Resources.PROFIT55910, 12, 0, true),
 				new Exports.QColumn(CSGenioAstats.FldNotsold, FieldType.NUMERIC, Resources.Resources.PROPERTIES_NOT_SOLD48533, 3, 0, true),
 				new Exports.QColumn(CSGenioAstats.FldCountry, FieldType.TEXT, Resources.Resources.COUNTRY64133, 30, 0, true),
+				new Exports.QColumn(CSGenioAstats.FldSold, FieldType.NUMERIC, Resources.Resources.PROPERTIES_SOLD24318, 3, 0, true),
 			];
 		}
 
@@ -331,7 +332,7 @@ namespace GenioMVC.ViewModels.Stats
 
 			}
 
-			FieldRef[] fields = new FieldRef[] { CSGenioAstats.FldCodstats, CSGenioAstats.FldZzstate, CSGenioAstats.FldProfit, CSGenioAstats.FldNotsold, CSGenioAstats.FldCountry };
+			FieldRef[] fields = new FieldRef[] { CSGenioAstats.FldCodstats, CSGenioAstats.FldZzstate, CSGenioAstats.FldProfit, CSGenioAstats.FldNotsold, CSGenioAstats.FldCountry, CSGenioAstats.FldSold };
 
 			// List of column names that should display totalized (aggregated) values.
 			List<string> totalizerColumns = [];
@@ -527,7 +528,7 @@ namespace GenioMVC.ViewModels.Stats
 
 		private static readonly string[] _fieldsToSerialize =
 		[
-			"Stats", "Stats.ValCodstats", "Stats.ValZzstate", "Stats.ValProfit", "Stats.ValNotsold", "Stats.ValCountry"
+			"Stats", "Stats.ValCodstats", "Stats.ValZzstate", "Stats.ValProfit", "Stats.ValNotsold", "Stats.ValCountry", "Stats.ValSold"
 		];
 
 		private static readonly List<TableSearchColumn> _searchableColumns =
@@ -535,6 +536,7 @@ namespace GenioMVC.ViewModels.Stats
 			new TableSearchColumn("ValProfit", CSGenioAstats.FldProfit, typeof(decimal?)),
 			new TableSearchColumn("ValNotsold", CSGenioAstats.FldNotsold, typeof(decimal?)),
 			new TableSearchColumn("ValCountry", CSGenioAstats.FldCountry, typeof(string)),
+			new TableSearchColumn("ValSold", CSGenioAstats.FldSold, typeof(decimal?)),
 		];
 	}
 }
