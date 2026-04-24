@@ -127,6 +127,11 @@ namespace GenioMVC.Models
 		[CurrencyAttribute("EUR", 2)]
 		public decimal? ValAverage_price { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValAverage_price, 2)); } set { klass.ValAverage_price = Convert.ToDecimal(value); } }
 
+		[DisplayName("Active")]
+		/// <summary>Field : "Active" Tipo: "L" Formula:  ""</summary>
+		[ShouldSerialize("Agent.ValActive")]
+		public bool ValActive { get { return Convert.ToBoolean(klass.ValActive); } set { klass.ValActive = Convert.ToInt32(value); } }
+
 		[DisplayName("ZZSTATE")]
 		[ShouldSerialize("Agent.ValZzstate")]
 		/// <summary>Field: "ZZSTATE", Type: "INT", Formula: ""</summary>

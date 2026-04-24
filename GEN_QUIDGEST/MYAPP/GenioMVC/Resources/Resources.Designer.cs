@@ -63,6 +63,15 @@ namespace GenioMVC.Resources
 		}
 
 		/// <summary>
+		///   Looks up a localized string similar to "Active"
+		/// </summary>
+		public static string ACTIVE03270 {
+			get {
+				return ResourceManager.GetString("ACTIVE03270", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///   Looks up a localized string similar to "Building types"
 		/// </summary>
 		public static string BUILDING_TYPES23872 {
@@ -25808,15 +25817,6 @@ namespace GenioMVC.Resources
 		public static string EXPORT_TO_EXCEL22478 {
 			get {
 				return ResourceManager.GetString("EXPORT_TO_EXCEL22478", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///   Looks up a localized string similar to "Active"
-		/// </summary>
-		public static string ACTIVE03270 {
-			get {
-				return ResourceManager.GetString("ACTIVE03270", resourceCulture);
 			}
 		}
 

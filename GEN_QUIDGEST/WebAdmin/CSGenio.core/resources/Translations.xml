@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Messages>
+  <msg id="Active" code="ACTIVE03270">
+    <ENUS>Active</ENUS>
+  </msg>
   <msg id="Building types" code="BUILDING_TYPES23872">
     <ENUS>Building types</ENUS>
   </msg>
@@ -8582,9 +8585,6 @@
   </msg>
   <msg id="Export to Excel" code="EXPORT_TO_EXCEL22478">
     <ENUS>Export to Excel</ENUS>
-  </msg>
-  <msg id="Active" code="ACTIVE03270">
-    <ENUS>Active</ENUS>
   </msg>
   <msg id="Inactive" code="INACTIVE23138">
     <ENUS>Inactive</ENUS>

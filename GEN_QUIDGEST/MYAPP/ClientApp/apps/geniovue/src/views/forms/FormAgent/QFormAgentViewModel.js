@@ -75,6 +75,16 @@ export default class ViewModel extends FormViewModelBase
 		this.stopWatchers.push(watch(() => this.ValCodcaddr.value, (newValue, oldValue) => this.onUpdate('agent.codcaddr', this.ValCodcaddr, newValue, oldValue)))
 
 		/** The remaining form fields. */
+		this.ValName = reactive(new modelFieldType.String({
+			id: 'ValName',
+			originId: 'ValName',
+			area: 'AGENT',
+			field: 'NAME',
+			maxLength: 50,
+			description: computed(() => this.Resources.AGENT_S_NAME42642),
+		}).cloneFrom(values?.ValName))
+		this.stopWatchers.push(watch(() => this.ValName.value, (newValue, oldValue) => this.onUpdate('agent.name', this.ValName, newValue, oldValue)))
+
 		this.ValBirthdat = reactive(new modelFieldType.Date({
 			id: 'ValBirthdat',
 			originId: 'ValBirthdat',
@@ -223,16 +233,6 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.PHOTOGRAPHY38058),
 		}).cloneFrom(values?.ValPhotography))
 		this.stopWatchers.push(watch(() => this.ValPhotography.value, (newValue, oldValue) => this.onUpdate('agent.photography', this.ValPhotography, newValue, oldValue)))
-
-		this.ValName = reactive(new modelFieldType.String({
-			id: 'ValName',
-			originId: 'ValName',
-			area: 'AGENT',
-			field: 'NAME',
-			maxLength: 50,
-			description: computed(() => this.Resources.AGENT_S_NAME42642),
-		}).cloneFrom(values?.ValName))
-		this.stopWatchers.push(watch(() => this.ValName.value, (newValue, oldValue) => this.onUpdate('agent.name', this.ValName, newValue, oldValue)))
 	}
 
 	/**

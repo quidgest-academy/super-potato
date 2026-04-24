@@ -54,16 +54,6 @@ export default class ViewModel extends FormViewModelBase
 		this.stopWatchers.push(watch(() => this.ValCodprope.value, (newValue, oldValue) => this.onUpdate('prope.codprope', this.ValCodprope, newValue, oldValue)))
 
 		/** The used foreign keys. */
-		this.ValCodcity = reactive(new modelFieldType.ForeignKey({
-			id: 'ValCodcity',
-			originId: 'ValCodcity',
-			area: 'PROPE',
-			field: 'CODCITY',
-			relatedArea: 'CITY',
-			description: '',
-		}).cloneFrom(values?.ValCodcity))
-		this.stopWatchers.push(watch(() => this.ValCodcity.value, (newValue, oldValue) => this.onUpdate('prope.codcity', this.ValCodcity, newValue, oldValue)))
-
 		this.ValCodagent = reactive(new modelFieldType.ForeignKey({
 			id: 'ValCodagent',
 			originId: 'ValCodagent',
@@ -73,6 +63,16 @@ export default class ViewModel extends FormViewModelBase
 			description: '',
 		}).cloneFrom(values?.ValCodagent))
 		this.stopWatchers.push(watch(() => this.ValCodagent.value, (newValue, oldValue) => this.onUpdate('prope.codagent', this.ValCodagent, newValue, oldValue)))
+
+		this.ValCodcity = reactive(new modelFieldType.ForeignKey({
+			id: 'ValCodcity',
+			originId: 'ValCodcity',
+			area: 'PROPE',
+			field: 'CODCITY',
+			relatedArea: 'CITY',
+			description: '',
+		}).cloneFrom(values?.ValCodcity))
+		this.stopWatchers.push(watch(() => this.ValCodcity.value, (newValue, oldValue) => this.onUpdate('prope.codcity', this.ValCodcity, newValue, oldValue)))
 
 		/** The remaining form fields. */
 		this.ValId = reactive(new modelFieldType.Number({
@@ -136,6 +136,28 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.LAST_VISITOR08357),
 		}).cloneFrom(values?.ValLastvisit))
 		this.stopWatchers.push(watch(() => this.ValLastvisit.value, (newValue, oldValue) => this.onUpdate('prope.lastvisit', this.ValLastvisit, newValue, oldValue)))
+
+		this.TableAgentName = reactive(new modelFieldType.String({
+			type: 'Lookup',
+			id: 'TableAgentName',
+			originId: 'ValName',
+			area: 'AGENT',
+			field: 'NAME',
+			maxLength: 50,
+			description: computed(() => this.Resources.AGENT_S_NAME42642),
+			ignoreFldSubmit: true,
+		}).cloneFrom(values?.TableAgentName))
+		this.stopWatchers.push(watch(() => this.TableAgentName.value, (newValue, oldValue) => this.onUpdate('agent.name', this.TableAgentName, newValue, oldValue)))
+
+		this.AgentValPhotography = reactive(new modelFieldType.Image({
+			id: 'AgentValPhotography',
+			originId: 'ValPhotography',
+			area: 'AGENT',
+			field: 'PHOTOGRA',
+			isFixed: true,
+			description: computed(() => this.Resources.PHOTOGRAPHY38058),
+		}).cloneFrom(values?.AgentValPhotography))
+		this.stopWatchers.push(watch(() => this.AgentValPhotography.value, (newValue, oldValue) => this.onUpdate('agent.photography', this.AgentValPhotography, newValue, oldValue)))
 
 		this.TableCityCity = reactive(new modelFieldType.String({
 			type: 'Lookup',
@@ -293,39 +315,6 @@ export default class ViewModel extends FormViewModelBase
 		}).cloneFrom(values?.ValBuildage))
 		this.stopWatchers.push(watch(() => this.ValBuildage.value, (newValue, oldValue) => this.onUpdate('prope.buildage', this.ValBuildage, newValue, oldValue)))
 
-		this.TableAgentName = reactive(new modelFieldType.String({
-			type: 'Lookup',
-			id: 'TableAgentName',
-			originId: 'ValName',
-			area: 'AGENT',
-			field: 'NAME',
-			maxLength: 50,
-			description: computed(() => this.Resources.AGENT_S_NAME42642),
-			ignoreFldSubmit: true,
-		}).cloneFrom(values?.TableAgentName))
-		this.stopWatchers.push(watch(() => this.TableAgentName.value, (newValue, oldValue) => this.onUpdate('agent.name', this.TableAgentName, newValue, oldValue)))
-
-		this.AgentValPhotography = reactive(new modelFieldType.Image({
-			id: 'AgentValPhotography',
-			originId: 'ValPhotography',
-			area: 'AGENT',
-			field: 'PHOTOGRA',
-			isFixed: true,
-			description: computed(() => this.Resources.PHOTOGRAPHY38058),
-		}).cloneFrom(values?.AgentValPhotography))
-		this.stopWatchers.push(watch(() => this.AgentValPhotography.value, (newValue, oldValue) => this.onUpdate('agent.photography', this.AgentValPhotography, newValue, oldValue)))
-
-		this.AgentValEmail = reactive(new modelFieldType.String({
-			id: 'AgentValEmail',
-			originId: 'ValEmail',
-			area: 'AGENT',
-			field: 'EMAIL',
-			maxLength: 80,
-			isFixed: true,
-			description: computed(() => this.Resources.E_MAIL42251),
-		}).cloneFrom(values?.AgentValEmail))
-		this.stopWatchers.push(watch(() => this.AgentValEmail.value, (newValue, oldValue) => this.onUpdate('agent.email', this.AgentValEmail, newValue, oldValue)))
-
 		this.ValProfit = reactive(new modelFieldType.Number({
 			id: 'ValProfit',
 			originId: 'ValProfit',
@@ -425,6 +414,17 @@ export default class ViewModel extends FormViewModelBase
 			description: computed(() => this.Resources.AVERAGEPRICE13700),
 		}).cloneFrom(values?.ValAverage))
 		this.stopWatchers.push(watch(() => this.ValAverage.value, (newValue, oldValue) => this.onUpdate('prope.average', this.ValAverage, newValue, oldValue)))
+
+		this.AgentValEmail = reactive(new modelFieldType.String({
+			id: 'AgentValEmail',
+			originId: 'ValEmail',
+			area: 'AGENT',
+			field: 'EMAIL',
+			maxLength: 80,
+			isFixed: true,
+			description: computed(() => this.Resources.E_MAIL42251),
+		}).cloneFrom(values?.AgentValEmail))
+		this.stopWatchers.push(watch(() => this.AgentValEmail.value, (newValue, oldValue) => this.onUpdate('agent.email', this.AgentValEmail, newValue, oldValue)))
 	}
 
 	/**

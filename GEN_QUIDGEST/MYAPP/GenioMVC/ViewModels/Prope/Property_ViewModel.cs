@@ -59,6 +59,29 @@ namespace GenioMVC.ViewModels.Prope
 		[ValidateSetAccess]
 		public string ValLastvisit { get; set; }
 		/// <summary>
+		/// Title: "Agent's name" | Type: "C"
+		/// </summary>
+		[ValidateSetAccess]
+		public TableDBEdit<GenioMVC.Models.Agent> TableAgentName { get; set; }
+		/// <summary>
+		/// Title: "Photography" | Type: "IJ"
+		/// </summary>
+		[ImageThumbnailJsonConverter(30, 50)]
+		[ValidateSetAccess]
+		public GenioMVC.Models.ImageModel AgentValPhotography
+		{
+			get
+			{
+				return funcAgentValPhotography != null ? funcAgentValPhotography() : _auxAgentValPhotography;
+			}
+			set { funcAgentValPhotography = () => value; }
+		}
+
+		[JsonIgnore]
+		public Func<GenioMVC.Models.ImageModel> funcAgentValPhotography { get; set; }
+
+		private GenioMVC.Models.ImageModel _auxAgentValPhotography { get; set; }
+		/// <summary>
 		/// Title: "City" | Type: "C"
 		/// </summary>
 		[ValidateSetAccess]
@@ -118,46 +141,6 @@ namespace GenioMVC.ViewModels.Prope
 		[ValidateSetAccess]
 		public decimal? ValBuildage { get; set; }
 		/// <summary>
-		/// Title: "Agent's name" | Type: "C"
-		/// </summary>
-		[ValidateSetAccess]
-		public TableDBEdit<GenioMVC.Models.Agent> TableAgentName { get; set; }
-		/// <summary>
-		/// Title: "Photography" | Type: "IJ"
-		/// </summary>
-		[ImageThumbnailJsonConverter(30, 50)]
-		[ValidateSetAccess]
-		public GenioMVC.Models.ImageModel AgentValPhotography
-		{
-			get
-			{
-				return funcAgentValPhotography != null ? funcAgentValPhotography() : _auxAgentValPhotography;
-			}
-			set { funcAgentValPhotography = () => value; }
-		}
-
-		[JsonIgnore]
-		public Func<GenioMVC.Models.ImageModel> funcAgentValPhotography { get; set; }
-
-		private GenioMVC.Models.ImageModel _auxAgentValPhotography { get; set; }
-		/// <summary>
-		/// Title: "E-mail" | Type: "C"
-		/// </summary>
-		[ValidateSetAccess]
-		public string AgentValEmail
-		{
-			get
-			{
-				return funcAgentValEmail != null ? funcAgentValEmail() : _auxAgentValEmail;
-			}
-			set { funcAgentValEmail = () => value; }
-		}
-
-		[JsonIgnore]
-		public Func<string> funcAgentValEmail { get; set; }
-
-		private string _auxAgentValEmail { get; set; }
-		/// <summary>
 		/// Title: "Profit" | Type: "$"
 		/// </summary>
 		[ValidateSetAccess]
@@ -185,6 +168,23 @@ namespace GenioMVC.ViewModels.Prope
 		/// </summary>
 		[ValidateSetAccess]
 		public decimal? ValAverage { get; set; }
+		/// <summary>
+		/// Title: "E-mail" | Type: "C"
+		/// </summary>
+		[ValidateSetAccess]
+		public string AgentValEmail
+		{
+			get
+			{
+				return funcAgentValEmail != null ? funcAgentValEmail() : _auxAgentValEmail;
+			}
+			set { funcAgentValEmail = () => value; }
+		}
+
+		[JsonIgnore]
+		public Func<string> funcAgentValEmail { get; set; }
+
+		private string _auxAgentValEmail { get; set; }
 
 		#region Navigations
 		#endregion
@@ -325,6 +325,7 @@ namespace GenioMVC.ViewModels.Prope
 				ValSold = ViewModelConversion.ToLogic(m.ValSold);
 				ValDtsold = ViewModelConversion.ToDateTime(m.ValDtsold);
 				ValLastvisit = ViewModelConversion.ToString(m.ValLastvisit);
+				funcAgentValPhotography = () => ViewModelConversion.ToImage(m.Agent.ValPhotography);
 				ValPrice = ViewModelConversion.ToNumeric(m.ValPrice);
 				ValTypology = ViewModelConversion.ToNumeric(m.ValTypology);
 				ValBuildtyp = ViewModelConversion.ToString(m.ValBuildtyp);
@@ -334,14 +335,13 @@ namespace GenioMVC.ViewModels.Prope
 				ValBathnr = ViewModelConversion.ToNumeric(m.ValBathnr);
 				ValDtconst = ViewModelConversion.ToDateTime(m.ValDtconst);
 				ValBuildage = ViewModelConversion.ToNumeric(m.ValBuildage);
-				funcAgentValPhotography = () => ViewModelConversion.ToImage(m.Agent.ValPhotography);
-				funcAgentValEmail = () => ViewModelConversion.ToString(m.Agent.ValEmail);
 				ValProfit = ViewModelConversion.ToNumeric(m.ValProfit);
 				ValTax = ViewModelConversion.ToNumeric(m.ValTax);
 				ValTitle = ViewModelConversion.ToString(m.ValTitle);
 				ValPhoto = ViewModelConversion.ToImage(m.ValPhoto);
 				ValDescript = ViewModelConversion.ToString(m.ValDescript);
 				ValAverage = ViewModelConversion.ToNumeric(m.ValAverage);
+				funcAgentValEmail = () => ViewModelConversion.ToString(m.Agent.ValEmail);
 				ValCodprope = ViewModelConversion.ToString(m.ValCodprope);
 			}
 			catch (Exception)
@@ -573,8 +573,8 @@ namespace GenioMVC.ViewModels.Prope
 			// Add characteristics
 			Characs = new List<string>();
 
-			Load_Propertycity_city____(qs, lazyLoad);
 			Load_Propertyagentname____(qs, lazyLoad);
+			Load_Propertycity_city____(qs, lazyLoad);
 
 // USE /[MANUAL FOR VIEWMODEL_LOADPARTIAL PROPERTY]/
 		}
@@ -594,10 +594,10 @@ namespace GenioMVC.ViewModels.Prope
 			validator.StringLength("CityCountValCountry", Resources.Resources.COUNTRY64133, CityCountValCountry, 50);
 
 			validator.Required("ValPrice", Resources.Resources.PRICE06900, ViewModelConversion.ToNumeric(ValPrice), FieldType.CURRENCY.GetFormatting());
-			validator.StringLength("AgentValEmail", Resources.Resources.E_MAIL42251, AgentValEmail, 80);
 			validator.StringLength("ValTitle", Resources.Resources.TITLE21885, ValTitle, 50);
 
 			validator.Required("ValTitle", Resources.Resources.TITLE21885, ViewModelConversion.ToString(ValTitle), FieldType.TEXT.GetFormatting());
+			validator.StringLength("AgentValEmail", Resources.Resources.E_MAIL42251, AgentValEmail, 80);
 
 
 			return validator.GetResult();
@@ -634,6 +634,200 @@ namespace GenioMVC.ViewModels.Prope
 		public void LoadChecklistsSelectedIDs()
 		{
 		}
+
+		/// <summary>
+		/// TableAgentName -> (DB)
+		/// </summary>
+		/// <param name="qs"></param>
+		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
+		public void Load_Propertyagentname____(NameValueCollection qs, bool lazyLoad = false)
+		{
+			bool propertyagentname____DoLoad = true;
+			CriteriaSet propertyagentname____Conds = CriteriaSet.And();
+			{
+				object hValue = Navigation.GetValue("agent", true);
+				if (hValue != null && !(hValue is Array) && !string.IsNullOrEmpty(Convert.ToString(hValue)))
+				{
+					propertyagentname____Conds.Equal(CSGenioAagent.FldCodagent, hValue);
+					this.ValCodagent = DBConversion.ToString(hValue);
+				}
+			}
+			// Limits Generation
+
+			object propertyagentname_____flimitagent_active = "1";
+			propertyagentname____Conds.Equal(
+				CSGenio.business.CSGenioAagent.FldActive,
+				propertyagentname_____flimitagent_active);
+
+			TableAgentName = new TableDBEdit<Models.Agent>();
+
+			if (lazyLoad)
+			{
+				if (Navigation.CurrentLevel.GetEntry("RETURN_agent") != null)
+				{
+					this.ValCodagent = Navigation.GetStrValue("RETURN_agent");
+					Navigation.CurrentLevel.SetEntry("RETURN_agent", null);
+				}
+				FillDependant_PropertyTableAgentName(lazyLoad);
+				return;
+			}
+
+			if (propertyagentname____DoLoad)
+			{
+				List<ColumnSort> sorts = [];
+				ColumnSort requestedSort = GetRequestSort(TableAgentName, "sTableAgentName", "dTableAgentName", qs, "agent");
+				if (requestedSort != null)
+					sorts.Add(requestedSort);
+
+				string query = "";
+				if (!string.IsNullOrEmpty(qs["TableAgentName_tableFilters"]))
+					TableAgentName.TableFilters = bool.Parse(qs["TableAgentName_tableFilters"]);
+				else
+					TableAgentName.TableFilters = false;
+
+				query = qs["qTableAgentName"];
+
+				//RS 26.07.2016 O preenchimento da lista de ajuda dos Dbedits passa a basear-se apenas no campo do próprio DbEdit
+				// O interface de pesquisa rápida não fica coerente quando se visualiza apenas uma coluna mas a pesquisa faz matching com 5 ou 6 colunas diferentes
+				//  tornando confuso to o user porque determinada row foi devolvida quando o Qresult não mostra como o matching foi feito
+				CriteriaSet search_filters = CriteriaSet.And();
+				if (!string.IsNullOrEmpty(query))
+				{
+					search_filters.Like(CSGenioAagent.FldName, query + "%");
+				}
+				propertyagentname____Conds.SubSet(search_filters);
+
+				string tryParsePage = qs["pTableAgentName"] != null ? qs["pTableAgentName"].ToString() : "1";
+				int page = !string.IsNullOrEmpty(tryParsePage) ? int.Parse(tryParsePage) : 1;
+				int numberItems = CSGenio.framework.Configuration.NrRegDBedit;
+				int offset = (page - 1) * numberItems;
+
+				FieldRef[] fields = [CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAagent.FldEmail, CSGenioAagent.FldZzstate];
+
+// USE /[MANUAL FOR OVERRQ PROPERTY_AGENTNAME]/
+
+				// Limitation by Zzstate
+				/*
+					Records that are currently being inserted or duplicated will also be included.
+					Client-side persistence will try to fill the "text" value of that option.
+				*/
+				if (Navigation.checkFormMode("agent", FormMode.New) || Navigation.checkFormMode("agent", FormMode.Duplicate))
+					propertyagentname____Conds.SubSet(CriteriaSet.Or()
+						.Equal(CSGenioAagent.FldZzstate, 0)
+						.Equal(CSGenioAagent.FldCodagent, Navigation.GetStrValue("agent")));
+				else
+					propertyagentname____Conds.Criterias.Add(new Criteria(new ColumnReference(CSGenioAagent.FldZzstate), CriteriaOperator.Equal, 0));
+
+				FieldRef firstVisibleColumn = new FieldRef("agent", "name");
+				ListingMVC<CSGenioAagent> listing = Models.ModelBase.Where<CSGenioAagent>(m_userContext, false, propertyagentname____Conds, fields, offset, numberItems, sorts, "LED_PROPERTYAGENTNAME____", true, false, firstVisibleColumn: firstVisibleColumn);
+
+				TableAgentName.SetPagination(page, numberItems, listing.HasMore, listing.GetTotal, listing.TotalRecords);
+				TableAgentName.Query = query;
+				TableAgentName.Elements = listing.RowsForViewModel((r) => new GenioMVC.Models.Agent(m_userContext, r, true, _fieldsToSerialize_PROPERTYAGENTNAME____));
+
+				//created by [ MH ] at [ 14.04.2016 ] - Foi alterada a forma de retornar a key do novo registo inserido / editado no form de apoio do DBEdit.
+				//last update by [ MH ] at [ 10.05.2016 ] - Validação se key encontra-se no level atual, as chaves dos niveis anteriores devem ser ignorados.
+				if (Navigation.CurrentLevel.GetEntry("RETURN_agent") != null)
+				{
+					this.ValCodagent = Navigation.GetStrValue("RETURN_agent");
+					Navigation.CurrentLevel.SetEntry("RETURN_agent", null);
+				}
+
+				TableAgentName.List = new SelectList(TableAgentName.Elements.ToSelectList(x => x.ValName, x => x.ValCodagent,  x => x.ValCodagent == this.ValCodagent), "Value", "Text", this.ValCodagent);
+				FillDependant_PropertyTableAgentName();
+			}
+		}
+
+		/// <summary>
+		/// Get Dependant fields values -> TableAgentName (DB)
+		/// </summary>
+		/// <param name="PKey">Primary Key of Agent</param>
+		public ConcurrentDictionary<string, object> GetDependant_PropertyTableAgentName(string PKey)
+		{
+			FieldRef[] refDependantFields = [CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAagent.FldPhotography, CSGenioAagent.FldEmail];
+
+			var returnEmptyDependants = false;
+			CriteriaSet wherecodition = CriteriaSet.And();
+
+			// Return default values
+			if (GenFunctions.emptyG(PKey) == 1)
+				returnEmptyDependants = true;
+
+			// Check if the limit(s) is filled if exists
+			// - - - - - - - - - - - - - - - - - - - - -
+
+			if (returnEmptyDependants)
+				return GetViewModelFieldValues(refDependantFields);
+
+			PersistentSupport sp = m_userContext.PersistentSupport;
+			User u = m_userContext.User;
+
+			CSGenioAagent tempArea = new(u);
+
+			// Fields to select
+			SelectQuery querySelect = new();
+			querySelect.PageSize(1);
+			foreach (FieldRef field in refDependantFields)
+				querySelect.Select(field);
+
+			querySelect.From(tempArea.QSystem, tempArea.TableName, tempArea.Alias)
+				.Where(wherecodition.Equal(CSGenioAagent.FldCodagent, PKey));
+
+			string[] dependantFields = refDependantFields.Select(f => f.FullName).ToArray();
+			QueryUtils.SetInnerJoins(dependantFields, null, tempArea, querySelect);
+
+			ArrayList values = sp.executeReaderOneRow(querySelect);
+			bool useDefaults = values.Count == 0;
+
+			if (useDefaults)
+				return GetViewModelFieldValues(refDependantFields);
+			return GetViewModelFieldValues(refDependantFields, values);
+		}
+
+		/// <summary>
+		/// Fill Dependant fields values -> TableAgentName (DB)
+		/// </summary>
+		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
+		public void FillDependant_PropertyTableAgentName(bool lazyLoad = false)
+		{
+			var row = GetDependant_PropertyTableAgentName(this.ValCodagent);
+			try
+			{
+				this.funcAgentValPhotography = () => (GenioMVC.Models.ImageModel)row["agent.photography"];
+				this.funcAgentValEmail = () => (string)row["agent.email"];
+
+				// Fill List fields
+				this.ValCodagent = ViewModelConversion.ToString(row["agent.codagent"]);
+				TableAgentName.Value = (string)row["agent.name"];
+				if (GenFunctions.emptyG(this.ValCodagent) == 1)
+				{
+					this.ValCodagent = "";
+					TableAgentName.Value = "";
+					Navigation.ClearValue("agent");
+				}
+				else if (lazyLoad)
+				{
+					TableAgentName.SetPagination(1, 0, false, false, 1);
+					TableAgentName.List = new SelectList(new List<SelectListItem>()
+					{
+						new SelectListItem
+						{
+							Value = Convert.ToString(this.ValCodagent),
+							Text = Convert.ToString(TableAgentName.Value),
+							Selected = true
+						}
+					}, "Value", "Text", this.ValCodagent);
+				}
+
+				TableAgentName.Selected = this.ValCodagent;
+			}
+			catch (Exception ex)
+			{
+				CSGenio.framework.Log.Error(string.Format("FillDependant_Error (TableAgentName): {0}; {1}", ex.Message, ex.InnerException != null ? ex.InnerException.Message : ""));
+			}
+		}
+
+		private readonly string[] _fieldsToSerialize_PROPERTYAGENTNAME____ = ["Agent", "Agent.ValCodagent", "Agent.ValZzstate", "Agent.ValName", "Agent.ValEmail"];
 
 		/// <summary>
 		/// TableCityCity -> (DB)
@@ -823,195 +1017,6 @@ namespace GenioMVC.ViewModels.Prope
 
 		private readonly string[] _fieldsToSerialize_PROPERTYCITY_CITY____ = ["City", "City.ValCodcity", "City.ValZzstate", "City.ValCity"];
 
-		/// <summary>
-		/// TableAgentName -> (DB)
-		/// </summary>
-		/// <param name="qs"></param>
-		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
-		public void Load_Propertyagentname____(NameValueCollection qs, bool lazyLoad = false)
-		{
-			bool propertyagentname____DoLoad = true;
-			CriteriaSet propertyagentname____Conds = CriteriaSet.And();
-			{
-				object hValue = Navigation.GetValue("agent", true);
-				if (hValue != null && !(hValue is Array) && !string.IsNullOrEmpty(Convert.ToString(hValue)))
-				{
-					propertyagentname____Conds.Equal(CSGenioAagent.FldCodagent, hValue);
-					this.ValCodagent = DBConversion.ToString(hValue);
-				}
-			}
-
-			TableAgentName = new TableDBEdit<Models.Agent>();
-
-			if (lazyLoad)
-			{
-				if (Navigation.CurrentLevel.GetEntry("RETURN_agent") != null)
-				{
-					this.ValCodagent = Navigation.GetStrValue("RETURN_agent");
-					Navigation.CurrentLevel.SetEntry("RETURN_agent", null);
-				}
-				FillDependant_PropertyTableAgentName(lazyLoad);
-				return;
-			}
-
-			if (propertyagentname____DoLoad)
-			{
-				List<ColumnSort> sorts = [];
-				ColumnSort requestedSort = GetRequestSort(TableAgentName, "sTableAgentName", "dTableAgentName", qs, "agent");
-				if (requestedSort != null)
-					sorts.Add(requestedSort);
-				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAagent.FldName), SortOrder.Ascending));
-
-				string query = "";
-				if (!string.IsNullOrEmpty(qs["TableAgentName_tableFilters"]))
-					TableAgentName.TableFilters = bool.Parse(qs["TableAgentName_tableFilters"]);
-				else
-					TableAgentName.TableFilters = false;
-
-				query = qs["qTableAgentName"];
-
-				//RS 26.07.2016 O preenchimento da lista de ajuda dos Dbedits passa a basear-se apenas no campo do próprio DbEdit
-				// O interface de pesquisa rápida não fica coerente quando se visualiza apenas uma coluna mas a pesquisa faz matching com 5 ou 6 colunas diferentes
-				//  tornando confuso to o user porque determinada row foi devolvida quando o Qresult não mostra como o matching foi feito
-				CriteriaSet search_filters = CriteriaSet.And();
-				if (!string.IsNullOrEmpty(query))
-				{
-					search_filters.Like(CSGenioAagent.FldName, query + "%");
-				}
-				propertyagentname____Conds.SubSet(search_filters);
-
-				string tryParsePage = qs["pTableAgentName"] != null ? qs["pTableAgentName"].ToString() : "1";
-				int page = !string.IsNullOrEmpty(tryParsePage) ? int.Parse(tryParsePage) : 1;
-				int numberItems = CSGenio.framework.Configuration.NrRegDBedit;
-				int offset = (page - 1) * numberItems;
-
-				FieldRef[] fields = [CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAagent.FldEmail, CSGenioAagent.FldZzstate];
-
-// USE /[MANUAL FOR OVERRQ PROPERTY_AGENTNAME]/
-
-				// Limitation by Zzstate
-				/*
-					Records that are currently being inserted or duplicated will also be included.
-					Client-side persistence will try to fill the "text" value of that option.
-				*/
-				if (Navigation.checkFormMode("agent", FormMode.New) || Navigation.checkFormMode("agent", FormMode.Duplicate))
-					propertyagentname____Conds.SubSet(CriteriaSet.Or()
-						.Equal(CSGenioAagent.FldZzstate, 0)
-						.Equal(CSGenioAagent.FldCodagent, Navigation.GetStrValue("agent")));
-				else
-					propertyagentname____Conds.Criterias.Add(new Criteria(new ColumnReference(CSGenioAagent.FldZzstate), CriteriaOperator.Equal, 0));
-
-				FieldRef firstVisibleColumn = new FieldRef("agent", "name");
-				ListingMVC<CSGenioAagent> listing = Models.ModelBase.Where<CSGenioAagent>(m_userContext, false, propertyagentname____Conds, fields, offset, numberItems, sorts, "LED_PROPERTYAGENTNAME____", true, false, firstVisibleColumn: firstVisibleColumn);
-
-				TableAgentName.SetPagination(page, numberItems, listing.HasMore, listing.GetTotal, listing.TotalRecords);
-				TableAgentName.Query = query;
-				TableAgentName.Elements = listing.RowsForViewModel((r) => new GenioMVC.Models.Agent(m_userContext, r, true, _fieldsToSerialize_PROPERTYAGENTNAME____));
-
-				//created by [ MH ] at [ 14.04.2016 ] - Foi alterada a forma de retornar a key do novo registo inserido / editado no form de apoio do DBEdit.
-				//last update by [ MH ] at [ 10.05.2016 ] - Validação se key encontra-se no level atual, as chaves dos niveis anteriores devem ser ignorados.
-				if (Navigation.CurrentLevel.GetEntry("RETURN_agent") != null)
-				{
-					this.ValCodagent = Navigation.GetStrValue("RETURN_agent");
-					Navigation.CurrentLevel.SetEntry("RETURN_agent", null);
-				}
-
-				TableAgentName.List = new SelectList(TableAgentName.Elements.ToSelectList(x => x.ValName, x => x.ValCodagent,  x => x.ValCodagent == this.ValCodagent), "Value", "Text", this.ValCodagent);
-				FillDependant_PropertyTableAgentName();
-			}
-		}
-
-		/// <summary>
-		/// Get Dependant fields values -> TableAgentName (DB)
-		/// </summary>
-		/// <param name="PKey">Primary Key of Agent</param>
-		public ConcurrentDictionary<string, object> GetDependant_PropertyTableAgentName(string PKey)
-		{
-			FieldRef[] refDependantFields = [CSGenioAagent.FldCodagent, CSGenioAagent.FldName, CSGenioAagent.FldPhotography, CSGenioAagent.FldEmail];
-
-			var returnEmptyDependants = false;
-			CriteriaSet wherecodition = CriteriaSet.And();
-
-			// Return default values
-			if (GenFunctions.emptyG(PKey) == 1)
-				returnEmptyDependants = true;
-
-			// Check if the limit(s) is filled if exists
-			// - - - - - - - - - - - - - - - - - - - - -
-
-			if (returnEmptyDependants)
-				return GetViewModelFieldValues(refDependantFields);
-
-			PersistentSupport sp = m_userContext.PersistentSupport;
-			User u = m_userContext.User;
-
-			CSGenioAagent tempArea = new(u);
-
-			// Fields to select
-			SelectQuery querySelect = new();
-			querySelect.PageSize(1);
-			foreach (FieldRef field in refDependantFields)
-				querySelect.Select(field);
-
-			querySelect.From(tempArea.QSystem, tempArea.TableName, tempArea.Alias)
-				.Where(wherecodition.Equal(CSGenioAagent.FldCodagent, PKey));
-
-			string[] dependantFields = refDependantFields.Select(f => f.FullName).ToArray();
-			QueryUtils.SetInnerJoins(dependantFields, null, tempArea, querySelect);
-
-			ArrayList values = sp.executeReaderOneRow(querySelect);
-			bool useDefaults = values.Count == 0;
-
-			if (useDefaults)
-				return GetViewModelFieldValues(refDependantFields);
-			return GetViewModelFieldValues(refDependantFields, values);
-		}
-
-		/// <summary>
-		/// Fill Dependant fields values -> TableAgentName (DB)
-		/// </summary>
-		/// <param name="lazyLoad">Lazy loading of dropdown items</param>
-		public void FillDependant_PropertyTableAgentName(bool lazyLoad = false)
-		{
-			var row = GetDependant_PropertyTableAgentName(this.ValCodagent);
-			try
-			{
-				this.funcAgentValPhotography = () => (GenioMVC.Models.ImageModel)row["agent.photography"];
-				this.funcAgentValEmail = () => (string)row["agent.email"];
-
-				// Fill List fields
-				this.ValCodagent = ViewModelConversion.ToString(row["agent.codagent"]);
-				TableAgentName.Value = (string)row["agent.name"];
-				if (GenFunctions.emptyG(this.ValCodagent) == 1)
-				{
-					this.ValCodagent = "";
-					TableAgentName.Value = "";
-					Navigation.ClearValue("agent");
-				}
-				else if (lazyLoad)
-				{
-					TableAgentName.SetPagination(1, 0, false, false, 1);
-					TableAgentName.List = new SelectList(new List<SelectListItem>()
-					{
-						new SelectListItem
-						{
-							Value = Convert.ToString(this.ValCodagent),
-							Text = Convert.ToString(TableAgentName.Value),
-							Selected = true
-						}
-					}, "Value", "Text", this.ValCodagent);
-				}
-
-				TableAgentName.Selected = this.ValCodagent;
-			}
-			catch (Exception ex)
-			{
-				CSGenio.framework.Log.Error(string.Format("FillDependant_Error (TableAgentName): {0}; {1}", ex.Message, ex.InnerException != null ? ex.InnerException.Message : ""));
-			}
-		}
-
-		private readonly string[] _fieldsToSerialize_PROPERTYAGENTNAME____ = ["Agent", "Agent.ValCodagent", "Agent.ValZzstate", "Agent.ValName", "Agent.ValEmail"];
-
 		protected override object GetViewModelValue(string identifier, object modelValue)
 		{
 			return identifier switch
@@ -1022,6 +1027,7 @@ namespace GenioMVC.ViewModels.Prope
 				"prope.sold" => ViewModelConversion.ToLogic(modelValue),
 				"prope.dtsold" => ViewModelConversion.ToDateTime(modelValue),
 				"prope.lastvisit" => ViewModelConversion.ToString(modelValue),
+				"agent.photography" => ViewModelConversion.ToImage(modelValue),
 				"count.country" => ViewModelConversion.ToString(modelValue),
 				"prope.price" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.typology" => ViewModelConversion.ToNumeric(modelValue),
@@ -1032,20 +1038,19 @@ namespace GenioMVC.ViewModels.Prope
 				"prope.bathnr" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.dtconst" => ViewModelConversion.ToDateTime(modelValue),
 				"prope.buildage" => ViewModelConversion.ToNumeric(modelValue),
-				"agent.photography" => ViewModelConversion.ToImage(modelValue),
-				"agent.email" => ViewModelConversion.ToString(modelValue),
 				"prope.profit" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.tax" => ViewModelConversion.ToNumeric(modelValue),
 				"prope.title" => ViewModelConversion.ToString(modelValue),
 				"prope.photo" => ViewModelConversion.ToImage(modelValue),
 				"prope.descript" => ViewModelConversion.ToString(modelValue),
 				"prope.average" => ViewModelConversion.ToNumeric(modelValue),
+				"agent.email" => ViewModelConversion.ToString(modelValue),
 				"prope.codprope" => ViewModelConversion.ToString(modelValue),
+				"agent.codagent" => ViewModelConversion.ToString(modelValue),
+				"agent.name" => ViewModelConversion.ToString(modelValue),
 				"city.codcity" => ViewModelConversion.ToString(modelValue),
 				"city.city" => ViewModelConversion.ToString(modelValue),
 				"count.codcount" => ViewModelConversion.ToString(modelValue),
-				"agent.codagent" => ViewModelConversion.ToString(modelValue),
-				"agent.name" => ViewModelConversion.ToString(modelValue),
 				_ => modelValue
 			};
 		}

@@ -202,6 +202,17 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
+			Qfield = new Field(info.Alias, "active", FieldType.LOGIC);
+			Qfield.FieldDescription = "Active";
+			Qfield.FieldSize =  1;
+			Qfield.MQueue = false;
+			Qfield.CavDesignation = "ACTIVE03270";
+
+			Qfield.Dupmsg = "";
+			Qfield.DefaultValue = new DefaultValue(1);
+			info.RegisterFieldDB(Qfield);
+
+			//- - - - - - - - - - - - - - - - - - -
 			Qfield = new Field(info.Alias, "zzstate", FieldType.INTEGER);
 			Qfield.FieldDescription = "Estado da ficha";
 			info.RegisterFieldDB(Qfield);
@@ -252,7 +263,7 @@ namespace CSGenio.business
 			};
 
 			info.DefaultValues = new string[] {
-			 "email"
+			 "email","active"
 			};
 
 
@@ -512,6 +523,17 @@ namespace CSGenio.business
 			set { insertNameValueField(FldAverage_price, value); }
 		}
 
+		/// <summary>Field : "Active" Tipo: "L" Formula:  ""</summary>
+		public static FieldRef FldActive { get { return m_fldActive; } }
+		private static FieldRef m_fldActive = new FieldRef("agent", "active");
+
+		/// <summary>Field : "Active" Tipo: "L" Formula:  ""</summary>
+		public int ValActive
+		{
+			get { return (int)returnValueField(FldActive); }
+			set { insertNameValueField(FldActive, value); }
+		}
+
 		/// <summary>Field : "ZZSTATE" Type: "INT" Formula:  ""</summary>
 		public static FieldRef FldZzstate { get { return m_fldZzstate; } }
 		private static FieldRef m_fldZzstate = new FieldRef("agent", "zzstate");
@@ -609,7 +631,7 @@ namespace CSGenio.business
 		// USE /[MANUAL FOR TABAUX AGENT]/
 
  
-              
+               
 
 	}
 }

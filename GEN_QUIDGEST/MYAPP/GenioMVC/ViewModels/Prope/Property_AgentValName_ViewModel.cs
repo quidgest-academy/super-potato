@@ -93,6 +93,7 @@ namespace GenioMVC.ViewModels.Prope
 			return crs;
 		}
 
+
 		public override int GetCount(User user)
 		{
 			throw new NotImplementedException("This operation is not supported");
@@ -128,8 +129,8 @@ namespace GenioMVC.ViewModels.Prope
 		{
 			return
 			[
-				new Exports.QColumn(CSGenioAagent.FldName, FieldType.TEXT, Resources.Resources.AGENT_S_NAME42642, 50, 0, true),
-				new Exports.QColumn(CSGenioAagent.FldEmail, FieldType.TEXT, Resources.Resources.E_MAIL42251, 80, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldName, FieldType.TEXT, Resources.Resources.AGENT_S_NAME42642, 30, 0, true),
+				new Exports.QColumn(CSGenioAagent.FldEmail, FieldType.TEXT, Resources.Resources.E_MAIL42251, 30, 0, true),
 			];
 		}
 
@@ -170,6 +171,12 @@ namespace GenioMVC.ViewModels.Prope
 
 			crs ??= CriteriaSet.And();
 
+			// Limits Generation
+
+			object propertyagentname_____flimitagent_active = "1";
+			crs.Equal(
+				CSGenio.business.CSGenioAagent.FldActive,
+				propertyagentname_____flimitagent_active);
 
 			Menu ??= new TablePartial<Property_AgentValName_RowViewModel>();
 			// Set table name (used in getting searchable column names)
@@ -293,8 +300,6 @@ namespace GenioMVC.ViewModels.Prope
 
 			//FOR: MENU LIST SORTING
 			Dictionary<string, OrderedDictionary> allSortOrders = new Dictionary<string, OrderedDictionary>();
-			allSortOrders.Add("AGENT.NAME", new OrderedDictionary());
-			allSortOrders["AGENT.NAME"].Add("AGENT.NAME", "A");
 
 
 			int numberListItems = tableConfig.RowsPerPage;
@@ -306,12 +311,6 @@ namespace GenioMVC.ViewModels.Prope
 
 			List<ColumnSort> sorts = GetRequestSorts(this.Menu, tableConfig, "agent", allSortOrders);
 
-			if (sorts == null || sorts.Count == 0)
-			{
-				sorts = new List<ColumnSort>();
-				sorts.Add(new ColumnSort(new ColumnReference(CSGenioAagent.FldName), SortOrder.Ascending));
-
-			}
 
 			FieldRef[] fields = new FieldRef[] { CSGenioAagent.FldCodagent, CSGenioAagent.FldZzstate, CSGenioAagent.FldName, CSGenioAagent.FldEmail };
 
@@ -341,6 +340,24 @@ namespace GenioMVC.ViewModels.Prope
 					this.TableLimits.AddRange(area_EPH_limits);
 			}
 
+			// Tooltips: Making a tooltip for each valid limitation: 1 Limit(s) detected.
+			// Limit origin: form 
+			//Limit type: "F"
+			//Current Area = "AGENT"
+			//1st Area Limit: "AGENT"
+			//1st Area Field: "ACTIVE"
+			//1st Area Value: "1"
+			{
+				Limit limit = new Limit();
+				limit.TipoLimite = LimitType.F;
+				limit.NaoAplicaSeNulo = false;
+				CSGenioAagent model_limit_area = new CSGenioAagent(m_userContext.User);
+				string limit_field = "active", limit_field_value = "1";
+				object this_limit_field = Navigation.GetStrValue(limit_field_value);
+				Limit_Filler(ref limit, model_limit_area, limit_field, limit_field_value, this_limit_field, LimitAreaType.AreaLimita);
+				if (!this.TableLimits.Contains(limit, limitComparer)) //to avoid repetitions (i.e: DB and EPH applying same limit)
+					this.TableLimits.Add(limit);
+			}
 
 			if (conditions == null)
 				conditions = CriteriaSet.And();

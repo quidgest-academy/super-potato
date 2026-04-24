@@ -13,6 +13,11 @@ public class AgentForm : Form
 	public CollapsibleZoneControl PseudNewgrp01 => new CollapsibleZoneControl(driver, ContainerLocator, "#AGENT___PSEUDNEWGRP01" + IdSuffix + "-container");
 
 	/// <summary>
+	/// Agent's name
+	/// </summary>
+	public BaseInputControl AgentName => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTNAME____" + IdSuffix, "#AGENT___AGENTNAME____" + IdSuffix);
+
+	/// <summary>
 	/// Birthdate
 	/// </summary>
 	public DateInputControl AgentBirthdat => new DateInputControl(driver, ContainerLocator, "#AGENT___AGENTBIRTHDAT" + IdSuffix);
@@ -68,11 +73,6 @@ public class AgentForm : Form
 	/// Photography
 	/// </summary>
 	public BaseInputControl AgentPhotogra => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTPHOTOGRA" + IdSuffix, "#AGENT___AGENTPHOTOGRA" + IdSuffix);
-
-	/// <summary>
-	/// Agent's name
-	/// </summary>
-	public BaseInputControl AgentName => new BaseInputControl(driver, ContainerLocator, "container-AGENT___AGENTNAME____" + IdSuffix, "#AGENT___AGENTNAME____" + IdSuffix);
 
 	public AgentForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "AGENT", containerLocator: containerLocator, usePkInId: usePkInId) { }

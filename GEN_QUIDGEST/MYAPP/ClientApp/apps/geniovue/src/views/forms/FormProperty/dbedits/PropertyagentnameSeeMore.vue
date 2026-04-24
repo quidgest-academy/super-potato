@@ -226,7 +226,7 @@
 								field: 'NAME',
 								label: computed(() => this.Resources.AGENT_S_NAME42642),
 								dataLength: 50,
-								scrollData: 50,
+								scrollData: 30,
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 							new listColumnTypes.TextColumn({
@@ -236,7 +236,7 @@
 								field: 'EMAIL',
 								label: computed(() => this.Resources.E_MAIL42251),
 								dataLength: 80,
-								scrollData: 80,
+								scrollData: 30,
 								export: 1,
 							}, computed(() => vm.model), computed(() => vm.internalEvents)),
 						],
@@ -274,7 +274,7 @@
 							defaultSearchColumnName: 'ValName',
 							defaultSearchColumnNameOriginal: 'ValName',
 							defaultColumnSorting: {
-								columnName: 'ValName',
+								columnName: '',
 								sortOrder: 'asc'
 							}
 						},

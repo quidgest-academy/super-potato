@@ -192,77 +192,6 @@
 							v-model="controls.PROPERTYPSEUDNEWGRP05.openChild">
 							<!-- Start PROPERTYPSEUDNEWGRP05 -->
 							<q-accordion-item
-								v-if="controls.PROPERTYPSEUDNEWGRP02.isVisible"
-								:id="getControlId(controls.PROPERTYPSEUDNEWGRP02) + '-container'"
-								value="PROPERTYPSEUDNEWGRP02"
-								:title="controls.PROPERTYPSEUDNEWGRP02.label">
-								<!-- Start PROPERTYPSEUDNEWGRP02 -->
-								<q-row v-if="controls.PROPERTYCITY_CITY____.isVisible || controls.PROPERTYCOUNTCOUNTRY_.isVisible || controls.PROPERTYPROPETAX_____.isVisible">
-									<q-col
-										v-if="controls.PROPERTYCITY_CITY____.isVisible"
-										cols="auto">
-										<base-input-structure
-											v-if="controls.PROPERTYCITY_CITY____.isVisible"
-											class="i-text"
-											v-bind="controls.PROPERTYCITY_CITY____.wrapperProps"
-											:id="getControlId(controls.PROPERTYCITY_CITY____)"
-											v-on="controls.PROPERTYCITY_CITY____.handlers"
-											:loading="controls.PROPERTYCITY_CITY____.props.loading"
-											:reporting-mode-on="reportingModeCAV"
-											:suggestion-mode-on="suggestionModeOn">
-											<q-lookup
-												v-if="controls.PROPERTYCITY_CITY____.isVisible"
-												v-bind="controls.PROPERTYCITY_CITY____.props"
-												:id="getControlId(controls.PROPERTYCITY_CITY____)"
-												v-on="controls.PROPERTYCITY_CITY____.handlers" />
-											<q-see-more-propertycity-city
-												v-if="controls.PROPERTYCITY_CITY____.seeMoreIsVisible"
-												v-bind="controls.PROPERTYCITY_CITY____.seeMoreParams"
-												v-on="controls.PROPERTYCITY_CITY____.handlers" />
-										</base-input-structure>
-									</q-col>
-									<q-col
-										v-if="controls.PROPERTYCOUNTCOUNTRY_.isVisible"
-										cols="auto">
-										<base-input-structure
-											v-if="controls.PROPERTYCOUNTCOUNTRY_.isVisible"
-											class="i-text"
-											v-bind="controls.PROPERTYCOUNTCOUNTRY_.wrapperProps"
-											:id="getControlId(controls.PROPERTYCOUNTCOUNTRY_)"
-											v-on="controls.PROPERTYCOUNTCOUNTRY_.handlers"
-											:loading="controls.PROPERTYCOUNTCOUNTRY_.props.loading"
-											:reporting-mode-on="reportingModeCAV"
-											:suggestion-mode-on="suggestionModeOn">
-											<q-text-field
-												v-bind="controls.PROPERTYCOUNTCOUNTRY_.props"
-												:id="getControlId(controls.PROPERTYCOUNTCOUNTRY_)"
-												@blur="onBlur(controls.PROPERTYCOUNTCOUNTRY_, model.CityCountValCountry.value)"
-												@change="model.CityCountValCountry.fnUpdateValueOnChange" />
-										</base-input-structure>
-									</q-col>
-									<q-col
-										v-if="controls.PROPERTYPROPETAX_____.isVisible"
-										cols="auto">
-										<base-input-structure
-											v-if="controls.PROPERTYPROPETAX_____.isVisible"
-											class="i-text"
-											v-bind="controls.PROPERTYPROPETAX_____.wrapperProps"
-											:id="getControlId(controls.PROPERTYPROPETAX_____)"
-											v-on="controls.PROPERTYPROPETAX_____.handlers"
-											:loading="controls.PROPERTYPROPETAX_____.props.loading"
-											:reporting-mode-on="reportingModeCAV"
-											:suggestion-mode-on="suggestionModeOn">
-											<q-numeric-input
-												v-if="controls.PROPERTYPROPETAX_____.isVisible"
-												v-bind="controls.PROPERTYPROPETAX_____.props"
-												:id="getControlId(controls.PROPERTYPROPETAX_____)"
-												@update:model-value="model.ValTax.fnUpdateValue" />
-										</base-input-structure>
-									</q-col>
-								</q-row>
-								<!-- End PROPERTYPSEUDNEWGRP02 -->
-							</q-accordion-item>
-							<q-accordion-item
 								v-if="controls.PROPERTYPSEUDNEWGRP03.isVisible"
 								:id="getControlId(controls.PROPERTYPSEUDNEWGRP03) + '-container'"
 								value="PROPERTYPSEUDNEWGRP03"
@@ -510,6 +439,77 @@
 								</q-row>
 								<!-- End PROPERTYPSEUDNEWGRP04 -->
 							</q-accordion-item>
+							<q-accordion-item
+								v-if="controls.PROPERTYPSEUDNEWGRP02.isVisible"
+								:id="getControlId(controls.PROPERTYPSEUDNEWGRP02) + '-container'"
+								value="PROPERTYPSEUDNEWGRP02"
+								:title="controls.PROPERTYPSEUDNEWGRP02.label">
+								<!-- Start PROPERTYPSEUDNEWGRP02 -->
+								<q-row v-if="controls.PROPERTYCITY_CITY____.isVisible || controls.PROPERTYCOUNTCOUNTRY_.isVisible || controls.PROPERTYPROPETAX_____.isVisible">
+									<q-col
+										v-if="controls.PROPERTYCITY_CITY____.isVisible"
+										cols="auto">
+										<base-input-structure
+											v-if="controls.PROPERTYCITY_CITY____.isVisible"
+											class="i-text"
+											v-bind="controls.PROPERTYCITY_CITY____.wrapperProps"
+											:id="getControlId(controls.PROPERTYCITY_CITY____)"
+											v-on="controls.PROPERTYCITY_CITY____.handlers"
+											:loading="controls.PROPERTYCITY_CITY____.props.loading"
+											:reporting-mode-on="reportingModeCAV"
+											:suggestion-mode-on="suggestionModeOn">
+											<q-lookup
+												v-if="controls.PROPERTYCITY_CITY____.isVisible"
+												v-bind="controls.PROPERTYCITY_CITY____.props"
+												:id="getControlId(controls.PROPERTYCITY_CITY____)"
+												v-on="controls.PROPERTYCITY_CITY____.handlers" />
+											<q-see-more-propertycity-city
+												v-if="controls.PROPERTYCITY_CITY____.seeMoreIsVisible"
+												v-bind="controls.PROPERTYCITY_CITY____.seeMoreParams"
+												v-on="controls.PROPERTYCITY_CITY____.handlers" />
+										</base-input-structure>
+									</q-col>
+									<q-col
+										v-if="controls.PROPERTYCOUNTCOUNTRY_.isVisible"
+										cols="auto">
+										<base-input-structure
+											v-if="controls.PROPERTYCOUNTCOUNTRY_.isVisible"
+											class="i-text"
+											v-bind="controls.PROPERTYCOUNTCOUNTRY_.wrapperProps"
+											:id="getControlId(controls.PROPERTYCOUNTCOUNTRY_)"
+											v-on="controls.PROPERTYCOUNTCOUNTRY_.handlers"
+											:loading="controls.PROPERTYCOUNTCOUNTRY_.props.loading"
+											:reporting-mode-on="reportingModeCAV"
+											:suggestion-mode-on="suggestionModeOn">
+											<q-text-field
+												v-bind="controls.PROPERTYCOUNTCOUNTRY_.props"
+												:id="getControlId(controls.PROPERTYCOUNTCOUNTRY_)"
+												@blur="onBlur(controls.PROPERTYCOUNTCOUNTRY_, model.CityCountValCountry.value)"
+												@change="model.CityCountValCountry.fnUpdateValueOnChange" />
+										</base-input-structure>
+									</q-col>
+									<q-col
+										v-if="controls.PROPERTYPROPETAX_____.isVisible"
+										cols="auto">
+										<base-input-structure
+											v-if="controls.PROPERTYPROPETAX_____.isVisible"
+											class="i-text"
+											v-bind="controls.PROPERTYPROPETAX_____.wrapperProps"
+											:id="getControlId(controls.PROPERTYPROPETAX_____)"
+											v-on="controls.PROPERTYPROPETAX_____.handlers"
+											:loading="controls.PROPERTYPROPETAX_____.props.loading"
+											:reporting-mode-on="reportingModeCAV"
+											:suggestion-mode-on="suggestionModeOn">
+											<q-numeric-input
+												v-if="controls.PROPERTYPROPETAX_____.isVisible"
+												v-bind="controls.PROPERTYPROPETAX_____.props"
+												:id="getControlId(controls.PROPERTYPROPETAX_____)"
+												@update:model-value="model.ValTax.fnUpdateValue" />
+										</base-input-structure>
+									</q-col>
+								</q-row>
+								<!-- End PROPERTYPSEUDNEWGRP02 -->
+							</q-accordion-item>
 							<!-- End PROPERTYPSEUDNEWGRP05 -->
 						</q-accordion>
 					</q-col>
@@ -726,8 +726,8 @@
 		name: 'QFormProperty',
 
 		components: {
-			QSeeMorePropertycityCity: defineAsyncComponent(() => import('@/views/forms/FormProperty/dbedits/PropertycityCitySeeMore.vue')),
 			QSeeMorePropertyagentname: defineAsyncComponent(() => import('@/views/forms/FormProperty/dbedits/PropertyagentnameSeeMore.vue')),
+			QSeeMorePropertycityCity: defineAsyncComponent(() => import('@/views/forms/FormProperty/dbedits/PropertycityCitySeeMore.vue')),
 		},
 
 		mixins: [
@@ -1066,7 +1066,7 @@
 						labelPosition: computed(() => this.labelAlignment.topleft),
 						isCollapsible: false,
 						anchored: false,
-						directChildren: ['PROPERTYPSEUDNEWGRP02', 'PROPERTYPSEUDNEWGRP03', 'PROPERTYPSEUDNEWGRP04'],
+						directChildren: ['PROPERTYPSEUDNEWGRP03', 'PROPERTYPSEUDNEWGRP04', 'PROPERTYPSEUDNEWGRP02'],
 						controlLimits: [
 						],
 					}, this),
@@ -1472,19 +1472,64 @@
 							},
 						],
 					}, this),
-					PROPERTYPSEUDNEWGRP02: new fieldControlClass.GroupControl({
-						id: 'PROPERTYPSEUDNEWGRP02',
-						name: 'NEWGRP02',
-						size: 'block',
-						label: computed(() => this.Resources.LOCALIZATION34148),
+					PROPERTYAGENTNAME____: new fieldControlClass.LookupControl({
+						modelField: 'TableAgentName',
+						valueChangeEvent: 'fieldChange:agent.name',
+						id: 'PROPERTYAGENTNAME____',
+						name: 'NAME',
+						size: 'xxlarge',
+						helpControl: {
+							shortHelp: {
+								type: 'Tooltip',
+								text: computed(() => this.Resources.____114843),
+							},
+							detailedHelp: {
+								type: 'Popover',
+								text: computed(() => this.Resources.____1_VERBOSE59661),
+							}
+						},
+						label: computed(() => this.Resources.AGENT_S_NAME42642),
 						placeholder: '',
 						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP05',
-						isInAccordion: true,
-						borderless: false,
-						isCollapsible: true,
-						anchored: false,
-						directChildren: ['PROPERTYCITY_CITY____', 'PROPERTYCOUNTCOUNTRY_', 'PROPERTYPROPETAX_____'],
+						container: 'PROPERTYPSEUDNEWGRP04',
+						externalCallbacks: {
+							getModelField: vm.getModelField,
+							getModelFieldValue: vm.getModelFieldValue,
+							setModelFieldValue: vm.setModelFieldValue
+						},
+						externalProperties: {
+							modelKeys: computed(() => vm.modelKeys)
+						},
+						lookupKeyModelField: {
+							name: 'ValCodagent',
+							dependencyEvent: 'fieldChange:prope.codagent'
+						},
+						dependentFields: () => ({
+							set 'agent.codagent'(value) { vm.model.ValCodagent.updateValue(value) },
+							set 'agent.name'(value) { vm.model.TableAgentName.updateValue(value) },
+							set 'agent.photography'(value) { vm.model.AgentValPhotography.updateValue(value) },
+							set 'agent.email'(value) { vm.model.AgentValEmail.updateValue(value) },
+						}),
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYAGENTPHOTOGRA: new fieldControlClass.ImageControl({
+						modelField: 'AgentValPhotography',
+						valueChangeEvent: 'fieldChange:agent.photography',
+						dependentModelField: 'ValCodagent',
+						dependentChangeEvent: 'fieldChange:prope.codagent',
+						id: 'PROPERTYAGENTPHOTOGRA',
+						name: 'PHOTOGRA',
+						size: 'mini',
+						label: computed(() => this.Resources.PHOTOGRAPHY38058),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP04',
+						height: 50,
+						width: 30,
+						dataTitle: computed(() => genericFunctions.formatString(vm.Resources.IMAGEM_UTILIZADA_PAR17299, vm.Resources.PHOTOGRAPHY38058)),
+						maxFileSize: 10485760, // In bytes.
+						maxFileSizeLabel: '10 MB',
 						controlLimits: [
 						],
 					}, this),
@@ -1705,79 +1750,6 @@
 						controlLimits: [
 						],
 					}, this),
-					PROPERTYAGENTNAME____: new fieldControlClass.LookupControl({
-						modelField: 'TableAgentName',
-						valueChangeEvent: 'fieldChange:agent.name',
-						id: 'PROPERTYAGENTNAME____',
-						name: 'NAME',
-						size: 'xxlarge',
-						helpControl: {
-							shortHelp: {
-								type: '',
-								text: '',
-							},
-						},
-						label: computed(() => this.Resources.AGENT_S_NAME42642),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP04',
-						externalCallbacks: {
-							getModelField: vm.getModelField,
-							getModelFieldValue: vm.getModelFieldValue,
-							setModelFieldValue: vm.setModelFieldValue
-						},
-						externalProperties: {
-							modelKeys: computed(() => vm.modelKeys)
-						},
-						lookupKeyModelField: {
-							name: 'ValCodagent',
-							dependencyEvent: 'fieldChange:prope.codagent'
-						},
-						dependentFields: () => ({
-							set 'agent.codagent'(value) { vm.model.ValCodagent.updateValue(value) },
-							set 'agent.name'(value) { vm.model.TableAgentName.updateValue(value) },
-							set 'agent.photography'(value) { vm.model.AgentValPhotography.updateValue(value) },
-							set 'agent.email'(value) { vm.model.AgentValEmail.updateValue(value) },
-						}),
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYAGENTPHOTOGRA: new fieldControlClass.ImageControl({
-						modelField: 'AgentValPhotography',
-						valueChangeEvent: 'fieldChange:agent.photography',
-						dependentModelField: 'ValCodagent',
-						dependentChangeEvent: 'fieldChange:prope.codagent',
-						id: 'PROPERTYAGENTPHOTOGRA',
-						name: 'PHOTOGRA',
-						size: 'mini',
-						label: computed(() => this.Resources.PHOTOGRAPHY38058),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP04',
-						height: 50,
-						width: 30,
-						dataTitle: computed(() => genericFunctions.formatString(vm.Resources.IMAGEM_UTILIZADA_PAR17299, vm.Resources.PHOTOGRAPHY38058)),
-						maxFileSize: 10485760, // In bytes.
-						maxFileSizeLabel: '10 MB',
-						controlLimits: [
-						],
-					}, this),
-					PROPERTYAGENTEMAIL___: new fieldControlClass.StringControl({
-						modelField: 'AgentValEmail',
-						valueChangeEvent: 'fieldChange:agent.email',
-						dependentModelField: 'ValCodagent',
-						dependentChangeEvent: 'fieldChange:prope.codagent',
-						id: 'PROPERTYAGENTEMAIL___',
-						name: 'EMAIL',
-						size: 'xxlarge',
-						label: computed(() => this.Resources.E_MAIL42251),
-						placeholder: '',
-						labelPosition: computed(() => this.labelAlignment.topleft),
-						container: 'PROPERTYPSEUDNEWGRP04',
-						maxLength: 80,
-						controlLimits: [
-						],
-					}, this),
 					PROPERTYPROPETAX_____: new fieldControlClass.NumberControl({
 						modelField: 'ValTax',
 						valueChangeEvent: 'fieldChange:prope.tax',
@@ -1858,6 +1830,38 @@
 						controlLimits: [
 						],
 					}, this),
+					PROPERTYPSEUDNEWGRP02: new fieldControlClass.GroupControl({
+						id: 'PROPERTYPSEUDNEWGRP02',
+						name: 'NEWGRP02',
+						size: 'block',
+						label: computed(() => this.Resources.LOCALIZATION34148),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP05',
+						isInAccordion: true,
+						borderless: false,
+						isCollapsible: true,
+						anchored: false,
+						directChildren: ['PROPERTYCITY_CITY____', 'PROPERTYCOUNTCOUNTRY_', 'PROPERTYPROPETAX_____'],
+						controlLimits: [
+						],
+					}, this),
+					PROPERTYAGENTEMAIL___: new fieldControlClass.StringControl({
+						modelField: 'AgentValEmail',
+						valueChangeEvent: 'fieldChange:agent.email',
+						dependentModelField: 'ValCodagent',
+						dependentChangeEvent: 'fieldChange:prope.codagent',
+						id: 'PROPERTYAGENTEMAIL___',
+						name: 'EMAIL',
+						size: 'xlarge',
+						label: computed(() => this.Resources.E_MAIL42251),
+						placeholder: '',
+						labelPosition: computed(() => this.labelAlignment.topleft),
+						container: 'PROPERTYPSEUDNEWGRP04',
+						maxLength: 80,
+						controlLimits: [
+						],
+					}, this),
 				},
 
 				model: new FormViewModel(this, {
@@ -1869,9 +1873,9 @@
 
 				groupFields: readonly([
 					'PROPERTYPSEUDNEWGRP05',
-					'PROPERTYPSEUDNEWGRP02',
 					'PROPERTYPSEUDNEWGRP03',
 					'PROPERTYPSEUDNEWGRP04',
+					'PROPERTYPSEUDNEWGRP02',
 					'PROPERTYPSEUDNEWGRP01',
 				]),
 

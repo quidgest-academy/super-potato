@@ -48,9 +48,15 @@ public class PropertyForm : Form
 	public ListControl PseudField002 => new ListControl(driver, ContainerLocator, "#PROPERTYPSEUDFIELD002" + IdSuffix);
 
 	/// <summary>
-	/// Localization
+	/// Agent's name
 	/// </summary>
-	public CollapsibleZoneControl PseudNewgrp02 => new CollapsibleZoneControl(driver, ContainerLocator, "#PROPERTYPSEUDNEWGRP02" + IdSuffix + "-container");
+	public LookupControl AgentName => new LookupControl(driver, ContainerLocator, "container-PROPERTYAGENTNAME____" + IdSuffix);
+	public SeeMorePage AgentNameSeeMorePage => new SeeMorePage(driver, "PROPERTY", "PROPERTYAGENTNAME____" + IdSuffix);
+
+	/// <summary>
+	/// Photography
+	/// </summary>
+	public IWebElement AgentPhotogra => throw new NotImplementedException();
 
 	/// <summary>
 	/// City
@@ -119,22 +125,6 @@ public class PropertyForm : Form
 	public CollapsibleZoneControl PseudNewgrp04 => new CollapsibleZoneControl(driver, ContainerLocator, "#PROPERTYPSEUDNEWGRP04" + IdSuffix + "-container");
 
 	/// <summary>
-	/// Agent's name
-	/// </summary>
-	public LookupControl AgentName => new LookupControl(driver, ContainerLocator, "container-PROPERTYAGENTNAME____" + IdSuffix);
-	public SeeMorePage AgentNameSeeMorePage => new SeeMorePage(driver, "PROPERTY", "PROPERTYAGENTNAME____" + IdSuffix);
-
-	/// <summary>
-	/// Photography
-	/// </summary>
-	public IWebElement AgentPhotogra => throw new NotImplementedException();
-
-	/// <summary>
-	/// E-mail
-	/// </summary>
-	public IWebElement AgentEmail => throw new NotImplementedException();
-
-	/// <summary>
 	/// Profit
 	/// </summary>
 	public BaseInputControl PropeProfit => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEPROFIT__" + IdSuffix, "#PROPERTYPROPEPROFIT__" + IdSuffix);
@@ -163,6 +153,16 @@ public class PropertyForm : Form
 	/// AveragePrice
 	/// </summary>
 	public BaseInputControl PropeAverage => new BaseInputControl(driver, ContainerLocator, "container-PROPERTYPROPEAVERAGE_" + IdSuffix, "#PROPERTYPROPEAVERAGE_" + IdSuffix);
+
+	/// <summary>
+	/// Localization
+	/// </summary>
+	public CollapsibleZoneControl PseudNewgrp02 => new CollapsibleZoneControl(driver, ContainerLocator, "#PROPERTYPSEUDNEWGRP02" + IdSuffix + "-container");
+
+	/// <summary>
+	/// E-mail
+	/// </summary>
+	public IWebElement AgentEmail => throw new NotImplementedException();
 
 	public PropertyForm(IWebDriver driver, FORM_MODE mode, By? containerLocator = null, bool usePkInId = false)
 		: base(driver, mode, "PROPERTY", containerLocator: containerLocator, usePkInId: usePkInId) { }
