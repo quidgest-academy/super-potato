@@ -44,6 +44,12 @@ namespace GenioMVC.Models
 		[CurrencyAttribute("EUR", 2)]
 		public decimal? ValProfit { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValProfit, 2)); } set { klass.ValProfit = Convert.ToDecimal(value); } }
 
+		[DisplayName("Properties Sold")]
+		/// <summary>Field : "Properties Sold" Tipo: "N" Formula:  ""</summary>
+		[ShouldSerialize("Stats.ValSold")]
+		[NumericAttribute(0)]
+		public decimal? ValSold { get { return Convert.ToDecimal(GenFunctions.RoundQG(klass.ValSold, 0)); } set { klass.ValSold = Convert.ToDecimal(value); } }
+
 		[DisplayName("ZZSTATE")]
 		[ShouldSerialize("Stats.ValZzstate")]
 		/// <summary>Field: "ZZSTATE", Type: "INT", Formula: ""</summary>

@@ -336,6 +336,9 @@
   <msg id="Async process arguments" code="ASYNC_PROCESS_ARGUME13794">
     <ENUS>Async process arguments</ENUS>
   </msg>
+  <msg id="Properties Sold" code="PROPERTIES_SOLD24318">
+    <ENUS>Properties Sold</ENUS>
+  </msg>
   <msg id="Idade" code="IDADE29819">
     <ENUS>Idade</ENUS>
   </msg>

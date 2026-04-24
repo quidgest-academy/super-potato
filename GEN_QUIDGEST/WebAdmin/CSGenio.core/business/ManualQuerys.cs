@@ -142,15 +142,15 @@ namespace CSGenio.business
 		{
 			this.m_parameters = new Dictionary<String, ParameterQuery>();
 			this.m_id = "#_QDG_VIEW_STATS____QDG_#";
-			this.m_query = @"with view_stats (COUNTRY, NOTSOLD, PROFIT)
+			this.m_query = @"with view_stats (COUNTRY, NOTSOLD,SOLD,PROFIT)
 AS (
-	SELECT c.COUNTRY, COUNT(CASE WHEN p.SOLD = 0 THEN 1 END) as NOTSOLD, SUM(p.PROFIT)
+	SELECT c.COUNTRY, COUNT(CASE WHEN p.SOLD = 0 THEN 1 END) as NOTSOLD, COUNT(CASE WHEN p.SOLD = 1 THEN 1 END) as SOLD, SUM(p.PROFIT)
 	FROM FORCOUNT c
 	LEFT JOIN FORCITY ct ON c.CODCOUNT = ct.CODCOUNT
 	LEFT JOIN FORPROPERTY p ON p.CODCITY = ct.CODCITY
 	group by c.COUNTRY)
 
-SELECT NEWID() CODSTATS, COUNTRY, NOTSOLD, PROFIT, 0 ZZSTATE
+SELECT NEWID() CODSTATS, COUNTRY, NOTSOLD, SOLD, PROFIT, 0 ZZSTATE
 
 FROM view_stats
 ";

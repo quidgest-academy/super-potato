@@ -453,6 +453,9 @@
 	<data name="ASYNC_PROCESS_ARGUME13794" xml:space="preserve">
 		<value>Async process arguments</value>
 	</data>
+	<data name="PROPERTIES_SOLD24318" xml:space="preserve">
+		<value>Properties Sold</value>
+	</data>
 	<data name="IDADE29819" xml:space="preserve">
 		<value>Idade</value>
 	</data>

@@ -87,6 +87,17 @@ namespace CSGenio.business
 			info.RegisterFieldDB(Qfield);
 
 			//- - - - - - - - - - - - - - - - - - -
+			Qfield = new Field(info.Alias, "sold", FieldType.NUMERIC);
+			Qfield.FieldDescription = "Properties Sold";
+			Qfield.FieldSize =  3;
+			Qfield.MQueue = false;
+			Qfield.IntegerDigits = 3;
+			Qfield.CavDesignation = "PROPERTIES_SOLD24318";
+
+			Qfield.Dupmsg = "";
+			info.RegisterFieldDB(Qfield);
+
+			//- - - - - - - - - - - - - - - - - - -
 			Qfield = new Field(info.Alias, "zzstate", FieldType.INTEGER);
 			Qfield.FieldDescription = "Estado da ficha";
 			info.RegisterFieldDB(Qfield);
@@ -277,6 +288,17 @@ namespace CSGenio.business
 			set { insertNameValueField(FldProfit, value); }
 		}
 
+		/// <summary>Field : "Properties Sold" Tipo: "N" Formula:  ""</summary>
+		public static FieldRef FldSold { get { return m_fldSold; } }
+		private static FieldRef m_fldSold = new FieldRef("stats", "sold");
+
+		/// <summary>Field : "Properties Sold" Tipo: "N" Formula:  ""</summary>
+		public decimal ValSold
+		{
+			get { return (decimal)returnValueField(FldSold); }
+			set { insertNameValueField(FldSold, value); }
+		}
+
 		/// <summary>Field : "ZZSTATE" Type: "INT" Formula:  ""</summary>
 		public static FieldRef FldZzstate { get { return m_fldZzstate; } }
 		private static FieldRef m_fldZzstate = new FieldRef("stats", "zzstate");
@@ -374,7 +396,7 @@ namespace CSGenio.business
 		// USE /[MANUAL FOR TABAUX STATS]/
 
  
-     
+      
 
 	}
 }
