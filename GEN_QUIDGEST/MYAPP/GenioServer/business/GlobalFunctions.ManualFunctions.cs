@@ -202,7 +202,7 @@ return DBConversion.ToNumeric(sp.ExecuteScalar(average));
 //BEGIN_FUNCTION:ead68981-adc9-462d-8f81-2150d89e463d
             var props = new List<object>();
 			SelectQuery query = new SelectQuery()
-				.Select(CSGenioAagent.FldName)
+				.Select(CSGenioAagent.FldCodagent)
 				.From(Area.AreaAGENT)
 				.Join(Area.AreaCITY)
                     .On(CriteriaSet.And().Equal(CSGenioAcity.FldCodcount, CSGenioAcount.FldCodcount))
