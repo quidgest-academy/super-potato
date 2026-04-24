@@ -56,6 +56,7 @@ namespace GenioMVC.Controllers
 var sp = m_userContext.PersistentSupport;
 var user = m_userContext.User;
 var selectedList = CSGenioAprope.searchList(sp, user, crs);
+					DateTime today = DateTime.Today;
 
 sp.openConnection();
 foreach (var item in selectedList)
@@ -63,6 +64,7 @@ foreach (var item in selectedList)
 				sp.Execute(new UpdateQuery()
 					.Update(Area.AreaPROPE)
 					.Set(CSGenioAprope.FldSold, 1)
+					.Set(CSGenioAprope.FldDtsold, today)
 					.Where(CriteriaSet.And().Equal(CSGenioAprope.FldCodprope, item.ValCodprope)));				
 
 }
