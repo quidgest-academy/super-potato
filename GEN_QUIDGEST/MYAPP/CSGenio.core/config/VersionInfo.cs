@@ -45,7 +45,7 @@ namespace CSGenio.framework
         /// <summary>
         /// Generated version. Is incremented each time there is a generation
         /// </summary>
-        public const int Generation = 105;
+        public const int Generation = 106;
 
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace CSGenio.framework
         /// <summary>
         /// Date when the code was generated
         /// </summary>
-        public static readonly DateTime GenerationDate = new DateTime(2026, 4, 24);
+        public static readonly DateTime GenerationDate = new DateTime(2026, 4, 27);
 
     }
 }
